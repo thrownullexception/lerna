@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { App as AppLayout } from '../layouts/App';
+import { RouteConfig } from 'react-router-config';
+import { AppLayout, AuthLayout } from '../layouts';
 import { FaqRoutes } from '../screens/Faqs';
 import { NotFound } from '../screens/NotFound';
 import { Dashboard } from '../screens/Dashboard';
@@ -9,7 +10,7 @@ import { requireAuthentication } from './guards/requireAuthentication';
 import { NavigationService } from '../services';
 import { IMenuItems } from './types';
 
-export const routes: IMenuItems[] = [
+export const appRoutes: IMenuItems[] = [
   {
     path: '/',
     exact: true,
@@ -25,9 +26,17 @@ export const routes: IMenuItems[] = [
   },
 ];
 
+export const authRoutes: RouteConfig[] = [
+  {
+    path: NavigationService.indexPath(SignInPath),
+    exact: true,
+    component: SignIn as React.ComponentType,
+  },
+];
+
 export const route = (
   <Switch>
-    <Route path={NavigationService.indexPath(SignInPath)} component={SignIn} />
+    <Route path="/auth" component={AuthLayout} />
     <Route path="/" component={AppLayout} />
   </Switch>
 );

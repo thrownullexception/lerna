@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import { useLocation } from 'react-router';
-import { routes } from '../../../routes/routes';
+import { appRoutes } from '../../../routes/routes';
 import { IMenuItems } from '../../../routes/types';
 import { NavigationService } from '../../../services';
 
@@ -38,7 +38,7 @@ export const NavigationMenu: React.SFC<INavigationMenu> = ({
       <li className="dt-side-nav__item dt-side-nav__header">
         <span className="dt-side-nav__text">main</span>
       </li>
-      {routes
+      {appRoutes
         .filter(
           route =>
             route.showOnNavigation &&

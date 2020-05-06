@@ -3,7 +3,7 @@ import { renderRoutes } from 'react-router-config';
 import { ToastContainer } from 'react-toastify';
 import { Dropdown, DropdownToggle, DropdownMenu } from 'reactstrap';
 import { useLocation } from 'react-router-dom';
-import { routes } from '../../routes/routes';
+import { appRoutes } from '../../routes/routes';
 import { IProps } from './App.types';
 import { NavigationMenu } from './components/NavigationMenu';
 import { NavigationService } from '../../services';
@@ -46,8 +46,6 @@ export const AppLayout: React.SFC<IProps> = ({
   // const toggleNotificationDropdown = () => setNotificationDropDownOpen(togglePreviousState);
   // const toggleAccountDropDown = () => setAccountDropDownOpen(togglePreviousState);
   // const toggleMessagesDropDown = () => setMessagesDropDownOpen(togglePreviousState);
-
-  // <ToastContainer />
 
   return (
     <>
@@ -745,7 +743,7 @@ export const AppLayout: React.SFC<IProps> = ({
               </div>
             </div>
           </div>
-          {renderRoutes(routes)}
+          {renderRoutes(appRoutes)}
           </div>
       </div>
       <a href="#top" id="back-to-top" style={{ display: 'none' }}>
