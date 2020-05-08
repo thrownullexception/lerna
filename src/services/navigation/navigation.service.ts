@@ -14,6 +14,9 @@ export const NavigationService = {
   hash: (path: string): string => {
     return `#${path}`;
   },
+  hashPath: (path: string): string => {
+    return `#/${path}`;
+  },
   goTo: (path: string): void => {
     window.location.href = `#${NavigationService.indexPath(path)}`;
   },

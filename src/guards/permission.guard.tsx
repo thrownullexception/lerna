@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect, ConnectedComponent } from 'react-redux';
-import { IStore } from '../../store/rootReducers';
+import { IStore } from '../store/rootReducers';
 import { Redirect } from 'react-router';
 
 interface IProps {
@@ -13,7 +13,7 @@ interface InjectedProps extends IProps {
   location: Location;
 }
 
-export function requirePermission(
+export function permissionGaurd(
   Component: React.ComponentType<any> | ConnectedComponent<any, {}>,
   permission: string,
 ): React.ComponentType {

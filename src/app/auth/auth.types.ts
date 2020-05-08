@@ -5,6 +5,13 @@ export enum ActionType {
   LOG_OUT = 'LOG_OUT',
   MAKING_AUTH_REQUEST = 'MAKING_AUTH_REQUEST',
   AUTH_REQUEST_ENDED = 'AUTH_REQUEST_ENDED',
+  SET_SIGN_UP_CREDENTIALS = 'SET_SIGN_UP_CREDENTIALS',
+}
+
+export enum AccountModeType {
+  Tutor,
+  Student,
+  Admin,
 }
 
 export interface IAuthenticatedAccount {
@@ -17,10 +24,23 @@ export interface IAuthenticatedAccount {
 export interface IAuthState {
   authenticated: boolean;
   isMakingRequest: boolean;
-  username: string;
+  accountMode: AccountModeType;
+  email: string;
   id: number;
+  profile: {
+    lastName: string;
+    firstName: string;
+  };
   role: string;
   permissions: string[];
+}
+
+interface ISetSignUpCredentials {
+  type: ActionType.SET_SIGN_UP_CREDENTIALS;
+  payload: {
+    id: number;
+    email: string;
+  };
 }
 
 interface IAuthenticateUser {
@@ -51,5 +71,6 @@ export type AuthAction =
   | IAuthenticateUser
   | ILogOut
   | IAuthRequestEnded
+  | ISetSignUpCredentials
   | IMakingAuthRequest
   | IDefaultAction;

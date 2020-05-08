@@ -3,9 +3,10 @@ import { action } from 'typesafe-actions';
 import { ThunkInterface } from '../../shared/types';
 import { AuthAction, ActionType, JWT_TOKEN_STORAGE_KEY, IAuthenticatedAccount } from './auth.types';
 import { RequestService, ToastService, NavigationService, StorageService } from '../../services';
-import { ISignInForm } from '../../screens/SignIn/SignIn.types';
+import { ISignInForm } from '../../screens/Auth/SignIn/SignIn.types';
+import { ISignUpForm } from '../../screens/Auth/SignUp/SignUp.types';
 import { DashboardPath } from '../../screens/Dashboard';
-import { SignInPath } from '../../screens/SignIn';
+import { AuthSignInPath } from '../../screens/Auth/Auth.types';
 
 interface IAuthenticationBag {
   account: IAuthenticatedAccount;
@@ -19,6 +20,29 @@ interface IAuthenticationResponse {
     role: object;
   };
 }
+
+export const doSignUp = (signUpForm: ISignUpForm): ThunkInterface<void> => {
+  return async (dispatch: Dispatch<AuthAction>) => {
+    dispatch(action(ActionType.MAKING_AUTH_REQUEST));
+    try {
+      const {
+        data: { id },
+      } = await RequestService.post('auth/signup', signUpForm);
+      ToastService.success('Sign up was successfull');
+      dispatch(
+        action(ActionType.SET_SIGN_UP_CREDENTIALS, {
+          id,
+          email: signUpForm.email,
+        }),
+      );
+      NavigationService.goTo('VerifyAccount');
+    } catch (e) {
+      ToastService.error(e);
+    }
+    dispatch(action(ActionType.AUTH_REQUEST_ENDED));
+  };
+};
+
 
 export const doSignIn = (signInForm: ISignInForm): ThunkInterface<void> => {
   return async (dispatch: Dispatch<AuthAction>) => {
@@ -59,6 +83,6 @@ export const doLogOut = (): ThunkInterface<void> => {
   return async (dispatch: Dispatch<AuthAction>) => {
     dispatch(action(ActionType.LOG_OUT));
     StorageService.removeString(JWT_TOKEN_STORAGE_KEY);
-    NavigationService.goTo(SignInPath);
+    NavigationService.goTo(AuthSignInPath);
   };
 };

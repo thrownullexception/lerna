@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Form, Field } from 'react-final-form';
-import { RenderInput, SubmitButton } from '../../components/RenderInput';
+import { RenderInput, SubmitButton } from '../../../components/RenderInput';
 import { ISignInForm } from './SignIn.types';
-import { FormProps } from '../../shared/types';
-import { required } from '../../shared/validations';
+import { FormProps } from '../../../shared/types';
+import { required } from '../../../shared/validations';
 
 export const SignInForm: React.SFC<FormProps<ISignInForm>> = ({ onSubmit, isMakingRequest }) => {
   return (
@@ -30,9 +30,7 @@ export const SignInForm: React.SFC<FormProps<ISignInForm>> = ({ onSubmit, isMaki
             </Field>
             <SubmitButton
               disabled={submitting || pristine}
-              onClick={() => {
-                handleSubmit();
-              }}
+              onClick={handleSubmit}
               isMakingRequest={isMakingRequest}
               text="Sign In"
             />

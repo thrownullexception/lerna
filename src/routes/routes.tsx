@@ -1,13 +1,10 @@
 import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { RouteConfig } from 'react-router-config';
 import { AppLayout, AuthLayout } from '../layouts';
 import { FaqRoutes } from '../screens/Faqs';
 import { NotFound } from '../screens/NotFound';
 import { Dashboard } from '../screens/Dashboard';
-import { SignIn, SignInPath } from '../screens/SignIn';
-import { requireAuthentication } from './guards/requireAuthentication';
-import { NavigationService } from '../services';
+import { authenticationGuard } from '../guards';
 import { IMenuItems } from './types';
 
 export const appRoutes: IMenuItems[] = [
@@ -15,7 +12,7 @@ export const appRoutes: IMenuItems[] = [
     path: '/',
     exact: true,
     title: 'Dashboard',
-    component: requireAuthentication(Dashboard),
+    component: authenticationGuard(Dashboard),
     showOnNavigation: true,
   },
   ...FaqRoutes,
@@ -23,14 +20,6 @@ export const appRoutes: IMenuItems[] = [
     path: '*',
     title: 'Not Found',
     component: NotFound,
-  },
-];
-
-export const authRoutes: RouteConfig[] = [
-  {
-    path: NavigationService.indexPath(SignInPath),
-    exact: true,
-    component: SignIn as React.ComponentType,
   },
 ];
 

@@ -37,7 +37,7 @@ const togglePreviousState = (prev: boolean) => !prev;
 
 export const AppLayout: React.SFC<IProps> = ({
   doLogOut,
-  username,
+  fullName,
   permissions,
   role,
 }): JSX.Element => {
@@ -572,7 +572,7 @@ export const AppLayout: React.SFC<IProps> = ({
         <div className="container-fluid">
           <div className="breadcrumb-header justify-content-between">
             <div>
-              <h4 className="content-title mb-2">Hi, welcome back!</h4>
+              <h4 className="content-title mb-2">Dashboard</h4>
               <nav aria-label="breadcrumb">
                 <ol className="breadcrumb">
                   <li className="breadcrumb-item">

@@ -1,7 +1,7 @@
 import React from 'react';
 import { renderRoutes } from 'react-router-config';
 import { ToastContainer } from 'react-toastify';
-import { authRoutes } from '../../routes/routes';
+import { AuthRoutes } from '../../screens/Auth';
 
 export const AuthLayout: React.SFC<{}> = (): JSX.Element => {
   return (
@@ -28,7 +28,7 @@ export const AuthLayout: React.SFC<{}> = (): JSX.Element => {
               </div>
             </div>
           </div>
-          {renderRoutes(authRoutes)}
+          {renderRoutes(AuthRoutes)}
         </div>
       </div>
     </div>

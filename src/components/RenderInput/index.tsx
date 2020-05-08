@@ -72,7 +72,7 @@ export const SubmitButton: React.SFC<ISubmitButton> = ({
       disabled={disabled || isMakingRequest}
       onClick={onClick}
       type="submit"
-      className="btn btn-primary text-uppercase"
+      className="btn ripple btn-main-primary btn-block"
     >
       {isMakingRequest ? <i className="fa fa-spinner fa-spin" /> : text}
     </button>

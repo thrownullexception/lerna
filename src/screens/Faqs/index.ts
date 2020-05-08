@@ -1,5 +1,5 @@
 import { NavigationService } from '../../services';
-import { requirePermission } from '../../routes';
+import { permissionGaurd } from '../../guards';
 import { IMenuItems } from '../../routes/types';
 import { FaqsList } from './List';
 import { FaqsEdit } from './Edit';
@@ -13,7 +13,7 @@ export const FaqRoutes: IMenuItems[] = [
     path: NavigationService.indexPath(FaqsPath),
     exact: true,
     title: 'Faqs',
-    // component: requirePermission(FaqsList, CAN_MANAGE_FAQS),
+    // component: permissionGaurd(FaqsList, CAN_MANAGE_FAQS),
     component: FaqsList,
     // permission: CAN_MANAGE_FAQS,
     showOnNavigation: true,
@@ -28,14 +28,14 @@ export const FaqRoutes: IMenuItems[] = [
     path: NavigationService.editPath(FaqsPath, ':id'),
     exact: true,
     title: 'Edit Faq',
-    component: requirePermission(FaqsEdit, CAN_MANAGE_FAQS),
+    component: permissionGaurd(FaqsEdit, CAN_MANAGE_FAQS),
     permission: CAN_MANAGE_FAQS,
   },
   {
     path: NavigationService.createPath(FaqsPath),
     exact: true,
     title: 'Create Faq',
-    component: requirePermission(FaqsCreate, CAN_MANAGE_FAQS),
+    component: permissionGaurd(FaqsCreate, CAN_MANAGE_FAQS),
     permission: CAN_MANAGE_FAQS,
   },
 ];

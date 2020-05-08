@@ -10,3 +10,5 @@ export interface ISignInForm {
   email: string;
   password: string;
 }
+
+export const SignInPath = 'signin';

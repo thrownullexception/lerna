@@ -1,9 +1,9 @@
 export interface IProps {
   doLogOut: () => void;
-  username: string;
+  fullName: string;
   role: string;
   permissions: string[];
 }
 
 export type DispatchProps = Pick<IProps, 'doLogOut'>;
-export type StateProps = Pick<IProps, 'username' | 'permissions' | 'role'>;
+export type StateProps = Pick<IProps, 'fullName' | 'permissions' | 'role'>;

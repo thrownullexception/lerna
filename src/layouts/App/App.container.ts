@@ -5,10 +5,11 @@ import { IStore } from '../../store/rootReducers';
 import { AppLayout } from './App';
 import { DispatchProps, StateProps } from './App.types';
 import { doLogOut } from '../../app/auth/auth.actions';
+import { selectUserFullName } from '../../app/auth/auth.selectors';
 
 const mapStateToProps = (state: IStore): StateProps => {
   return {
-    username: state.auth.username,
+    fullName: selectUserFullName(state),
     permissions: state.auth.permissions,
     role: state.auth.role,
   };
