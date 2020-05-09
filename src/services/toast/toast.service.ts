@@ -62,7 +62,7 @@ export class ToastService {
       return;
     }
     const errorMessage = getBestErrorMessage(error);
-    if (typeof error === 'string') {
+    if (typeof errorMessage === 'string') {
       toast.error(errorMessage);
       return;
     }

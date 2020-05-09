@@ -5,6 +5,7 @@ import { Dropdown, DropdownToggle, DropdownMenu } from 'reactstrap';
 import classnames from 'classnames';
 import { useLocation } from 'react-router-dom';
 import { appRoutes } from '../../routes/routes';
+import PerfectScrollbar from 'perfect-scrollbar';
 import { IProps } from './App.types';
 import { NavigationMenu } from './components/NavigationMenu';
 import { NavigationService } from '../../services';
@@ -58,6 +59,39 @@ export const AppLayout: React.SFC<IProps> = ({
     'sidenav-toggled': isSideBarOpen,
   });
 
+  React.useEffect(() => {
+    let cps: PerfectScrollbar | null = new PerfectScrollbar('.chat-scroll', {
+      wheelSpeed: 2,
+      wheelPropagation: true,
+      minScrollbarLength: 20,
+    });
+
+    let nps: PerfectScrollbar | null = new PerfectScrollbar('.notification-scroll', {
+      wheelSpeed: 2,
+      wheelPropagation: true,
+      minScrollbarLength: 20,
+    });
+
+    let sps: PerfectScrollbar | null = new PerfectScrollbar('.sidebar-scroll', {
+      suppressScrollX: true,
+    });
+
+    return () => {
+      if (cps) {
+        cps.destroy();
+        cps = null;
+      }
+      if (nps) {
+        nps.destroy();
+        nps = null;
+      }
+      if (sps) {
+        sps.destroy();
+        sps = null;
+      }
+    };
+  });
+
   return (
     <div className={navClassName}>
       <ToastContainer />
@@ -99,7 +133,7 @@ export const AppLayout: React.SFC<IProps> = ({
                 />
               </div>
               <div className="user-info">
-                <h6 className=" mb-0 text-dark">Petey Cruiser</h6>
+                <h6 className=" mb-0 text-dark">{fullName}</h6>
                 <span className="text-muted app-sidebar__user-name text-sm">Administrator</span>
               </div>
               <button className="btn btn-primary btn-block call-to-action">Consult A Tutor</button>
@@ -248,7 +282,7 @@ export const AppLayout: React.SFC<IProps> = ({
                         <i className="nav-link-icon fe fe-briefcase" /> Tutor
                       </span>
                     </DropdownToggle>
-                    <DropdownMenu left={true} className="dropdown-menu-lg dropdown-menu">
+                    <DropdownMenu left="true" className="dropdown-menu-lg dropdown-menu">
                       <div className="dropdown-menu-header">
                         <div className="dropdown-menu-header-inner header-img p-3">
                           <div className="header-content text-left d-flex">
@@ -303,10 +337,10 @@ export const AppLayout: React.SFC<IProps> = ({
                     <div className="main-message-list chat-scroll ps">
                       <a href="/" className="p-3 d-flex border-bottom">
                         <div
-                          className="  drop-img  cover-image  "
-                          data-image-src="../assets/img/faces/3.jpg"
+                          className="drop-img cover-image"
+                          data-image-src="/static/images/4.jpg"
                           style={{
-                            background: "url('../assets/img/faces/3.jpg') center center;",
+                            background: "url('/static/images/4.jpg') center center",
                           }}
                         >
                           <span className="avatar-status bg-teal" />
@@ -324,7 +358,7 @@ export const AppLayout: React.SFC<IProps> = ({
                           className="drop-img cover-image"
                           data-image-src="../assets/img/faces/2.jpg"
                           style={{
-                            background: "url('../assets/img/faces/2.jpg') center center;",
+                            background: "url('../assets/img/faces/2.jpg') center center",
                           }}
                         >
                           <span className="avatar-status bg-teal" />
@@ -342,7 +376,7 @@ export const AppLayout: React.SFC<IProps> = ({
                           className="drop-img cover-image"
                           data-image-src="../assets/img/faces/9.jpg"
                           style={{
-                            background: "url('../assets/img/faces/9.jpg') center center;",
+                            background: "url('../assets/img/faces/9.jpg') center center",
                           }}
                         >
                           <span className="avatar-status bg-teal" />
@@ -360,7 +394,7 @@ export const AppLayout: React.SFC<IProps> = ({
                           className="drop-img cover-image"
                           data-image-src="../assets/img/faces/12.jpg"
                           style={{
-                            background: "url('../assets/img/faces/12.jpg';) center center;",
+                            background: "url('../assets/img/faces/12.jpg') center center",
                           }}
                         >
                           <span className="avatar-status bg-danger" />
@@ -378,20 +412,20 @@ export const AppLayout: React.SFC<IProps> = ({
                           className="drop-img cover-image"
                           data-image-src="../assets/img/faces/5.jpg"
                           style={{
-                            background: "url('../assets/img/faces/5.jpg') center center;",
+                            background: "url('../assets/img/faces/5.jpg') center center",
                           }}
                         >
                           <span className="avatar-status bg-teal" />
                         </div>
                         <div className="wd-90p">
                           <div className="d-flex">
-                            <h5 className="mb-1 name">Petey Cruiser</h5>
+                            <h5 className="mb-1 name">{fullName}</h5>
                             <p className="time mb-0 text-right ml-auto float-right">35 min ago</p>
                           </div>
                           <p className="mb-0 desc">I'm sorry but i'm not sure how...</p>
                         </div>
                       </a>
-                      <div className="ps__rail-x" style={{ left: '0px; top: 0px;' }}>
+                      <div className="ps__rail-x" style={{ left: '0px', top: '0px' }}>
                         <div
                           className="ps__thumb-x"
                           tabIndex={0}
@@ -432,7 +466,7 @@ export const AppLayout: React.SFC<IProps> = ({
                         </button>
                       </div>
                     </div>
-                    <div className="main-notification-list Notification-scroll ps">
+                    <div className="main-notification-list notification-scroll ps">
                       <a className="d-flex p-3 border-bottom" href="/">
                         <div className="notifyimg bg-success-transparent">
                           <i className="la la-shopping-basket text-success" />
@@ -505,7 +539,7 @@ export const AppLayout: React.SFC<IProps> = ({
                           <i className="las la-angle-right text-right text-muted" />
                         </div>
                       </a>
-                      <div className="ps__rail-x" style={{ left: '0px; top: 0px;' }}>
+                      <div className="ps__rail-x" style={{ left: '0px', top: '0px' }}>
                         <div
                           className="ps__thumb-x"
                           tabIndex={0}
@@ -543,7 +577,7 @@ export const AppLayout: React.SFC<IProps> = ({
                       <div className="main-img-user">
                         <img alt="" src="../assets/img/faces/6.jpg" />
                       </div>
-                      <h6>Petey Cruiser</h6>
+                      <h6>{fullName}</h6>
                       <span>Premium Member</span>
                     </div>
                     <a className="dropdown-item" href="/">
@@ -555,12 +589,12 @@ export const AppLayout: React.SFC<IProps> = ({
                     <a className="dropdown-item" href="/">
                       <i className="far fa-clock" /> Activity Logs
                     </a>
-                    <a className="dropdown-item" href="/">
-                      <i className="fas fa-sliders-h" /> Account Settings
-                    </a>
-                    <a className="dropdown-item" href="page-signin.html">
+                    <button className="dropdown-item link-like" onClick={doLogOut}>
                       <i className="fas fa-sign-out-alt" />
                       Sign Out
+                    </button>
+                    <a className="dropdown-item" href="/">
+                      <i className="fas fa-sliders-h" /> Account Settings
                     </a>
                   </DropdownMenu>
                 </Dropdown>

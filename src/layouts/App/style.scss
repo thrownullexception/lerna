@@ -3,3 +3,8 @@
     margin-top: 5px;
     margin-bottom: 5px;
 }
+
+.chat-scroll, .notification-scroll {
+    max-height: 320px;
+    position: relative;
+}

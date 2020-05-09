@@ -1,3 +1,5 @@
+import { SignInResponse } from './responses';
+
 export const JWT_TOKEN_STORAGE_KEY = 'JWT_TOKEN_STORAGE_KEY';
 
 export enum ActionType {
@@ -14,19 +16,12 @@ export enum AccountModeType {
   Admin,
 }
 
-export interface IAuthenticatedAccount {
-  username: string;
-  email: string;
-  id: number;
-  coins: number;
-}
-
 export interface IAuthState {
   authenticated: boolean;
   isMakingRequest: boolean;
   accountMode: AccountModeType;
   email: string;
-  id: number;
+  id: string;
   profile: {
     lastName: string;
     firstName: string;
@@ -38,17 +33,14 @@ export interface IAuthState {
 interface ISetSignUpCredentials {
   type: ActionType.SET_SIGN_UP_CREDENTIALS;
   payload: {
-    id: number;
+    id: string;
     email: string;
   };
 }
 
 interface IAuthenticateUser {
   type: ActionType.AUTHENTICATE_USER;
-  payload: {
-    account: IAuthenticatedAccount;
-    role: object;
-  };
+  payload: SignInResponse;
 }
 
 interface ILogOut {
