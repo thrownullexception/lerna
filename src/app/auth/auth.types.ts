@@ -7,6 +7,7 @@ export enum ActionType {
   LOG_OUT = 'LOG_OUT',
   MAKING_AUTH_REQUEST = 'MAKING_AUTH_REQUEST',
   AUTH_REQUEST_ENDED = 'AUTH_REQUEST_ENDED',
+  CHANGE_ACCOUNT_MODE = 'CHANGE_ACCOUNT_MODE',
   SET_SIGN_UP_CREDENTIALS = 'SET_SIGN_UP_CREDENTIALS',
 }
 
@@ -25,6 +26,7 @@ export interface IAuthState {
   profile: {
     lastName: string;
     firstName: string;
+    picture: string;
   };
   role: string;
   permissions: string[];
@@ -41,6 +43,11 @@ interface ISetSignUpCredentials {
 interface IAuthenticateUser {
   type: ActionType.AUTHENTICATE_USER;
   payload: SignInResponse;
+}
+
+interface IChangeAccountMode {
+  type: ActionType.CHANGE_ACCOUNT_MODE;
+  payload: AccountModeType;
 }
 
 interface ILogOut {
@@ -63,6 +70,7 @@ export type AuthAction =
   | IAuthenticateUser
   | ILogOut
   | IAuthRequestEnded
+  | IChangeAccountMode
   | ISetSignUpCredentials
   | IMakingAuthRequest
   | IDefaultAction;

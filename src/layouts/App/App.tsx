@@ -10,6 +10,7 @@ import { IProps } from './App.types';
 import { NavigationMenu } from './components/NavigationMenu';
 import { NavigationService } from '../../services';
 import './style.scss';
+import { AccountModeType } from '../../app/auth/auth.types';
 
 const togglePreviousState = (prev: boolean) => !prev;
 
@@ -38,7 +39,9 @@ const togglePreviousState = (prev: boolean) => !prev;
 
 export const AppLayout: React.SFC<IProps> = ({
   doLogOut,
+  changeAccountMode,
   fullName,
+  picture,
   permissions,
   role,
 }): JSX.Element => {
@@ -126,11 +129,7 @@ export const AppLayout: React.SFC<IProps> = ({
           <div className="app-sidebar__user">
             <div className="dropdown user-pro-body text-center">
               <div className="user-pic">
-                <img
-                  src="../assets/img/faces/6.jpg"
-                  alt="user-img"
-                  className="rounded-circle mCS_img_loaded"
-                />
+                <img src={picture} alt="user-img" className="rounded-circle mCS_img_loaded" />
               </div>
               <div className="user-info">
                 <h6 className=" mb-0 text-dark">{fullName}</h6>
@@ -155,7 +154,7 @@ export const AppLayout: React.SFC<IProps> = ({
               </a>
             </li>
             <li className="slide">
-              <a className="side-menu__item" href="/">
+              <a className="side-menu__item" href="#/student/skills">
                 <i className="side-menu__icon fe fe-airplay" />
                 <span className="side-menu__label">Skills</span>
               </a>
@@ -213,7 +212,7 @@ export const AppLayout: React.SFC<IProps> = ({
       </aside>
 
       <div className="main-content">
-        <div className="main-header side-header">
+        <div className="main-header side-header fixed-header">
           <div className="container-fluid">
             <div className="main-header-left ">
               <div className="app-sidebar__toggle mobile-toggle" data-toggle="sidebar">
@@ -298,11 +297,17 @@ export const AppLayout: React.SFC<IProps> = ({
                           </div>
                         </div>
                       </div>
-                      <button className="link-like dropdown-item  mt-2">
+                      <button
+                        className="link-like dropdown-item  mt-2"
+                        onClick={() => changeAccountMode(AccountModeType.Tutor)}
+                      >
                         <i className="dropdown-icon" />
                         Tutor
                       </button>
-                      <button className="link-like dropdown-item">
+                      <button
+                        className="link-like dropdown-item"
+                        onClick={() => changeAccountMode(AccountModeType.Student)}
+                      >
                         <i className="dropdown-icon" />
                         Student
                       </button>
@@ -566,16 +571,12 @@ export const AppLayout: React.SFC<IProps> = ({
                   className="dropdown main-profile-menu nav nav-item nav-link"
                 >
                   <DropdownToggle tag="a" className="profile-user d-flex">
-                    <img
-                      src="../assets/img/faces/6.jpg"
-                      alt="user-img"
-                      className="rounded-circle mCS_img_loaded"
-                    />
+                    <img src={picture} alt="user-img" className="rounded-circle mCS_img_loaded" />
                   </DropdownToggle>
                   <DropdownMenu right={true} className="dropdown-menu">
                     <div className="main-header-profile header-img">
                       <div className="main-img-user">
-                        <img alt="" src="../assets/img/faces/6.jpg" />
+                        <img alt="" src={picture} />
                       </div>
                       <h6>{fullName}</h6>
                       <span>Premium Member</span>

@@ -13,3 +13,5 @@ export const selectUserFullName = createSelector(
   base,
   ({ profile: { lastName, firstName } }) => `${firstName} ${lastName}`,
 );
+
+export const selectUserPicture = createSelector(base, ({ profile: { picture } }) => picture);

@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { AppLayout, AuthLayout } from '../layouts';
+import { IMenuItems } from './types';
 import { FaqRoutes } from '../screens/Faqs';
 import { NotFound } from '../screens/NotFound';
 import { Dashboard } from '../screens/Dashboard';
 import { authenticationGuard } from '../guards';
-import { IMenuItems } from './types';
+import { SkillsRoutes } from '../screens/Skills';
 
 export const appRoutes: IMenuItems[] = [
   {
@@ -16,6 +17,7 @@ export const appRoutes: IMenuItems[] = [
     showOnNavigation: true,
   },
   ...FaqRoutes,
+  ...SkillsRoutes,
   {
     path: '*',
     title: 'Not Found',

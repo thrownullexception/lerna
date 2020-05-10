@@ -2,11 +2,13 @@ import { connectRouter } from 'connected-react-router';
 import { combineReducers } from 'redux';
 import { faqsReducer } from '../app/faqs/faqs.reducers';
 import { authReducer } from '../app/auth/auth.reducers';
+import { skillsReducer } from '../app/skills/skills.reducers';
 import { history } from './history';
 
 const rootReducers = combineReducers({
   router: connectRouter(history),
   faqs: faqsReducer,
+  skills: skillsReducer,
   auth: authReducer,
 });
 

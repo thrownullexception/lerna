@@ -2,6 +2,12 @@ export const NavigationService = {
   indexPath: (path: string): string => {
     return `/${path}`;
   },
+  studentPath: (path: string): string => {
+    return NavigationService.indexPath(`student/${path}`);
+  },
+  tutorPath: (path: string): string => {
+    return `tutor/${path}`;
+  },
   editPath: (path: string, id: string): string => {
     return `/${path}/edit/${id}`;
   },
@@ -18,6 +24,10 @@ export const NavigationService = {
     return `#/${path}`;
   },
   goTo: (path: string): void => {
+    if (path.startsWith('/')) {
+      window.location.href = `#${path}`;
+      return;
+    }
     window.location.href = `#${NavigationService.indexPath(path)}`;
   },
 };

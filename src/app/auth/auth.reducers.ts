@@ -10,6 +10,7 @@ const initial = {
   profile: {
     lastName: '',
     firstName: '',
+    picture: '',
   },
   permissions: [],
   role: '',
@@ -18,18 +19,22 @@ const initial = {
 export const authReducer = (state: IAuthState = initial, action: AuthAction) => {
   return produce(state, draftState => {
     if (action.type === ActionType.AUTHENTICATE_USER) {
-      const { lastName, firstName, email, id, accountMode } = action.payload;
+      const { lastName, firstName, email, id, accountMode, picture } = action.payload;
       draftState.authenticated = true;
       draftState.id = id;
       draftState.email = email;
       draftState.accountMode = accountMode;
-      draftState.profile = { firstName, lastName };
+      draftState.profile = { firstName, lastName, picture };
     }
 
     if (action.type === ActionType.SET_SIGN_UP_CREDENTIALS) {
       const { id, email } = action.payload;
       draftState.id = id;
       draftState.email = email;
+    }
+
+    if (action.type === ActionType.CHANGE_ACCOUNT_MODE) {
+      draftState.accountMode = action.payload;
     }
 
     if (action.type === ActionType.LOG_OUT) {

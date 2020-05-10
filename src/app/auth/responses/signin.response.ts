@@ -7,14 +7,16 @@ export class SignInResponse {
   email: string;
   lastName: string;
   firstName: string;
+  picture: string;
   id: string;
   token: string;
   constructor(jsonObject: object) {
     this.id = get('id', jsonObject);
-    this.token = get('token', jsonObject);
+    this.token = get('jwt_token', jsonObject);
     this.email = get('email', jsonObject);
     this.lastName = get('last_name', jsonObject);
     this.firstName = get('first_name', jsonObject);
+    this.picture = get('picture', jsonObject);
     this.accountMode = get('account_mode', jsonObject);
   }
 }

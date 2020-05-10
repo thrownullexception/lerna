@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux';
 import { action } from 'typesafe-actions';
 import { ThunkInterface } from '../../shared/types';
-import { AuthAction, ActionType, JWT_TOKEN_STORAGE_KEY } from './auth.types';
+import { AuthAction, ActionType, JWT_TOKEN_STORAGE_KEY, AccountModeType } from './auth.types';
 import { RequestService, ToastService, NavigationService, StorageService } from '../../services';
 import { ISignInForm } from '../../screens/Auth/SignIn/SignIn.types';
 import { ISignUpForm } from '../../screens/Auth/SignUp/SignUp.types';
@@ -28,6 +28,19 @@ export const doSignUp = (signUpForm: ISignUpForm): ThunkInterface<void> => {
       ToastService.error(e);
     }
     dispatch(action(ActionType.AUTH_REQUEST_ENDED));
+  };
+};
+
+export const changeAccountMode = (mode: AccountModeType): ThunkInterface<void> => {
+  return async (dispatch: Dispatch<AuthAction>) => {
+    dispatch(action(ActionType.CHANGE_ACCOUNT_MODE, mode));
+    // await RequestService.patch('user/account_mode', { mode }); // TODO
+    if (mode === AccountModeType.Student) {
+      NavigationService.goTo(NavigationService.studentPath(DashboardPath));
+    }
+    if (mode === AccountModeType.Tutor) {
+      NavigationService.goTo(NavigationService.tutorPath(DashboardPath));
+    }
   };
 };
 
