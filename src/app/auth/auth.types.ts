@@ -1,5 +1,23 @@
 import { SignInResponse } from './responses';
 
+export enum AccountModeType {
+  Tutor,
+  Student,
+  Admin,
+}
+
+export const AccountModePaths = {
+  [AccountModeType.Admin]: 'admin',
+  [AccountModeType.Student]: 'student',
+  [AccountModeType.Tutor]: 'tutor',
+};
+
+export const AccountModeLabel = {
+  [AccountModeType.Admin]: 'Admin',
+  [AccountModeType.Student]: 'Student',
+  [AccountModeType.Tutor]: 'Tutor',
+};
+
 export const JWT_TOKEN_STORAGE_KEY = 'JWT_TOKEN_STORAGE_KEY';
 
 export enum ActionType {
@@ -11,11 +29,6 @@ export enum ActionType {
   SET_SIGN_UP_CREDENTIALS = 'SET_SIGN_UP_CREDENTIALS',
 }
 
-export enum AccountModeType {
-  Tutor,
-  Student,
-  Admin,
-}
 
 export interface IAuthState {
   authenticated: boolean;

@@ -1,8 +1,8 @@
-import { get } from 'lodash-es';
+import { FaqResponse } from './responses';
 
 export interface IFaqState {
-  faqs: Faq[];
-  faq: Faq;
+  faqs: FaqResponse[];
+  faq: FaqResponse;
   isFetching: boolean;
 }
 
@@ -18,12 +18,12 @@ export enum ActionType {
 
 interface IFetchFaqsSuccessfull {
   type: ActionType.FETCH_FAQS_SUCCESSFULL;
-  payload: Faq[];
+  payload: FaqResponse[];
 }
 
 interface IFetchFaqSuccessfull {
   type: ActionType.FETCH_FAQ_SUCCESSFULL;
-  payload: Faq;
+  payload: FaqResponse;
 }
 
 interface IAddFaq {
@@ -68,20 +68,6 @@ export type FaqsAction =
   | IRemoveFaq
   | IUpdateFaq
   | IDefaultAction;
-
-export class Faq {
-  id: number;
-  question: string;
-  answer: string;
-  admin: string;
-
-  constructor(jsonData: object) {
-    this.id = get(jsonData, 'id');
-    this.question = get(jsonData, 'question');
-    this.answer = get(jsonData, 'answer');
-    this.admin = get(jsonData, 'admin');
-  }
-}
 
 export interface IFaqsForm {
   question: string;

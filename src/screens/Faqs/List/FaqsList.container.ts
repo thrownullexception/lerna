@@ -3,7 +3,7 @@ import { IThunkDispatch } from '../../../shared/types';
 import { IStore } from '../../../store/rootReducers';
 import { FaqsList } from './FaqsList';
 import { DispatchProps, StateProps } from './FaqsList.types';
-import { getFaqs } from '../../../app/faqs/faqs.actions';
+import { FaqsActions } from '../../../app/faqs/faqs.actions';
 
 const mapStateToProps = (state: IStore): StateProps => {
   return {
@@ -15,7 +15,7 @@ const mapStateToProps = (state: IStore): StateProps => {
 const mapDispatchToProps = (dispatch: IThunkDispatch): DispatchProps => {
   return {
     getFaqs: () => {
-      dispatch(getFaqs());
+      dispatch(FaqsActions.getFaqs());
     },
   };
 };

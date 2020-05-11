@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
-import { IThunkDispatch } from '../../../shared/types';
-import { IStore } from '../../../store/rootReducers';
+import { IThunkDispatch } from '../../../../shared/types';
+import { IStore } from '../../../../store/rootReducers';
 import { FaqsEdit } from './FaqsEdit';
 import { DispatchProps, StateProps } from './FaqsEdit.types';
-import { IFaqsForm } from '../../../app/faqs/faqs.types';
-import { patchFaqs, getFaq, deleteFaq } from '../../../app/faqs/faqs.actions';
+import { IFaqsForm } from '../../../../app/faqs/faqs.types';
+// import { patchFaqs, getFaq, deleteFaq } from '../../../../app/faqs/faqs.actions';
 
 const mapStateToProps = (state: IStore): StateProps => {
   return {
@@ -16,13 +16,13 @@ const mapStateToProps = (state: IStore): StateProps => {
 const mapDispatchToProps = (dispatch: IThunkDispatch): DispatchProps => {
   return {
     getFaq: (faqId: number) => {
-      dispatch(getFaq(faqId));
+      // dispatch(getFaq(faqId));
     },
     deleteFaq: (faqId: number) => {
-      dispatch(deleteFaq(faqId));
+      // dispatch(deleteFaq(faqId));
     },
     editFaq: (faqId: number, faqsForm: IFaqsForm) => {
-      dispatch(patchFaqs(faqId, faqsForm));
+      // dispatch(patchFaqs(faqId, faqsForm));
     },
   };
 };

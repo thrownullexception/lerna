@@ -4,13 +4,18 @@ import { IStore } from '../../store/rootReducers';
 import { AppLayout } from './App';
 import { DispatchProps, StateProps } from './App.types';
 import { doLogOut, changeAccountMode } from '../../app/auth/auth.actions';
-import { selectUserFullName, selectUserPicture } from '../../app/auth/auth.selectors';
+import {
+  selectUserFullName,
+  selectUserPicture,
+  AuthSelectors,
+} from '../../app/auth/auth.selectors';
 import { AccountModeType } from '../../app/auth/auth.types';
 
 const mapStateToProps = (state: IStore): StateProps => {
   return {
     fullName: selectUserFullName(state),
     picture: selectUserPicture(state),
+    accountModeLabel: AuthSelectors.selectAccountModeLabel(state),
     permissions: state.auth.permissions,
     role: state.auth.role,
   };

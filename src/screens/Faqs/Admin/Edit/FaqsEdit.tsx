@@ -2,9 +2,9 @@ import * as React from 'react';
 import { pick } from 'lodash-es';
 import { IProps } from './FaqsEdit.types';
 import { FaqsForm } from '../forms/Faqs.form';
-import { IFaqsForm } from '../../../app/faqs/faqs.types';
+import { IFaqsForm } from '../../../../app/faqs/faqs.types';
 import { RouteComponentProps } from 'react-router-dom';
-import { ToastService } from '../../../services';
+import { ToastService } from '../../../../services';
 
 export class FaqsEdit extends React.PureComponent<IProps & RouteComponentProps<{ id: string }>> {
   private faqId!: number;
@@ -30,7 +30,7 @@ export class FaqsEdit extends React.PureComponent<IProps & RouteComponentProps<{
     return (
       <>
         <p>
-          Last Updated By {faq.admin}
+          {/* Last Updated By {faq.admin} */}
           <button className="btn btn-xs btn-danger pull-right" onClick={this.deleteFaq}>
             Delete
           </button>

@@ -1,4 +1,4 @@
-import { IFaqsForm } from '../../../app/faqs/faqs.types';
+import { IFaqsForm } from '../../../../app/faqs/faqs.types';
 
 export interface IProps {
   postFaqs: (faqsForm: IFaqsForm) => void;

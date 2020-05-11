@@ -1,8 +1,8 @@
-import { Faq } from '../../../app/faqs/faqs.types';
+import { FaqResponse } from '../../../app/faqs/responses';
 
 export interface IProps {
   getFaqs: () => void;
-  faqs: Faq[];
+  faqs: FaqResponse[];
   isFetching: boolean;
 }
 

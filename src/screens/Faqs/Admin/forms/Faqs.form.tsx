@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Form, Field } from 'react-final-form';
-import { RenderInput, SubmitButton } from '../../../components/RenderInput';
-import { IFaqsForm } from '../../../app/faqs/faqs.types';
-import { FormProps } from '../../../shared/types';
-import { required } from '../../../shared/validations';
+import { RenderInput, SubmitButton } from '../../../../components/RenderInput';
+import { IFaqsForm } from '../../../../app/faqs/faqs.types';
+import { FormProps } from '../../../../shared/types';
+import { required } from '../../../../shared/validations';
 
 export const FaqsForm: React.SFC<FormProps<IFaqsForm>> = ({
   onSubmit,

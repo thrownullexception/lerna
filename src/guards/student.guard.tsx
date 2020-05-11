@@ -26,9 +26,7 @@ export function studentGuard(
     render() {
       const Component1 = authenticationGuard(Component);
       if (this.props.accountMode !== AccountModeType.Student) {
-        return (
-          <Redirect to={NavigationService.indexPath(NavigationService.tutorPath(DashboardPath))} />
-        );
+        return <Redirect to={NavigationService.tutorPath(DashboardPath)} />;
       }
       return <Component1 {...this.props} />;
     }

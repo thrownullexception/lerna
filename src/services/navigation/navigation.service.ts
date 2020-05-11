@@ -6,7 +6,7 @@ export const NavigationService = {
     return NavigationService.indexPath(`student/${path}`);
   },
   tutorPath: (path: string): string => {
-    return `tutor/${path}`;
+    return NavigationService.indexPath(`tutor/${path}`);
   },
   editPath: (path: string, id: string): string => {
     return `/${path}/edit/${id}`;

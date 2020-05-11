@@ -10,7 +10,7 @@ import { IProps } from './App.types';
 import { NavigationMenu } from './components/NavigationMenu';
 import { NavigationService } from '../../services';
 import './style.scss';
-import { AccountModeType } from '../../app/auth/auth.types';
+import { AccountModeType, AccountModeLabel } from '../../app/auth/auth.types';
 
 const togglePreviousState = (prev: boolean) => !prev;
 
@@ -44,7 +44,10 @@ export const AppLayout: React.SFC<IProps> = ({
   picture,
   permissions,
   role,
+  accountModeLabel,
 }): JSX.Element => {
+  console.log(appRoutes);
+
   const [isNotificationDropDownOpen, setNotificationDropDownOpen] = React.useState(false);
   const [isAccountDropDownOpen, setAccountDropDownOpen] = React.useState(false);
   const [isMessagesDropDownOpen, setMessagesDropDownOpen] = React.useState(false);
@@ -184,9 +187,15 @@ export const AppLayout: React.SFC<IProps> = ({
               </a>
             </li>
             <li className="slide">
-              <a className="side-menu__item" href="/">
+              <a className="side-menu__item" href="#/tutor/faqs">
                 <i className="side-menu__icon fe fe-airplay" />
-                <span className="side-menu__label">Support</span>
+                <span className="side-menu__label">Tutor Faqs</span>
+              </a>
+            </li>
+            <li className="slide">
+              <a className="side-menu__item" href="#/student/faqs">
+                <i className="side-menu__icon fe fe-airplay" />
+                <span className="side-menu__label">Student Faqs</span>
               </a>
             </li>
             <li className="slide">
@@ -278,7 +287,7 @@ export const AppLayout: React.SFC<IProps> = ({
                   >
                     <DropdownToggle tag="button" className="btn btn-link dropdown-toggle">
                       <span>
-                        <i className="nav-link-icon fe fe-briefcase" /> Tutor
+                        <i className="nav-link-icon fe fe-briefcase" /> {accountModeLabel}
                       </span>
                     </DropdownToggle>
                     <DropdownMenu left="true" className="dropdown-menu-lg dropdown-menu">
@@ -286,30 +295,33 @@ export const AppLayout: React.SFC<IProps> = ({
                         <div className="dropdown-menu-header-inner header-img p-3">
                           <div className="header-content text-left d-flex">
                             <div className="text-white">
-                              <h5 className="menu-header-title">Projects</h5>
-                              <h6 className="menu-header-subtitle mb-0">Overview of Projects</h6>
-                            </div>
-                            <div className="my-auto ml-auto">
-                              <span className="badge badge-pill badge-warning float-right">
-                                View all
-                              </span>
+                              <h5 className="menu-header-title">Switch Account Mode</h5>
+                              <h6 className="menu-header-subtitle mb-0">
+                                View the other side of the app
+                              </h6>
                             </div>
                           </div>
                         </div>
                       </div>
                       <button
                         className="link-like dropdown-item  mt-2"
-                        onClick={() => changeAccountMode(AccountModeType.Tutor)}
+                        onClick={() => {
+                          changeAccountMode(AccountModeType.Tutor);
+                          toggleAccountModeDropDown();
+                        }}
                       >
                         <i className="dropdown-icon" />
-                        Tutor
+                        {AccountModeLabel[AccountModeType.Tutor]}
                       </button>
                       <button
                         className="link-like dropdown-item"
-                        onClick={() => changeAccountMode(AccountModeType.Student)}
+                        onClick={() => {
+                          changeAccountMode(AccountModeType.Student);
+                          toggleAccountModeDropDown();
+                        }}
                       >
                         <i className="dropdown-icon" />
-                        Student
+                        {AccountModeLabel[AccountModeType.Student]}
                       </button>
                     </DropdownMenu>
                   </Dropdown>
