@@ -4,22 +4,24 @@ import { useLocation } from 'react-router';
 import { appRoutes } from '../../../routes/routes';
 import { IMenuItems } from '../../../routes/types';
 import { NavigationService } from '../../../services';
+import { AccountModeType } from '../../../app/auth/auth.types';
 
 interface INavigationMenu {
   permissions: string[];
   role: string;
+  accountMode: AccountModeType;
 }
 
 const buildMenu: React.SFC<IMenuItems> = ({ path, title }, pathname: string): JSX.Element => {
   const navClassName = classnames({
-    'dt-side-nav__link': true,
-    'dt-side-nav__link--active': pathname === path,
+    'side-menu__item': true,
+    active: pathname === path,
   });
   return (
-    <li key={title} className="dt-side-nav__item">
+    <li key={title} className="slide">
       <a href={NavigationService.hash(`${path}`)} className={navClassName} title={title}>
-        <i className="fa fa-bars" />
-        <span className="dt-side-nav__text">{title}</span>
+        <i className="side-menu__icon fe fe-airplay" />
+        <span className="side-menu__label">{title}</span>
       </a>
     </li>
   );
@@ -28,25 +30,24 @@ const buildMenu: React.SFC<IMenuItems> = ({ path, title }, pathname: string): JS
 export const NavigationMenu: React.SFC<INavigationMenu> = ({
   permissions,
   role,
+  accountMode,
 }): JSX.Element | null => {
-  const location = useLocation();
+  const { pathname } = useLocation();
   if (!permissions) {
     return null;
   }
   return (
-    <ul className="dt-side-nav">
-      <li className="dt-side-nav__item dt-side-nav__header">
-        <span className="dt-side-nav__text">main</span>
-      </li>
+    <ul className="side-menu">
       {appRoutes
         .filter(
           route =>
-            route.showOnNavigation &&
-            (!route.permission ||
-              permissions.includes('' + route.permission) ||
-              role === 'SUPER_ADMIN'),
+            (route.showOnNavigation &&
+              route.accountModes?.includes(accountMode) &&
+              !route.permission) ||
+            permissions.includes('' + route.permission) ||
+            role === 'SUPER_ADMIN',
         )
-        .map(route => buildMenu(route, location.pathname))}
+        .map(route => buildMenu(route, pathname))}
     </ul>
   );
 };

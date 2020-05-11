@@ -4,7 +4,6 @@ import { AccountModeLabel, AccountModePaths } from './auth.types';
 
 const base = (state: IStore) => state.auth;
 
-
 export const selectAccountMode = createSelector(base, ({ accountMode }) => accountMode);
 export const selectAuthIsMakingRequest = createSelector(
   base,
@@ -23,11 +22,21 @@ export class AuthSelectors {
     return state.skills;
   }
 
+  static selectAccountMode(state: IStore) {
+    return createSelector(base, ({ accountMode }) => accountMode)(state);
+  }
+
   static selectAccountModePath(state: IStore) {
-    return createSelector(base, ({ accountMode }) => AccountModePaths[accountMode])(state);
+    return createSelector(
+      AuthSelectors.selectAccountMode,
+      accountMode => AccountModePaths[accountMode],
+    )(state);
   }
 
   static selectAccountModeLabel(state: IStore) {
-    return createSelector(base, ({ accountMode }) => AccountModeLabel[accountMode])(state);
+    return createSelector(
+      AuthSelectors.selectAccountMode,
+      accountMode => AccountModeLabel[accountMode],
+    )(state);
   }
 }

@@ -29,7 +29,7 @@ export const FaqRoutes: IMenuItems[] = [
     exact: true,
     title: 'Support',
     showOnNavigation: true,
-    accountMode: [AccountModeType.Tutor],
+    accountModes: [AccountModeType.Tutor],
     component: tutorGuard(FaqsList),
   },
   {
@@ -37,7 +37,7 @@ export const FaqRoutes: IMenuItems[] = [
     exact: true,
     title: 'Support',
     showOnNavigation: true,
-    accountMode: [AccountModeType.Student],
+    accountModes: [AccountModeType.Student],
     component: studentGuard(FaqsList),
   },
 ];

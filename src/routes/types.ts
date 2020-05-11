@@ -10,6 +10,6 @@ export interface IMenuItems extends RouteConfig {
   title: string;
   permission?: string;
   showOnNavigation?: boolean;
-  accountMode?: AccountModeType[];
+  accountModes?: AccountModeType[];
   actions?: IMenuAction[];
 }

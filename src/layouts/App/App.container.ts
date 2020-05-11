@@ -16,6 +16,7 @@ const mapStateToProps = (state: IStore): StateProps => {
     fullName: selectUserFullName(state),
     picture: selectUserPicture(state),
     accountModeLabel: AuthSelectors.selectAccountModeLabel(state),
+    accountMode: AuthSelectors.selectAccountMode(state),
     permissions: state.auth.permissions,
     role: state.auth.role,
   };

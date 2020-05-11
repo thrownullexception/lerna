@@ -5,6 +5,7 @@ export interface IProps {
   changeAccountMode: (mode: AccountModeType) => void;
   fullName: string;
   role: string;
+  accountMode: AccountModeType;
   accountModeLabel: string;
   picture: string;
   permissions: string[];
@@ -13,5 +14,5 @@ export interface IProps {
 export type DispatchProps = Pick<IProps, 'doLogOut' | 'changeAccountMode'>;
 export type StateProps = Pick<
   IProps,
-  'fullName' | 'picture' | 'permissions' | 'accountModeLabel' | 'role'
+  'fullName' | 'picture' | 'permissions' | 'accountMode' | 'accountModeLabel' | 'role'
 >;

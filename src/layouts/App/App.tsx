@@ -14,39 +14,39 @@ import { AccountModeType, AccountModeLabel } from '../../app/auth/auth.types';
 
 const togglePreviousState = (prev: boolean) => !prev;
 
-// const TitleAndActions: React.SFC<{}> = (): JSX.Element => {
-//   const { pathname } = useLocation();
-//   const currentRoute = routes.find(route => route.path === pathname);
-//   if (currentRoute) {
-//     const { title, actions = [] } = currentRoute;
-//     return (
-//       <h1 className="dt-page__title">
-//         {title}
-//         {actions.map(action => (
-//           <a
-//             href={NavigationService.hash(action.path)}
-//             key={action.title}
-//             className="btn btn-outline-info btn-xs pull-right"
-//           >
-//             <span className="dt-side-nav__text">{action.title}</span>
-//           </a>
-//         ))}
-//       </h1>
-//     );
-//   }
-//   return <h1 className="dt-page__title">Untitled</h1>;
-// };
+const TitleAndActions: React.SFC<{}> = (): JSX.Element => {
+  const { pathname } = useLocation();
+  const currentRoute = appRoutes.find(route => route.path === pathname);
+  if (currentRoute) {
+    const { title, actions = [] } = currentRoute;
+    return (
+      <h4 className="content-title mb-2">
+        {title}
+        {/* {actions.map(action => (
+          <a
+            href={NavigationService.hash(action.path)}
+            key={action.title}
+            className="btn btn-outline-info btn-xs pull-right"
+          >
+            <span className="dt-side-nav__text">{action.title}</span>
+          </a>
+        ))} */}
+      </h4>
+    );
+  }
+  return <h4 className="content-title mb-2">Untitled</h4>;
+};
 
 export const AppLayout: React.SFC<IProps> = ({
   doLogOut,
   changeAccountMode,
   fullName,
   picture,
+  accountMode,
   permissions,
   role,
   accountModeLabel,
 }): JSX.Element => {
-  console.log(appRoutes);
 
   const [isNotificationDropDownOpen, setNotificationDropDownOpen] = React.useState(false);
   const [isAccountDropDownOpen, setAccountDropDownOpen] = React.useState(false);
@@ -107,20 +107,20 @@ export const AppLayout: React.SFC<IProps> = ({
       <div className="app-sidebar__overlay" data-toggle="sidebar" />
       <aside className="main-sidebar app-sidebar sidebar-scroll ps ps--active-y">
         <div className="main-sidebar-header">
-          <a className="desktop-logo logo-light active" href="index.html">
+          <a className="desktop-logo logo-light active" href="/">
             <img src="../assets/img/brand/logo.png" alt="" className="main-logo" />
           </a>
-          <a className="desktop-logo icon-logo active" href="index.html">
+          <a className="desktop-logo icon-logo active" href="/">
             <img src="../assets/img/brand/favicon.png" alt="" className="logo-icon" />
           </a>
-          <a className="desktop-logo logo-dark active" href="index.html">
+          <a className="desktop-logo logo-dark active" href="/">
             <img
               src="../assets/img/brand/logo-white.png"
               className="main-logo dark-theme"
               alt="logo"
             />
           </a>
-          <a className="logo-icon mobile-logo icon-dark active" href="index.html">
+          <a className="logo-icon mobile-logo icon-dark active" href="/">
             <img
               src="../assets/img/brand/favicon-white.png"
               className="logo-icon dark-theme"
@@ -143,74 +143,7 @@ export const AppLayout: React.SFC<IProps> = ({
           </div>
         </div>
         <div className="main-sidebar-body active">
-          <ul className="side-menu ">
-            <li className="slide">
-              <a className="side-menu__item" href="/">
-                <i className="side-menu__icon fe fe-airplay" />
-                <span className="side-menu__label">Dashboard</span>
-              </a>
-            </li>
-            <li className="slide">
-              <a className="side-menu__item" href="/">
-                <i className="side-menu__icon fe fe-airplay" />
-                <span className="side-menu__label">Messages</span>
-              </a>
-            </li>
-            <li className="slide">
-              <a className="side-menu__item" href="#/student/skills">
-                <i className="side-menu__icon fe fe-airplay" />
-                <span className="side-menu__label">Skills</span>
-              </a>
-            </li>
-            <li className="slide">
-              <a className="side-menu__item" href="/">
-                <i className="side-menu__icon fe fe-airplay" />
-                <span className="side-menu__label">Sessions</span>
-              </a>
-            </li>
-            <li className="slide">
-              <a className="side-menu__item" href="/">
-                <i className="side-menu__icon fe fe-airplay" />
-                <span className="side-menu__label">Payouts</span>
-              </a>
-            </li>
-            <li className="slide">
-              <a className="side-menu__item" href="/">
-                <i className="side-menu__icon fe fe-airplay" />
-                <span className="side-menu__label">Invoice</span>
-              </a>
-            </li>
-            <li className="slide">
-              <a className="side-menu__item" href="/">
-                <i className="side-menu__icon fe fe-airplay" />
-                <span className="side-menu__label">Transactions</span>
-              </a>
-            </li>
-            <li className="slide">
-              <a className="side-menu__item" href="#/tutor/faqs">
-                <i className="side-menu__icon fe fe-airplay" />
-                <span className="side-menu__label">Tutor Faqs</span>
-              </a>
-            </li>
-            <li className="slide">
-              <a className="side-menu__item" href="#/student/faqs">
-                <i className="side-menu__icon fe fe-airplay" />
-                <span className="side-menu__label">Student Faqs</span>
-              </a>
-            </li>
-            <li className="slide">
-              <a className="side-menu__item" href="/">
-                <i className="side-menu__icon fe fe-airplay" />
-                <span className="side-menu__label">Reviews</span>
-              </a>
-            </li>
-            <li className="slide">
-              <a className="side-menu__item" href="/">
-                <i className="side-menu__icon fe fe-airplay" />
-                <span className="side-menu__label">Disputes</span>
-              </a>
-            </li>
-          </ul>
+          <NavigationMenu permissions={[]} role={''} accountMode={accountMode} />
         </div>
         <div className="ps__rail-x" style={{ left: '0px', top: '251px' }}>
           <div className="ps__thumb-x" tabIndex={0} style={{ left: '0px', width: '0px' }} />
@@ -264,16 +197,16 @@ export const AppLayout: React.SFC<IProps> = ({
                 )}
               </div>
               <div className="responsive-logo">
-                <a href="index.html">
+                <a href="/">
                   <img src="../assets/img/brand/logo-white.png" alt="" className="logo-1" />
                 </a>
-                <a href="index.html">
+                <a href="/">
                   <img src="../assets/img/brand/logo.png" alt="" className="logo-11" />
                 </a>
-                <a href="index.html">
+                <a href="/">
                   <img src="../assets/img/brand/favicon-white.png" alt="" className="logo-2" />
                 </a>
-                <a href="index.html">
+                <a href="/">
                   <img src="../assets/img/brand/favicon.png" alt="" className="logo-12" />
                 </a>
               </div>
@@ -619,7 +552,7 @@ export const AppLayout: React.SFC<IProps> = ({
         <div className="container-fluid">
           <div className="breadcrumb-header justify-content-between">
             <div>
-              <h4 className="content-title mb-2">Dashboard</h4>
+              <TitleAndActions />
               <nav aria-label="breadcrumb">
                 <ol className="breadcrumb">
                   <li className="breadcrumb-item">
@@ -633,48 +566,12 @@ export const AppLayout: React.SFC<IProps> = ({
             </div>
             <div className="d-flex my-auto">
               <div className=" d-flex right-page">
-                <div className="d-flex justify-content-center mr-5">
+                <div className="d-flex justify-content-center">
                   <div className="">
                     <span className="d-block">
                       <span className="label ">EXPENSES</span>
                     </span>
                     <span className="value"> $53,000 </span>
-                  </div>
-                  <div className="ml-3 mt-2">
-                    <span className="sparkline_bar">
-                      <canvas
-                        width={52}
-                        height={30}
-                        style={{
-                          display: 'inline-block',
-                          width: '52px',
-                          height: '30px',
-                          verticalAlign: 'top',
-                        }}
-                      />
-                    </span>
-                  </div>
-                </div>
-                <div className="d-flex justify-content-center">
-                  <div className="">
-                    <span className="d-block">
-                      <span className="label">PROFIT</span>
-                    </span>
-                    <span className="value"> $34,000 </span>
-                  </div>
-                  <div className="ml-3 mt-2">
-                    <span className="sparkline_bar31">
-                      <canvas
-                        width={52}
-                        height={30}
-                        style={{
-                          display: 'inline-block',
-                          width: '52px',
-                          height: '30px',
-                          verticalAlign: 'top',
-                        }}
-                      />
-                    </span>
                   </div>
                 </div>
               </div>
