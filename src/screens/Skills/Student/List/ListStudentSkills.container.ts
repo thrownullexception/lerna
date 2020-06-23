@@ -9,6 +9,7 @@ import { SkillActions } from '../../../../app/skills/skills.actions';
 const mapStateToProps = (state: IStore): StateProps => {
   return {
     skills: SkillsSelectors.selectSkillsInHierarchy(state),
+    skillInHierarchy: SkillsSelectors.selectSkillInHierarchy(state),
     skill: SkillsSelectors.selectCurrentSkill(state),
     skillsDepth: SkillsSelectors.selectSkillsDepth(state),
     isFetching: SkillsSelectors.selectIsFetching(state),
@@ -26,8 +27,12 @@ const mapDispatchToProps = (dispatch: IThunkDispatch): DispatchProps => {
     goBackInSkillsDepth: () => {
       dispatch(SkillActions.goBackInSkillsDepth());
     },
+    setCurrentSkillId: (skillId: string) => {
+      dispatch(SkillActions.setCurrentSkillId(skillId));
+    },
   };
 };
+
 const connected = connect(
   mapStateToProps,
   mapDispatchToProps,

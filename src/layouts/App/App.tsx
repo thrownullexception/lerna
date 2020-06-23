@@ -8,7 +8,6 @@ import { appRoutes } from '../../routes/routes';
 import PerfectScrollbar from 'perfect-scrollbar';
 import { IProps } from './App.types';
 import { NavigationMenu } from './components/NavigationMenu';
-import { NavigationService } from '../../services';
 import './style.scss';
 import { AccountModeType, AccountModeLabel } from '../../app/auth/auth.types';
 
@@ -18,21 +17,8 @@ const TitleAndActions: React.SFC<{}> = (): JSX.Element => {
   const { pathname } = useLocation();
   const currentRoute = appRoutes.find(route => route.path === pathname);
   if (currentRoute) {
-    const { title, actions = [] } = currentRoute;
-    return (
-      <h4 className="content-title mb-2">
-        {title}
-        {/* {actions.map(action => (
-          <a
-            href={NavigationService.hash(action.path)}
-            key={action.title}
-            className="btn btn-outline-info btn-xs pull-right"
-          >
-            <span className="dt-side-nav__text">{action.title}</span>
-          </a>
-        ))} */}
-      </h4>
-    );
+    const { title } = currentRoute;
+    return <h4 className="content-title mb-2">{title}</h4>;
   }
   return <h4 className="content-title mb-2">Untitled</h4>;
 };
@@ -47,7 +33,6 @@ export const AppLayout: React.SFC<IProps> = ({
   role,
   accountModeLabel,
 }): JSX.Element => {
-
   const [isNotificationDropDownOpen, setNotificationDropDownOpen] = React.useState(false);
   const [isAccountDropDownOpen, setAccountDropDownOpen] = React.useState(false);
   const [isMessagesDropDownOpen, setMessagesDropDownOpen] = React.useState(false);
@@ -138,7 +123,7 @@ export const AppLayout: React.SFC<IProps> = ({
                 <h6 className=" mb-0 text-dark">{fullName}</h6>
                 <span className="text-muted app-sidebar__user-name text-sm">Administrator</span>
               </div>
-              <button className="btn btn-primary btn-block call-to-action">Consult A Tutor</button>
+              <button className="btn btn-primary btn-block call-to-action">Start A Session</button>
             </div>
           </div>
         </div>

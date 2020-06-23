@@ -32,16 +32,19 @@ export class SkillsSelectors {
     )(state);
   }
 
-  static selectCurrentSkill(state: IStore): SkillResponse {
-    return createSelector(SkillsSelectors.base, ({ currentSkill, currentSkillId, skills }) => {
-      if (currentSkill.id === currentSkillId) {
-        return currentSkill;
-      }
+  static selectSkillInHierarchy(state: IStore): SkillResponse {
+    return createSelector(SkillsSelectors.base, ({ currentSkillId, skills }) => {
       const skill = skills.find(({ id }) => id === currentSkillId);
       if (skill) {
         return skill;
       }
 
+      return new SkillResponse({});
+    })(state);
+  }
+
+  static selectCurrentSkill(state: IStore) {
+    return createSelector(SkillsSelectors.base, ({ currentSkill }) => {
       return currentSkill;
     })(state);
   }

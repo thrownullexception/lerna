@@ -29,7 +29,6 @@ export enum ActionType {
   SET_SIGN_UP_CREDENTIALS = 'SET_SIGN_UP_CREDENTIALS',
 }
 
-
 export interface IAuthState {
   authenticated: boolean;
   isMakingRequest: boolean;

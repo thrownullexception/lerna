@@ -28,9 +28,14 @@ export class SkillActions {
     };
   }
 
-  static getSkill(skillId: string): ThunkInterface<void> {
+  static setCurrentSkillId(skillId: string): ThunkInterface<void> {
     return async (dispatch: Dispatch<SkillsAction>) => {
       dispatch(action(ActionType.SET_CURRENT_SKILL_ID, skillId));
+    };
+  }
+
+  static getSkill(skillId: string): ThunkInterface<void> {
+    return async (dispatch: Dispatch<SkillsAction>) => {
       dispatch(action(ActionType.SKILLS_REQUEST_STARTED));
       try {
         const { data } = await RequestService.get(`${BASE_REQUEST_PATH}/${skillId}`);

@@ -6,14 +6,15 @@ interface IProps {
 }
 
 export const Spinner: React.SFC<IProps> = ({ isFetching, children }) => {
-  if (isFetching) {
-    return (
-      <div className="text-center spinner-container">
-        <div className="spinner-grow" role="status">
-          <span className="sr-only">Loading</span>
-        </div>
-      </div>
-    );
-  }
+  // if (isFetching) {
+  //   return (
+  //     <div className="text-center spinner-container">
+  //       <div className="spinner-grow" role="status">
+  //         <span className="sr-only">Loading</span>
+  //       </div>
+  //       {children}
+  //     </div>
+  //   );
+  // }
   return <>{children}</>;
 };
