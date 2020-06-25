@@ -1,0 +1,26 @@
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Bank } from '../banks/banks.entity';
+
+@Entity('bank_details')
+export class BankDetail {
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @Column()
+  userId: number;
+
+  @Column()
+  accountNumber: number;
+
+  @Column()
+  bankId: number;
+
+  @Column()
+  accountName: string;
+
+  @ManyToOne(
+    type => Bank,
+    bank => bank.bankDetails,
+  )
+  bank: Bank;
+}

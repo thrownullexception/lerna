@@ -1,0 +1,20 @@
+import { MigrationInterface, QueryRunner } from 'typeorm';
+import { BaseMigration } from './base/base-migration';
+
+export class Roles1572361327594 extends BaseMigration
+  implements MigrationInterface {
+  protected table = 'roles';
+
+  public async up(queryRunner: QueryRunner): Promise<any> {
+    await this.createTable(queryRunner, [
+      {
+        name: 'name',
+        type: 'varchar',
+      },
+    ]);
+  }
+
+  public async down(queryRunner: QueryRunner): Promise<any> {
+    await this.drop(queryRunner);
+  }
+}
