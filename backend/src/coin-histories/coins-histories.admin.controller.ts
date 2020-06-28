@@ -6,6 +6,7 @@ import { AdminPermission } from '../shared/decorators';
 import { QueryParametersDTO } from '../shared/dtos';
 import { QueryParametersPipe } from '../shared/pipes';
 import { CoinHistoryService } from './coin-histories.service';
+import { IPaginatePayload } from 'src/shared/types';
 
 const PERMISSION = 'CAN_MANAGE_COINS_HISTORY';
 
@@ -19,7 +20,7 @@ export class AdminCoinsHistoryController {
   @Get()
   async index(
     @Query(new QueryParametersPipe()) queryParameters: QueryParametersDTO,
-  ) {
+  ): Promise<IPaginatePayload<AdminCoinsHistoryTransformer>> {
     const dataPaginated = await this.coinHistoryService.listCoinsHistoriesForAdmin(
       queryParameters,
     );

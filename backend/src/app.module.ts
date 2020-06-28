@@ -19,21 +19,15 @@ import { HealthCheckModule } from './healthcheck/healthcheck.module';
     ConfigModule,
     MailerModule.forRootAsync({
       imports: [ConfigModule],
-      inject: [ConfigService],
-      useFactory: async (configService: ConfigService) =>
-        configService.getMailerOptions(),
+      useExisting: ConfigService,
     }),
     WinstonModule.forRootAsync({
       imports: [ConfigModule],
-      inject: [ConfigService],
-      useFactory: async (configService: ConfigService) =>
-        configService.getWinstonOptions(),
+      useClass: ConfigService, // TODO check this works
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
-      inject: [ConfigService],
-      useFactory: async (configService: ConfigService) =>
-        configService.getTypeOrmConfig(),
+      useExisting: ConfigService,
     }),
     CacheModule,
     AuthModule,

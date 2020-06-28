@@ -3,6 +3,7 @@ import { PassportStrategy } from '@nestjs/passport';
 import * as Strategy from 'passport-facebook-token';
 import { ConfigService } from '../../shared/services';
 import { IProviderAuthResponse } from '../../auth/auth.types';
+import get from 'lodash/fp/get';
 
 @Injectable()
 export class FacebookTokenStrategy extends PassportStrategy(
@@ -19,12 +20,12 @@ export class FacebookTokenStrategy extends PassportStrategy(
   async validate(
     _: string,
     __: string,
-    profile: any,
+    profile: Record<string, unknown>,
   ): Promise<IProviderAuthResponse> {
     return {
-      email: profile.emails[0].value,
-      name: profile.displayName,
-      image: profile.photos[0].value, // TODO get
+      email: get(['emails', 0, 'value'], profile),
+      name: get(['displayName'], profile),
+      image: get(['photos', 0, 'value'], profile),
     };
   }
 }

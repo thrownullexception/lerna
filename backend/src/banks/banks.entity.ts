@@ -10,7 +10,7 @@ export class Bank {
   name: string;
 
   @OneToMany(
-    type => BankDetail,
+    () => BankDetail,
     bankDetail => bankDetail.bank,
   )
   bankDetails: BankDetail[];

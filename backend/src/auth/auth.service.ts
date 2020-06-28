@@ -11,7 +11,7 @@ export class AuthService {
     private readonly hashService: HashService,
   ) {}
 
-  async generateAuthToken(userId: string) {
+  generateAuthToken(userId: string): string {
     return this.jwtService.sign({ id: userId });
   }
 

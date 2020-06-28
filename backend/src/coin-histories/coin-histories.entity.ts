@@ -32,7 +32,7 @@ export class CoinHistory {
   createdAt: Date;
 
   @ManyToOne(
-    type => User,
+    () => User,
     user => user.id,
   )
   user: User;

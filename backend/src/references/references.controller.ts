@@ -27,7 +27,7 @@ export class ReferencesController {
   ) {}
 
   @Get()
-  async index(): Promise<object> {
+  async index(): Promise<Record<string, string | number>> {
     return {
       payoutThreshold: await this.referencesService.getPayoutThreshold(),
     };

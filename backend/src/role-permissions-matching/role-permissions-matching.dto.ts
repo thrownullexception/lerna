@@ -1,6 +1,12 @@
-import { IsNotEmpty, IsInt } from 'class-validator';
+import { IsNotEmpty, IsInt, IsUUID } from 'class-validator';
 
 export class RolePermissionMatchingDTO {
+  @IsNotEmpty({
+    message: 'Id is required',
+  })
+  @IsUUID(4)
+  id: string;
+
   @IsNotEmpty({
     message: 'Role Id is required',
   })

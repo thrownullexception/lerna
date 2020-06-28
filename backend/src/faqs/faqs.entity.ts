@@ -20,7 +20,7 @@ export class Faq {
   answer: string;
 
   @ManyToOne(
-    type => AccountMode,
+    () => AccountMode,
     ({ systemName }) => systemName,
   )
   @JoinColumn({
@@ -33,7 +33,7 @@ export class Faq {
   lastTouchedBy: number;
 
   @ManyToOne(
-    type => User,
+    () => User,
     ({ id }) => id,
   )
   lastTouchedBy$1: User;

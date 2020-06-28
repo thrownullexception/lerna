@@ -11,12 +11,14 @@ import { User } from '../../users/users.entity';
 // const configService = new ConfigService();
 
 export class AuthenticatedUserDetailsTransformer {
-  profile: object;
-  account: object;
-  settings: object;
-  bankDetails: object;
+  // profile: object;
+  // account: object;
+  // settings: object;
+  // bankDetails: object;
 
   constructor(user: User) {
+    user = null;
+    return user;
     //   const gender = this.formatGenderType(user.profile.gender);
     //   this.profile = {
     //     nicename: user.profile.nicename,

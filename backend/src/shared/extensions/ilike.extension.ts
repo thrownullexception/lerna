@@ -1,14 +1,16 @@
 import { Connection, FindOperator, FindOperatorType } from 'typeorm';
 
 class FindOperatorWithExtras<T> extends FindOperator<T> {
+  type: string;
+
   constructor(
     type: FindOperatorType | 'ilike',
     value: FindOperator<T> | T,
     useParameter?: boolean,
     multipleParameters?: boolean,
   ) {
-    // @ts-ignore
-    super(type, value, useParameter, multipleParameters);
+    super(type as FindOperatorType, value, useParameter, multipleParameters);
+    this.type = type;
   }
 
   public toSql(
@@ -16,8 +18,7 @@ class FindOperatorWithExtras<T> extends FindOperator<T> {
     aliasPath: string,
     parameters: string[],
   ): string {
-    // @ts-ignore
-    if (this._type === 'ilike') {
+    if (this.type === 'ilike') {
       return `${aliasPath} ILIKE ${parameters[0]}`;
     }
 

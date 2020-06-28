@@ -1,13 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import {
-  Repository,
-  In,
-  MoreThanOrEqual,
-  Not,
-  FindOperator,
-  FindConditions,
-} from 'typeorm';
+import { Repository, In, Not, FindOperator, FindConditions } from 'typeorm';
 import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
 import { User } from './users.entity';
 import { ICreateUserDetails } from './users.types';

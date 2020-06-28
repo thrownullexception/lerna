@@ -6,10 +6,11 @@ import {
   ValidatorConstraintInterface,
   ValidationArguments,
 } from 'class-validator';
+import { Serializable } from 'child_process';
 
 @ValidatorConstraint({ async: true })
 export class UniqueConstraint implements ValidatorConstraintInterface {
-  async validate(field: any, args: ValidationArguments) {
+  async validate(field: string, args: ValidationArguments): Promise<boolean> {
     const [RepositoryModel] = args.constraints;
     let where = {
       [args.property]: args.value,
@@ -28,7 +29,7 @@ export class UniqueConstraint implements ValidatorConstraintInterface {
     return true;
   }
 
-  defaultMessage(args: ValidationArguments) {
+  defaultMessage(args: ValidationArguments): string {
     return `${args.property.toUpperCase()} already exists`;
   }
 }
@@ -36,8 +37,8 @@ export class UniqueConstraint implements ValidatorConstraintInterface {
 export function Unique(
   RepositoryModel: string,
   validationOptions?: ValidationOptions,
-) {
-  return (object: object, propertyName: string) => {
+): (object: Serializable, propertyName: string) => void {
+  return (object: Serializable, propertyName: string): void => {
     registerDecorator({
       target: object.constructor,
       propertyName,

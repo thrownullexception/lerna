@@ -15,11 +15,10 @@ export class RolesPermissionsMatchingService {
 
   async createRolePermissionsMatching(
     rolePermissionMatchingDTO: RolePermissionMatchingDTO,
-  ): Promise<string> {
-    const created = await this.rolesPermissionMatchingRepository.save(
+  ): Promise<void> {
+    await this.rolesPermissionMatchingRepository.insert(
       rolePermissionMatchingDTO,
     );
-    return created.id;
   }
 
   async deleteRolePermissionsMatching(

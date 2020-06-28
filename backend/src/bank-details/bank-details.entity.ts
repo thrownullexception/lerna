@@ -19,7 +19,7 @@ export class BankDetail {
   accountName: string;
 
   @ManyToOne(
-    type => Bank,
+    () => Bank,
     bank => bank.bankDetails,
   )
   bank: Bank;

@@ -22,7 +22,7 @@ export class SkillRoadMap {
   description: string;
 
   @ManyToOne(
-    type => Skill,
+    () => Skill,
     ({ id }) => id,
   )
   skill$1: Skill;

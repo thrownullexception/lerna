@@ -1,4 +1,4 @@
-export const sleep = (milliseconds: number) => {
+export const sleep = (milliseconds: number): void => {
   const date = Date.now();
   let currentDate = null;
   do {

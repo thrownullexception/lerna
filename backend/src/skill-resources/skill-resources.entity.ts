@@ -29,7 +29,7 @@ export class SkillResource {
   isFree: boolean;
 
   @ManyToOne(
-    _ => SkillMediaType,
+    () => SkillMediaType,
     ({ systemName }) => systemName,
   )
   @JoinColumn({
@@ -39,7 +39,7 @@ export class SkillResource {
   accountMode$1: SkillMediaType;
 
   @ManyToOne(
-    _ => Skill,
+    () => Skill,
     ({ id }) => id,
   )
   skill$1: Skill;

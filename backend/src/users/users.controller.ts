@@ -1,7 +1,5 @@
 import {
   Controller,
-  Get,
-  Param,
   Body,
   UseGuards,
   UseInterceptors,
@@ -9,7 +7,6 @@ import {
   HttpCode,
   BadRequestException,
   UploadedFile,
-  NotFoundException,
   HttpStatus,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -92,7 +89,7 @@ export class UsersController {
   async updateProfileImage(
     @AuthenticatedUser('id') userId: string,
     @UploadedFile() file: { filename: string },
-  ): Promise<object> {
+  ): Promise<{ image: string }> {
     // TODO remove the old user file
     const image = this.configService.getFileStorageHost(
       `${APP_CONSTANTS.AVATARS_PATH}/${file.filename}`,

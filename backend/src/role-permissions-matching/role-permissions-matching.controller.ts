@@ -24,18 +24,20 @@ export class RolesPermissionsMatchingController {
   @Post()
   @AdminPermission('CAN_MATCH_PERMISSION_TO_ROLE')
   @UseGuards(PermissionsGuard)
-  async create(@Body() rolePermissionMatchingDTO: RolePermissionMatchingDTO) {
-    const rolePermissionMatchingId = await this.rolesPermissionsMatchingService.createRolePermissionsMatching(
+  @HttpCode(HttpStatus.NO_CONTENT)
+  async create(
+    @Body() rolePermissionMatchingDTO: RolePermissionMatchingDTO,
+  ): Promise<void> {
+    await this.rolesPermissionsMatchingService.createRolePermissionsMatching(
       rolePermissionMatchingDTO,
     );
-    return { data: rolePermissionMatchingId };
   }
 
   @Delete(':id')
   @AdminPermission('CAN_DELETE_ROLE_PERMISSION_GUARD')
   @UseGuards(PermissionsGuard)
   @HttpCode(HttpStatus.NO_CONTENT)
-  async delete(@Param('id') id: string) {
+  async delete(@Param('id') id: string): Promise<void> {
     await this.rolesPermissionsMatchingService.deleteRolePermissionsMatching(
       +id,
     );

@@ -6,6 +6,7 @@ import { AdminPermission } from '../shared/decorators';
 import { PermissionsGuard } from '../auth/permissions.guards';
 import { QueryParametersPipe } from '../shared/pipes';
 import { QueryParametersDTO } from '../shared/dtos';
+import { IPaginatePayload } from '../shared/types';
 
 const PERMISSION = 'CAN_MANAGE_USERS';
 
@@ -19,7 +20,7 @@ export class AdminUsersController {
   @Get()
   async index(
     @Query(new QueryParametersPipe()) queryParameters: QueryParametersDTO,
-  ) {
+  ): Promise<IPaginatePayload<AdminUserTransformer>> {
     const usersPaginated = await this.usersService.listUsersForAdmin(
       queryParameters,
     );

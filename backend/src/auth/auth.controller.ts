@@ -24,7 +24,6 @@ import {
   VerifyAccountDTO,
   SignUpDTO,
   ResendVerificationCodeDTO,
-  SetReferralDTO,
   CompleteProfileDTO,
   ResetPasswordDTO,
 } from './dtos';
@@ -202,7 +201,7 @@ export class AuthController {
     userId: string,
   ): Promise<IAuthenticationResponse> {
     const userBag = await this.usersService.getAuthenticatedUserBag(userId);
-    const authToken = await this.authService.generateAuthToken(userId);
+    const authToken = this.authService.generateAuthToken(userId);
     // undefined because I want the role not to show for users
     const role = userBag.role || undefined;
     return {
@@ -269,10 +268,9 @@ export class AuthController {
   @Post('referral')
   @UseGuards(AuthGuard('jwt'))
   @HttpCode(HttpStatus.NO_CONTENT)
-  async setReferral(
-    @Body() setReferralDTO: SetReferralDTO,
-    @AuthenticatedUser('id') userId: string,
-  ): Promise<void> {
+  async setReferral(): // @Body() setReferralDTO: SetReferralDTO,
+  // @AuthenticatedUser('id') userId: string,
+  Promise<void> {
     // const { username } = setReferralDTO;
     // const referredBy = await this.usersService.getUserIdFromMaybeUser({
     //   username,

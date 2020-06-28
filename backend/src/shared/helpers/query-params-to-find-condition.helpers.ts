@@ -23,7 +23,7 @@ enum NumberComparisions {
 
 export class QueryParamsToFindConditionHelper {
   static transform<T>(
-    queryFilters: object,
+    queryFilters: Record<string, unknown>,
     filterQueryStructure: IFilterQueryStructure[],
   ): FindConditions<T> {
     const findConditions: FindConditions<T> = {};

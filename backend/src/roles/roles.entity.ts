@@ -11,13 +11,13 @@ export class Role {
   name: string;
 
   @OneToMany(
-    type => RolesPermissionMatching,
+    () => RolesPermissionMatching,
     rolesPermissionMatching => rolesPermissionMatching.role,
   )
   permissions: RolesPermissionMatching[];
 
   @OneToMany(
-    type => User,
+    () => User,
     user => user.role,
   )
   users: User[];

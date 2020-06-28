@@ -14,13 +14,13 @@ export class RolesPermissionMatching {
   permissionId: number;
 
   @ManyToOne(
-    type => Role,
+    () => Role,
     role => role.id,
   )
   role: Role;
 
   @ManyToOne(
-    type => Permission,
+    () => Permission,
     permission => permission.id,
   )
   permission: Permission;

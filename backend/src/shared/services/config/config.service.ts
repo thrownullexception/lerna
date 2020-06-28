@@ -7,6 +7,7 @@ import * as winston from 'winston';
 import * as appRoot from 'app-root-path';
 import * as redisStore from 'cache-manager-redis-store';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { JwtModuleOptions } from '@nestjs/jwt';
 
 enum EnvironmentTypes {
   Production = 'production',
@@ -108,7 +109,7 @@ export class ConfigService implements CacheOptionsFactory {
     return this.get('GOOGLE_CLIENT_SECRET');
   }
 
-  getMailerOptions(): MailerOptions {
+  createMailerOptions(): MailerOptions {
     return {
       transport: {
         host: this.getSMTPHOST(),
@@ -129,7 +130,7 @@ export class ConfigService implements CacheOptionsFactory {
     };
   }
 
-  createJwtOptions(): object {
+  createJwtOptions(): JwtModuleOptions {
     return {
       secret: this.getJWTSecretKey(),
       signOptions: {
@@ -138,7 +139,7 @@ export class ConfigService implements CacheOptionsFactory {
     };
   }
 
-  getWinstonOptions(): object {
+  createWinstonModuleOptions(): winston.LoggerOptions {
     const options = {
       file: {
         level: 'info',
@@ -176,7 +177,7 @@ export class ConfigService implements CacheOptionsFactory {
     };
   }
 
-  getRedisConfig(): object {
+  getRedisConfig(): Record<string, string | number> {
     return {
       host: this.getRedisHost(),
       port: this.getRedisPort(),
@@ -220,12 +221,12 @@ export class ConfigService implements CacheOptionsFactory {
     return +this.get('DB_PORT');
   }
 
-  getTypeOrmConfig(): TypeOrmModuleOptions {
+  createTypeOrmOptions(): TypeOrmModuleOptions {
     const ENTITIES_DIR =
       this.getEnvironment() === 'production' ? './dist' : './dist/src';
     return {
       keepConnectionAlive: true,
-      type: 'postgres' as 'postgres',
+      type: 'postgres' as const,
       host: this.getDBHost(),
       port: this.getDBPort(),
       username: this.getDBUsername(),

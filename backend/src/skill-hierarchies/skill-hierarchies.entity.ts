@@ -16,13 +16,13 @@ export class SkillHierarchy {
   order: number;
 
   @ManyToOne(
-    _ => Skill,
+    () => Skill,
     ({ id }) => id,
   )
   parent$1: Skill;
 
   @ManyToOne(
-    _ => Skill,
+    () => Skill,
     ({ id }) => id,
   )
   child$1: Skill;

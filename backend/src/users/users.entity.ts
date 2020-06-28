@@ -45,7 +45,7 @@ export class User {
   updatedAt: string;
 
   @OneToOne(
-    type => Profile,
+    () => Profile,
     profile => profile.id,
   )
   @JoinColumn({
@@ -55,14 +55,14 @@ export class User {
   profile: Profile;
 
   @OneToMany(
-    type => UserSetting,
+    () => UserSetting,
     userSetting => userSetting.user,
   )
   settings: UserSetting[];
 
   // TODO Check if this works
   @ManyToOne(
-    type => AccountMode,
+    () => AccountMode,
     ({ systemName }) => systemName,
   )
   @JoinColumn({
@@ -72,22 +72,22 @@ export class User {
   accountMode$1: AccountMode;
 
   @ManyToOne(
-    type => Role,
+    () => Role,
     role => role.users,
   )
   role: Role;
 
   // @OneToMany(
-  //   type => UserNotification,
+  //   () => UserNotification,
   //   userNotification => userNotification.user,
   // )
   // notifications: UserNotification[];
 
-  // @OneToMany(type => Support, support => support.user)
+  // @OneToMany(() => Support, support => support.user)
   // supports: Support[];
 
   @OneToOne(
-    type => BankDetail,
+    () => BankDetail,
     bankDetail => bankDetail.id,
   )
   @JoinColumn({

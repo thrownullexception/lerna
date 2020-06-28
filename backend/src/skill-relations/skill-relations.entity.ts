@@ -13,13 +13,13 @@ export class SkillRelation {
   skillB: string;
 
   @ManyToOne(
-    _ => Skill,
+    () => Skill,
     ({ id }) => id,
   )
   skillA$1: Skill;
 
   @ManyToOne(
-    _ => Skill,
+    () => Skill,
     ({ id }) => id,
   )
   skillB$1: Skill;

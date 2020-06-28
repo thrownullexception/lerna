@@ -17,7 +17,7 @@ export class UserSetting {
   value: string;
 
   @ManyToOne(
-    type => User,
+    () => User,
     user => user.settings,
   )
   user: User;

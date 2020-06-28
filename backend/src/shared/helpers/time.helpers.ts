@@ -18,7 +18,7 @@ export class TimeHelpers {
     );
   }
 
-  static getNextDate(date: string) {
+  static getNextDate(date: string): string {
     return moment(date)
       .add(1, 'days')
       .format('YYYY-MM-DD');

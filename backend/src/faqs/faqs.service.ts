@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { buildPaginator } from 'typeorm-cursor-pagination';
+// import { buildPaginator } from 'typeorm-cursor-pagination';
 import { Faq } from './faqs.entity';
 import { FaqDTO } from './faqs.dto';
 

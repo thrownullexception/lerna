@@ -11,8 +11,8 @@ import { FaqsTransformer } from './faqs.transformers';
 import { AuthGuard } from '@nestjs/passport';
 
 @Controller('faqs')
-// @UseGuards(AuthGuard('jwt'))
-// @UseInterceptors(CacheInterceptor)
+@UseGuards(AuthGuard('jwt'))
+@UseInterceptors(CacheInterceptor)
 export class FaqsController {
   constructor(private readonly faqsService: FaqsService) {}
 
