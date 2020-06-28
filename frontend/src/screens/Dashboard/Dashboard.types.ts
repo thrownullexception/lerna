@@ -1,12 +1,12 @@
-export interface IProps {
-  // toggleCart: () => void;
-  // logout: () => void;
-  // cartOpened: boolean;
-  // isAuthenticated: boolean;
-}
+// export interface IProps {
+// toggleCart: () => void;
+// logout: () => void;
+// cartOpened: boolean;
+// isAuthenticated: boolean;
+// }
 
-export interface StateProps {}
-export interface DispatchProps {}
+// export interface StateProps {}
+// export interface DispatchProps {}
 
 // export type StateProps = Pick<IProps,
 //   | 'cartOpened'

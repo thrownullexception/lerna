@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { IProps } from './Dashboard.types';
+// import { IProps } from './Dashboard.types';
 
-export class Dashboard extends React.PureComponent<IProps> {
+export class Dashboard extends React.PureComponent {
   render() {
     return (
       <div className="main-content-body">
