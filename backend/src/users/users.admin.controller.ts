@@ -21,9 +21,7 @@ export class AdminUsersController {
   async index(
     @Query(new QueryParametersPipe()) queryParameters: QueryParametersDTO,
   ): Promise<IPaginatePayload<AdminUserTransformer>> {
-    const usersPaginated = await this.usersService.listUsersForAdmin(
-      queryParameters,
-    );
+    const usersPaginated = await this.usersService.listUsersForAdmin(queryParameters);
     return {
       ...usersPaginated,
       data: usersPaginated.data.map(user => new AdminUserTransformer(user)),

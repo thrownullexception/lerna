@@ -7,10 +7,7 @@ export class PermissionsGuard implements CanActivate {
   constructor(private readonly reflector: Reflector) {}
 
   canActivate(context: ExecutionContext): boolean {
-    const permission = this.reflector.get<string>(
-      'permission',
-      context.getHandler(),
-    );
+    const permission = this.reflector.get<string>('permission', context.getHandler());
     if (!permission) {
       return true;
     }
@@ -25,9 +22,7 @@ export class PermissionsGuard implements CanActivate {
     }
     // TODO make the FE so solid that is this turns out to be false then we should alert hack here too
     const hasPermissions = () =>
-      user.role.permissions.some(
-        userPermission => userPermission.permission.permission === permission,
-      );
+      user.role.permissions.some(userPermission => userPermission.permission === permission);
     return user && hasPermissions();
   }
 }

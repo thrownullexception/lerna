@@ -27,25 +27,16 @@ export class HttpExceptionFilter implements ExceptionFilter {
       validations: undefined,
     };
 
-    this.logger.error(
-      `${request.method} ${request.url} ${JSON.stringify(errorResponse)}`,
-    );
+    this.logger.error(`${request.method} ${request.url} ${JSON.stringify(errorResponse)}`);
 
-    if (
-      status === HttpStatus.BAD_REQUEST &&
-      typeof exception.message === 'object'
-    ) {
-      errorResponse.validations = this.transformClassValidatorsErrors(
-        exception.message,
-      );
+    if (status === HttpStatus.BAD_REQUEST && typeof exception.message === 'object') {
+      errorResponse.validations = this.transformClassValidatorsErrors(exception.message);
     }
 
     response.status(status).json(errorResponse);
   }
 
-  private transformClassValidatorsErrors(
-    errorBag: ValidationError[],
-  ): ValidationError[] {
+  private transformClassValidatorsErrors(errorBag: ValidationError[]): ValidationError[] {
     return errorBag;
     // TODO
     // return errorBag.reduce((allStrings: [], error) => {

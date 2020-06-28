@@ -1,11 +1,4 @@
-import {
-  Controller,
-  UseGuards,
-  HttpCode,
-  HttpStatus,
-  Body,
-  Post,
-} from '@nestjs/common';
+import { Controller, UseGuards, HttpCode, HttpStatus, Body, Post } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthenticatedUser } from '../shared/decorators';
 import { UserSettingDTO } from './user-settings.dto';

@@ -8,6 +8,7 @@ import * as appRoot from 'app-root-path';
 import * as redisStore from 'cache-manager-redis-store';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { JwtModuleOptions } from '@nestjs/jwt';
+import { APP_CONSTANTS } from '../../constants';
 
 enum EnvironmentTypes {
   Production = 'production',
@@ -80,9 +81,7 @@ export class ConfigService implements CacheOptionsFactory {
   }
 
   getJWTSecretKey(): string {
-    return (
-      this.get('JWT_SECRET_KEY') || 'a_quicj_brown_fox_lazied_over_the_jumped'
-    );
+    return this.get('JWT_SECRET_KEY') || 'a_quicj_brown_fox_lazied_over_the_jumped';
   }
 
   getJWTTokenExpiration(): string {
@@ -188,7 +187,7 @@ export class ConfigService implements CacheOptionsFactory {
   createCacheOptions(): CacheModuleOptions {
     return {
       ...this.getRedisConfig(),
-      ttl: 60 * 60 * 24, // seconds => 1 day
+      ttl: APP_CONSTANTS.A_DAY, // seconds => 1 day
       store: redisStore,
     };
   }
@@ -222,20 +221,24 @@ export class ConfigService implements CacheOptionsFactory {
   }
 
   createTypeOrmOptions(): TypeOrmModuleOptions {
-    const ENTITIES_DIR =
-      this.getEnvironment() === 'production' ? './dist' : './dist/src';
+    const ENTITIES_DIR = this.getEnvironment() === 'production' ? './dist' : './dist/src';
     return {
       keepConnectionAlive: true,
-      type: 'postgres' as const,
+      type: 'postgres',
       host: this.getDBHost(),
       port: this.getDBPort(),
       username: this.getDBUsername(),
       password: this.getDBPassword(),
       database: this.getDBName(),
       entities: [ENTITIES_DIR + '/**/**.entity{.ts,.js}'],
-      logging: false, // !['production', 'test', 'testing'].includes(this.getEnvironment()),
+      logging: true, // !['production', 'test', 'testing'].includes(this.getEnvironment()),
       namingStrategy: new SnakeNamingStrategy(),
       retryAttempts: 5,
+      cache: {
+        type: 'redis',
+        options: this.getRedisConfig(),
+        duration: APP_CONSTANTS.A_DAY,
+      },
     };
   }
 }

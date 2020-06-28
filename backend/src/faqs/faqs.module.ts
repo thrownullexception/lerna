@@ -1,20 +1,12 @@
-import { Module, CacheModule } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { FaqsController } from './faqs.controller';
 import { AdminFaqsController } from './faqs.admin.controller';
 import { FaqsService } from './faqs.service';
-import { Faq } from './faqs.entity';
-import { ConfigService } from '../shared/services';
-import { ConfigModule } from '../shared/services/config/config.module';
+import { FaqsRepository } from './faqs.repository';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([Faq]),
-    CacheModule.registerAsync({
-      imports: [ConfigModule],
-      useExisting: ConfigService,
-    }),
-  ],
+  imports: [TypeOrmModule.forFeature([FaqsRepository])],
   controllers: [FaqsController, AdminFaqsController],
   providers: [FaqsService],
 })

@@ -17,6 +17,14 @@ const commonConfig = {
   connectTimeout: 30000,
   retryAttempts: 5,
   namingStrategy: new SnakeNamingStrategy(),
+  cache: {
+    type: "redis",
+    options: {
+      host: process.env.REDIS_HOST,
+      port: process.env.REDIS_PORT,
+      password: process.env.REDIS_PASSWORD
+    },
+  }
 };
 
 if (NODE_ENV === 'testing') {

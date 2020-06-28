@@ -15,10 +15,7 @@ export class UserSettingsService {
     await this.userSettingRepository.insert({ userId });
   }
 
-  async updateSetting(
-    { field, value }: UserSettingDTO,
-    userId: number,
-  ): Promise<void> {
+  async updateSetting({ field, value }: UserSettingDTO, userId: number): Promise<void> {
     const count = await this.userSettingRepository.count({ userId, field });
     if (count === 1) {
       await this.userSettingRepository.update({ userId, field }, { value });

@@ -11,10 +11,7 @@ export class ProfilesService {
     private readonly profileRepository: Repository<Profile>,
   ) {}
 
-  async updateProfile(
-    userId: string,
-    profile: QueryDeepPartialEntity<Profile>,
-  ): Promise<void> {
+  async updateProfile(userId: string, profile: QueryDeepPartialEntity<Profile>): Promise<void> {
     // TODO skip the profile that is already set for dob and gender
     await this.profileRepository.update({ userId }, profile);
   }

@@ -1,8 +1,7 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
 import { BaseMigration } from './base/base-migration';
 
-export class CreateProfileTable1593354718008 extends BaseMigration
-  implements MigrationInterface {
+export class CreateProfileTable1593354718008 extends BaseMigration implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<any> {
     this.table = 'genders';
 
@@ -23,7 +22,7 @@ export class CreateProfileTable1593354718008 extends BaseMigration
 
     await this.createTable(queryRunner, [
       {
-        name: 'userId',
+        name: 'user_id',
         type: 'uuid',
       },
       {

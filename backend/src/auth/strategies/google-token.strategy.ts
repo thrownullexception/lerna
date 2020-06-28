@@ -6,10 +6,7 @@ import { IProviderAuthResponse } from '../../auth/auth.types';
 import get from 'lodash/fp/get';
 
 @Injectable()
-export class GoogleTokenStrategy extends PassportStrategy(
-  Strategy,
-  'google-token',
-) {
+export class GoogleTokenStrategy extends PassportStrategy(Strategy, 'google-token') {
   constructor(configService: ConfigService) {
     super({
       clientID: configService.getGoogleClientID(),

@@ -13,11 +13,7 @@ class FindOperatorWithExtras<T> extends FindOperator<T> {
     this.type = type;
   }
 
-  public toSql(
-    connection: Connection,
-    aliasPath: string,
-    parameters: string[],
-  ): string {
+  public toSql(connection: Connection, aliasPath: string, parameters: string[]): string {
     if (this.type === 'ilike') {
       return `${aliasPath} ILIKE ${parameters[0]}`;
     }
@@ -30,8 +26,6 @@ class FindOperatorWithExtras<T> extends FindOperator<T> {
  * Find Options Operator.
  * Example: { someField: Like("%some sting%") }
  */
-export function ILike<T>(
-  value: T | FindOperator<T>,
-): FindOperatorWithExtras<T> {
+export function ILike<T>(value: T | FindOperator<T>): FindOperatorWithExtras<T> {
   return new FindOperatorWithExtras('ilike', value);
 }

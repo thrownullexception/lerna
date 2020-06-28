@@ -16,18 +16,10 @@ const makeTargetDirectory = (targetDir: string): string => {
 
 export const FileStorageHelpers = (targetDir = 'uploads'): void =>
   multer.diskStorage({
-    destination: (
-      req: unknown,
-      file: unknown,
-      cb: (x: null, y: string) => void,
-    ): void => {
+    destination: (req: unknown, file: unknown, cb: (x: null, y: string) => void): void => {
       cb(null, makeTargetDirectory(targetDir));
     },
-    filename: (
-      req: unknown,
-      file: multer.File,
-      cb: (x: null, y: string) => void,
-    ): void => {
+    filename: (req: unknown, file: multer.File, cb: (x: null, y: string) => void): void => {
       //TODO Fix this type
       const fileExtension = file.originalname.split('.').pop();
       const filename = `${uuidv4()}.${fileExtension}`;

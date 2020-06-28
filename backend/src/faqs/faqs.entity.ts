@@ -1,10 +1,4 @@
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  ManyToOne,
-  JoinColumn,
-} from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { User } from '../users/users.entity';
 import { AccountMode } from 'src/account-modes/account-modes.entity';
 
@@ -19,22 +13,25 @@ export class Faq {
   @Column()
   answer: string;
 
+  @Column()
+  accountModeSystemName: string;
+
   @ManyToOne(
     () => AccountMode,
     ({ systemName }) => systemName,
   )
   @JoinColumn({
-    name: 'accountMode',
+    name: 'account_mode_system_name',
     referencedColumnName: 'systemName',
   })
-  accountMode$1: AccountMode;
+  accountMode: AccountMode;
 
   @Column()
-  lastTouchedBy: number;
+  lastTouchedById: string;
 
   @ManyToOne(
     () => User,
     ({ id }) => id,
   )
-  lastTouchedBy$1: User;
+  lastTouchedBy: User;
 }

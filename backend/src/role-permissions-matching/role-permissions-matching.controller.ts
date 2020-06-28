@@ -17,17 +17,13 @@ import { PermissionsGuard } from '../auth/permissions.guards';
 @Controller('roles-permissions-matching')
 @UseGuards(AuthGuard('jwt'))
 export class RolesPermissionsMatchingController {
-  constructor(
-    private readonly rolesPermissionsMatchingService: RolesPermissionsMatchingService,
-  ) {}
+  constructor(private readonly rolesPermissionsMatchingService: RolesPermissionsMatchingService) {}
 
   @Post()
   @AdminPermission('CAN_MATCH_PERMISSION_TO_ROLE')
   @UseGuards(PermissionsGuard)
   @HttpCode(HttpStatus.NO_CONTENT)
-  async create(
-    @Body() rolePermissionMatchingDTO: RolePermissionMatchingDTO,
-  ): Promise<void> {
+  async create(@Body() rolePermissionMatchingDTO: RolePermissionMatchingDTO): Promise<void> {
     await this.rolesPermissionsMatchingService.createRolePermissionsMatching(
       rolePermissionMatchingDTO,
     );
@@ -38,8 +34,6 @@ export class RolesPermissionsMatchingController {
   @UseGuards(PermissionsGuard)
   @HttpCode(HttpStatus.NO_CONTENT)
   async delete(@Param('id') id: string): Promise<void> {
-    await this.rolesPermissionsMatchingService.deleteRolePermissionsMatching(
-      +id,
-    );
+    await this.rolesPermissionsMatchingService.deleteRolePermissionsMatching(+id);
   }
 }

@@ -8,7 +8,6 @@ import { FaqsModule } from './faqs/faqs.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigService } from './shared/services';
 import { ConfigModule } from './shared/services/config/config.module';
-import { CacheModule } from './shared/services/cache/cache.module';
 import { LoggingInterceptor } from './shared/interceptors/logging.interceptors';
 import { HttpExceptionFilter } from './shared/filters/http-exception.filter';
 import { ValidationsModule } from './validations/validations.module';
@@ -29,7 +28,6 @@ import { HealthCheckModule } from './healthcheck/healthcheck.module';
       imports: [ConfigModule],
       useExisting: ConfigService,
     }),
-    CacheModule,
     AuthModule,
     FaqsModule,
     ValidationsModule,

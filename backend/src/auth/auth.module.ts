@@ -12,7 +12,6 @@ import { UsersModule } from '../users/users.module';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { UserVerificationsModule } from '../user-verifications/user-verifications.module';
-import { ReferencesModule } from '../references/references.module';
 import { CoinHistoriesModule } from '../coin-histories/coin-histories.module';
 import { ProfilesModule } from '../profiles/profiles.module';
 import { ConfigModule } from '../shared/services/config/config.module';
@@ -26,7 +25,6 @@ import { ConfigModule } from '../shared/services/config/config.module';
     }),
     UsersModule,
     ProfilesModule,
-    ReferencesModule,
     CoinHistoriesModule,
     UserVerificationsModule,
   ],

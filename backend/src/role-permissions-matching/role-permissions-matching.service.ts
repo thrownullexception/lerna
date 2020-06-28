@@ -8,24 +8,16 @@ import { RolesPermissionMatching } from './role-permissions-matching.entity';
 export class RolesPermissionsMatchingService {
   constructor(
     @InjectRepository(RolesPermissionMatching)
-    private readonly rolesPermissionMatchingRepository: Repository<
-      RolesPermissionMatching
-    >,
+    private readonly rolesPermissionMatchingRepository: Repository<RolesPermissionMatching>,
   ) {}
 
   async createRolePermissionsMatching(
     rolePermissionMatchingDTO: RolePermissionMatchingDTO,
   ): Promise<void> {
-    await this.rolesPermissionMatchingRepository.insert(
-      rolePermissionMatchingDTO,
-    );
+    await this.rolesPermissionMatchingRepository.insert(rolePermissionMatchingDTO);
   }
 
-  async deleteRolePermissionsMatching(
-    rolePermissionMatchingId: number,
-  ): Promise<void> {
-    await this.rolesPermissionMatchingRepository.delete(
-      rolePermissionMatchingId,
-    );
+  async deleteRolePermissionsMatching(rolePermissionMatchingId: number): Promise<void> {
+    await this.rolesPermissionMatchingRepository.delete(rolePermissionMatchingId);
   }
 }

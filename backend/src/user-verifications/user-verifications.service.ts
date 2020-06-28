@@ -18,14 +18,8 @@ export class UserVerificationService {
     private readonly logger: Logger,
   ) {}
 
-  async create(
-    userId: string,
-    email: string,
-    username: string,
-  ): Promise<string> {
-    const verificationCode = StringHelpers.generateRandomString(
-      5,
-    ).toLowerCase();
+  async create(userId: string, email: string, username: string): Promise<string> {
+    const verificationCode = StringHelpers.generateRandomString(5).toLowerCase();
     const verificationHash = await this.hashService.make(verificationCode);
 
     await this.userVerificationRepository.delete({ userId });
@@ -66,9 +60,7 @@ export class UserVerificationService {
       return false;
     }
 
-    if (
-      !(await this.hashService.compare(code, verification.verificationHash))
-    ) {
+    if (!(await this.hashService.compare(code, verification.verificationHash))) {
       return false;
     }
 

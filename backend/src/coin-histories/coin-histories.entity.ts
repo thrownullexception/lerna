@@ -1,8 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
-import {
-  TransactionHistorySource,
-  TransactionHistoryType,
-} from './coin-histories.types';
+import { TransactionHistorySource, TransactionHistoryType } from './coin-histories.types';
 import { User } from '../users/users.entity';
 
 @Entity('coin_histories')

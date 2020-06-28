@@ -11,10 +11,7 @@ export class BankDetailsService {
     private readonly bankDetailRepository: Repository<BankDetail>,
   ) {}
 
-  async updateBankDetails(
-    userId: string,
-    bankDetailsDTO: UpdateBankDetailsDTO,
-  ): Promise<void> {
+  async updateBankDetails(userId: string, bankDetailsDTO: UpdateBankDetailsDTO): Promise<void> {
     await this.bankDetailRepository.update({ userId }, bankDetailsDTO);
   }
 

@@ -55,21 +55,13 @@ export class QueryParamsToFindConditionHelper {
           }
           break;
         case ComparisionType.TEXT_SEARCH:
-          const valueBag$1 = get(queryFilters, [
-            queryStructure.field,
-            0,
-            'value',
-          ]);
+          const valueBag$1 = get(queryFilters, [queryStructure.field, 0, 'value']);
           if (valueBag$1) {
             allFindConditions[findConditionField] = ILike(`%${valueBag$1}%`);
           }
           break;
         case ComparisionType.DATE_SEARCH:
-          const valueBag$3 = get(queryFilters, [
-            queryStructure.field,
-            0,
-            'value',
-          ]);
+          const valueBag$3 = get(queryFilters, [queryStructure.field, 0, 'value']);
           if (valueBag$3) {
             const dateSplit = valueBag$3.split(',');
             let dateTo: string;
@@ -78,10 +70,7 @@ export class QueryParamsToFindConditionHelper {
             } else {
               dateTo = dateSplit[1];
             }
-            allFindConditions[findConditionField] = Between(
-              dateSplit[0],
-              dateTo,
-            );
+            allFindConditions[findConditionField] = Between(dateSplit[0], dateTo);
           }
           break;
         case ComparisionType.EQUALITY_CHECK:

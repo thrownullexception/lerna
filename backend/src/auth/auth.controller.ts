@@ -13,9 +13,7 @@ import { UsersService } from '../users/users.service';
 import { AuthenticatedUser } from '../shared/decorators';
 import { AuthenticatedUserDetailsTransformer } from './transformers/authenticated-user-details.transformers';
 import { HashService, ConfigService } from '../shared/services';
-import { UserResigsteredBy } from '../users/users.types';
 import { UserVerificationService } from '../user-verifications/user-verifications.service';
-import { ReferencesService } from '../references/references.service';
 import { StringHelpers, getFileAndStore } from '../shared/helpers';
 import { ProfilesService } from '../profiles/profiles.service';
 import { APP_CONSTANTS } from '../shared/constants';
@@ -33,10 +31,7 @@ import { Role } from '../roles/roles.entity';
 interface IAuthenticationResponse {
   authenticationBag?: AuthenticatedUserDetailsTransformer;
   authToken?: string;
-  responseMeta?:
-    | 'RETURNING_USER'
-    | 'ACCOUNT_VERIFICATION_FAILED'
-    | 'NEW_AUTH_PROVIDER_USER';
+  responseMeta?: 'RETURNING_USER' | 'ACCOUNT_VERIFICATION_FAILED' | 'NEW_AUTH_PROVIDER_USER';
   newAuthUserBag?: {
     userId: string;
     username: string;
@@ -52,43 +47,34 @@ export class AuthController {
     private readonly authService: AuthService,
     private readonly hashService: HashService,
     private readonly configService: ConfigService,
-    private readonly referencesService: ReferencesService,
     private readonly profilesService: ProfilesService,
     private readonly mailerService: MailerService,
     private readonly userVerificationService: UserVerificationService,
   ) {}
 
   @Post('signin')
+  @HttpCode(HttpStatus.OK)
   @UseGuards(AuthGuard('local'))
-  async signin(
-    @AuthenticatedUser('id') userId: string,
-  ): Promise<IAuthenticationResponse> {
-    if (
-      !(await this.usersService.getSingleFieldFromUserId(userId, 'verified'))
-    ) {
+  async signin(@AuthenticatedUser('id') userId: string): Promise<IAuthenticationResponse> {
+    if (!(await this.usersService.getSingleFieldFromUserId(userId, 'verified'))) {
       return { responseMeta: 'ACCOUNT_VERIFICATION_FAILED' };
     }
     return await this.getAuthenticationResponse(userId);
   }
 
   @Post('signup')
-  async signup(@Body() signUpDTO: SignUpDTO): Promise<{ data: string }> {
+  async signup(@Body() signUpDTO: SignUpDTO): Promise<{ userId: string }> {
     const passwordHash = await this.hashService.make(signUpDTO.password);
 
     const userId = await this.usersService.createNewUser({
       ...signUpDTO,
       password: passwordHash,
       verified: false,
-      registeredBy: UserResigsteredBy.EMAIL,
     });
 
-    this.userVerificationService.create(
-      userId,
-      signUpDTO.email,
-      signUpDTO.username,
-    );
+    this.userVerificationService.create(userId, signUpDTO.email, signUpDTO.username);
 
-    return { data: userId };
+    return { userId };
   }
 
   @Post('facebook')
@@ -96,7 +82,7 @@ export class AuthController {
   async authenticateFacebook(
     @AuthenticatedUser() user: IProviderAuthResponse,
   ): Promise<IAuthenticationResponse> {
-    return await this.providerAuthentication(user, UserResigsteredBy.FACEBOOK);
+    return await this.providerAuthentication(user);
   }
 
   @Post('google')
@@ -104,7 +90,7 @@ export class AuthController {
   async authenticateGoogle(
     @AuthenticatedUser() user: IProviderAuthResponse,
   ): Promise<IAuthenticationResponse> {
-    return await this.providerAuthentication(user, UserResigsteredBy.GOOGLE);
+    return await this.providerAuthentication(user);
   }
 
   @Post('verify-account')
@@ -112,10 +98,7 @@ export class AuthController {
     @Body() verifyAccountDTO: VerifyAccountDTO,
   ): Promise<IAuthenticationResponse> {
     const { code, email } = verifyAccountDTO;
-    const user = await this.usersService.getUserDetailsFromEmail(email, [
-      'id',
-      'verified',
-    ]);
+    const user = await this.usersService.getUserDetailsFromEmail(email, ['id', 'verified']);
     if (!user) {
       throw new BadRequestException('Account verification failed');
     }
@@ -134,10 +117,11 @@ export class AuthController {
     return await this.getAuthenticationResponse(userId);
   }
 
-  private async providerAuthentication(
-    { email, name, image }: IProviderAuthResponse,
-    registeredBy: UserResigsteredBy,
-  ): Promise<IAuthenticationResponse> {
+  private async providerAuthentication({
+    email,
+    name,
+    image,
+  }: IProviderAuthResponse): Promise<IAuthenticationResponse> {
     const user = await this.usersService.getUserDetailsFromEmail(email, ['id']);
     if (user) {
       return {
@@ -156,7 +140,6 @@ export class AuthController {
       email,
       username,
       verified: true,
-      registeredBy,
     });
 
     this.updateProviderAuthenticationProfile(userId, { email, name, image });
@@ -182,10 +165,7 @@ export class AuthController {
     }
 
     if (profile.image) {
-      const fileName = await getFileAndStore(
-        profile.image,
-        APP_CONSTANTS.AVATARS_PATH,
-      );
+      const fileName = await getFileAndStore(profile.image, APP_CONSTANTS.AVATARS_PATH);
       profileToUpdate.picture = this.configService.getFileStorageHost(
         `${APP_CONSTANTS.AVATARS_PATH}/${fileName}`,
       );
@@ -197,9 +177,7 @@ export class AuthController {
     }
   }
 
-  private async getAuthenticationResponse(
-    userId: string,
-  ): Promise<IAuthenticationResponse> {
+  private async getAuthenticationResponse(userId: string): Promise<IAuthenticationResponse> {
     const userBag = await this.usersService.getAuthenticatedUserBag(userId);
     const authToken = this.authService.generateAuthToken(userId);
     // undefined because I want the role not to show for users
@@ -213,9 +191,7 @@ export class AuthController {
 
   @Post('reset-password')
   @HttpCode(HttpStatus.NO_CONTENT)
-  async resetPassword(
-    @Body() resetPasswordDTO: ResetPasswordDTO,
-  ): Promise<void> {
+  async resetPassword(@Body() resetPasswordDTO: ResetPasswordDTO): Promise<void> {
     const { email } = resetPasswordDTO;
     const user = await this.usersService.getUserDetailsFromEmail(email, ['id']);
     if (!user) {
@@ -245,10 +221,7 @@ export class AuthController {
     @Body() resendVerificationCodeDTO: ResendVerificationCodeDTO,
   ): Promise<void> {
     const { email } = resendVerificationCodeDTO;
-    const {
-      username,
-      id: userId,
-    } = await this.usersService.getUserDetailsFromEmail(email, [
+    const { username, id: userId } = await this.usersService.getUserDetailsFromEmail(email, [
       'username',
       'id',
     ]);

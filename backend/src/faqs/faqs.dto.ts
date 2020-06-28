@@ -1,6 +1,8 @@
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsUUID } from 'class-validator';
 
 export class FaqDTO {
+  @IsNotEmpty()
+  @IsUUID(4)
   id: string;
 
   @IsNotEmpty({

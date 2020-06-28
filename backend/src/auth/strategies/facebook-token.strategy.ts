@@ -6,10 +6,7 @@ import { IProviderAuthResponse } from '../../auth/auth.types';
 import get from 'lodash/fp/get';
 
 @Injectable()
-export class FacebookTokenStrategy extends PassportStrategy(
-  Strategy,
-  'facebook-token',
-) {
+export class FacebookTokenStrategy extends PassportStrategy(Strategy, 'facebook-token') {
   constructor(configService: ConfigService) {
     super({
       clientID: configService.getFacebookClientID(),

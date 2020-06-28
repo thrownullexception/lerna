@@ -2,16 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, FindConditions } from 'typeorm';
 import { CoinHistory } from './coin-histories.entity';
-import {
-  TransactionHistorySource,
-  TransactionHistoryType,
-} from './coin-histories.types';
+import { TransactionHistorySource, TransactionHistoryType } from './coin-histories.types';
 import { QueryParametersDTO } from '../shared/dtos';
 import { IPaginatePayload } from '../shared/types';
-import {
-  QueryParamsToFindConditionHelper,
-  ComparisionType,
-} from '../shared/helpers';
+import { QueryParamsToFindConditionHelper, ComparisionType } from '../shared/helpers';
 
 const take = 10;
 
@@ -103,10 +97,7 @@ export class CoinHistoryService {
     });
   }
 
-  async listMyCoinsHistory(
-    userId: number,
-    page: number,
-  ): Promise<CoinHistory[]> {
+  async listMyCoinsHistory(userId: number, page: number): Promise<CoinHistory[]> {
     const skip = (page - 1) * take;
     return this.coinHistoryRepository.find({
       where: { userId },

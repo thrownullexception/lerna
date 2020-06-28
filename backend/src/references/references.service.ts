@@ -33,9 +33,6 @@ export class ReferencesService {
     updateReferenceDTO: UpdateReferenceDTO,
     referenceId: string,
   ): Promise<void> {
-    await this.referenceRepository.update(
-      { id: referenceId },
-      { value: updateReferenceDTO.value },
-    );
+    await this.referenceRepository.update({ id: referenceId }, { value: updateReferenceDTO.value });
   }
 }

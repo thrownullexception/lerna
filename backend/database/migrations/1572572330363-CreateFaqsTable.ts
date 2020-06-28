@@ -1,8 +1,7 @@
-import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import { MigrationInterface, QueryRunner } from 'typeorm';
 import { BaseMigration } from './base/base-migration';
 
-export class CreateFaqsTable1572572330363 extends BaseMigration
-  implements MigrationInterface {
+export class CreateFaqsTable1572572330363 extends BaseMigration implements MigrationInterface {
   protected table = 'faqs';
 
   public async up(queryRunner: QueryRunner): Promise<any> {
@@ -16,11 +15,11 @@ export class CreateFaqsTable1572572330363 extends BaseMigration
         type: 'text',
       },
       {
-        name: 'account_mode',
+        name: 'account_mode_sytem_name',
         type: 'varchar',
       },
       {
-        name: 'last_touched_by',
+        name: 'last_touched_by_id',
         type: 'uuid',
         isNullable: true,
       },
@@ -28,11 +27,11 @@ export class CreateFaqsTable1572572330363 extends BaseMigration
 
     await this.reference(queryRunner, {
       table: 'users',
-      referencedColumnHere: 'last_touched_by',
+      referencedColumnHere: 'last_touched_by_id',
     });
     await this.reference(queryRunner, {
       table: 'account_modes',
-      referencedColumnHere: 'account_mode',
+      referencedColumnHere: 'account_mode_sytem_name',
       referencedColumnThere: 'system_name',
     });
   }

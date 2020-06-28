@@ -1,10 +1,4 @@
-import {
-  IsNotEmpty,
-  MaxLength,
-  IsEmail,
-  IsAlphanumeric,
-  MinLength,
-} from 'class-validator';
+import { IsNotEmpty, MaxLength, IsEmail, IsAlphanumeric, MinLength } from 'class-validator';
 import { Unique } from '../../shared/constraints';
 
 export class SignUpDTO {

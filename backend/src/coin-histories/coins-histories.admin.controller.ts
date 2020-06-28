@@ -21,14 +21,10 @@ export class AdminCoinsHistoryController {
   async index(
     @Query(new QueryParametersPipe()) queryParameters: QueryParametersDTO,
   ): Promise<IPaginatePayload<AdminCoinsHistoryTransformer>> {
-    const dataPaginated = await this.coinHistoryService.listCoinsHistoriesForAdmin(
-      queryParameters,
-    );
+    const dataPaginated = await this.coinHistoryService.listCoinsHistoriesForAdmin(queryParameters);
     return {
       ...dataPaginated,
-      data: dataPaginated.data.map(
-        datum => new AdminCoinsHistoryTransformer(datum),
-      ),
+      data: dataPaginated.data.map(datum => new AdminCoinsHistoryTransformer(datum)),
     };
   }
 }

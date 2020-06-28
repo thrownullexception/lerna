@@ -1,8 +1,5 @@
 import { CoinHistory } from '../coin-histories.entity';
-import {
-  TransactionHistorySource,
-  TransactionHistoryType,
-} from '../coin-histories.types';
+import { TransactionHistorySource, TransactionHistoryType } from '../coin-histories.types';
 
 export class AdminCoinsHistoryTransformer {
   id: string;

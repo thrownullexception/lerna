@@ -1,53 +1,29 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-// import { buildPaginator } from 'typeorm-cursor-pagination';
 import { Faq } from './faqs.entity';
 import { FaqDTO } from './faqs.dto';
+import { FaqsRepository } from './faqs.repository';
 
 @Injectable()
 export class FaqsService {
-  constructor(
-    @InjectRepository(Faq)
-    private readonly faqRepository: Repository<Faq>,
-  ) {}
+  constructor(private readonly faqsRepository: FaqsRepository) {}
 
   async listFaqs(): Promise<Faq[]> {
-    // const paginator = buildPaginator({
-    //   entity: Faq,
-    //   query: {
-    //     limit: 5,
-    //     afterCursor: 'aWQ6Mw=='
-    //   },
-    // });
-
-    // const { data, cursor } = await paginator.paginate(this.faqRepository.createQueryBuilder('faq'));
-    // console.log(cursor);
-    // return data;
-    return await this.faqRepository.find({ order: { id: 'DESC' } });
+    return await this.faqsRepository.listFaqs();
   }
 
-  async getFaq(faqId: number): Promise<Faq> {
-    return await this.faqRepository.findOne({
-      where: { id: faqId },
-      relations: ['admin'],
-    });
+  async getFaq(faqId: string): Promise<Faq> {
+    return await this.faqsRepository.showFaq(faqId);
   }
 
-  async createFaq(faqDTO: FaqDTO, adminId: number): Promise<string> {
-    const { id } = await this.faqRepository.save({ ...faqDTO, adminId });
-    return id;
+  async createFaq(faqDTO: FaqDTO, adminId: string): Promise<string> {
+    return await this.faqsRepository.createFaq(faqDTO, adminId);
   }
 
-  async updateFaq(
-    faqId: number,
-    faqDTO: FaqDTO,
-    lastTouchedBy: number,
-  ): Promise<void> {
-    await this.faqRepository.update(faqId, { ...faqDTO, lastTouchedBy });
+  async updateFaq(faqId: string, faqDTO: FaqDTO, lastTouchedBy: string): Promise<void> {
+    await this.faqsRepository.updateFaq(faqId, faqDTO, lastTouchedBy);
   }
 
-  async deleteFaq(faqId: number): Promise<void> {
-    await this.faqRepository.delete(faqId);
+  async deleteFaq(faqId: string): Promise<void> {
+    await this.faqsRepository.deleteFaq(faqId);
   }
 }

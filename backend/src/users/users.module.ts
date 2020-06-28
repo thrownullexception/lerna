@@ -9,12 +9,7 @@ import { AdminUsersController } from './users.admin.controller';
 import { BankDetailsModule } from '../bank-details/bank-details.module';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([User]),
-    ProfilesModule,
-    UsersModule,
-    BankDetailsModule,
-  ],
+  imports: [TypeOrmModule.forFeature([User]), ProfilesModule, UsersModule, BankDetailsModule],
   controllers: [AdminUsersController, UsersController],
   providers: [UsersService, HashService],
   exports: [UsersService],

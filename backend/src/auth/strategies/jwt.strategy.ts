@@ -10,10 +10,7 @@ interface IJwtPayload {
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-  constructor(
-    private readonly usersService: UsersService,
-    configService: ConfigService,
-  ) {
+  constructor(private readonly usersService: UsersService, configService: ConfigService) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
@@ -22,10 +19,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate({ id: userId }: IJwtPayload): Promise<{ id: string }> {
-    const user = await this.usersService.getMultipleFieldsFromUserId(userId, [
-      'id',
-      'roleId',
-    ]);
+    const user = await this.usersService.getMultipleFieldsFromUserId(userId, ['id', 'roleId']);
     if (!user) {
       throw new UnauthorizedException();
     }

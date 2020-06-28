@@ -6,10 +6,7 @@ import { User } from './users.entity';
 import { ICreateUserDetails } from './users.types';
 import { QueryParametersDTO } from '../shared/dtos';
 import { IPaginatePayload } from '../shared/types';
-import {
-  QueryParamsToFindConditionHelper,
-  ComparisionType,
-} from '../shared/helpers';
+import { QueryParamsToFindConditionHelper, ComparisionType } from '../shared/helpers';
 
 const take = 10;
 
@@ -44,11 +41,7 @@ export class UsersService {
     });
   }
 
-  async hasValueBeenUsed(
-    field: string,
-    value: string,
-    skipId?: number,
-  ): Promise<boolean> {
+  async hasValueBeenUsed(field: string, value: string, skipId?: number): Promise<boolean> {
     let where: { [x: string]: string | FindOperator<number> } = {
       [field]: value,
     };
@@ -75,9 +68,7 @@ export class UsersService {
     });
   }
 
-  async getUserIdFromMaybeUser(
-    where: QueryDeepPartialEntity<User>,
-  ): Promise<string | boolean> {
+  async getUserIdFromMaybeUser(where: QueryDeepPartialEntity<User>): Promise<string | boolean> {
     const user = await this.usersRespository.findOne({
       select: ['id'],
       where,
@@ -88,14 +79,10 @@ export class UsersService {
     return user.id;
   }
 
-  async updateDetails(
-    userId: string,
-    details: QueryDeepPartialEntity<User>,
-  ): Promise<void> {
+  async updateDetails(userId: string, details: QueryDeepPartialEntity<User>): Promise<void> {
     this.usersRespository.update({ id: userId }, details);
   }
 
-  // TODO get this only after signin
   async getAuthenticatedUserBag(userId: string): Promise<User> {
     return this.usersRespository.findOne({
       where: {
@@ -103,12 +90,11 @@ export class UsersService {
       },
       relations: [
         'profile',
-        'bankDetail',
-        'bankDetail.bank',
-        'settings',
+        // 'bankDetail',
+        // 'bankDetail.bank',
+        // 'settings',
         'role',
         'role.permissions',
-        'role.permissions.permission',
       ],
     });
   }
@@ -116,7 +102,7 @@ export class UsersService {
   async getUserWithPermission(id: string): Promise<User> {
     return await this.usersRespository.findOne({
       where: { id },
-      relations: ['role', 'role.permissions', 'role.permissions.permission'],
+      relations: ['role', 'role.permissions'],
     });
   }
 
@@ -136,10 +122,7 @@ export class UsersService {
     return (user[field] as unknown) as Pick<User, T>;
   }
 
-  async getMultipleFieldsFromUserId(
-    userId: string,
-    select: Array<'id' | 'roleId'>,
-  ): Promise<User> {
+  async getMultipleFieldsFromUserId(userId: string, select: Array<'id' | 'roleId'>): Promise<User> {
     return this.usersRespository.findOne({
       select,
       where: {
@@ -190,9 +173,10 @@ export class UsersService {
       },
     ];
 
-    const where: FindConditions<User> = QueryParamsToFindConditionHelper.transform<
-      User
-    >(filters, filterQueryStructure);
+    const where: FindConditions<User> = QueryParamsToFindConditionHelper.transform<User>(
+      filters,
+      filterQueryStructure,
+    );
     // console.log(where);
     const [result, total] = await this.usersRespository.findAndCount({
       where,

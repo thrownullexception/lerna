@@ -1,18 +1,8 @@
-import {
-  Controller,
-  Get,
-  CacheInterceptor,
-  UseInterceptors,
-  UseGuards,
-  Param,
-} from '@nestjs/common';
+import { Controller, Get, Param, ParseUUIDPipe } from '@nestjs/common';
 import { FaqsService } from './faqs.service';
 import { FaqsTransformer } from './faqs.transformers';
-import { AuthGuard } from '@nestjs/passport';
 
 @Controller('faqs')
-@UseGuards(AuthGuard('jwt'))
-@UseInterceptors(CacheInterceptor)
 export class FaqsController {
   constructor(private readonly faqsService: FaqsService) {}
 
@@ -22,9 +12,9 @@ export class FaqsController {
     return faqs.map(faq => new FaqsTransformer(faq));
   }
 
-  @Get(':id')
-  async show(@Param('id') faqId: string): Promise<FaqsTransformer> {
-    const faq = await this.faqsService.getFaq(+faqId);
+  @Get(':faqId')
+  async show(@Param('faqId', new ParseUUIDPipe()) faqId: string): Promise<FaqsTransformer> {
+    const faq = await this.faqsService.getFaq(faqId);
     return new FaqsTransformer(faq);
   }
 }

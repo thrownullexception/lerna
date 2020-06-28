@@ -20,7 +20,7 @@ export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ select: false })
+  @Column()
   username: string;
 
   @Column({ select: false })
@@ -66,7 +66,7 @@ export class User {
     ({ systemName }) => systemName,
   )
   @JoinColumn({
-    name: 'accountMode',
+    name: 'account_mode',
     referencedColumnName: 'systemName',
   })
   accountMode$1: AccountMode;

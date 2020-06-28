@@ -1,19 +1,11 @@
-import { Module, CacheModule } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ReferencesController } from './references.controller';
 import { ReferencesService } from './references.service';
 import { Reference } from './references.entity';
-import { ConfigService } from '../shared/services';
-import { ConfigModule } from '../shared/services/config/config.module';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([Reference]),
-    CacheModule.registerAsync({
-      imports: [ConfigModule],
-      useExisting: ConfigService,
-    }),
-  ],
+  imports: [TypeOrmModule.forFeature([Reference])],
   controllers: [ReferencesController],
   providers: [ReferencesService],
   exports: [ReferencesService],
