@@ -1,10 +1,10 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
 import { BaseMigration } from './base/base-migration';
 
-export class CreateUsersTable1572487741663 extends BaseMigration
+export class CreateProfileTable1593354718008 extends BaseMigration
   implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<any> {
-    this.table = 'account_modes';
+    this.table = 'genders';
 
     await this.createTable(queryRunner, [
       {
@@ -19,61 +19,58 @@ export class CreateUsersTable1572487741663 extends BaseMigration
 
     this.uniqueIndex(queryRunner, 'system_name');
 
-    this.table = 'users';
+    this.table = 'profiles';
 
     await this.createTable(queryRunner, [
       {
-        name: 'username',
+        name: 'first_name',
         type: 'varchar',
         length: '32',
-        isUnique: true,
-      },
-      {
-        name: 'email',
-        type: 'varchar',
-        length: '32',
-        isUnique: true,
-      },
-      {
-        name: 'password',
-        type: 'varchar',
-        length: '128',
         isNullable: true,
       },
       {
-        name: 'registered_by',
-        type: 'smallint',
-      },
-      {
-        name: 'role_id',
-        type: 'uuid',
+        name: 'last_name',
+        type: 'varchar',
+        length: '32',
         isNullable: true,
       },
       {
-        name: 'account_mode',
+        name: 'phone_number',
+        type: 'varchar',
+        length: '32',
+        isUnique: true,
+        isNullable: true, // Will this work
+      },
+      {
+        name: 'picture',
+        type: 'varchar',
+        length: '255',
+        isNullable: true,
+      },
+      {
+        name: 'gender',
         type: 'varchar',
       },
       {
-        name: 'verified',
+        name: 'online',
         type: 'boolean',
         default: false,
       },
+      {
+        name: 'last_online',
+        type: 'timestamp',
+        default: 'CURRENT_TIMESTAMP',
+      },
     ]);
     await this.reference(queryRunner, {
-      table: 'roles',
-      referencedColumnHere: 'role_id',
-    });
-    await this.reference(queryRunner, {
-      table: 'account_modes',
-      referencedColumnHere: 'account_mode',
+      table: 'genders',
+      referencedColumnHere: 'gender',
       referencedColumnThere: 'system_name',
     });
-    await this.index(queryRunner, 'email');
-    await this.index(queryRunner, 'username');
   }
 
   public async down(queryRunner: QueryRunner): Promise<any> {
-    await this.drop(queryRunner, 'users');
-    await this.drop(queryRunner, 'account_modes');
+    await this.drop(queryRunner, 'profiles');
+    await this.drop(queryRunner, 'genders');
   }
 }

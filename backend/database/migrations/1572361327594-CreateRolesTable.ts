@@ -1,7 +1,7 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
 import { BaseMigration } from './base/base-migration';
 
-export class Roles1572361327594 extends BaseMigration
+export class CreateRolesTable1572361327594 extends BaseMigration
   implements MigrationInterface {
   protected table = 'roles';
 

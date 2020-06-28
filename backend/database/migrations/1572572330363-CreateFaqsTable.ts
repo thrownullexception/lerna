@@ -1,9 +1,10 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 import { BaseMigration } from './base/base-migration';
 
-export class Faqs1572572330363 extends BaseMigration
+export class CreateFaqsTable1572572330363 extends BaseMigration
   implements MigrationInterface {
   protected table = 'faqs';
+
   public async up(queryRunner: QueryRunner): Promise<any> {
     await this.createTable(queryRunner, [
       {
@@ -15,13 +16,25 @@ export class Faqs1572572330363 extends BaseMigration
         type: 'text',
       },
       {
-        name: 'admin_id',
+        name: 'account_mode',
+        type: 'varchar',
+      },
+      {
+        name: 'last_touched_by',
         type: 'uuid',
         isNullable: true,
       },
     ]);
 
-    await this.reference(queryRunner, 'users', 'admin_id', true);
+    await this.reference(queryRunner, {
+      table: 'users',
+      referencedColumnHere: 'last_touched_by',
+    });
+    await this.reference(queryRunner, {
+      table: 'account_modes',
+      referencedColumnHere: 'account_mode',
+      referencedColumnThere: 'system_name',
+    });
   }
 
   public async down(queryRunner: QueryRunner): Promise<any> {
