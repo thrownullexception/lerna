@@ -30,6 +30,7 @@
     "lint-staged": {
         "backend/**/*.ts": [
             "npm run prettify:backend",
+            "npm run lint:backend",
             "git add"
         ],
         "frontend/**/*.{ts,tsx}": [
