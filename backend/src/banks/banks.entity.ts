@@ -4,7 +4,7 @@ import { BankDetail } from '../bank-details/bank-details.entity';
 @Entity('banks')
 export class Bank {
   @PrimaryGeneratedColumn()
-  id: number;
+  id: string;
 
   @Column()
   name: string;

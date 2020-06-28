@@ -1,23 +1,32 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
-import { GenderTypes } from './profiles.types';
+import { GenderTypes } from '../genders/genders.types';
 
 @Entity('profiles')
 export class Profile {
   @PrimaryGeneratedColumn()
-  id: number;
+  id: string;
 
   @Column()
-  userId: number;
+  userId: string;
 
   @Column()
-  nicename: string;
+  firstName: string;
 
   @Column()
-  profileImage: string;
+  lastName: string;
+
+  @Column()
+  phoneNumber: string;
+
+  @Column()
+  picture: string;
+
+  @Column()
+  online: boolean;
 
   @Column()
   gender: GenderTypes;
 
   @Column()
-  dob: Date;
+  dob: string;
 }

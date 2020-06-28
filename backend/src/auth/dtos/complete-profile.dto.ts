@@ -1,5 +1,5 @@
-import { IsNotEmpty } from 'class-validator';
-import { GenderTypes } from '../../profiles/profiles.types';
+import { IsNotEmpty, IsEnum } from 'class-validator';
+import { GenderTypes } from '../../genders/genders.types';
 
 export class CompleteProfileDTO {
   nicename: string;
@@ -9,5 +9,6 @@ export class CompleteProfileDTO {
   @IsNotEmpty({
     message: 'Gender is required',
   })
+  @IsEnum(GenderTypes)
   gender: GenderTypes;
 }

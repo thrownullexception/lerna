@@ -11,7 +11,6 @@
         "lint:frontend": "cd frontend && npm run lint",
         "prettify:frontend": "prettier --write \"frontend/src/**/*.{ts,tsx}\"",
         "prettify:backend": "prettier --write \"BackEnd/src/**/*.ts\"",
-        "prettify": "prettier --write \"{backend,frontend}/src/**/*.{ts,tsx}\"",
         "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
         "lint": "concurrently \"npm run lint:frontend\" \"npm run lint:backend\""
     },

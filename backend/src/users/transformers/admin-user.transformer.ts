@@ -1,8 +1,8 @@
 import { User } from '../users.entity';
-import { GenderTypes } from '../../profiles/profiles.types';
+import { GenderTypes } from '../../genders/genders.types';
 
 export class AdminUserTransformer {
-  id: number;
+  id: string;
   email: string;
   username: string;
   verified: boolean;
@@ -15,7 +15,7 @@ export class AdminUserTransformer {
     this.email = user.email;
     this.verified = user.verified;
     if (user.profile) {
-      this.nicename = user.profile.nicename;
+      this.nicename = user.profile.firstName;
       this.gender = user.profile.gender;
     }
   }

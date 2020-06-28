@@ -31,7 +31,7 @@ export class ReferencesService {
 
   async updateReference(
     updateReferenceDTO: UpdateReferenceDTO,
-    referenceId: number,
+    referenceId: string,
   ): Promise<void> {
     await this.referenceRepository.update(
       { id: referenceId },

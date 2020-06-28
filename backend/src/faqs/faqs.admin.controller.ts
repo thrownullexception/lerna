@@ -33,13 +33,13 @@ export class AdminFaqsController {
   ) {}
 
   @Post()
+  @HttpCode(HttpStatus.NO_CONTENT)
   async create(
     @Body() faqDTO: FaqDTO,
     @AuthenticatedUser('id') userId: number,
-  ): Promise<{ id: number }> {
-    const id = await this.faqsService.createFaq(faqDTO, userId);
+  ): Promise<void> {
+    await this.faqsService.createFaq(faqDTO, userId);
     this.cacheService.clearAllCacheMatching('faqs');
-    return { id };
   }
 
   @Patch(':id')

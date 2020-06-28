@@ -34,7 +34,7 @@ export class FaqsService {
     });
   }
 
-  async createFaq(faqDTO: FaqDTO, adminId: number): Promise<number> {
+  async createFaq(faqDTO: FaqDTO, adminId: number): Promise<string> {
     const { id } = await this.faqRepository.save({ ...faqDTO, adminId });
     return id;
   }
@@ -42,9 +42,9 @@ export class FaqsService {
   async updateFaq(
     faqId: number,
     faqDTO: FaqDTO,
-    adminId: number,
+    lastTouchedBy: number,
   ): Promise<void> {
-    await this.faqRepository.update(faqId, { ...faqDTO, adminId });
+    await this.faqRepository.update(faqId, { ...faqDTO, lastTouchedBy });
   }
 
   async deleteFaq(faqId: number): Promise<void> {

@@ -41,7 +41,7 @@ export class ReferencesController {
     @Param('id') referenceId: string,
     @Body() updateReferenceDTO: UpdateReferenceDTO,
   ): Promise<void> {
-    this.referencesService.updateReference(updateReferenceDTO, +referenceId);
+    this.referencesService.updateReference(updateReferenceDTO, referenceId);
     this.cacheService.clearAllCacheMatching('references');
   }
 }

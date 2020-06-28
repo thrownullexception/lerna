@@ -4,10 +4,10 @@ import { Bank } from '../banks/banks.entity';
 @Entity('bank_details')
 export class BankDetail {
   @PrimaryGeneratedColumn()
-  id: number;
+  id: string;
 
   @Column()
-  userId: number;
+  userId: string;
 
   @Column()
   accountNumber: number;

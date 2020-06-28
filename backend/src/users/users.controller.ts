@@ -41,25 +41,28 @@ export class UsersController {
   @Post('profile')
   @HttpCode(HttpStatus.NO_CONTENT)
   async updateProfile(
-    @AuthenticatedUser('id') id: number,
+    @AuthenticatedUser('id') id: string,
     @Body() updateProfileDTO: UpdateProfileDTO,
   ): Promise<void> {
-    await this.profilesService.updateProfile(+id, updateProfileDTO);
+    await this.profilesService.updateProfile(id, updateProfileDTO);
   }
 
   @Post('bankdetails')
   @HttpCode(HttpStatus.NO_CONTENT)
   async updateBankDetails(
-    @AuthenticatedUser('id') id: number,
+    @AuthenticatedUser('id') userId: string,
     @Body() updateBankDetailsDTO: UpdateBankDetailsDTO,
   ): Promise<void> {
-    await this.bankDetailsService.updateBankDetails(+id, updateBankDetailsDTO);
+    await this.bankDetailsService.updateBankDetails(
+      userId,
+      updateBankDetailsDTO,
+    );
   }
 
   @Post('password')
   @HttpCode(HttpStatus.NO_CONTENT)
   async changePassword(
-    @AuthenticatedUser('id') userId: number,
+    @AuthenticatedUser('id') userId: string,
     @Body() changePasswordDTO: ChangePasswordDTO,
   ): Promise<void> {
     const oldPasswordHash = await this.usersService.getSingleFieldFromUserId(
@@ -87,14 +90,14 @@ export class UsersController {
     }),
   )
   async updateProfileImage(
-    @AuthenticatedUser('id') id: number,
+    @AuthenticatedUser('id') userId: string,
     @UploadedFile() file: { filename: string },
   ): Promise<object> {
     // TODO remove the old user file
     const image = this.configService.getFileStorageHost(
       `${APP_CONSTANTS.AVATARS_PATH}/${file.filename}`,
     );
-    this.profilesService.updateProfile(id, { profileImage: image });
+    this.profilesService.updateProfile(userId, { picture: image });
     return { image };
   }
 

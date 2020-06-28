@@ -11,11 +11,11 @@ export class AuthService {
     private readonly hashService: HashService,
   ) {}
 
-  async generateAuthToken(userId: number) {
+  async generateAuthToken(userId: string) {
     return this.jwtService.sign({ id: userId });
   }
 
-  async validateUser(email: string, password: string): Promise<{ id: number }> {
+  async validateUser(email: string, password: string): Promise<{ id: string }> {
     const user = await this.usersService.getUserDetailsFromEmail(email, [
       'id',
       'password',

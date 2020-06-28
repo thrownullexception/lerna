@@ -3,7 +3,7 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 @Entity('references')
 export class Reference {
   @PrimaryGeneratedColumn()
-  id: number;
+  id: string;
 
   @Column()
   key: string;

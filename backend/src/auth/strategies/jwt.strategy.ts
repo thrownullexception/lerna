@@ -5,7 +5,7 @@ import { ConfigService } from '../../shared/services';
 import { UsersService } from '../../users/users.service';
 
 interface IJwtPayload {
-  id: number;
+  id: string;
 }
 
 @Injectable()
@@ -21,7 +21,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  async validate({ id: userId }: IJwtPayload): Promise<{ id: number }> {
+  async validate({ id: userId }: IJwtPayload): Promise<{ id: string }> {
     const user = await this.usersService.getMultipleFieldsFromUserId(userId, [
       'id',
       'roleId',

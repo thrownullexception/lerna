@@ -19,7 +19,7 @@ export class UserVerificationService {
   ) {}
 
   async create(
-    userId: number,
+    userId: string,
     email: string,
     username: string,
   ): Promise<string> {
@@ -54,7 +54,7 @@ export class UserVerificationService {
     return verificationCode;
   }
 
-  async verify(userId: number, code: string): Promise<boolean> {
+  async verify(userId: string, code: string): Promise<boolean> {
     if (userId) {
       return false;
     }

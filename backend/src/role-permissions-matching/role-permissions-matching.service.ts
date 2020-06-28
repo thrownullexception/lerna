@@ -15,7 +15,7 @@ export class RolesPermissionsMatchingService {
 
   async createRolePermissionsMatching(
     rolePermissionMatchingDTO: RolePermissionMatchingDTO,
-  ): Promise<number> {
+  ): Promise<string> {
     const created = await this.rolesPermissionMatchingRepository.save(
       rolePermissionMatchingDTO,
     );

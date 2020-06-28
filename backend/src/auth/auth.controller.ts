@@ -39,7 +39,7 @@ interface IAuthenticationResponse {
     | 'ACCOUNT_VERIFICATION_FAILED'
     | 'NEW_AUTH_PROVIDER_USER';
   newAuthUserBag?: {
-    userId: number;
+    userId: string;
     username: string;
     email: string;
   };
@@ -62,7 +62,7 @@ export class AuthController {
   @Post('signin')
   @UseGuards(AuthGuard('local'))
   async signin(
-    @AuthenticatedUser('id') userId: number,
+    @AuthenticatedUser('id') userId: string,
   ): Promise<IAuthenticationResponse> {
     if (
       !(await this.usersService.getSingleFieldFromUserId(userId, 'verified'))
@@ -73,7 +73,7 @@ export class AuthController {
   }
 
   @Post('signup')
-  async signup(@Body() signUpDTO: SignUpDTO): Promise<{ data: number }> {
+  async signup(@Body() signUpDTO: SignUpDTO): Promise<{ data: string }> {
     const passwordHash = await this.hashService.make(signUpDTO.password);
 
     const userId = await this.usersService.createNewUser({
@@ -173,13 +173,13 @@ export class AuthController {
   }
 
   private async updateProviderAuthenticationProfile(
-    userId: number,
+    userId: string,
     profile: IProviderAuthResponse,
   ): Promise<void> {
-    const profileToUpdate = { nicename: '', profileImage: '' };
+    const profileToUpdate = { firstName: '', picture: '' };
 
     if (profile.name) {
-      profileToUpdate.nicename = profile.name;
+      profileToUpdate.firstName = profile.name;
     }
 
     if (profile.image) {
@@ -187,22 +187,19 @@ export class AuthController {
         profile.image,
         APP_CONSTANTS.AVATARS_PATH,
       );
-      profileToUpdate.profileImage = this.configService.getFileStorageHost(
+      profileToUpdate.picture = this.configService.getFileStorageHost(
         `${APP_CONSTANTS.AVATARS_PATH}/${fileName}`,
       );
     }
 
-    if (
-      profileToUpdate.nicename !== '' &&
-      profileToUpdate.profileImage !== ''
-    ) {
+    if (profileToUpdate.firstName !== '' && profileToUpdate.picture !== '') {
       // TODO test this logic
       this.profilesService.updateProfile(userId, profileToUpdate);
     }
   }
 
   private async getAuthenticationResponse(
-    userId: number,
+    userId: string,
   ): Promise<IAuthenticationResponse> {
     const userBag = await this.usersService.getAuthenticatedUserBag(userId);
     const authToken = await this.authService.generateAuthToken(userId);
@@ -264,7 +261,7 @@ export class AuthController {
   @HttpCode(HttpStatus.NO_CONTENT)
   async completeProfile(
     @Body() completeProfileDTO: CompleteProfileDTO,
-    @AuthenticatedUser('id') userId: number,
+    @AuthenticatedUser('id') userId: string,
   ): Promise<void> {
     await this.profilesService.updateProfile(userId, completeProfileDTO);
   }
@@ -274,16 +271,16 @@ export class AuthController {
   @HttpCode(HttpStatus.NO_CONTENT)
   async setReferral(
     @Body() setReferralDTO: SetReferralDTO,
-    @AuthenticatedUser('id') userId: number,
+    @AuthenticatedUser('id') userId: string,
   ): Promise<void> {
-    const { username } = setReferralDTO;
-    const referredBy = await this.usersService.getUserIdFromMaybeUser({
-      username,
-    });
-    if (!referredBy) {
-      throw new BadRequestException('This username does not exist');
-    }
-    await this.usersService.updateDetails(userId, { referredBy: +referredBy });
+    // const { username } = setReferralDTO;
+    // const referredBy = await this.usersService.getUserIdFromMaybeUser({
+    //   username,
+    // });
+    // if (!referredBy) {
+    //   throw new BadRequestException('This username does not exist');
+    // }
+    // await this.usersService.updateDetails(userId, { referredBy: +referredBy });
     // const coins = await this.referencesService.getCoinsRewardForInvite();
     // await this.coinHistoryService.createReferralRewards(
     //   +referredBy,

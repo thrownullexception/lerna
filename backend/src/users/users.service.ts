@@ -84,7 +84,7 @@ export class UsersService {
 
   async getUserIdFromMaybeUser(
     where: QueryDeepPartialEntity<User>,
-  ): Promise<number | boolean> {
+  ): Promise<string | boolean> {
     const user = await this.usersRespository.findOne({
       select: ['id'],
       where,
@@ -96,14 +96,14 @@ export class UsersService {
   }
 
   async updateDetails(
-    userId: number,
+    userId: string,
     details: QueryDeepPartialEntity<User>,
   ): Promise<void> {
     this.usersRespository.update({ id: userId }, details);
   }
 
   // TODO get this only after signin
-  async getAuthenticatedUserBag(userId: number): Promise<User> {
+  async getAuthenticatedUserBag(userId: string): Promise<User> {
     return this.usersRespository.findOne({
       where: {
         id: userId,
@@ -120,7 +120,7 @@ export class UsersService {
     });
   }
 
-  async getUserWithPermission(id: number): Promise<User> {
+  async getUserWithPermission(id: string): Promise<User> {
     return await this.usersRespository.findOne({
       where: { id },
       relations: ['role', 'role.permissions', 'role.permissions.permission'],
@@ -128,7 +128,7 @@ export class UsersService {
   }
 
   async getSingleFieldFromUserId<T extends keyof User>(
-    userId: number,
+    userId: string,
     field: T,
   ): Promise<Pick<User, T>> {
     const user = await this.usersRespository.findOne({
@@ -144,7 +144,7 @@ export class UsersService {
   }
 
   async getMultipleFieldsFromUserId(
-    userId: number,
+    userId: string,
     select: Array<'id' | 'roleId'>,
   ): Promise<User> {
     return this.usersRespository.findOne({
@@ -155,7 +155,7 @@ export class UsersService {
     });
   }
 
-  async createNewUser(userDetails: ICreateUserDetails): Promise<number> {
+  async createNewUser(userDetails: ICreateUserDetails): Promise<string> {
     // TODO transactions
     const user = await this.usersRespository.save(userDetails);
     const userId = user.id;

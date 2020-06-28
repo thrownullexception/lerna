@@ -1,12 +1,12 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('user_verifications')
 export class UserVerification {
   @PrimaryGeneratedColumn()
-  id: number;
+  id: string;
 
   @Column()
-  userId: number;
+  userId: string;
 
   @Column()
   verificationHash: string;

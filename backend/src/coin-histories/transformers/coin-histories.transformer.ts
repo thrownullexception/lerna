@@ -5,7 +5,7 @@ import {
 } from '../coin-histories.types';
 
 export class AdminCoinsHistoryTransformer {
-  id: number;
+  id: string;
   source: TransactionHistorySource;
   username: string;
   sourceReference: string;

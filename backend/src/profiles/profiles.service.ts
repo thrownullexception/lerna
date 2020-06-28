@@ -12,14 +12,14 @@ export class ProfilesService {
   ) {}
 
   async updateProfile(
-    userId: number,
+    userId: string,
     profile: QueryDeepPartialEntity<Profile>,
   ): Promise<void> {
     // TODO skip the profile that is already set for dob and gender
     await this.profileRepository.update({ userId }, profile);
   }
 
-  async createForNewUser(userId: number): Promise<void> {
+  async createForNewUser(userId: string): Promise<void> {
     await this.profileRepository.insert({ userId });
   }
 }

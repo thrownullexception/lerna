@@ -8,7 +8,7 @@ import { User } from '../users/users.entity';
 @Entity('coin_histories')
 export class CoinHistory {
   @PrimaryGeneratedColumn()
-  id: number;
+  id: string;
 
   @Column()
   userId: number;

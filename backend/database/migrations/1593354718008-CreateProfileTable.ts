@@ -23,6 +23,10 @@ export class CreateProfileTable1593354718008 extends BaseMigration
 
     await this.createTable(queryRunner, [
       {
+        name: 'userId',
+        type: 'uuid',
+      },
+      {
         name: 'first_name',
         type: 'varchar',
         length: '32',
@@ -50,6 +54,7 @@ export class CreateProfileTable1593354718008 extends BaseMigration
       {
         name: 'gender',
         type: 'varchar',
+        isNullable: true,
       },
       {
         name: 'online',
@@ -57,15 +62,19 @@ export class CreateProfileTable1593354718008 extends BaseMigration
         default: false,
       },
       {
-        name: 'last_online',
-        type: 'timestamp',
-        default: 'CURRENT_TIMESTAMP',
+        name: 'dob',
+        type: 'date',
+        isNullable: true,
       },
     ]);
     await this.reference(queryRunner, {
       table: 'genders',
       referencedColumnHere: 'gender',
       referencedColumnThere: 'system_name',
+    });
+    await this.reference(queryRunner, {
+      table: 'users',
+      referencedColumnHere: 'userId',
     });
   }
 

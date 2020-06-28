@@ -12,13 +12,13 @@ export class BankDetailsService {
   ) {}
 
   async updateBankDetails(
-    userId: number,
+    userId: string,
     bankDetailsDTO: UpdateBankDetailsDTO,
   ): Promise<void> {
     await this.bankDetailRepository.update({ userId }, bankDetailsDTO);
   }
 
-  async createForNewUser(userId: number): Promise<void> {
+  async createForNewUser(userId: string): Promise<void> {
     await this.bankDetailRepository.insert({ userId });
   }
 }

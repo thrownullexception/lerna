@@ -5,7 +5,7 @@ import { User } from '../users/users.entity';
 @Entity('user_settings')
 export class UserSetting {
   @PrimaryGeneratedColumn()
-  id: number;
+  id: string;
 
   @Column()
   userId: number;

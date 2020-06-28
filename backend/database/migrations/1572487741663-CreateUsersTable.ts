@@ -41,10 +41,6 @@ export class CreateUsersTable1572487741663 extends BaseMigration
         isNullable: true,
       },
       {
-        name: 'registered_by',
-        type: 'smallint',
-      },
-      {
         name: 'role_id',
         type: 'uuid',
         isNullable: true,

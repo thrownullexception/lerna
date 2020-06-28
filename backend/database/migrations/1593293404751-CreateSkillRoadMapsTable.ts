@@ -27,7 +27,7 @@ export class CreateSkillRoadMapsTable1593293404751 extends BaseMigration
       },
       {
         name: 'description',
-        type: 'varchar',
+        type: 'text',
       },
     ]);
     await this.reference(queryRunner, {
