@@ -20,7 +20,7 @@ import { ConfigService, HashService } from '../shared/services';
 import { AuthenticatedUser } from '../shared/decorators';
 import { APP_CONSTANTS } from '../shared/constants';
 
-@Controller('users')
+@Controller(APP_CONSTANTS.API_ROUTES_PREFIX('users'))
 @UseGuards(AuthGuard('jwt'))
 export class UsersController {
   constructor(

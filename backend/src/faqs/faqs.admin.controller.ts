@@ -15,10 +15,11 @@ import { FaqDTO } from './faqs.dto';
 import { AdminPermission } from '../shared/decorators';
 import { PermissionsGuard } from '../auth/permissions.guards';
 import { AuthenticatedUser } from '../shared/decorators';
+import { APP_CONSTANTS } from 'src/shared/constants';
 
 const PERMISSION = 'CAN_MANAGE_FAQS';
 
-@Controller('faqs/admin')
+@Controller(APP_CONSTANTS.ADMIN_ROUTES_PREFIX('faqs'))
 @UseGuards(AuthGuard('jwt'))
 @AdminPermission(PERMISSION)
 @UseGuards(PermissionsGuard)

@@ -1,7 +1,8 @@
 import { Controller, Post, Body } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
+import { APP_CONSTANTS } from 'src/shared/constants';
 
-@Controller('validations')
+@Controller(APP_CONSTANTS.API_ROUTES_PREFIX('validations'))
 export class ValidationsController {
   constructor(private readonly usersService: UsersService) {}
 

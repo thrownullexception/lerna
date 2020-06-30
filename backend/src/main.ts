@@ -1,10 +1,11 @@
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
+import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
 import * as helmet from 'helmet';
+import nunjucks from 'nunjucks';
 import { AppModule } from './app.module';
 import { ConfigService } from './shared/services';
-import { NestExpressApplication } from '@nestjs/platform-express';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -22,10 +23,16 @@ async function bootstrap() {
     }),
   );
 
+  nunjucks.configure('views', {
+    express: app,
+    autoescape: true,
+  });
+
+  app.setBaseViewsDir(join(__dirname, '..', '..', 'views'));
+  app.setViewEngine('html');
+
   app.enable('trust proxy');
 
-  app.setGlobalPrefix('api');
-  app.useStaticAssets(join(__dirname, '..', 'public'));
   await app.listen(configService.getPort());
 }
 

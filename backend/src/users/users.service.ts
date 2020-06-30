@@ -29,10 +29,6 @@ export class UsersService {
     });
   }
 
-  // async incrementCoinsBy(userId: number, coins: number): Promise<void> {
-  //   await this.usersRespository.increment({ id: userId }, 'coins', coins);
-  // }
-
   async getUserDetails(userId: number): Promise<User> {
     return this.usersRespository.findOne({
       where: {

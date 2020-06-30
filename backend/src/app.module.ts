@@ -12,6 +12,7 @@ import { LoggingInterceptor } from './shared/interceptors/logging.interceptors';
 import { HttpExceptionFilter } from './shared/filters/http-exception.filter';
 import { ValidationsModule } from './validations/validations.module';
 import { HealthCheckModule } from './healthcheck/healthcheck.module';
+import { GuestModule } from './guest/guest.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { HealthCheckModule } from './healthcheck/healthcheck.module';
     FaqsModule,
     ValidationsModule,
     HealthCheckModule,
+    GuestModule,
   ],
   providers: [
     {

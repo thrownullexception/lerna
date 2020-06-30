@@ -8,5 +8,5 @@ Transactions
 Support
 Reviews
 Disputes
-
-no links
+Profile =>
+no links for messages

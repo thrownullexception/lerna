@@ -7,10 +7,11 @@ import { PermissionsGuard } from '../auth/permissions.guards';
 import { QueryParametersPipe } from '../shared/pipes';
 import { QueryParametersDTO } from '../shared/dtos';
 import { IPaginatePayload } from '../shared/types';
+import { APP_CONSTANTS } from 'src/shared/constants';
 
 const PERMISSION = 'CAN_MANAGE_USERS';
 
-@Controller('users/admin')
+@Controller(APP_CONSTANTS.ADMIN_ROUTES_PREFIX('users'))
 @UseGuards(AuthGuard('jwt'))
 @AdminPermission(PERMISSION)
 @UseGuards(PermissionsGuard)

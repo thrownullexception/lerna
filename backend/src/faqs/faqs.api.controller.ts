@@ -1,8 +1,9 @@
 import { Controller, Get, Param, ParseUUIDPipe } from '@nestjs/common';
 import { FaqsService } from './faqs.service';
 import { FaqsTransformer } from './faqs.transformers';
+import { APP_CONSTANTS } from 'src/shared/constants';
 
-@Controller('faqs')
+@Controller(APP_CONSTANTS.API_ROUTES_PREFIX('faqs'))
 export class FaqsController {
   constructor(private readonly faqsService: FaqsService) {}
 

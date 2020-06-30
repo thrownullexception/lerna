@@ -40,7 +40,7 @@ interface IAuthenticationResponse {
   role?: Role;
 }
 
-@Controller('auth')
+@Controller(APP_CONSTANTS.API_ROUTES_PREFIX('auth'))
 export class AuthController {
   constructor(
     private readonly usersService: UsersService,
