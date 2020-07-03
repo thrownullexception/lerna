@@ -1,4 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToMany, JoinTable } from 'typeorm';
+import { SkillResource } from 'src/skill-resources/skill-resources.entity';
+import { SkillRoadMap } from 'src/skill-road-maps/skill-road-maps.entity';
 
 @Entity('skills')
 export class Skill {
@@ -11,6 +13,42 @@ export class Skill {
   @Column({ select: false })
   description: string;
 
-  @Column({ select: false })
+  @Column()
   isPath: boolean;
+
+  @OneToMany(
+    () => SkillResource,
+    ({ skill }) => skill,
+  )
+  resources: SkillResource[];
+
+  @OneToMany(
+    () => SkillRoadMap,
+    ({ skill }) => skill,
+  )
+  roadMaps: SkillRoadMap[];
+
+  @ManyToMany(() => Skill)
+  @JoinTable({
+    name: 'skill_relations',
+    joinColumn: {
+      name: 'skill_a_id',
+    },
+    inverseJoinColumn: {
+      name: 'skill_b_id',
+    },
+  })
+  forwardRelatedSkill: Skill[];
+
+  @ManyToMany(() => Skill)
+  @JoinTable({
+    name: 'skill_relations',
+    joinColumn: {
+      name: 'skill_b_id',
+    },
+    inverseJoinColumn: {
+      name: 'skill_a_id',
+    },
+  })
+  backwardRelatedSkill: Skill[];
 }

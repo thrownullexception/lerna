@@ -1,7 +1,9 @@
 export class QueryParametersDTO {
-  page = 1;
-  take = 10;
-  sortBy = 'id';
-  order: 'DESC' | 'ASC' = 'DESC';
+  page: number;
+  take: number;
+  skip: number;
+  sortBy: string;
+  orderBy: 'DESC' | 'ASC';
   filters?: Record<string, unknown>;
+  order: Record<string, 'DESC' | 'ASC'>;
 }

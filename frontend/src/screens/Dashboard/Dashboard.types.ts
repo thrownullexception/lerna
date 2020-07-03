@@ -16,3 +16,4 @@
 //   | 'toggleCart'
 //   | 'logout'
 // >;
+export const A = 'a';

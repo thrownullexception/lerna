@@ -3,7 +3,6 @@ import { action } from 'typesafe-actions';
 import { ThunkInterface } from '../../shared/types';
 import { SkillsAction, ActionType } from './skills.types';
 import { RequestService, ToastService } from '../../services';
-// import { FaqsPath } from '../../screens/Faqs';
 import { SkillsResponse, SkillResponse } from './responses';
 
 const BASE_REQUEST_PATH = 'skills';
@@ -39,7 +38,7 @@ export class SkillActions {
       dispatch(action(ActionType.SKILLS_REQUEST_STARTED));
       try {
         const { data } = await RequestService.get(`${BASE_REQUEST_PATH}/${skillId}`);
-        dispatch(action(ActionType.FETCH_SKILL_SUCCESSFULL, new SkillResponse(data.data)));
+        dispatch(action(ActionType.FETCH_SKILL_SUCCESSFULL, new SkillResponse(data)));
       } catch (e) {
         ToastService.error(e);
       }

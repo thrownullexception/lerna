@@ -1,12 +1,11 @@
-config.m only one occurence
-
 Guest Controller
 How it works
 Skills
 Tutors
 
 
-lerna.nghttp://amentotech.com/projects/worketic/admin/profile
+lerna.ng
+http://amentotech.com/projects/worketic/admin/profile
 http://amentotech.com/projects/worketic/freelancer/dashboardhttp://amentotech.com/projects/worketic/employer/dashboardhttps://dbdiagram.io/d/5dd12975edf08a25543e0486http://amentotech.com/htmls/worktern/dashboard-accountsettings.html
 https://www.spruko.com/demo/azira/Azira/leftmenu/faq.html#
 
@@ -18,12 +17,30 @@ Start Learning Session
 
 Was it worth it having my services?
 How was my proffesional behaviour?
-Skill concpets
+Skill concepts
 mentorship
 
 tip a mentor?
-Stop SessionRate TeacherRate Student
+Stop Session
+Rate Teacher
+Rate Student
 live.lerna.ng
 
-Video CallScreen ShareAudio ChatDrawing BoardOnline typing in sync1 hr => 2000/hr => 10%
-15/mins moving forwardShow me how long I have leftTake Your Learning Anytime, AnywhereProgrammingSchool SubjectsArchitectureMusicTeachers post their cvYou vet your area of interest10 secs to select answer 
+Video Call
+Screen Share
+Audio Chat
+Drawing Board
+Online typing in sync
+1 hr => 2000/hr => 10%
+15/mins moving forward
+Show me how long I have left
+Take Your Learning Anytime, Anywhere
+ProgrammingSchool 
+SubjectsArchitectureMusicTeachers
+post their cv
+You vet your area of interest
+10 secs to select answer
+
+IP_ADDRESS
+FINGERPRINTS
+log fingerprints

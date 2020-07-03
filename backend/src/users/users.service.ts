@@ -84,14 +84,7 @@ export class UsersService {
       where: {
         id: userId,
       },
-      relations: [
-        'profile',
-        // 'bankDetail',
-        // 'bankDetail.bank',
-        // 'settings',
-        'role',
-        'role.permissions',
-      ],
+      relations: ['profile'],
     });
   }
 

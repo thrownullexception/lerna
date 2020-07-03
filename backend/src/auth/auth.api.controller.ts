@@ -26,22 +26,13 @@ import {
   ResetPasswordDTO,
 } from './dtos';
 import { MailerService } from '@nest-modules/mailer';
-import { Role } from '../roles/roles.entity';
 
-interface IAuthenticationResponse {
-  authenticationBag?: AuthenticatedUserDetailsTransformer;
-  authToken?: string;
+interface IAuthenticationResponse extends Partial<AuthenticatedUserDetailsTransformer> {
   responseMeta?: 'RETURNING_USER' | 'ACCOUNT_VERIFICATION_FAILED' | 'NEW_AUTH_PROVIDER_USER';
-  newAuthUserBag?: {
-    userId: string;
-    username: string;
-    email: string;
-  };
-  role?: Role;
 }
 
 @Controller(APP_CONSTANTS.API_ROUTES_PREFIX('auth'))
-export class AuthController {
+export class AuthApiController {
   constructor(
     private readonly usersService: UsersService,
     private readonly authService: AuthService,
@@ -146,11 +137,9 @@ export class AuthController {
 
     return {
       responseMeta: 'NEW_AUTH_PROVIDER_USER',
-      newAuthUserBag: {
-        userId,
-        username,
-        email,
-      },
+      id: userId,
+      firstName: username,
+      email,
     };
   }
 
@@ -177,16 +166,12 @@ export class AuthController {
     }
   }
 
-  private async getAuthenticationResponse(userId: string): Promise<IAuthenticationResponse> {
+  private async getAuthenticationResponse(
+    userId: string,
+  ): Promise<AuthenticatedUserDetailsTransformer> {
     const userBag = await this.usersService.getAuthenticatedUserBag(userId);
     const authToken = this.authService.generateAuthToken(userId);
-    // undefined because I want the role not to show for users
-    const role = userBag.role || undefined;
-    return {
-      authenticationBag: new AuthenticatedUserDetailsTransformer(userBag),
-      authToken,
-      role,
-    };
+    return new AuthenticatedUserDetailsTransformer(userBag, authToken);
   }
 
   @Post('reset-password')

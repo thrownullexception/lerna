@@ -7,20 +7,20 @@ export class SkillRelation {
   id: string;
 
   @Column()
-  skillA: string;
+  skillAId: string;
 
   @Column()
-  skillB: string;
+  skillBId: string;
 
   @ManyToOne(
     () => Skill,
     ({ id }) => id,
   )
-  skillA$1: Skill;
+  skillA: Skill;
 
   @ManyToOne(
     () => Skill,
     ({ id }) => id,
   )
-  skillB$1: Skill;
+  skillB: Skill;
 }

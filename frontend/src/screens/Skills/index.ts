@@ -14,6 +14,7 @@ export const SkillsRoutes: IMenuItems[] = [
     title: 'Skills',
     showOnNavigation: true,
     accountModes: [AccountModeType.Student],
-    component: studentGuard(ListStudentSkills),
+    // component: studentGuard(ListStudentSkills),
+    component: ListStudentSkills,
   },
 ];

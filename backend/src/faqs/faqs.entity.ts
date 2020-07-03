@@ -1,6 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { User } from '../users/users.entity';
 import { AccountMode } from 'src/account-modes/account-modes.entity';
+import { AccountModeType } from 'src/account-modes/account-modes.types';
 
 @Entity('faqs')
 export class Faq {
@@ -14,7 +15,13 @@ export class Faq {
   answer: string;
 
   @Column()
-  accountModeSystemName: string;
+  accountModeSystemName: AccountModeType;
+
+  @Column()
+  createdAt: string;
+
+  @Column({ select: false })
+  updatedAt: string;
 
   @ManyToOne(
     () => AccountMode,

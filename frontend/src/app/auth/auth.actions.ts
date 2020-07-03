@@ -50,12 +50,11 @@ export const doSignIn = (signInForm: ISignInForm): ThunkInterface<void> => {
     try {
       const response = await RequestService.post('auth/signin', signInForm);
       const signInResponse = new SignInResponse(response.data);
-      // TODO
-      // if (responseMeta === 'ACCOUNT_VERIFICATION_FAILED') {
-      //   ToastService.error('Account Not Verifed');
-      //   dispatch(action(ActionType.AUTH_REQUEST_ENDED));
-      //   return;
-      // }
+      if (response.data.responseMeta === 'ACCOUNT_VERIFICATION_FAILED') {
+        ToastService.error('Account Not Verifed');
+        dispatch(action(ActionType.AUTH_REQUEST_ENDED));
+        return;
+      }
       dispatch(action(ActionType.AUTHENTICATE_USER, signInResponse));
       StorageService.setString(JWT_TOKEN_STORAGE_KEY, signInResponse.token);
       NavigationService.goTo(DashboardPath);

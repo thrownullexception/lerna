@@ -9,7 +9,7 @@ export class SkillHierarchyResponse {
   constructor(jsonObject: object) {
     this.id = get('id', jsonObject);
     this.order = get('order', jsonObject);
-    this.childId = get('child_id', jsonObject);
-    this.parentId = get('parent_id', jsonObject);
+    this.childId = get('childId', jsonObject);
+    this.parentId = get('parentId', jsonObject);
   }
 }

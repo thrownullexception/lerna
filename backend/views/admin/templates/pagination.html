@@ -1,0 +1,33 @@
+{% macro paginate(pagination) %}
+{% set lastPage = (pagination.count / pagination.take) | ceil %}
+<div class="box-footer clearfix">
+    <ul class="pagination pagination-sm no-margin pull-right">
+        <li>
+            <a
+            {% if( pagination.page > 1) %} href="?page={{ pagination.page - 1 }}" {% endif %}
+            >
+                &laquo;
+            </a>
+        </li>
+        {% for page in range(1, lastPage + 1) -%}
+            {% if((loop.index < 2) or (loop.index > lastPage - 3) or ((loop.index > pagination.page - 4) and (loop.index < pagination.page + 2)) ) %}
+            <li class="{{ 'active' if pagination.page == page  }}">
+                <a href="?page={{ page }}">{{ page }}</a>
+            </li>
+            {% endif %}
+        {%- endfor %}
+        <li class="page-item">
+            <a class="page-link"
+            {% if(pagination.page != lastPage) %}
+                href="?page={{ pagination.page + 1 }}"
+            {% endif %}
+            >
+                &raquo;
+            </a>
+        </li>
+        <li>
+            <a href="#">Total: {{ pagination.count }}</a>
+        </li>
+    </ul>
+</div>
+{% endmacro %}

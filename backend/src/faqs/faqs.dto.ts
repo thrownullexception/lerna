@@ -1,10 +1,7 @@
-import { IsNotEmpty, IsUUID } from 'class-validator';
+import { IsNotEmpty } from 'class-validator';
+import { AccountModeType } from 'src/account-modes/account-modes.types';
 
 export class FaqDTO {
-  @IsNotEmpty()
-  @IsUUID(4)
-  id: string;
-
   @IsNotEmpty({
     message: 'Question is required',
   })
@@ -14,4 +11,9 @@ export class FaqDTO {
     message: 'Answer is required',
   })
   answer: string;
+
+  @IsNotEmpty({
+    message: 'Answer is required',
+  })
+  accountModeSystemName: AccountModeType;
 }

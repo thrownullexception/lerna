@@ -1,6 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { Skill } from '../skills/skills.entity';
 import { SkillMediaType } from '../skill-media-types/skill-media-types.entity';
+import { SkillMediaTypes } from 'src/skill-media-types/skill-media-types.types';
 
 @Entity('skill_resources')
 export class SkillResource {
@@ -17,7 +18,7 @@ export class SkillResource {
   link: string;
 
   @Column()
-  mediaType: string;
+  mediaType: SkillMediaTypes;
 
   @Column()
   isFree: boolean;
@@ -27,14 +28,14 @@ export class SkillResource {
     ({ systemName }) => systemName,
   )
   @JoinColumn({
-    name: 'mediaType',
+    name: 'media_type',
     referencedColumnName: 'systemName',
   })
-  accountMode$1: SkillMediaType;
+  skillMediaType: SkillMediaType;
 
   @ManyToOne(
     () => Skill,
     ({ id }) => id,
   )
-  skill$1: Skill;
+  skill: Skill;
 }

@@ -41,7 +41,6 @@ export interface IAuthState {
     picture: string;
   };
   role: string;
-  permissions: string[];
 }
 
 interface ISetSignUpCredentials {

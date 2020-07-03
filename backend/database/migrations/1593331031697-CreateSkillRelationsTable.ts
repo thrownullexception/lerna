@@ -8,21 +8,21 @@ export class CreateSkillRelationsTable1593331031697 extends BaseMigration
   public async up(queryRunner: QueryRunner): Promise<void> {
     await this.createTable(queryRunner, [
       {
-        name: 'skill_a',
+        name: 'skill_a_id',
         type: 'uuid',
       },
       {
-        name: 'skill_b',
+        name: 'skill_b_id',
         type: 'uuid',
       },
     ]);
     await this.reference(queryRunner, {
       table: 'skills',
-      referencedColumnHere: 'skill_a',
+      referencedColumnHere: 'skill_a_id',
     });
     await this.reference(queryRunner, {
       table: 'skills',
-      referencedColumnHere: 'skill_b',
+      referencedColumnHere: 'skill_b_id',
     });
   }
 

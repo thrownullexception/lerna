@@ -9,6 +9,7 @@ import * as redisStore from 'cache-manager-redis-store';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { JwtModuleOptions } from '@nestjs/jwt';
 import { APP_CONSTANTS } from '../../constants';
+import { NestSessionOptions } from 'nestjs-session';
 
 enum EnvironmentTypes {
   Production = 'production',
@@ -29,6 +30,10 @@ export class ConfigService implements CacheOptionsFactory {
 
   get(key: string): string {
     return this.envConfig[key];
+  }
+
+  isDevelopment(): boolean {
+    return this.getEnvironment() === EnvironmentTypes.Development;
   }
 
   getFileStorageHost(path: string): string {
@@ -106,6 +111,17 @@ export class ConfigService implements CacheOptionsFactory {
 
   getGoogleClientSecret(): string {
     return this.get('GOOGLE_CLIENT_SECRET');
+  }
+
+  getSessionSecret(): string {
+    return this.get('SESSION_SECRET') || 'xxx_a_quicj_brown_fox_lazied_over_the_jumped_xxxx';
+  }
+
+  getSessionOptions(): NestSessionOptions {
+    return {
+      // store: new RedisStore({ client: redisClient }),
+      session: { secret: this.getSessionSecret() },
+    };
   }
 
   createMailerOptions(): MailerOptions {
@@ -222,6 +238,11 @@ export class ConfigService implements CacheOptionsFactory {
 
   createTypeOrmOptions(): TypeOrmModuleOptions {
     const ENTITIES_DIR = this.getEnvironment() === 'production' ? './dist' : './dist/src';
+    const cache = {
+      type: 'redis' as const,
+      options: this.getRedisConfig(),
+      duration: APP_CONSTANTS.A_DAY,
+    };
     return {
       keepConnectionAlive: true,
       type: 'postgres',
@@ -234,11 +255,7 @@ export class ConfigService implements CacheOptionsFactory {
       logging: true, // !['production', 'test', 'testing'].includes(this.getEnvironment()),
       namingStrategy: new SnakeNamingStrategy(),
       retryAttempts: 5,
-      cache: {
-        type: 'redis',
-        options: this.getRedisConfig(),
-        duration: APP_CONSTANTS.A_DAY,
-      },
+      cache: this.getEnvironment() === EnvironmentTypes.Development ? false : cache,
     };
   }
 }

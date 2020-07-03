@@ -1,4 +1,4 @@
-import { Repository, EntityRepository } from 'typeorm';
+import { Repository, EntityRepository, FindManyOptions } from 'typeorm';
 import { Faq } from './faqs.entity';
 import { FaqDTO } from './faqs.dto';
 import { Injectable } from '@nestjs/common';
@@ -17,6 +17,10 @@ export class FaqsRepository extends Repository<Faq> {
     });
   }
 
+  async listFaqsAndCount(findAndCountOptions: FindManyOptions<Faq>): Promise<[Faq[], number]> {
+    return await this.findAndCount(findAndCountOptions);
+  }
+
   async showFaq(faqId: string): Promise<Faq> {
     return await this.findOne({
       where: { id: faqId },
@@ -28,19 +32,18 @@ export class FaqsRepository extends Repository<Faq> {
     });
   }
 
-  async createFaq(faqDTO: FaqDTO, adminId: string): Promise<string> {
-    const { id } = await this.save({ ...faqDTO, adminId });
-    this.queryRunner.connection.queryResultCache.clear();
-    return id;
+  async createFaq(faqDTO: FaqDTO, lastTouchedById: string): Promise<void> {
+    await this.insert({ ...faqDTO, lastTouchedById });
+    this.manager.connection.queryResultCache?.clear();
   }
 
   async updateFaq(faqId: string, faqDTO: FaqDTO, lastTouchedById: string): Promise<void> {
     await this.update(faqId, { ...faqDTO, lastTouchedById });
-    this.queryRunner.connection.queryResultCache.clear();
+    this.manager.connection.queryResultCache?.clear();
   }
 
   async deleteFaq(faqId: string): Promise<void> {
     await this.delete(faqId);
-    this.queryRunner.connection.queryResultCache.clear();
+    this.manager.connection.queryResultCache?.clear();
   }
 }

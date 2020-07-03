@@ -38,6 +38,7 @@ export const FaqRoutes: IMenuItems[] = [
     title: 'Support',
     showOnNavigation: true,
     accountModes: [AccountModeType.Student],
-    component: studentGuard(FaqsList),
+    // component: studentGuard(FaqsList),
+    component: FaqsList,
   },
 ];

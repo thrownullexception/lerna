@@ -10,13 +10,13 @@ export class SignInResponse {
   picture: string;
   id: string;
   token: string;
-  constructor(jsonObject: object) {
+  constructor(jsonObject: Record<string, string>) {
     this.id = get('id', jsonObject);
-    this.token = get('jwt_token', jsonObject);
+    this.token = get('jwtToken', jsonObject);
     this.email = get('email', jsonObject);
-    this.lastName = get('last_name', jsonObject);
-    this.firstName = get('first_name', jsonObject);
+    this.lastName = get('lastName', jsonObject);
+    this.firstName = get('firstName', jsonObject);
     this.picture = get('picture', jsonObject);
-    this.accountMode = get('account_mode', jsonObject);
+    this.accountMode = (get('accountMode', jsonObject) as unknown) as AccountModeType;
   }
 }

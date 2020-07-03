@@ -1,41 +1,22 @@
 import { User } from '../../users/users.entity';
-// import { GenderTypes } from '../../profiles/profiles.types';
-// import { ConfigService } from '../../shared/services';
-// import { APP_CONSTANTS } from '../../shared/constants';
-// import {
-//   UserSettingsDefaults,
-//   UserSettingTypes,
-// } from '../../user-settings/user-settings.types';
-// import { UserSetting } from '../../user-settings/user-settings.entity';
-
-// const configService = new ConfigService();
 
 export class AuthenticatedUserDetailsTransformer {
-  // profile: object;
-  // account: object;
-  // settings: object;
-  // bankDetails: object;
+  id: string;
+  jwtToken: string;
+  email: string;
+  lastName: string;
+  firstName: string;
+  picture: string;
+  accountMode: string;
 
-  constructor(user: User) {
-    user = null;
-    return user;
-    //   const gender = this.formatGenderType(user.profile.gender);
-    //   this.profile = {
-    //     nicename: user.profile.nicename,
-    //     image:
-    //       user.profile.profileImage ||
-    //       configService.getCdnHost(
-    //         `${APP_CONSTANTS.AVATARS_PATH}/default-${gender.toLowerCase()}.jpg`,
-    //       ),
-    //     gender,
-    //     dob: user.profile.dob,
-    //   };
-    //   this.account = {
-    //     username: user.username,
-    //     email: user.email,
-    //     id: user.id,
-    //     coins: user.coins,
-    //   };
+  constructor(user: User, jwtToken: string) {
+    this.id = user.id;
+    this.email = user.email;
+    this.lastName = user.profile.lastName;
+    this.firstName = user.profile.firstName;
+    this.picture = user.profile.picture;
+    this.accountMode = user.accountMode;
+    this.jwtToken = jwtToken;
     //   this.settings = {
     //     [UserSettingTypes.PUSH_NOTIFICATION]: this.getSettingValue(
     //       user.settings,
@@ -62,12 +43,6 @@ export class AuthenticatedUserDetailsTransformer {
     //       UserSettingTypes.GAME_SOUND,
     //     ),
     //   };
-    //   this.bankDetails = {
-    //     accountNumber: user.bankDetail.accountNumber,
-    //     accountName: user.bankDetail.accountName,
-    //     bankId: user.bankDetail.bankId,
-    //     bankName: user.bankDetail.bank && user.bankDetail.bank.name,
-    //   };
   }
 
   // private getSettingValue(
@@ -86,12 +61,5 @@ export class AuthenticatedUserDetailsTransformer {
   //     }
   //   }
   //   return UserSettingsDefaults[settingType];
-  // }
-
-  // private formatGenderType(gender: GenderTypes): string {
-  //   if (gender === GenderTypes.FEMALE) {
-  //     return 'Female';
-  //   }
-  //   return 'Male';
   // }
 }

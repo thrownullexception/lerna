@@ -1,0 +1,17 @@
+{% if (flashMessage.info) %}
+    <div class="alert alert-info" role="alert">
+       {{ flashMessage.info }}
+    </div>
+{% endif %}
+
+{% if (flashMessage.error) %}
+    <div class="alert alert-error" role="alert">
+       {{ flashMessage.error }}
+    </div>
+{% endif %}
+
+{% if (flashMessage.success) %}
+    <div class="alert alert-success" role="alert">
+       {{ flashMessage.success }}
+    </div>
+{% endif %}

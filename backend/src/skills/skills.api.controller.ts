@@ -1,0 +1,31 @@
+import { Controller, Get, Param, ParseUUIDPipe, UseGuards } from '@nestjs/common';
+import { SkillsService } from './skills.service';
+import { SkillTransformer } from './transfomers/skills.transformer';
+import { APP_CONSTANTS } from 'src/shared/constants';
+import { SkillHierarchyTransformer } from 'src/skill-hierarchies/skll-hierarchies.transformer';
+import { AuthGuard } from '@nestjs/passport';
+
+@Controller(APP_CONSTANTS.API_ROUTES_PREFIX('skills'))
+@UseGuards(AuthGuard('jwt'))
+export class SkillsApiController {
+  constructor(private readonly skillsService: SkillsService) {}
+
+  @Get()
+  async skillsWithHierarchies(): Promise<{
+    skills: SkillTransformer[];
+    hierarchies: SkillHierarchyTransformer[];
+  }> {
+    const { skills, skillHierarchies } = await this.skillsService.getSkillsAndHierarchies();
+    return {
+      skills: skills.map(skill => new SkillTransformer(skill)),
+      hierarchies: skillHierarchies.map(
+        skillHierarchy => new SkillHierarchyTransformer(skillHierarchy),
+      ),
+    };
+  }
+
+  @Get(':skillId')
+  async show(@Param('skillId', new ParseUUIDPipe()) skillId: string): Promise<SkillTransformer> {
+    return new SkillTransformer(await this.skillsService.getSkill(skillId), true);
+  }
+}

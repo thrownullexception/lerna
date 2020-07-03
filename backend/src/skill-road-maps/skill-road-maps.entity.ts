@@ -18,12 +18,12 @@ export class SkillRoadMap {
   @Column()
   title: string;
 
-  @Column({ select: false })
+  @Column()
   description: string;
 
   @ManyToOne(
     () => Skill,
     ({ id }) => id,
   )
-  skill$1: Skill;
+  skill: Skill;
 }

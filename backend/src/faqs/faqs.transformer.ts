@@ -1,6 +1,6 @@
 import { Faq } from './faqs.entity';
 
-export class FaqsTransformer {
+export class FaqTransformer {
   question: string;
   answer: string;
   id: string;

@@ -3,9 +3,18 @@ import { ValidationPipe } from '@nestjs/common';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
 import * as helmet from 'helmet';
-import nunjucks from 'nunjucks';
+import * as nunjucks from 'nunjucks';
+import * as methodOverride from 'method-override';
 import { AppModule } from './app.module';
 import { ConfigService } from './shared/services';
+import { APP_CONSTANTS } from './shared/constants';
+
+const customizeNunjucks = (nunjucksInstance: nunjucks.Environment) => {
+  nunjucksInstance.addGlobal('__adminPrefix', APP_CONSTANTS.ADMIN_ROUTES_PREFIX(''));
+  nunjucksInstance.addFilter('ceil', function(number: number) {
+    return Math.ceil(number);
+  });
+};
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -13,6 +22,7 @@ async function bootstrap() {
   const configService = new ConfigService();
 
   app.use(helmet());
+  app.use(methodOverride('_method'));
 
   app.enableCors();
 
@@ -23,10 +33,13 @@ async function bootstrap() {
     }),
   );
 
-  nunjucks.configure('views', {
+  const nunjucksInstance = nunjucks.configure('views', {
     express: app,
     autoescape: true,
+    watch: configService.isDevelopment(),
   });
+
+  customizeNunjucks(nunjucksInstance);
 
   app.setBaseViewsDir(join(__dirname, '..', '..', 'views'));
   app.setViewEngine('html');

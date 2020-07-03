@@ -7,10 +7,10 @@ export class SkillsResponse {
   hierarchies: SkillHierarchyResponse[];
 
   constructor(jsonObject: object) {
-    this.hierarchies = get([], ['data', 'skill_hierarchies'], jsonObject).map(
+    this.hierarchies = get([], ['hierarchies'], jsonObject).map(
       (hierachy: object) => new SkillHierarchyResponse(hierachy),
     );
-    this.skills = get([], ['data', 'skills'], jsonObject).map(
+    this.skills = get([], ['skills'], jsonObject).map(
       (skill: object) => new SkillResponse(skill, this.hierarchies),
     );
   }

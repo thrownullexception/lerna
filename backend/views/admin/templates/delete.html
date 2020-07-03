@@ -1,0 +1,5 @@
+{% macro button(path) %}
+<form method="POST" action="{{ path }}?_method=DELETE" class="form-inline">
+    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+</form>
+{% endmacro %}

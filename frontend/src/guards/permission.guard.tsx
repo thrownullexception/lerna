@@ -36,7 +36,7 @@ export function permissionGaurd(
 
   const mapStateToProps = (state: IStore) => ({
     isAuthenticated: state.auth.authenticated,
-    permissions: state.auth.permissions,
+    permissions: [],
     role: state.auth.role,
   });
 

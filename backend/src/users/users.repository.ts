@@ -6,14 +6,10 @@ import { APP_CONSTANTS } from '../shared/constants';
 
 @Injectable()
 @EntityRepository(User)
-export class FaqsRepository extends Repository<User> {
+export class UsersRepository extends Repository<User> {
   async listFaqs(): Promise<User[]> {
     return await this.find({
       order: { id: 'DESC' },
-      cache: {
-        id: 'FaqsRepository_listFaqs',
-        milliseconds: APP_CONSTANTS.A_DAY_IN_MILLIOSECONDS,
-      },
     });
   }
 

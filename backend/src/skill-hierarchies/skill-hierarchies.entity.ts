@@ -19,11 +19,11 @@ export class SkillHierarchy {
     () => Skill,
     ({ id }) => id,
   )
-  parent$1: Skill;
+  parent: Skill;
 
   @ManyToOne(
     () => Skill,
     ({ id }) => id,
   )
-  child$1: Skill;
+  child: Skill;
 }

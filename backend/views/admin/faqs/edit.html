@@ -1,0 +1,23 @@
+{% import "admin/templates/forms.html" as forms %}
+{% extends "admin/layout/main.html" %}
+{% block content %}
+<div class="box box-info">
+    <div class="box-header with-border">
+        <h3 class="box-title">Edit Faq</h3>
+    </div>
+    <form class="form-horizontal" method="PATCH" action="{{ route('faqs/' + faq.id) }}">
+        <div class="box-body">
+            {{ forms.textInput('question', 'Question', faq.question) }}
+            {{ forms.textArea('answer', 'Answer', faq.answer) }}
+            {{ forms.select('accountModeSystemName', 'Account Mode', [
+                {value: 'tutor', label: 'Tutor'},
+                {value: 'student', label: 'Student'}
+            ], faq.accountModeSystemName) }}
+        </div>
+        <div class="box-footer">
+            <a href="javascript:history.back();" class="btn btn-default">Go Back</a>
+            <button type="submit" class="btn btn-info pull-right">Submit</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
