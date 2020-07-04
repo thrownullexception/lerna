@@ -4,8 +4,7 @@ import { Repository, In, Not, FindOperator, FindConditions } from 'typeorm';
 import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
 import { User } from './users.entity';
 import { ICreateUserDetails } from './users.types';
-import { QueryParametersDTO } from '../shared/dtos';
-import { IPaginatePayload } from '../shared/types';
+import { IPaginatePayload, IQueryParametersDTO } from '../shared/types';
 import { QueryParamsToFindConditionHelper, ComparisionType } from '../shared/helpers';
 
 const take = 10;
@@ -145,7 +144,7 @@ export class UsersService {
     sortBy,
     order,
     filters,
-  }: QueryParametersDTO): Promise<IPaginatePayload<User>> {
+  }: IQueryParametersDTO): Promise<IPaginatePayload<User>> {
     const skip = (page - 1) * take$1;
     const filterQueryStructure = [
       {

@@ -1,4 +1,4 @@
-import { Repository, EntityRepository, FindManyOptions } from 'typeorm';
+import { Repository, EntityRepository, FindManyOptions, FindOneOptions } from 'typeorm';
 import { Faq } from './faqs.entity';
 import { FaqDTO } from './faqs.dto';
 import { Injectable } from '@nestjs/common';
@@ -21,12 +21,11 @@ export class FaqsRepository extends Repository<Faq> {
     return await this.findAndCount(findAndCountOptions);
   }
 
-  async showFaq(faqId: string): Promise<Faq> {
+  async showFaq(options: FindOneOptions<Faq>): Promise<Faq> {
     return await this.findOne({
-      where: { id: faqId },
-      relations: ['lastTouchedBy', 'accountMode'],
+      ...options,
       cache: {
-        id: `FaqsRepository_showFaq_${faqId}`,
+        id: `FaqsRepository_showFaq_${JSON.stringify(options)}`,
         milliseconds: APP_CONSTANTS.A_DAY_IN_MILLIOSECONDS,
       },
     });

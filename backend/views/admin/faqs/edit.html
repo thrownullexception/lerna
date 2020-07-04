@@ -5,14 +5,11 @@
     <div class="box-header with-border">
         <h3 class="box-title">Edit Faq</h3>
     </div>
-    <form class="form-horizontal" method="PATCH" action="{{ route('faqs/' + faq.id) }}">
+    <form class="form-horizontal" method="POST" action="{{ route('faqs/' + faq.id) }}?_method=PATCH">
         <div class="box-body">
             {{ forms.textInput('question', 'Question', faq.question) }}
             {{ forms.textArea('answer', 'Answer', faq.answer) }}
-            {{ forms.select('accountModeSystemName', 'Account Mode', [
-                {value: 'tutor', label: 'Tutor'},
-                {value: 'student', label: 'Student'}
-            ], faq.accountModeSystemName) }}
+            {{ forms.select('accountModeSystemName', 'Account Mode', accountModeOptions, faq.accountModeSystemName) }}
         </div>
         <div class="box-footer">
             <a href="javascript:history.back();" class="btn btn-default">Go Back</a>

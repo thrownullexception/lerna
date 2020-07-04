@@ -4,3 +4,18 @@ export interface IPaginatePayload<T> {
   page: number;
   data: T[];
 }
+
+export interface ISelectOptions {
+  label: string;
+  value: string;
+}
+
+export interface IQueryParametersDTO {
+  page: number;
+  take: number;
+  skip: number;
+  sortBy: string;
+  orderBy: 'DESC' | 'ASC';
+  filters?: Record<string, unknown>;
+  order: Record<string, 'DESC' | 'ASC'>;
+}

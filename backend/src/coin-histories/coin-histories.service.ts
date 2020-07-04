@@ -3,8 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, FindConditions } from 'typeorm';
 import { CoinHistory } from './coin-histories.entity';
 import { TransactionHistorySource, TransactionHistoryType } from './coin-histories.types';
-import { QueryParametersDTO } from '../shared/dtos';
-import { IPaginatePayload } from '../shared/types';
+import { IPaginatePayload, IQueryParametersDTO } from '../shared/types';
 import { QueryParamsToFindConditionHelper, ComparisionType } from '../shared/helpers';
 
 const take = 10;
@@ -113,7 +112,7 @@ export class CoinHistoryService {
     sortBy,
     order,
     filters,
-  }: QueryParametersDTO): Promise<IPaginatePayload<CoinHistory>> {
+  }: IQueryParametersDTO): Promise<IPaginatePayload<CoinHistory>> {
     const skip = (page - 1) * take$1;
     const filterQueryStructure = [
       {

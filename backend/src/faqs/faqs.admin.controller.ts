@@ -13,9 +13,10 @@ import {
   Render,
   Query,
   Res,
-  Session,
   Headers,
   UseInterceptors,
+  ParseUUIDPipe,
+  UsePipes,
 } from '@nestjs/common';
 import { Response } from 'express';
 import { AuthGuard } from '@nestjs/passport';
@@ -30,10 +31,10 @@ import {
 } from '../shared/decorators';
 import { APP_CONSTANTS } from 'src/shared/constants';
 import { QueryParametersPipe } from 'src/shared/pipes';
-import { QueryParametersDTO } from 'src/shared/dtos';
-import { IPaginatePayload } from 'src/shared/types';
+import { IPaginatePayload, ISelectOptions, IQueryParametersDTO } from 'src/shared/types';
 import { Faq } from './faqs.entity';
 import { SessionFlashInterceptor } from 'src/shared/interceptors';
+import { AccountModeAsOptions } from 'src/account-modes/account-modes.types';
 
 // const PERMISSION = 'CAN_MANAGE_FAQS';
 
@@ -47,8 +48,9 @@ export class AdminFaqsController {
 
   @Get()
   @Render('admin/faqs/list')
+  @UsePipes()
   async list(
-    @Query(new QueryParametersPipe()) queryParametersDTO: QueryParametersDTO,
+    @Query(new QueryParametersPipe()) queryParametersDTO: IQueryParametersDTO,
   ): Promise<{ faqs: IPaginatePayload<Faq> }> {
     console.log(queryParametersDTO);
     const faqs = await this.faqsService.listFaqsByQueryParamters(queryParametersDTO);
@@ -57,14 +59,17 @@ export class AdminFaqsController {
 
   @Get('create')
   @Render('admin/faqs/create')
-  createPage(): any {
-    return {};
+  createPage(): { accountModeOptions: ISelectOptions[] } {
+    return {
+      accountModeOptions: AccountModeAsOptions,
+    };
   }
 
   @Get(':faqId/edit')
   @Render('admin/faqs/edit')
-  editPage(): any {
-    return {};
+  async editPage(@Param('faqId', new ParseUUIDPipe()) faqId: string): Promise<any> {
+    const faq = await this.faqsService.getFaqWithAllRelations(faqId);
+    return { faq, accountModeOptions: AccountModeAsOptions };
   }
 
   @Post()
@@ -76,6 +81,7 @@ export class AdminFaqsController {
     @Headers('referer') back: string,
     @SessionFlash() sessionFlash: ISessionFlash,
   ): Promise<void> {
+    // Try to make an error
     await this.faqsService.createFaq(faqDTO, '81c4c49a-a125-49b9-9ab5-4b1ee059bf49');
     sessionFlash.success('Faq Created Successfully');
     res.redirect(back);

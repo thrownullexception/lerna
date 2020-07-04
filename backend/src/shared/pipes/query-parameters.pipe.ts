@@ -1,11 +1,10 @@
-import { PipeTransform, Injectable, ArgumentMetadata } from '@nestjs/common';
-import { QueryParametersDTO } from '../dtos';
+import { PipeTransform, Injectable } from '@nestjs/common';
+import { IQueryParametersDTO } from '../types';
 
 @Injectable()
 export class QueryParametersPipe implements PipeTransform {
-  transform(value: QueryParametersDTO, kiss: ArgumentMetadata): QueryParametersDTO {
+  transform(value: IQueryParametersDTO): IQueryParametersDTO {
     console.log(value);
-    console.log(kiss);
     if (!value.page) {
       value.page = 1;
     }

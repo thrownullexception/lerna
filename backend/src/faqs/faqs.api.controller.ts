@@ -1,4 +1,4 @@
-import { Controller, Get, Param, ParseUUIDPipe } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { FaqsService } from './faqs.service';
 import { FaqTransformer } from './faqs.transformer';
 import { APP_CONSTANTS } from 'src/shared/constants';
@@ -11,11 +11,5 @@ export class FaqsController {
   async index(): Promise<FaqTransformer[]> {
     const faqs = await this.faqsService.listFaqs();
     return faqs.map(faq => new FaqTransformer(faq));
-  }
-
-  @Get(':faqId')
-  async show(@Param('faqId', new ParseUUIDPipe()) faqId: string): Promise<FaqTransformer> {
-    const faq = await this.faqsService.getFaq(faqId);
-    return new FaqTransformer(faq);
   }
 }

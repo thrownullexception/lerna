@@ -3,8 +3,7 @@ import { FindConditions } from 'typeorm';
 import { Faq } from './faqs.entity';
 import { FaqDTO } from './faqs.dto';
 import { FaqsRepository } from './faqs.repository';
-import { QueryParametersDTO } from 'src/shared/dtos';
-import { IPaginatePayload } from 'src/shared/types';
+import { IPaginatePayload, IQueryParametersDTO } from 'src/shared/types';
 
 @Injectable()
 export class FaqsService {
@@ -15,7 +14,7 @@ export class FaqsService {
   }
 
   async listFaqsByQueryParamters(
-    queryParametersDTO: QueryParametersDTO,
+    queryParametersDTO: IQueryParametersDTO,
   ): Promise<IPaginatePayload<Faq>> {
     const where: FindConditions<Faq> = {};
     // if (filters) {
@@ -37,8 +36,11 @@ export class FaqsService {
     };
   }
 
-  async getFaq(faqId: string): Promise<Faq> {
-    return await this.faqsRepository.showFaq(faqId);
+  async getFaqWithAllRelations(faqId: string): Promise<Faq> {
+    return await this.faqsRepository.showFaq({
+      where: { id: faqId },
+      relations: ['lastTouchedBy', 'accountMode'],
+    });
   }
 
   async createFaq(faqDTO: FaqDTO, adminId: string): Promise<void> {

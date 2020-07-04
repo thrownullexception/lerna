@@ -9,10 +9,7 @@
         <div class="box-body">
             {{ forms.textInput('question', 'Question') }}
             {{ forms.textArea('answer', 'Answer') }}
-            {{ forms.select('accountModeSystemName', 'Account Mode', [
-                {value: 'tutor', label: 'Tutor'},
-                {value: 'student', label: 'Student'}
-            ]) }}
+            {{ forms.select('accountModeSystemName', 'Account Mode', accountModeOptions) }}
         </div>
         <div class="box-footer">
             <a href="javascript:history.back();" class="btn btn-default">Go Back</a>
