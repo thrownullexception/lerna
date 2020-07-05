@@ -9,7 +9,7 @@ export class BaseSeed {
   protected table: string;
   protected systemEnumerationFields: ISytemEnumerationFields[];
 
-  protected async seedSytemEnumerationTable(queryRunner: QueryRunner) {
+  protected async seedSytemEnumerationTable(queryRunner: QueryRunner): Promise<void> {
     await Promise.all(
       this.systemEnumerationFields.map(({ systemName, displayName }) => {
         return queryRunner.query(
@@ -19,12 +19,10 @@ export class BaseSeed {
     );
   }
 
-  protected async deSeedSytemEnumerationTable(queryRunner: QueryRunner) {
+  protected async deSeedSytemEnumerationTable(queryRunner: QueryRunner): Promise<void> {
     await Promise.all(
       this.systemEnumerationFields.map(({ systemName }) => {
-        return queryRunner.query(
-          `DELETE FROM ${this.table} WHERE system_name = '${systemName}';`,
-        );
+        return queryRunner.query(`DELETE FROM ${this.table} WHERE system_name = '${systemName}';`);
       }),
     );
   }

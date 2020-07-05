@@ -1,0 +1,32 @@
+import { MigrationInterface, QueryRunner } from 'typeorm';
+import { BaseMigration } from './base/base-migration';
+
+export class CreateRolePermissionMatchingTable1593940676418 extends BaseMigration
+  implements MigrationInterface {
+  table = 'role_permissions_matching';
+
+  public async up(queryRunner: QueryRunner): Promise<void> {
+    await this.createTable(queryRunner, [
+      {
+        name: 'role_id',
+        type: 'uuid',
+      },
+      {
+        name: 'permission_id',
+        type: 'uuid',
+      },
+    ]);
+    await this.reference(queryRunner, {
+      table: 'roles',
+      referencedColumnHere: 'role_id',
+    });
+    await this.reference(queryRunner, {
+      table: 'permissions',
+      referencedColumnHere: 'permission_id',
+    });
+  }
+
+  public async down(queryRunner: QueryRunner): Promise<void> {
+    await this.drop(queryRunner);
+  }
+}

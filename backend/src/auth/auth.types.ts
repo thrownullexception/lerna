@@ -3,3 +3,7 @@ export interface IProviderAuthResponse {
   name: string;
   image: string;
 }
+
+export interface IAuthenticatedUser {
+  id: string;
+}

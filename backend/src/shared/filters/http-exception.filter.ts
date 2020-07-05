@@ -9,6 +9,7 @@ import {
 import { Request, Response } from 'express';
 import { Logger } from 'winston';
 import { ValidationError } from 'class-validator';
+import { APP_CONSTANTS } from '../constants';
 
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
@@ -31,6 +32,21 @@ export class HttpExceptionFilter implements ExceptionFilter {
 
     if (status === HttpStatus.BAD_REQUEST && typeof exception.message === 'object') {
       errorResponse.validations = this.transformClassValidatorsErrors(exception.message);
+    }
+
+    if (request.url.startsWith(APP_CONSTANTS.ADMIN_ROUTES_PREFIX('', '/'))) {
+      switch (status) {
+        case HttpStatus.UNAUTHORIZED:
+          const redirectUrl = APP_CONSTANTS.ADMIN_ROUTES_PREFIX('auth/signin', '/');
+          // if(request.method === 'GET'){
+          //   redirectUrl += `?redirect=${request.url}`;
+          // }
+          response.redirect(redirectUrl);
+          return;
+        case HttpStatus.FORBIDDEN:
+          // Some logging is needed here
+          response.redirect(APP_CONSTANTS.ADMIN_ROUTES_PREFIX('dashboard', '/'));
+      }
     }
 
     response.status(status).json(errorResponse);

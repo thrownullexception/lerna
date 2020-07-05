@@ -1,7 +1,4 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
 import {
-  Controller,
-  UseGuards,
   Body,
   Post,
   Patch,
@@ -14,35 +11,24 @@ import {
   Query,
   Res,
   Headers,
-  UseInterceptors,
   ParseUUIDPipe,
   UsePipes,
 } from '@nestjs/common';
 import { Response } from 'express';
-import { AuthGuard } from '@nestjs/passport';
 import { FaqsService } from './faqs.service';
 import { FaqDTO } from './faqs.dto';
-import { PermissionsGuard } from '../auth/permissions.guards';
 import {
   AuthenticatedUser,
   SessionFlash,
-  AdminPermission,
   ISessionFlash,
+  AdminController,
 } from '../shared/decorators';
-import { APP_CONSTANTS } from 'src/shared/constants';
 import { QueryParametersPipe } from 'src/shared/pipes';
 import { IPaginatePayload, ISelectOptions, IQueryParametersDTO } from 'src/shared/types';
 import { Faq } from './faqs.entity';
-import { SessionFlashInterceptor } from 'src/shared/interceptors';
 import { AccountModeAsOptions } from 'src/account-modes/account-modes.types';
 
-// const PERMISSION = 'CAN_MANAGE_FAQS';
-
-@Controller(APP_CONSTANTS.ADMIN_ROUTES_PREFIX('faqs'))
-// @UseGuards(AuthGuard('jwt'))
-// @AdminPermission(PERMISSION)
-// @UseGuards(PermissionsGuard)
-@UseInterceptors(SessionFlashInterceptor)
+@AdminController('faqs', 'CAN_MANAGE_FAQS')
 export class AdminFaqsController {
   constructor(private readonly faqsService: FaqsService) {}
 
@@ -52,7 +38,6 @@ export class AdminFaqsController {
   async list(
     @Query(new QueryParametersPipe()) queryParametersDTO: IQueryParametersDTO,
   ): Promise<{ faqs: IPaginatePayload<Faq> }> {
-    console.log(queryParametersDTO);
     const faqs = await this.faqsService.listFaqsByQueryParamters(queryParametersDTO);
     return { faqs };
   }
@@ -81,8 +66,8 @@ export class AdminFaqsController {
     @Headers('referer') back: string,
     @SessionFlash() sessionFlash: ISessionFlash,
   ): Promise<void> {
-    // Try to make an error
-    await this.faqsService.createFaq(faqDTO, '81c4c49a-a125-49b9-9ab5-4b1ee059bf49');
+    // Try to make a validation error
+    await this.faqsService.createFaq(faqDTO, userId);
     sessionFlash.success('Faq Created Successfully');
     res.redirect(back);
   }
@@ -97,7 +82,7 @@ export class AdminFaqsController {
     @AuthenticatedUser('id') userId: string,
     @SessionFlash() sessionFlash: ISessionFlash,
   ): Promise<void> {
-    await this.faqsService.updateFaq(id, faqDTO, '81c4c49a-a125-49b9-9ab5-4b1ee059bf49');
+    await this.faqsService.updateFaq(id, faqDTO, userId);
     sessionFlash.success('Faq Updated Successfully');
     res.redirect(back);
   }

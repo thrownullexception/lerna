@@ -1,8 +1,9 @@
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { PassportStrategy } from '@nestjs/passport';
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { ConfigService } from '../../shared/services';
-import { UsersService } from '../../users/users.service';
+import { AuthService } from '../auth.service';
+import { IAuthenticatedUser } from '../auth.types';
 
 interface IJwtPayload {
   id: string;
@@ -10,7 +11,7 @@ interface IJwtPayload {
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-  constructor(private readonly usersService: UsersService, configService: ConfigService) {
+  constructor(private readonly authService: AuthService, configService: ConfigService) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
@@ -18,14 +19,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  async validate({ id: userId }: IJwtPayload): Promise<{ id: string }> {
-    const user = await this.usersService.getMultipleFieldsFromUserId(userId, ['id', 'roleId']);
-    if (!user) {
-      throw new UnauthorizedException();
-    }
-    if (!user.roleId) {
-      return { id: userId };
-    }
-    return await this.usersService.getUserWithPermission(userId);
+  async validate({ id: userId }: IJwtPayload): Promise<IAuthenticatedUser> {
+    return await this.authService.validateUserFromUserId(userId);
   }
 }

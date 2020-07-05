@@ -2,7 +2,6 @@ import { Repository, EntityRepository } from 'typeorm';
 import { User } from './users.entity';
 // import { FaqDTO } from './users.dto';
 import { Injectable } from '@nestjs/common';
-import { APP_CONSTANTS } from '../shared/constants';
 
 @Injectable()
 @EntityRepository(User)

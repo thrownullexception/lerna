@@ -4,7 +4,6 @@ import { IQueryParametersDTO } from '../types';
 @Injectable()
 export class QueryParametersPipe implements PipeTransform {
   transform(value: IQueryParametersDTO): IQueryParametersDTO {
-    console.log(value);
     if (!value.page) {
       value.page = 1;
     }
