@@ -121,7 +121,7 @@ export class ConfigService implements CacheOptionsFactory {
     return {
       // store: new RedisStore({ client: redisClient }),
       session: { secret: this.getSessionSecret() },
-      forRoutes: ['/admin'], // Look into
+      forRoutes: ['/admin'], // TODO Look into this
     };
   }
 
