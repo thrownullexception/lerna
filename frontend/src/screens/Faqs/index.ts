@@ -1,9 +1,6 @@
 import { NavigationService } from '../../services';
-import { permissionGaurd, studentGuard, tutorGuard } from '../../guards';
 import { IMenuItems } from '../../routes/types';
 import { FaqsList } from './List';
-// import { FaqsEdit } from './Admin/Edit';
-// import { FaqsCreate } from './Admin/Create';
 import { AccountModeType } from '../../app/auth/auth.types';
 
 export const FaqsPath = 'faqs';
@@ -30,7 +27,7 @@ export const FaqRoutes: IMenuItems[] = [
     title: 'Support',
     showOnNavigation: true,
     accountModes: [AccountModeType.Tutor],
-    component: tutorGuard(FaqsList),
+    component: FaqsList,
   },
   {
     path: NavigationService.studentPath(FaqsPath),
@@ -38,7 +35,6 @@ export const FaqRoutes: IMenuItems[] = [
     title: 'Support',
     showOnNavigation: true,
     accountModes: [AccountModeType.Student],
-    // component: studentGuard(FaqsList),
     component: FaqsList,
   },
 ];

@@ -1,7 +1,7 @@
 import { Controller, Get, Query, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AdminCoinsHistoryTransformer } from './transformers';
-import { PermissionsGuard } from '../auth/permissions.guards';
+import { PermissionsGuard } from '../auth/guards';
 import { AdminPermission } from '../shared/decorators';
 import { QueryParametersPipe } from '../shared/pipes';
 import { CoinHistoryService } from './coin-histories.service';

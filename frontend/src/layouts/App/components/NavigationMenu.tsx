@@ -7,8 +7,6 @@ import { NavigationService } from '../../../services';
 import { AccountModeType } from '../../../app/auth/auth.types';
 
 interface INavigationMenu {
-  permissions: string[];
-  role: string;
   accountMode: AccountModeType;
 }
 
@@ -27,26 +25,12 @@ const buildMenu: React.SFC<IMenuItems> = ({ path, title }, pathname: string): JS
   );
 };
 
-export const NavigationMenu: React.SFC<INavigationMenu> = ({
-  permissions,
-  role,
-  accountMode,
-}): JSX.Element | null => {
+export const NavigationMenu: React.SFC<INavigationMenu> = ({ accountMode }): JSX.Element | null => {
   const { pathname } = useLocation();
-  if (!permissions) {
-    return null;
-  }
   return (
     <ul className="side-menu">
       {appRoutes
-        .filter(
-          route =>
-            (route.showOnNavigation &&
-              route.accountModes?.includes(accountMode) &&
-              !route.permission) ||
-            permissions.includes('' + route.permission) ||
-            role === 'SUPER_ADMIN',
-        )
+        .filter(route => route.showOnNavigation && route.accountModes?.includes(accountMode))
         .map(route => buildMenu(route, pathname))}
     </ul>
   );

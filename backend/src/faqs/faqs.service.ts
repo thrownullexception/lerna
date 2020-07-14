@@ -1,16 +1,21 @@
 import { Injectable } from '@nestjs/common';
-import { FindConditions } from 'typeorm';
+import { FindConditions, FindManyOptions } from 'typeorm';
 import { Faq } from './faqs.entity';
 import { FaqDTO } from './faqs.dto';
 import { FaqsRepository } from './faqs.repository';
 import { IPaginatePayload, IQueryParametersDTO } from 'src/shared/types';
+import { AccountModeType } from 'src/account-modes/account-modes.types';
 
 @Injectable()
 export class FaqsService {
   constructor(private readonly faqsRepository: FaqsRepository) {}
 
-  async listFaqs(): Promise<Faq[]> {
-    return await this.faqsRepository.listFaqs();
+  async listFaqs(accountMode?: AccountModeType): Promise<Faq[]> {
+    const filter: FindManyOptions<Faq> = { order: { id: 'DESC' } };
+    if (accountMode) {
+      filter.where = { accountModeSystemName: accountMode };
+    }
+    return await this.faqsRepository.listFaqs(filter);
   }
 
   async listFaqsByQueryParamters(

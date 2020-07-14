@@ -1,6 +1,6 @@
 import { Controller, Get, Param, ParseUUIDPipe, UseGuards } from '@nestjs/common';
 import { SkillsService } from './skills.service';
-import { SkillTransformer } from './transfomers/skills.transformer';
+import { SkillTransformer } from './transfomers';
 import { APP_CONSTANTS } from 'src/shared/constants';
 import { SkillHierarchyTransformer } from 'src/skill-hierarchies/skll-hierarchies.transformer';
 import { AuthGuard } from '@nestjs/passport';

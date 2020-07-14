@@ -6,12 +6,12 @@ import { SkillHierarchy } from './skill-hierarchies.entity';
 @Injectable()
 @EntityRepository(SkillHierarchy)
 export class SkillHierarchiesRepository extends Repository<SkillHierarchy> {
-  private cachePrefix = 'SkillHierarchiesRepository';
+  private cachePrefix = '__SkillHierarchy__';
 
   async listSkillHierarchies(): Promise<SkillHierarchy[]> {
     return await this.find({
       cache: {
-        id: `${this.cachePrefix}_listSkillHierarchies`,
+        id: `${this.cachePrefix}-listSkillHierarchies`,
         milliseconds: APP_CONSTANTS.A_DAY_IN_MILLIOSECONDS,
       },
     });
@@ -21,7 +21,7 @@ export class SkillHierarchiesRepository extends Repository<SkillHierarchy> {
     return await this.findOne({
       where: { id: skillHierarchyId },
       cache: {
-        id: `${this.cachePrefix}_showSkill_${skillHierarchyId}`,
+        id: `${this.cachePrefix}-showSkill_${skillHierarchyId}`,
         milliseconds: APP_CONSTANTS.A_DAY_IN_MILLIOSECONDS,
       },
     });

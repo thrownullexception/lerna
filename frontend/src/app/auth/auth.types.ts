@@ -3,17 +3,14 @@ import { SignInResponse } from './responses';
 export enum AccountModeType {
   Tutor,
   Student,
-  Admin,
 }
 
 export const AccountModePaths = {
-  [AccountModeType.Admin]: 'admin',
   [AccountModeType.Student]: 'student',
   [AccountModeType.Tutor]: 'tutor',
 };
 
 export const AccountModeLabel = {
-  [AccountModeType.Admin]: 'Admin',
   [AccountModeType.Student]: 'Student',
   [AccountModeType.Tutor]: 'Tutor',
 };

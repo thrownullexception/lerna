@@ -12,7 +12,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { RolesPermissionsMatchingService } from './role-permissions-matching.service';
 import { RolePermissionMatchingDTO } from './role-permissions-matching.dto';
 import { AdminPermission } from '../shared/decorators';
-import { PermissionsGuard } from '../auth/permissions.guards';
+import { PermissionsGuard } from '../auth/guards';
 
 @Controller('roles-permissions-matching')
 @UseGuards(AuthGuard('jwt'))

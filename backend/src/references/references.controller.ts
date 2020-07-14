@@ -10,7 +10,7 @@ import {
 } from '@nestjs/common';
 import { ReferencesService } from './references.service';
 import { AdminPermission } from '../shared/decorators';
-import { PermissionsGuard } from '../auth/permissions.guards';
+import { PermissionsGuard } from '../auth/guards';
 import { UpdateReferenceDTO } from './references.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { APP_CONSTANTS } from 'src/shared/constants';

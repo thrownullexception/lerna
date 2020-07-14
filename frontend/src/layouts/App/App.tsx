@@ -29,8 +29,6 @@ export const AppLayout: React.SFC<IProps> = ({
   fullName,
   picture,
   accountMode,
-  permissions,
-  role,
   accountModeLabel,
 }): JSX.Element => {
   const [isNotificationDropDownOpen, setNotificationDropDownOpen] = React.useState(false);
@@ -121,14 +119,20 @@ export const AppLayout: React.SFC<IProps> = ({
               </div>
               <div className="user-info">
                 <h6 className=" mb-0 text-dark">{fullName}</h6>
-                <span className="text-muted app-sidebar__user-name text-sm">Administrator</span>
+                <span className="text-muted app-sidebar__user-name text-sm">
+                  {accountModeLabel}
+                </span>
               </div>
-              <button className="btn btn-primary btn-block call-to-action">Start A Session</button>
+              {accountMode === AccountModeType.Student ? (
+                <button className="btn btn-primary btn-block call-to-action">
+                  Start A Session
+                </button>
+              ) : null}
             </div>
           </div>
         </div>
         <div className="main-sidebar-body active">
-          <NavigationMenu permissions={[]} role={''} accountMode={accountMode} />
+          <NavigationMenu accountMode={accountMode} />
         </div>
         <div className="ps__rail-x" style={{ left: '0px', top: '251px' }}>
           <div className="ps__thumb-x" tabIndex={0} style={{ left: '0px', width: '0px' }} />

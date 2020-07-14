@@ -2,23 +2,9 @@ import { MigrationInterface, QueryRunner } from 'typeorm';
 import { BaseMigration } from './base/base-migration';
 
 export class CreateProfileTable1593354718008 extends BaseMigration implements MigrationInterface {
+  protected table = 'profiles';
   public async up(queryRunner: QueryRunner): Promise<any> {
-    this.table = 'genders';
-
-    await this.createTable(queryRunner, [
-      {
-        name: 'system_name',
-        type: 'varchar',
-      },
-      {
-        name: 'display_name',
-        type: 'varchar',
-      },
-    ]);
-
-    this.uniqueIndex(queryRunner, 'system_name');
-
-    this.table = 'profiles';
+    await this.createSystemTable(queryRunner, 'genders');
 
     await this.createTable(queryRunner, [
       {

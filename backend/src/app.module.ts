@@ -16,6 +16,8 @@ import { HealthCheckModule } from './healthcheck/healthcheck.module';
 import { GuestModule } from './guest/guest.module';
 import { SkillHierarchiesModule } from './skill-hierarchies/skill-hierarchies.module';
 import { SkillsModule } from './skills/skills.module';
+import { TutorSkillLevelsModule } from './tutor-skill-levels/tutor-skill-levels.module';
+import { TutorSkillsModule } from './tutor-skills/tutor-skills.module';
 
 @Module({
   imports: [
@@ -44,6 +46,8 @@ import { SkillsModule } from './skills/skills.module';
     GuestModule,
     SkillHierarchiesModule,
     SkillsModule,
+    TutorSkillLevelsModule,
+    TutorSkillsModule,
   ],
   providers: [
     {

@@ -3,20 +3,9 @@ import { BaseMigration } from './base/base-migration';
 
 export class CreateSkillResourcesTable1593326289145 extends BaseMigration
   implements MigrationInterface {
+  protected table = 'skill_resources';
   public async up(queryRunner: QueryRunner): Promise<void> {
-    this.table = 'skill_media_types';
-    await this.createTable(queryRunner, [
-      {
-        name: 'system_name',
-        type: 'varchar',
-      },
-      {
-        name: 'display_name',
-        type: 'varchar',
-      },
-    ]);
-    this.uniqueIndex(queryRunner, 'system_name');
-    this.table = 'skill_resources';
+    await this.createSystemTable(queryRunner, 'skill_media_types');
 
     await this.createTable(queryRunner, [
       {
@@ -52,6 +41,7 @@ export class CreateSkillResourcesTable1593326289145 extends BaseMigration
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await this.drop(queryRunner);
+    await this.drop(queryRunner, 'skill_resources');
+    await this.drop(queryRunner, 'skill_media_types');
   }
 }

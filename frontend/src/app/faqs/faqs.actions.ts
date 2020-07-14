@@ -15,12 +15,12 @@ export class FaqsActions {
       dispatch(action(ActionType.FAQS_REQUEST_STARTED));
       try {
         const { data } = await RequestService.get(
-          `${AuthSelectors.selectAccountModePath(getState())}/${BASE_PATH}`,
+          `${BASE_PATH}?account_mode=${AuthSelectors.selectAccountModePath(getState())}`,
         );
         dispatch(
           action(
             ActionType.FETCH_FAQS_SUCCESSFULL,
-            data.data.map((datum: object) => new FaqResponse(datum)),
+            data.map((datum: object) => new FaqResponse(datum)),
           ),
         );
       } catch (e) {

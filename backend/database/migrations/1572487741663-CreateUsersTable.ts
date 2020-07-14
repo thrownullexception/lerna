@@ -1,25 +1,10 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
 import { BaseMigration } from './base/base-migration';
 
-export class CreateUsersTable1572487741663 extends BaseMigration
-  implements MigrationInterface {
+export class CreateUsersTable1572487741663 extends BaseMigration implements MigrationInterface {
+  protected table = 'users';
   public async up(queryRunner: QueryRunner): Promise<any> {
-    this.table = 'account_modes';
-
-    await this.createTable(queryRunner, [
-      {
-        name: 'system_name',
-        type: 'varchar',
-      },
-      {
-        name: 'display_name',
-        type: 'varchar',
-      },
-    ]);
-
-    this.uniqueIndex(queryRunner, 'system_name');
-
-    this.table = 'users';
+    await this.createSystemTable(queryRunner, 'account_modes');
 
     await this.createTable(queryRunner, [
       {

@@ -7,11 +7,12 @@ import { APP_CONSTANTS } from 'src/shared/constants';
 @Injectable()
 @EntityRepository(Faq)
 export class FaqsRepository extends Repository<Faq> {
-  async listFaqs(): Promise<Faq[]> {
+  private cachePrefix = '__Faq__';
+  async listFaqs(findManyOptions: FindManyOptions<Faq>): Promise<Faq[]> {
     return await this.find({
-      order: { id: 'DESC' },
+      ...findManyOptions,
       cache: {
-        id: 'FaqsRepository_listFaqs',
+        id: `${this.cachePrefix}-listFaqs`,
         milliseconds: APP_CONSTANTS.A_DAY_IN_MILLIOSECONDS,
       },
     });
@@ -25,7 +26,7 @@ export class FaqsRepository extends Repository<Faq> {
     return await this.findOne({
       ...options,
       cache: {
-        id: `FaqsRepository_showFaq_${JSON.stringify(options)}`,
+        id: `${this.cachePrefix}-showFaq_${JSON.stringify(options)}`,
         milliseconds: APP_CONSTANTS.A_DAY_IN_MILLIOSECONDS,
       },
     });

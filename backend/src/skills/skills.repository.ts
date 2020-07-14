@@ -6,12 +6,12 @@ import { APP_CONSTANTS } from '../shared/constants';
 @Injectable()
 @EntityRepository(Skill)
 export class SkillsRepository extends Repository<Skill> {
-  private cachePrefix = 'SkillsRepository';
+  private cachePrefix = '__Skill__';
 
   async listSkills(): Promise<Skill[]> {
     return await this.find({
       cache: {
-        id: `${this.cachePrefix}_listSkills`,
+        id: `${this.cachePrefix}-listSkills`,
         milliseconds: APP_CONSTANTS.A_DAY_IN_MILLIOSECONDS,
       },
     });
@@ -21,7 +21,7 @@ export class SkillsRepository extends Repository<Skill> {
     return await this.findOne({
       where: { id: skillId },
       cache: {
-        id: `${this.cachePrefix}_showSkill_${skillId}`,
+        id: `${this.cachePrefix}-showSkill_${skillId}`,
         milliseconds: APP_CONSTANTS.A_DAY_IN_MILLIOSECONDS,
       },
       ...options,
