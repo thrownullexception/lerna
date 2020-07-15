@@ -1,9 +1,17 @@
 import { TableColumnOptions } from 'typeorm/schema-builder/options/TableColumnOptions';
 import { QueryRunner, TableForeignKey, TableIndex, Table, TableUnique } from 'typeorm';
 
+export enum ReferenceAction {
+  Cascade = 'CASCADE',
+  SetNull = 'SET NULL',
+  NoAction = 'NO ACTION',
+  Restrict = 'RESTRICT',
+}
+
 interface IReferenceParameters {
   table: string;
   referencedColumnHere: string;
+  referenceAction: ReferenceAction;
   referencedColumnThere?: string;
 }
 
@@ -12,7 +20,12 @@ export class BaseMigration {
 
   protected async reference(
     queryRunner: QueryRunner,
-    { table, referencedColumnHere, referencedColumnThere = 'id' }: IReferenceParameters,
+    {
+      table,
+      referencedColumnHere,
+      referencedColumnThere = 'id',
+      referenceAction = ReferenceAction.Cascade,
+    }: IReferenceParameters,
   ): Promise<void> {
     await queryRunner.createForeignKey(
       this.table,
@@ -21,8 +34,8 @@ export class BaseMigration {
         columnNames: [referencedColumnHere],
         referencedColumnNames: [referencedColumnThere],
         referencedTableName: table,
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
+        onDelete: referenceAction,
+        onUpdate: referenceAction,
       }),
     );
     await this.index(queryRunner, referencedColumnHere);

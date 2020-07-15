@@ -1,13 +1,12 @@
 import { Repository, EntityRepository, FindManyOptions, FindOneOptions } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { TutorSkill } from './tutor-skills.entity';
-import { TutorSkillDTO } from './tutor-skills.dto';
 import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
 
 @Injectable()
 @EntityRepository(TutorSkill)
 export class TutorSkillsRepository extends Repository<TutorSkill> {
-  async listUserTutorSkills(findManyOptions: FindManyOptions<TutorSkill>): Promise<TutorSkill[]> {
+  async listTutorSkills(findManyOptions: FindManyOptions<TutorSkill>): Promise<TutorSkill[]> {
     return await this.find({
       ...findManyOptions,
     });
@@ -31,7 +30,7 @@ export class TutorSkillsRepository extends Repository<TutorSkill> {
 
   async updateTutorSkill(
     tutorSkillId: string,
-    tutorSkill: QueryDeepPartialEntity<TutorSkillDTO>,
+    tutorSkill: QueryDeepPartialEntity<TutorSkill>,
   ): Promise<void> {
     await this.update(tutorSkillId, tutorSkill);
     this.manager.connection.queryResultCache?.clear();

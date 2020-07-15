@@ -1,1 +1,2 @@
-export { QueryParametersPipe } from './query-parameters.pipe';
+export { PaginationQueryParametersPipe } from './pagination-query-parameters.pipe';
+export { CursorQueryParametersPipe } from './cursor-query-parameters.pipe';

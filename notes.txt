@@ -3,6 +3,8 @@ How it works
 Skills
 Tutors
 
+Learn On Your Schedule
+Study any skill, anytime anywhere. Choose from thousands of thousands now.
 
 lerna.ng
 http://amentotech.com/projects/worketic/admin/profile
@@ -25,7 +27,7 @@ Tutors to be able to add their profile
 - tutor_awards_and_certifications
 - tutor_skills, Level, rate (AVG rate)
 
-Start Learning Session
+Setup Meeting
 
 Was it worth it having my services?
 How was my proffesional behaviour?
@@ -38,21 +40,23 @@ Rate Teacher
 Rate Student
 live.lerna.ng
 
+session_reminder
+
 Video Call
 Screen Share
 Audio Chat
 Drawing Board
 Online typing in sync
+
 1 hr => 2000/hr => 10%
 15/mins moving forward
+
 Show me how long I have left
 Take Your Learning Anytime, Anywhere
-ProgrammingSchool 
+ProgrammingSchool
 SubjectsArchitectureMusicTeachers
 post their cv
 You vet your area of interest
 10 secs to select answer
 
-IP_ADDRESS
-FINGERPRINTS
-log fingerprints
+IP_ADDRESS FINGERPRINTS on login

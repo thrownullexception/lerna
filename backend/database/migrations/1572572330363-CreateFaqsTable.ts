@@ -1,5 +1,5 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
-import { BaseMigration } from './base/base-migration';
+import { BaseMigration, ReferenceAction } from './base/base-migration';
 
 export class CreateFaqsTable1572572330363 extends BaseMigration implements MigrationInterface {
   protected table = 'faqs';
@@ -28,11 +28,13 @@ export class CreateFaqsTable1572572330363 extends BaseMigration implements Migra
     await this.reference(queryRunner, {
       table: 'users',
       referencedColumnHere: 'last_touched_by_id',
+      referenceAction: ReferenceAction.SetNull,
     });
     await this.reference(queryRunner, {
       table: 'account_modes',
       referencedColumnHere: 'account_mode_sytem_name',
       referencedColumnThere: 'system_name',
+      referenceAction: ReferenceAction.Restrict,
     });
   }
 

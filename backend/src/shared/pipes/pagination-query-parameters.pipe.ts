@@ -2,7 +2,7 @@ import { PipeTransform, Injectable } from '@nestjs/common';
 import { IQueryParametersDTO } from '../types';
 
 @Injectable()
-export class QueryParametersPipe implements PipeTransform {
+export class PaginationQueryParametersPipe implements PipeTransform {
   transform(value: IQueryParametersDTO): IQueryParametersDTO {
     if (!value.page) {
       value.page = 1;

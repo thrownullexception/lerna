@@ -1,0 +1,43 @@
+import { Injectable } from '@nestjs/common';
+import { SessionsRepository } from './sessions.repository';
+import { CreateSessionDTO } from './dtos';
+import { SessionStatusTypes } from 'src/session-statuses/session-statuses.types';
+import { AccountModeType } from 'src/account-modes/account-modes.types';
+import { Session } from './sessions.entity';
+import { ICursorParametersDTO } from 'src/shared/types';
+import { PagingResult } from 'typeorm-cursor-pagination';
+
+@Injectable()
+export class SessionsService {
+  constructor(private readonly sessionsRepository: SessionsRepository) {}
+
+  async listUserSessions(
+    accountMode: AccountModeType,
+    userId: string,
+    cursorParametersDTO: ICursorParametersDTO,
+  ): Promise<PagingResult<Session>> {
+    const accountField = accountMode === AccountModeType.Student ? 'studentId' : 'tutorId';
+    return this.sessionsRepository.cursorPaginateSessions(
+      this.sessionsRepository
+        .createQueryBuilder('session')
+        .where(`session.${accountField}=:userId`, { userId }),
+      cursorParametersDTO,
+    );
+  }
+
+  async showSession(sessionId: string): Promise<Session> {
+    return await this.sessionsRepository.showSession({ where: { id: sessionId } });
+  }
+
+  async createSession(createSessionDTO: CreateSessionDTO, studentId: string): Promise<void> {
+    return await this.sessionsRepository.createSession({
+      ...createSessionDTO,
+      studentId,
+      statusSystemName: SessionStatusTypes.Initialized,
+    });
+  }
+
+  async updateSession(sessionId: string, session: Partial<Session>): Promise<void> {
+    await this.sessionsRepository.updateSession(sessionId, session);
+  }
+}

@@ -23,7 +23,7 @@ import {
   ISessionFlash,
   AdminController,
 } from '../shared/decorators';
-import { QueryParametersPipe } from 'src/shared/pipes';
+import { PaginationQueryParametersPipe } from 'src/shared/pipes';
 import { IPaginatePayload, ISelectOptions, IQueryParametersDTO } from 'src/shared/types';
 import { Faq } from './faqs.entity';
 import { AccountModeAsOptions } from 'src/account-modes/account-modes.types';
@@ -36,7 +36,7 @@ export class AdminFaqsController {
   @Render('admin/faqs/list')
   @UsePipes()
   async list(
-    @Query(new QueryParametersPipe()) queryParametersDTO: IQueryParametersDTO,
+    @Query(new PaginationQueryParametersPipe()) queryParametersDTO: IQueryParametersDTO,
   ): Promise<{ faqs: IPaginatePayload<Faq> }> {
     const faqs = await this.faqsService.listFaqsByQueryParamters(queryParametersDTO);
     return { faqs };

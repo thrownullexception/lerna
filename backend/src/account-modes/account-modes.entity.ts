@@ -1,13 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity } from 'typeorm';
+import { SystemValueEntity } from 'src/shared/entities';
 
 @Entity('account_modes')
-export class AccountMode {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
-
-  @Column()
-  systemName: string;
-
-  @Column()
-  displayName: string;
-}
+export class AccountMode extends SystemValueEntity {}

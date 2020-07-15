@@ -73,7 +73,7 @@
     "rimraf": "^3.0.2",
     "rxjs": "^6.5.4",
     "typeorm": "^0.2.25",
-    "typeorm-cursor-pagination": "^0.2.2",
+    "typeorm-cursor-pagination": "^0.4.1",
     "typeorm-naming-strategies": "^1.1.0",
     "uuid": "^8.2.0",
     "winston": "^3.3.3"

@@ -1,5 +1,5 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
-import { BaseMigration } from './base/base-migration';
+import { BaseMigration, ReferenceAction } from './base/base-migration';
 
 export class CreateRolePermissionMatchingTable1593940676418 extends BaseMigration
   implements MigrationInterface {
@@ -19,10 +19,12 @@ export class CreateRolePermissionMatchingTable1593940676418 extends BaseMigratio
     await this.reference(queryRunner, {
       table: 'roles',
       referencedColumnHere: 'role_id',
+      referenceAction: ReferenceAction.Cascade,
     });
     await this.reference(queryRunner, {
       table: 'permissions',
       referencedColumnHere: 'permission_id',
+      referenceAction: ReferenceAction.Cascade,
     });
   }
 

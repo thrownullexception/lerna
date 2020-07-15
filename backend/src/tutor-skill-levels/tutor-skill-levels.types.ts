@@ -1,6 +1,6 @@
 export enum TutorSkillLevels {
   Beginner = 'beginner',
   Intermediate = 'intermediate',
-  Advanced = 'Advanced',
+  Advanced = 'advanced',
   Expert = 'expert',
 }

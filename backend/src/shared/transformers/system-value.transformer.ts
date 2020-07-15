@@ -3,7 +3,7 @@ interface ISystemValue {
   displayName: string;
 }
 
-export class SystemValuesTransformer {
+export class SystemValueTransformer {
   systemName: string;
   displayName: string;
 

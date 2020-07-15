@@ -8,10 +8,10 @@ import { APP_CONSTANTS } from 'src/shared/constants';
 export class TutorSkillLevelsRepository extends Repository<TutorSkillLevel> {
   private cachePrefix = '__TutorSkillLevel__';
 
-  async listUserTutorSkillLevels(): Promise<TutorSkillLevel[]> {
+  async listTutorSkillLevels(): Promise<TutorSkillLevel[]> {
     return await this.find({
       cache: {
-        id: `${this.cachePrefix}-listUserTutorSkillLevels`,
+        id: `${this.cachePrefix}-listTutorSkillLevels`,
         milliseconds: APP_CONSTANTS.A_DAY_IN_MILLIOSECONDS,
       },
     });

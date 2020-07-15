@@ -1,5 +1,5 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
-import { BaseMigration } from './base/base-migration';
+import { BaseMigration, ReferenceAction } from './base/base-migration';
 
 export class CreateSkillResourcesTable1593326289145 extends BaseMigration
   implements MigrationInterface {
@@ -32,11 +32,13 @@ export class CreateSkillResourcesTable1593326289145 extends BaseMigration
     await this.reference(queryRunner, {
       table: 'skills',
       referencedColumnHere: 'skill_id',
+      referenceAction: ReferenceAction.Cascade,
     });
     await this.reference(queryRunner, {
       table: 'skill_media_types',
       referencedColumnHere: 'media_type',
       referencedColumnThere: 'system_name',
+      referenceAction: ReferenceAction.Restrict,
     });
   }
 

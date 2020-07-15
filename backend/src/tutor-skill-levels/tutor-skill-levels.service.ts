@@ -7,6 +7,6 @@ export class TutorSkillLevelsService {
   constructor(private readonly tutorSkillLevelsRepository: TutorSkillLevelsRepository) {}
 
   async getTutorSkillLevels(): Promise<TutorSkillLevel[]> {
-    return await this.tutorSkillLevelsRepository.listUserTutorSkillLevels();
+    return await this.tutorSkillLevelsRepository.listTutorSkillLevels();
   }
 }

@@ -4,7 +4,7 @@ import { UsersService } from './users.service';
 import { AdminUserTransformer } from './transformers';
 import { AdminPermission } from '../shared/decorators';
 import { PermissionsGuard } from '../auth/guards';
-import { QueryParametersPipe } from '../shared/pipes';
+import { PaginationQueryParametersPipe } from '../shared/pipes';
 import { IPaginatePayload, IQueryParametersDTO } from '../shared/types';
 import { APP_CONSTANTS } from 'src/shared/constants';
 
@@ -19,7 +19,7 @@ export class AdminUsersController {
 
   @Get()
   async index(
-    @Query(new QueryParametersPipe()) queryParameters: IQueryParametersDTO,
+    @Query(new PaginationQueryParametersPipe()) queryParameters: IQueryParametersDTO,
   ): Promise<IPaginatePayload<AdminUserTransformer>> {
     const usersPaginated = await this.usersService.listUsersForAdmin(queryParameters);
     return {

@@ -19,3 +19,9 @@ export interface IQueryParametersDTO {
   filters?: Record<string, unknown>;
   order: Record<string, 'DESC' | 'ASC'>;
 }
+
+export interface ICursorParametersDTO {
+  afterCursor: string;
+  beforeCursor: string;
+  limit: number;
+}

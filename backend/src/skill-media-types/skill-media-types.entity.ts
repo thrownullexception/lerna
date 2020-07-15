@@ -1,13 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity } from 'typeorm';
+import { SystemValueEntity } from 'src/shared/entities';
 
 @Entity('skill_media_types')
-export class SkillMediaType {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
-
-  @Column()
-  systemName: string;
-
-  @Column()
-  displayName: string;
-}
+export class SkillMediaType extends SystemValueEntity {}

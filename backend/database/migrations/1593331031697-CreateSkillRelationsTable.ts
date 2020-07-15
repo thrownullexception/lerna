@@ -1,5 +1,5 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
-import { BaseMigration } from './base/base-migration';
+import { BaseMigration, ReferenceAction } from './base/base-migration';
 
 export class CreateSkillRelationsTable1593331031697 extends BaseMigration
   implements MigrationInterface {
@@ -19,10 +19,12 @@ export class CreateSkillRelationsTable1593331031697 extends BaseMigration
     await this.reference(queryRunner, {
       table: 'skills',
       referencedColumnHere: 'skill_a_id',
+      referenceAction: ReferenceAction.Cascade,
     });
     await this.reference(queryRunner, {
       table: 'skills',
       referencedColumnHere: 'skill_b_id',
+      referenceAction: ReferenceAction.Cascade,
     });
   }
 

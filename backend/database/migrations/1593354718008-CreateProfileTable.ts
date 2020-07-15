@@ -1,5 +1,5 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
-import { BaseMigration } from './base/base-migration';
+import { BaseMigration, ReferenceAction } from './base/base-migration';
 
 export class CreateProfileTable1593354718008 extends BaseMigration implements MigrationInterface {
   protected table = 'profiles';
@@ -47,6 +47,10 @@ export class CreateProfileTable1593354718008 extends BaseMigration implements Mi
         default: false,
       },
       {
+        name: 'last_online',
+        type: 'timestamp',
+      },
+      {
         name: 'dob',
         type: 'date',
         isNullable: true,
@@ -56,10 +60,12 @@ export class CreateProfileTable1593354718008 extends BaseMigration implements Mi
       table: 'genders',
       referencedColumnHere: 'gender',
       referencedColumnThere: 'system_name',
+      referenceAction: ReferenceAction.Restrict,
     });
     await this.reference(queryRunner, {
       table: 'users',
       referencedColumnHere: 'userId',
+      referenceAction: ReferenceAction.Cascade,
     });
   }
 

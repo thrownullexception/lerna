@@ -3,7 +3,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { AdminCoinsHistoryTransformer } from './transformers';
 import { PermissionsGuard } from '../auth/guards';
 import { AdminPermission } from '../shared/decorators';
-import { QueryParametersPipe } from '../shared/pipes';
+import { PaginationQueryParametersPipe } from '../shared/pipes';
 import { CoinHistoryService } from './coin-histories.service';
 import { IPaginatePayload, IQueryParametersDTO } from 'src/shared/types';
 
@@ -18,7 +18,7 @@ export class AdminCoinsHistoryController {
 
   @Get()
   async index(
-    @Query(new QueryParametersPipe()) queryParameters: IQueryParametersDTO,
+    @Query(new PaginationQueryParametersPipe()) queryParameters: IQueryParametersDTO,
   ): Promise<IPaginatePayload<AdminCoinsHistoryTransformer>> {
     const dataPaginated = await this.coinHistoryService.listCoinsHistoriesForAdmin(queryParameters);
     return {

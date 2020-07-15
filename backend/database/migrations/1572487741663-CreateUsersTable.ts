@@ -1,5 +1,5 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
-import { BaseMigration } from './base/base-migration';
+import { BaseMigration, ReferenceAction } from './base/base-migration';
 
 export class CreateUsersTable1572487741663 extends BaseMigration implements MigrationInterface {
   protected table = 'users';
@@ -43,11 +43,13 @@ export class CreateUsersTable1572487741663 extends BaseMigration implements Migr
     await this.reference(queryRunner, {
       table: 'roles',
       referencedColumnHere: 'role_id',
+      referenceAction: ReferenceAction.SetNull,
     });
     await this.reference(queryRunner, {
       table: 'account_modes',
       referencedColumnHere: 'account_mode',
       referencedColumnThere: 'system_name',
+      referenceAction: ReferenceAction.Restrict,
     });
     await this.index(queryRunner, 'email');
     await this.index(queryRunner, 'username');

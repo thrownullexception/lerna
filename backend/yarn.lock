@@ -642,15 +642,6 @@
   dependencies:
     uuid "8.1.0"
 
-"@nestjsplus/cookies@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@nestjsplus/cookies/-/cookies-1.1.1.tgz#b321935a0fa5a64c6aa8a9440c8ace58dfce2c0b"
-  integrity sha512-OpOAngUUn62o/AtY2bnZg8jke1r8TAY+Pg+6KVE38AbBlhY8EgXhSuIzZa5fuQw+X4TEfuSZvuOybffx3MYP0Q==
-  dependencies:
-    lodash "^4.17.15"
-    reflect-metadata "^0.1.13"
-    rxjs "^6.5.4"
-
 "@nuxtjs/opencollective@0.2.2":
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/@nuxtjs/opencollective/-/opencollective-0.2.2.tgz#26a761ebf588cc92a422d7cee996a66bd6e2761e"
@@ -6589,13 +6580,6 @@ passport-oauth@1.0.0, passport-oauth@^1.0.0:
     passport-oauth1 "1.x.x"
     passport-oauth2 "1.x.x"
 
-passport-session@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/passport-session/-/passport-session-1.0.2.tgz#28abf357b0958e7c704164a3f539bd08cb9851db"
-  integrity sha1-KKvzV7CVjnxwQWSj9Tm9CMuYUds=
-  dependencies:
-    passport-strategy "1.x.x"
-
 passport-strategy@1.x.x, passport-strategy@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/passport-strategy/-/passport-strategy-1.0.0.tgz#b5539aa8fc225a3d1ad179476ddf236b440f52e4"
@@ -8603,10 +8587,10 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typeorm-cursor-pagination@^0.2.2:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/typeorm-cursor-pagination/-/typeorm-cursor-pagination-0.2.2.tgz#3ec476936a948145b7ddf5a4d248176a571c8049"
-  integrity sha512-sViBGJeZnKuTEkA80/t2dFlgEN2qRskub3hH0ozCHPF1CuViRRNWViYz1hdxPu+EtuaK9hAVD6AGMG1bEAZTAA==
+typeorm-cursor-pagination@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/typeorm-cursor-pagination/-/typeorm-cursor-pagination-0.4.1.tgz#2bc1cb258f45a065c87d21f9f4ab3eab1efdbcd8"
+  integrity sha512-E/ySil8sjt6tkKWQrCDO+JNQXQ+XM1rjZDv/bfD0U3o5XIIVR276b3f8hFR7IWVT1K92DLQvsxyurWMNqDDfhg==
 
 typeorm-naming-strategies@^1.1.0:
   version "1.1.0"

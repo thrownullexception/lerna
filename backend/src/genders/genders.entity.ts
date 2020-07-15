@@ -1,13 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity } from 'typeorm';
+import { SystemValueEntity } from 'src/shared/entities';
 
 @Entity('genders')
-export class Gender {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
-
-  @Column()
-  systemName: string;
-
-  @Column()
-  displayName: string;
-}
+export class Gender extends SystemValueEntity {}

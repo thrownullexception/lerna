@@ -1,12 +1,12 @@
 tutor_skills
 Tutor_profile
 
-- Tutors be able to add skills 
+- Tutors be able to add skills
 - Tutors be able edit their profile
 
 
 - Students be able to create a session
 - Students be able to get suggestions based on the session details
-- Students should be able to search 
+- Students should be able to search
 
 Guests
