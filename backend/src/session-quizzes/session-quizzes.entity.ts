@@ -2,7 +2,7 @@ import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { Session } from 'src/sessions/sessions.entity';
 
 @Entity('session_quizzes')
-export class SessionCandidate {
+export class SessionQuiz {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -23,6 +23,9 @@ export class SessionCandidate {
 
   @Column()
   optionD: string;
+
+  @Column()
+  optionE: string;
 
   @ManyToOne(
     () => Session,

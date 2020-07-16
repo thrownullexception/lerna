@@ -8,5 +8,6 @@ import { SessionsService } from './sessions.service';
   imports: [TypeOrmModule.forFeature([SessionsRepository])],
   controllers: [SessionsApiController],
   providers: [SessionsService],
+  exports: [SessionsService],
 })
 export class SessionsModule {}

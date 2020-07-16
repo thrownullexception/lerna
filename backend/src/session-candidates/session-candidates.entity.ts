@@ -2,6 +2,7 @@ import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 't
 import { Session } from 'src/sessions/sessions.entity';
 import { User } from 'src/users/users.entity';
 import { SessionCandidateStatus } from 'src/session-candidate-statuses/session-candidate-statuses.entity';
+import { SessionCandidateStatusTypes } from 'src/session-candidate-statuses/session-candidate-statuses.types';
 
 @Entity('session_candidates')
 export class SessionCandidate {
@@ -15,7 +16,7 @@ export class SessionCandidate {
   candidateId: string;
 
   @Column()
-  statusSystemName: string;
+  statusSystemName: SessionCandidateStatusTypes;
 
   @Column()
   openedAt: string;

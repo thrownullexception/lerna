@@ -18,6 +18,10 @@ import { SkillHierarchiesModule } from './skill-hierarchies/skill-hierarchies.mo
 import { SkillsModule } from './skills/skills.module';
 import { TutorSkillLevelsModule } from './tutor-skill-levels/tutor-skill-levels.module';
 import { TutorSkillsModule } from './tutor-skills/tutor-skills.module';
+import { SessionsModule } from './sessions/sessions.module';
+import { SessionSkillsModule } from './session-skills/session-skills.module';
+import { SessionQuizzesModule } from './session-quizzes/session-quizzes.module';
+import { SessionQuizResponsesModule } from './session-quiz-responses/session-quiz-responses.module';
 
 @Module({
   imports: [
@@ -48,6 +52,10 @@ import { TutorSkillsModule } from './tutor-skills/tutor-skills.module';
     SkillsModule,
     TutorSkillLevelsModule,
     TutorSkillsModule,
+    SessionsModule,
+    SessionSkillsModule,
+    SessionQuizzesModule,
+    SessionQuizResponsesModule,
   ],
   providers: [
     {

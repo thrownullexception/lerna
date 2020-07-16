@@ -16,7 +16,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { SessionDetailTransformer, SessionListTransformer } from './transformers';
 import { AuthenticatedUser } from 'src/shared/decorators';
 import { SessionsService } from './sessions.service';
-import { CreateSessionDTO, UpdateSessionMetadataDTO } from './dtos';
+import { CreateSessionDTO, UpdateSessionMetadataDTO, UpdateSessionDTO } from './dtos';
 import { AccountModeType } from 'src/account-modes/account-modes.types';
 import { CursorQueryParametersPipe } from 'src/shared/pipes';
 import { ICursorParametersDTO } from 'src/shared/types';
@@ -61,9 +61,9 @@ export class SessionsApiController {
   @HttpCode(HttpStatus.NO_CONTENT)
   async updateBase(
     @Param('sessionId', new ParseUUIDPipe()) tutorSkillId: string,
-    @Body() createSessionDTO: CreateSessionDTO,
+    @Body() UpdateSessionDTO: UpdateSessionDTO,
   ): Promise<void> {
-    await this.sessionsService.updateSession(tutorSkillId, createSessionDTO);
+    await this.sessionsService.updateSession(tutorSkillId, UpdateSessionDTO);
   }
 
   @Patch(':sessionId/meta')
