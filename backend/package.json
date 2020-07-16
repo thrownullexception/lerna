@@ -24,7 +24,7 @@
     "migrate": "npm run migration:run && npm run seed:run",
     "migrate:dev": "npm run migrate && npm run tests-seed:run",
     "migration:create": "npm run typeorm migration:create -- -c default -n",
-    "migration:generate": "npm run typeorm migration:generate -- -c default -n",
+    "migration:revert": "npm run typeorm migration:revert -- -c default",
     "migration:run": "npm run typeorm migration:run -- -c default",
     "seed:create": "npm run typeorm migration:create -- -c seed -n",
     "seed:run": "npm run typeorm migration:run -- -c seed",

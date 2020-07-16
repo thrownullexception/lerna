@@ -47,5 +47,5 @@ export class SessionCandidate {
     name: 'status_system_name',
     referencedColumnName: 'systemName',
   })
-  accountMode: SessionCandidateStatus;
+  status: SessionCandidateStatus;
 }

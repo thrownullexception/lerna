@@ -22,10 +22,13 @@ import { SessionsModule } from './sessions/sessions.module';
 import { SessionSkillsModule } from './session-skills/session-skills.module';
 import { SessionQuizzesModule } from './session-quizzes/session-quizzes.module';
 import { SessionQuizResponsesModule } from './session-quiz-responses/session-quiz-responses.module';
+import { MailModule } from './shared/services/mail/mail-module';
+import { SessionCandidatesModule } from './session-candidates/session-candidates.module';
 
 @Module({
   imports: [
     ConfigModule,
+    MailModule,
     MailerModule.forRootAsync({
       imports: [ConfigModule],
       useExisting: ConfigService,
@@ -56,6 +59,7 @@ import { SessionQuizResponsesModule } from './session-quiz-responses/session-qui
     SessionSkillsModule,
     SessionQuizzesModule,
     SessionQuizResponsesModule,
+    SessionCandidatesModule,
   ],
   providers: [
     {

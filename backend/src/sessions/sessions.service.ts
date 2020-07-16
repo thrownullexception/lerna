@@ -29,7 +29,7 @@ export class SessionsService {
     return await this.sessionsRepository.showSession({ where: { id: sessionId } });
   }
 
-  async getSessionField<T>(sessionId: string, field: keyof Session): Promise<T> {
+  async getSessionField<T>(sessionId: string, field: keyof Session): Promise<T | null> {
     const session = await this.sessionsRepository.showSession({
       where: { id: sessionId },
       select: ['id', field],

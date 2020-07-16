@@ -1,29 +1,80 @@
 import { Injectable } from '@nestjs/common';
-import { SessionQuizResponseRepository } from './session-quiz-responses.repository';
-import { v4 as uuidv4 } from 'uuid';
+import { SessionCandidatesRepository } from './session-candidates.repository';
+import { ShortListCandidateDTO } from './dtos';
+import { SessionCandidateStatusTypes } from 'src/session-candidate-statuses/session-candidate-statuses.types';
+import { MailService } from 'src/shared/services';
+import { SessionCandidate } from './session-candidates.entity';
 
 @Injectable()
-export class SessionQuizResponseService {
-  constructor(private readonly sessionQuizResponseRepository: SessionQuizResponseRepository) {}
+export class SessionCandidatesService {
+  constructor(
+    private readonly sessionCandidatesRepository: SessionCandidatesRepository,
+    private readonly mailService: MailService,
+  ) {}
 
-  async createSessionQuizReponse(sessionQuizId: string, userId: string): Promise<string> {
-    const id = uuidv4();
-    await this.sessionQuizResponseRepository.createSessionQuizResponse({
-      id,
-      sessionQuizId,
-      userId,
+  async shortListCandidate(shortListCandidate: ShortListCandidateDTO): Promise<void> {
+    // TODO limit the amount of candidates a user can shortlist
+    await this.sessionCandidatesRepository.createSessionCandidate({
+      ...shortListCandidate,
+      statusSystemName: SessionCandidateStatusTypes.Sent,
     });
-    return id;
+    this.mailService.sendShortListCandidateMail({
+      to: 'user@email.com',
+      context: { name: 'TODO' },
+    });
   }
 
-  async updateSessionQuizReponse(
-    sessionQuizResponseId: string,
-    response: string,
-    isCorrect: boolean,
-  ): Promise<void> {
-    await this.sessionQuizResponseRepository.updateSessionQuizResponse(sessionQuizResponseId, {
-      response,
-      isCorrect,
+  async getSessionCandidateId(sessionId: string, userId: string): Promise<string> {
+    const sessionCandidate: Pick<
+      SessionCandidate,
+      'id'
+    > = await this.sessionCandidatesRepository.showSessionCandidate({
+      where: { userId, sessionId },
+      select: ['id'],
     });
+
+    if (!sessionCandidate) {
+      return null;
+    }
+
+    return sessionCandidate.id;
+  }
+
+  async processCandidateStatus(
+    sessionCandidateId: string,
+    candidateStatus: SessionCandidateStatusTypes,
+  ): Promise<void> {
+    const updatePayload: Partial<SessionCandidate> = {
+      statusSystemName: candidateStatus,
+    };
+
+    const currentDateTime = new Date().toString();
+
+    switch (candidateStatus) {
+      case SessionCandidateStatusTypes.Opened:
+        updatePayload.openedAt = currentDateTime;
+        break;
+
+      case SessionCandidateStatusTypes.Interested:
+        updatePayload.respondedAt = currentDateTime;
+        break;
+
+      case SessionCandidateStatusTypes.Rejected:
+        updatePayload.respondedAt = currentDateTime;
+        break;
+
+      case SessionCandidateStatusTypes.PassedQuiz:
+        updatePayload.quizedAt = currentDateTime;
+        break;
+
+      case SessionCandidateStatusTypes.FailedQuiz:
+        updatePayload.quizedAt = currentDateTime;
+        break;
+    }
+
+    await this.sessionCandidatesRepository.updateSessionCandidate(
+      sessionCandidateId,
+      updatePayload,
+    );
   }
 }

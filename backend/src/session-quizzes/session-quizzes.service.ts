@@ -6,6 +6,8 @@ import { SessionQuizResponseService } from 'src/session-quiz-responses/session-q
 import { IsNotIn } from 'class-validator';
 import { INextSessionQuiz } from './session-quizzes.types';
 import { SessionsService } from 'src/sessions/sessions.service';
+import { SessionCandidatesService } from 'src/session-candidates/session-candidates.service';
+import { SessionCandidateStatusTypes } from 'src/session-candidate-statuses/session-candidate-statuses.types';
 
 @Injectable()
 export class SessionQuizzesService {
@@ -13,6 +15,8 @@ export class SessionQuizzesService {
     private readonly sessionQuizzesRepository: SessionQuizzesRepository,
     private readonly sessionQuizResponseService: SessionQuizResponseService,
     private readonly sessionsService: SessionsService,
+    private readonly sessionCandidatesService: SessionCandidatesService,
+
     @Inject('winston')
     private readonly logger: Logger,
   ) {}
@@ -56,8 +60,10 @@ export class SessionQuizzesService {
       totalQuizCount,
     } = await this.sessionQuizResponseService.getAttemptedQuizNumbers(sessionId, userId);
     const result = (passedQuizCount / totalQuizCount) * 100 >= passPercentage;
-    // this.sessionCandidateService.processQuizResult();
-    // Will want to do some notiifcationa and and update the candiadate status
+    this.sessionCandidatesService.processCandidateStatus(
+      await this.sessionCandidatesService.getSessionCandidateId(sessionId, userId),
+      result ? SessionCandidateStatusTypes.PassedQuiz : SessionCandidateStatusTypes.FailedQuiz,
+    );
     return { checkResult: true, result };
   }
 

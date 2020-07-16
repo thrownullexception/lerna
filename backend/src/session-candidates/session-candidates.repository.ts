@@ -1,20 +1,30 @@
-import { Repository, EntityRepository } from 'typeorm';
+import { Repository, EntityRepository, FindManyOptions, FindOneOptions } from 'typeorm';
 import { Injectable } from '@nestjs/common';
-import { SessionQuizResponse } from './session-quiz-responses.entity';
+import { SessionCandidate } from './session-candidates.entity';
 
 @Injectable()
-@EntityRepository(SessionQuizResponse)
-export class SessionQuizResponseRepository extends Repository<SessionQuizResponse> {
-  async createSessionQuizResponse(
-    sessionQuizResponse: Partial<SessionQuizResponse>,
-  ): Promise<void> {
+@EntityRepository(SessionCandidate)
+export class SessionCandidatesRepository extends Repository<SessionCandidate> {
+  async createSessionCandidate(sessionQuizResponse: Partial<SessionCandidate>): Promise<void> {
     await this.insert(sessionQuizResponse);
   }
 
-  async updateSessionQuizResponse(
-    sessionQuizResponseId: string,
-    sessionQuizResponse: Partial<SessionQuizResponse>,
+  async listSessionCandidates(
+    findManyOptions: FindManyOptions<SessionCandidate>,
+  ): Promise<SessionCandidate[]> {
+    return await this.find(findManyOptions);
+  }
+
+  async showSessionCandidate(
+    findOneOptions: FindOneOptions<SessionCandidate>,
+  ): Promise<SessionCandidate> {
+    return await this.findOne(findOneOptions);
+  }
+
+  async updateSessionCandidate(
+    sessionCandidateId: string,
+    sessionCandidate: Partial<SessionCandidate>,
   ): Promise<void> {
-    await this.update(sessionQuizResponseId, sessionQuizResponse);
+    await this.update(sessionCandidateId, sessionCandidate);
   }
 }

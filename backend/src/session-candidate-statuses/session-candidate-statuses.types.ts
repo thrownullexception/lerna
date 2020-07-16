@@ -4,7 +4,6 @@ export enum SessionCandidateStatusTypes {
   NoResponse = 'no_response', // from sent
   Rejected = 'rejected',
   Interested = 'interested',
-  TakingQuiz = 'taking_quiz',
   PassedQuiz = 'passed_quiz',
   FailedQuiz = 'failed_quiz',
 }
