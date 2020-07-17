@@ -9,24 +9,12 @@ export class SeedSessionStatuses1594806924218 extends BaseSeed implements Migrat
       displayName: 'Initialized',
     },
     {
-      systemName: 'shortlisting',
-      displayName: 'Shortlisting Candidates',
-    },
-    {
       systemName: 'interviewing',
       displayName: 'Interviewing Candidates',
     },
     {
       systemName: 'selected_tutor',
       displayName: 'Selected Tutor',
-    },
-    {
-      systemName: 'session_started',
-      displayName: 'Session Started',
-    },
-    {
-      systemName: 'session_ended',
-      displayName: 'Session Ended',
     },
   ];
   public async up(queryRunner: QueryRunner): Promise<void> {

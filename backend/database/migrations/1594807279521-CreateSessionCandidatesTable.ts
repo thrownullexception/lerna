@@ -21,6 +21,10 @@ export class CreateSessionCandidatesTable1594807279521 extends BaseMigration
         type: 'varchar',
       },
       {
+        name: 'reason',
+        type: 'varchar',
+      },
+      {
         name: 'opened_at',
         type: 'timestamp',
         isNullable: true,
@@ -36,6 +40,7 @@ export class CreateSessionCandidatesTable1594807279521 extends BaseMigration
         isNullable: true,
       },
     ]);
+    await this.index(queryRunner, 'status_system_name');
     await this.reference(queryRunner, {
       table: 'users',
       referencedColumnHere: 'candidate_id',

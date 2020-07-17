@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsIn } from 'class-validator';
+import { IsNotEmpty, IsIn, IsOptional } from 'class-validator';
 import { SessionCandidateStatusTypes } from 'src/session-candidate-statuses/session-candidate-statuses.types';
 
 export class CandidateResponseDTO {
@@ -11,4 +11,7 @@ export class CandidateResponseDTO {
     SessionCandidateStatusTypes.Rejected,
   ])
   response: SessionCandidateStatusTypes;
+
+  @IsOptional()
+  reason: string;
 }

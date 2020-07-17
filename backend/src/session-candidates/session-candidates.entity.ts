@@ -19,6 +19,9 @@ export class SessionCandidate {
   statusSystemName: SessionCandidateStatusTypes;
 
   @Column()
+  reason: string;
+
+  @Column()
   openedAt: string;
 
   @Column()
@@ -48,4 +51,6 @@ export class SessionCandidate {
     referencedColumnName: 'systemName',
   })
   status: SessionCandidateStatus;
+
+  createdAt: string;
 }

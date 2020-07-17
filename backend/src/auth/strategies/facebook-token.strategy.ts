@@ -21,7 +21,7 @@ export class FacebookTokenStrategy extends PassportStrategy(Strategy, 'facebook-
   ): Promise<IProviderAuthResponse> {
     return {
       email: get(['emails', 0, 'value'], profile),
-      name: get(['displayName'], profile),
+      name: get(['displayName'], profile) as string,
       image: get(['photos', 0, 'value'], profile),
     };
   }

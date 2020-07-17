@@ -9,11 +9,10 @@ import {
   Body,
   Patch,
 } from '@nestjs/common';
-import { APP_CONSTANTS } from 'src/shared/constants';
 import { AuthGuard } from '@nestjs/passport';
-import { ShortListCandidateDTO } from './dtos';
+import { APP_CONSTANTS } from 'src/shared/constants';
+import { ShortListCandidateDTO, CandidateResponseDTO } from './dtos';
 import { SessionCandidatesService } from './session-candidates.service';
-import { CandidateResponseDTO } from './dtos/candidate-response.dto';
 
 @Controller(APP_CONSTANTS.API_ROUTES_PREFIX('session-candidates'))
 @UseGuards(AuthGuard('jwt'))
@@ -35,6 +34,15 @@ export class SessionCandidatesApiController {
     await this.sessionCandidatesService.processCandidateStatus(
       sessionCandidateId,
       candidateResponseDTO.response,
+      candidateResponseDTO.reason,
     );
+  }
+
+  @Post(':sessionCandidateId/select')
+  @HttpCode(HttpStatus.OK)
+  async selectCandidate(
+    @Param('sessionCandidateId', new ParseUUIDPipe()) sessionCandidateId: string,
+  ): Promise<void> {
+    await this.sessionCandidatesService.selectACandidate(sessionCandidateId);
   }
 }

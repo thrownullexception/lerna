@@ -33,6 +33,14 @@ export class SeedSessionCandidateStatuses1594807619530 extends BaseSeed
       systemName: 'failed_quiz',
       displayName: 'Failed Quiz',
     },
+    {
+      systemName: 'selected',
+      displayName: 'Selected',
+    },
+    {
+      systemName: 'already_filled',
+      displayName: 'Already Filled',
+    },
   ];
 
   public async up(queryRunner: QueryRunner): Promise<void> {
