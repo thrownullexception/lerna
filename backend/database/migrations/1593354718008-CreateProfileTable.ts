@@ -64,7 +64,7 @@ export class CreateProfileTable1593354718008 extends BaseMigration implements Mi
     });
     await this.reference(queryRunner, {
       table: 'users',
-      referencedColumnHere: 'userId',
+      referencedColumnHere: 'user_id',
       referenceAction: ReferenceAction.Cascade,
     });
   }
