@@ -13,7 +13,7 @@ import {
 } from '@nestjs/common';
 import { APP_CONSTANTS } from 'src/shared/constants';
 import { AuthGuard } from '@nestjs/passport';
-import { SessionDetailTransformer, SessionListTransformer } from './transformers';
+import { SessionDetailTransformer, StudentSessionTransformer, TutorSessionTransformer } from './transformers';
 import { AuthenticatedUser } from 'src/shared/decorators';
 import { SessionsService } from './sessions.service';
 import { CreateSessionDTO, UpdateSessionMetadataDTO, UpdateSessionDTO } from './dtos';
@@ -21,24 +21,38 @@ import { AccountModeType } from 'src/account-modes/account-modes.types';
 import { CursorQueryParametersPipe } from 'src/shared/pipes';
 import { ICursorParametersDTO } from 'src/shared/types';
 import { PagingResult } from 'typeorm-cursor-pagination';
+import { SessionCandidatesService } from 'src/session-candidates/session-candidates.service';
 
 @Controller(APP_CONSTANTS.API_ROUTES_PREFIX('sessions'))
 @UseGuards(AuthGuard('jwt'))
 export class SessionsApiController {
-  constructor(private readonly sessionsService: SessionsService) {}
+  constructor(
+    private readonly sessionsService: SessionsService,
+    private readonly sessionCandidatesService: SessionCandidatesService,
+    ) {}
 
-  @Get()
-  async list(
-    @Query('accountMode') accountMode: AccountModeType,
+  @Get(AccountModeType.Tutor)
+  async listForTutor(
     @Query(new CursorQueryParametersPipe()) cursorParametersDTO: ICursorParametersDTO,
     @AuthenticatedUser('userId', new ParseUUIDPipe()) userId: string,
-  ): Promise<PagingResult<SessionListTransformer>> {
-    const { data, cursor } = await this.sessionsService.listUserSessions(
-      accountMode,
+  ): Promise<PagingResult<TutorSessionTransformer>> {
+    const { data, cursor } = await this.sessionsService.listStudentsSessions(
       userId,
       cursorParametersDTO,
     );
-    return { data: data.map(session => new SessionListTransformer(session)), cursor };
+    return { data: data.map(session => new TutorSessionTransformer(session)), cursor };
+  }
+
+  @Get(AccountModeType.Student)
+  async listForStudent(
+    @Query(new CursorQueryParametersPipe()) cursorParametersDTO: ICursorParametersDTO,
+    @AuthenticatedUser('userId', new ParseUUIDPipe()) userId: string,
+  ): Promise<PagingResult<StudentSessionTransformer>> {
+    const { data, cursor } = await this.sessionCandidatesService.listTutorSessions(
+      userId,
+      cursorParametersDTO,
+    );
+    return { data: data.map(session => new StudentSessionTransformer(session)), cursor };
   }
 
   @Get(':sessionId')

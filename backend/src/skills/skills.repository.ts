@@ -1,4 +1,4 @@
-import { Repository, EntityRepository, FindOneOptions } from 'typeorm';
+import { Repository, EntityRepository, FindOneOptions, FindManyOptions } from 'typeorm';
 import { Skill } from './skills.entity';
 import { Injectable } from '@nestjs/common';
 import { APP_CONSTANTS } from '../shared/constants';
@@ -8,10 +8,11 @@ import { APP_CONSTANTS } from '../shared/constants';
 export class SkillsRepository extends Repository<Skill> {
   private cachePrefix = '__Skill__';
 
-  async listSkills(): Promise<Skill[]> {
+  async listSkills(findManyOptions?: FindManyOptions<Skill>): Promise<Skill[]> {
     return await this.find({
+      ...findManyOptions,
       cache: {
-        id: `${this.cachePrefix}-listSkills`,
+        id: `${this.cachePrefix}-listSkills_${JSON.stringify(findManyOptions)}`,
         milliseconds: APP_CONSTANTS.A_DAY_IN_MILLIOSECONDS,
       },
     });

@@ -1,68 +1,45 @@
-import { SkillResponse, SkillHierarchyResponse, SkillsResponse } from './responses';
+import {
+  SkillResponse,
+  SkillHierarchyResponse,
+  SkillsWithHierarchiesResponse,
+  BareSkillResponse,
+} from './responses';
 
 export interface ISkillsState {
   skills: SkillResponse[];
+  bareSkills: SkillResponse[];
   hierarchies: SkillHierarchyResponse[];
-  isFetching: boolean;
-  currentSkillId: string;
+  currentStudentSkillId: string;
   skillsDepth: string[];
-  currentSkill: SkillResponse;
+  studentSkill: SkillResponse;
 }
 
 export enum ActionType {
-  SKILLS_REQUEST_STARTED = 'SKILLS_REQUEST_STARTED',
-  FETCH_SKILLS_SUCCESSFULL = 'FETCH_SKILLS_SUCCESSFULL',
-  SKILLS_REQUEST_ENDED = 'SKILLS_REQUEST_ENDED',
-  FETCH_SKILL_SUCCESSFULL = 'FETCH_SKILL_SUCCESSFULL',
+  SET_SKILLS_WITH_HIERARCHIES = 'SET_SKILLS_WITH_HIERARCHIES',
+  SET_BARE_SKILLS = 'SET_BARE_SKILLS',
+  SET_STUDENT_SKILL = 'SET_STUDENT_SKILL',
   SET_CURRENT_SKILL_ID = 'SET_CURRENT_SKILL_ID',
   GO_BACK_IN_SKILLS_DEPTH = 'GO_BACK_IN_SKILLS_DEPTH',
-  ADD_SKILL = 'ADD_SKILL',
-  DELETE_SKILL = 'DELETE_SKILL',
-  UPDATE_SKILL = 'UPDATE_SKILL',
 }
 
-interface IFetchSkillsSuccessfull {
-  type: ActionType.FETCH_SKILLS_SUCCESSFULL;
-  payload: SkillsResponse;
+interface ISetSkillsWithHierarchies {
+  type: ActionType.SET_SKILLS_WITH_HIERARCHIES;
+  payload: SkillsWithHierarchiesResponse;
 }
 
-interface IFetchSkillSuccessfull {
-  type: ActionType.FETCH_SKILL_SUCCESSFULL;
+interface ISetBareSkills {
+  type: ActionType.SET_BARE_SKILLS;
+  payload: BareSkillResponse[];
+}
+
+interface ISetStudentSkill {
+  type: ActionType.SET_STUDENT_SKILL;
   payload: SkillResponse;
-}
-
-interface IAddSkill {
-  type: ActionType.ADD_SKILL;
-  payload: {
-    faq: ISkillForm;
-    id: number;
-  };
-}
-
-interface IUpdateSkill {
-  type: ActionType.UPDATE_SKILL;
-  payload: {
-    faq: ISkillForm;
-    id: number;
-  };
 }
 
 interface ISetCurrentSkillId {
   type: ActionType.SET_CURRENT_SKILL_ID;
   payload: string;
-}
-
-interface IDeleteSkill {
-  type: ActionType.DELETE_SKILL;
-  payload: number;
-}
-
-interface ISkillsRequestStarted {
-  type: ActionType.SKILLS_REQUEST_STARTED;
-}
-
-interface ISkillsRequestEnded {
-  type: ActionType.SKILLS_REQUEST_ENDED;
 }
 
 interface IGoBackInSkillsDepth {
@@ -74,17 +51,9 @@ interface IDefaultAction {
 }
 
 export type SkillsAction =
-  | IFetchSkillsSuccessfull
-  | ISkillsRequestStarted
+  | ISetSkillsWithHierarchies
   | IGoBackInSkillsDepth
-  | ISkillsRequestEnded
-  | IAddSkill
-  | IFetchSkillSuccessfull
-  | IDeleteSkill
+  | ISetBareSkills
+  | ISetStudentSkill
   | ISetCurrentSkillId
-  | IUpdateSkill
   | IDefaultAction;
-
-interface ISkillForm {
-  someThingWrong: string;
-}

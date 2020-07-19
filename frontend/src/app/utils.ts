@@ -1,1 +1,33 @@
-export const kiss = 'love';
+import { v4 } from 'uuid';
+import { CursorData, Cursor } from './types';
+import set from 'lodash/fp/set';
+
+export const addUUIDToForm = (form: object): object => ({ ...form, id: v4() });
+
+export function transformCursorData<T>(
+  cursorObject: CursorData<object>,
+  transformer: any,
+): CursorData<T> {
+  return {
+    data: cursorObject.data.map((datum: object) => new transformer(datum)),
+    cursor: cursorObject.cursor,
+  };
+}
+
+export function queryStringifyCursor(cursor: Cursor, filters: Record<string, string> = {}): string {
+  let filters$1 = filters;
+  if (cursor.afterCursor) {
+    filters$1 = set('afterCursor', cursor.afterCursor, filters$1);
+  }
+  if (cursor.beforeCursor) {
+    filters$1 = set('beforeCursor', cursor.beforeCursor, filters$1);
+  }
+  const querystring = Object.entries(filters$1)
+    .map(([key, value]) => `${key}=${value}`)
+    .join('&');
+
+  if (querystring === '') {
+    return '';
+  }
+  return `?${querystring}`;
+}

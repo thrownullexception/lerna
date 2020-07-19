@@ -6,7 +6,7 @@ import { SkillResponse } from '../../../../app/skills/responses';
 
 export class ListStudentSkills extends React.Component<IProps> {
   componentDidMount() {
-    this.props.getSkills();
+    this.props.getSkillsWithHeirarchies();
   }
 
   renderSkillResource = ({ id, title, link, mediaType }: SkillResourceResponse) => (
@@ -27,7 +27,7 @@ export class ListStudentSkills extends React.Component<IProps> {
       skills,
       skill,
       skillInHierarchy,
-      getSkill,
+      getStudentSkill,
       goBackInSkillsDepth,
       skillsDepth,
       setCurrentSkillId,
@@ -64,7 +64,7 @@ export class ListStudentSkills extends React.Component<IProps> {
                     <button
                       className="list-group-item link-like"
                       onClick={() => {
-                        getSkill(id);
+                        getStudentSkill(id);
                         if (hasChildren) {
                           setCurrentSkillId(id);
                         }

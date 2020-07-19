@@ -10,19 +10,18 @@ const mapStateToProps = (state: IStore): StateProps => {
   return {
     skills: SkillsSelectors.selectSkillsInHierarchy(state),
     skillInHierarchy: SkillsSelectors.selectSkillInHierarchy(state),
-    skill: SkillsSelectors.selectCurrentSkill(state),
+    skill: SkillsSelectors.selectCurrentStudentSkill(state),
     skillsDepth: SkillsSelectors.selectSkillsDepth(state),
-    isFetching: SkillsSelectors.selectIsFetching(state),
   };
 };
 
 const mapDispatchToProps = (dispatch: IThunkDispatch): DispatchProps => {
   return {
-    getSkills: () => {
-      dispatch(SkillActions.getSkills());
+    getSkillsWithHeirarchies: () => {
+      dispatch(SkillActions.getSkillsWithHeirarchies());
     },
-    getSkill: (skillId: string) => {
-      dispatch(SkillActions.getSkill(skillId));
+    getStudentSkill: (skillId: string) => {
+      dispatch(SkillActions.getStudentSkill(skillId));
     },
     goBackInSkillsDepth: () => {
       dispatch(SkillActions.goBackInSkillsDepth());

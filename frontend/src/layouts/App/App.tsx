@@ -226,17 +226,7 @@ export const AppLayout: React.SFC<IProps> = ({
                         </div>
                       </div>
                       <button
-                        className="link-like dropdown-item  mt-2"
-                        onClick={() => {
-                          changeAccountMode(AccountModeType.Tutor);
-                          toggleAccountModeDropDown();
-                        }}
-                      >
-                        <i className="dropdown-icon" />
-                        {AccountModeLabel[AccountModeType.Tutor]}
-                      </button>
-                      <button
-                        className="link-like dropdown-item"
+                        className="link-like dropdown-item mt-2"
                         onClick={() => {
                           changeAccountMode(AccountModeType.Student);
                           toggleAccountModeDropDown();
@@ -244,6 +234,16 @@ export const AppLayout: React.SFC<IProps> = ({
                       >
                         <i className="dropdown-icon" />
                         {AccountModeLabel[AccountModeType.Student]}
+                      </button>
+                      <button
+                        className="link-like dropdown-item"
+                        onClick={() => {
+                          changeAccountMode(AccountModeType.Tutor);
+                          toggleAccountModeDropDown();
+                        }}
+                      >
+                        <i className="dropdown-icon" />
+                        {AccountModeLabel[AccountModeType.Tutor]}
                       </button>
                     </DropdownMenu>
                   </Dropdown>

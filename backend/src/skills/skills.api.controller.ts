@@ -1,6 +1,6 @@
 import { Controller, Get, Param, ParseUUIDPipe, UseGuards } from '@nestjs/common';
 import { SkillsService } from './skills.service';
-import { SkillTransformer } from './transfomers';
+import { SkillTransformer, BareSkillTransformer } from './transfomers';
 import { APP_CONSTANTS } from 'src/shared/constants';
 import { SkillHierarchyTransformer } from 'src/skill-hierarchies/skll-hierarchies.transformer';
 import { AuthGuard } from '@nestjs/passport';
@@ -10,7 +10,7 @@ import { AuthGuard } from '@nestjs/passport';
 export class SkillsApiController {
   constructor(private readonly skillsService: SkillsService) {}
 
-  @Get()
+  @Get('with-hierarchies')
   async skillsWithHierarchies(): Promise<{
     skills: SkillTransformer[];
     hierarchies: SkillHierarchyTransformer[];
@@ -22,6 +22,12 @@ export class SkillsApiController {
         skillHierarchy => new SkillHierarchyTransformer(skillHierarchy),
       ),
     };
+  }
+
+  @Get('bare')
+  async bareSkills(): Promise<BareSkillTransformer[]> {
+    const skills = await this.skillsService.getSkillsNamesAndIds();
+    return skills.map(skill => new BareSkillTransformer(skill));
   }
 
   @Get(':skillId')

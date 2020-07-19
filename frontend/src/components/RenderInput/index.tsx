@@ -11,7 +11,7 @@ interface IRenderInput {
   input: FieldInputProps<any, HTMLElement>;
   meta: FieldMetaState<any>;
   label: string;
-  type?: 'textarea' | 'password' | 'date' | 'select';
+  type?: 'textarea' | 'number' | 'password' | 'date' | 'select';
   icon?: string;
   selectData?: ISelectData[];
   hideLabel?: boolean;

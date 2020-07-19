@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux';
 import { action } from 'typesafe-actions';
 import { ThunkInterface } from '../../shared/types';
-import { FaqsAction, ActionType } from './faqs.types';
+import { FaqsActionType, ActionType } from './faqs.types';
 import { RequestService, ToastService } from '../../services';
 import { FaqResponse } from './responses';
 import { IStore } from '../../store/rootReducers';
@@ -11,7 +11,7 @@ const BASE_PATH = 'faqs';
 
 export class FaqsActions {
   static getFaqs(): ThunkInterface<void> {
-    return async (dispatch: Dispatch<FaqsAction>, getState: () => IStore) => {
+    return async (dispatch: Dispatch<FaqsActionType>, getState: () => IStore) => {
       dispatch(action(ActionType.FAQS_REQUEST_STARTED));
       try {
         const { data } = await RequestService.get(
@@ -32,7 +32,7 @@ export class FaqsActions {
 }
 
 // export const getFaq = (faqId: number): ThunkInterface<void> => {
-//   return async (dispatch: Dispatch<FaqsAction>) => {
+//   return async (dispatch: Dispatch<FaqsActionType>) => {
 //     dispatch(action(ActionType.FAQS_REQUEST_STARTED));
 //     try {
 //       const response = await RequestService.get(`${BASE_PUBLIC_REQUEST_PATH}/${faqId}`);
@@ -45,7 +45,7 @@ export class FaqsActions {
 // };
 
 // export const postFaqs = (faqsForm: IFaqsForm): ThunkInterface<void> => {
-//   return async (dispatch: Dispatch<FaqsAction>) => {
+//   return async (dispatch: Dispatch<FaqsActionType>) => {
 //     dispatch(action(ActionType.FAQS_REQUEST_STARTED));
 //     try {
 //       const { id } = await RequestService.post(BASE_REQUEST_PATH, faqsForm);
@@ -65,7 +65,7 @@ export class FaqsActions {
 // };
 
 // export const patchFaqs = (faqId: number, faqsForm: IFaqsForm): ThunkInterface<void> => {
-//   return async (dispatch: Dispatch<FaqsAction>) => {
+//   return async (dispatch: Dispatch<FaqsActionType>) => {
 //     dispatch(action(ActionType.FAQS_REQUEST_STARTED));
 //     try {
 //       const { id } = await RequestService.patch(`${BASE_REQUEST_PATH}/${faqId}`, faqsForm);
@@ -85,7 +85,7 @@ export class FaqsActions {
 // };
 
 // export const deleteFaq = (faqId: number): ThunkInterface<void> => {
-//   return async (dispatch: Dispatch<FaqsAction>) => {
+//   return async (dispatch: Dispatch<FaqsActionType>) => {
 //     dispatch(action(ActionType.FAQS_REQUEST_STARTED));
 //     try {
 //       await RequestService.delete(`${BASE_REQUEST_PATH}/${faqId}`);

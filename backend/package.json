@@ -28,8 +28,8 @@
     "migration:run": "npm run typeorm migration:run -- -c default",
     "seed:create": "npm run typeorm migration:create -- -c seed -n",
     "seed:run": "npm run typeorm migration:run -- -c seed",
-    "tests-seed:create": "npm run typeorm migration:create -- -c tests-seed -n",
-    "tests-seed:run": "npm run typeorm migration:run -- -c tests-seed"
+    "dev-seed:create": "npm run typeorm migration:create -- -c dev-seed -n",
+    "dev-seed:run": "npm run typeorm migration:run -- -c dev-seed"
   },
   "dependencies": {
     "@nest-modules/mailer": "^1.3.22",

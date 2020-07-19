@@ -59,7 +59,7 @@ interface IDefaultAction {
   type: '';
 }
 
-export type FaqsAction =
+export type FaqsActionType =
   | IFetchFaqsSuccessfull
   | IFaqsRequestStarted
   | IFaqsRequestEnded

@@ -17,6 +17,6 @@ export class SignInResponse {
     this.lastName = get('lastName', jsonObject);
     this.firstName = get('firstName', jsonObject);
     this.picture = get('picture', jsonObject);
-    this.accountMode = (get('accountMode', jsonObject) as unknown) as AccountModeType;
+    this.accountMode = get('accountMode', jsonObject) as AccountModeType;
   }
 }

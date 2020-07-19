@@ -1,6 +1,7 @@
 import { Session } from '../sessions.entity';
+import { SessionCandidate } from 'src/session-candidates/session-candidates.entity';
 
-export class SessionListTransformer {
+export class StudentSessionTransformer {
   id: string;
   studentName: string;
   studentId: string;
@@ -12,7 +13,7 @@ export class SessionListTransformer {
   rate: number;
   years: number;
   skillName: string;
-  constructor(session: Session) {
-    this.title = session.title;
+  constructor(session: SessionCandidate) {
+    this.title = session.session.title;
   }
 }

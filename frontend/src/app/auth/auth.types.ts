@@ -1,8 +1,8 @@
 import { SignInResponse } from './responses';
 
 export enum AccountModeType {
-  Tutor,
-  Student,
+  Tutor = 'tutor',
+  Student = 'student',
 }
 
 export const AccountModePaths = {

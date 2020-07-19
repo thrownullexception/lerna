@@ -12,11 +12,7 @@ export class SeedAccountModes1593354437143 extends BaseSeed
     {
       systemName: 'student',
       displayName: 'Student',
-    },
-    {
-      systemName: 'admin',
-      displayName: 'Admin',
-    },
+    }
   ];
 
   public async up(queryRunner: QueryRunner): Promise<void> {

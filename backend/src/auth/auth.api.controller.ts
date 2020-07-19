@@ -139,7 +139,6 @@ export class AuthApiController {
       responseMeta: 'NEW_AUTH_PROVIDER_USER',
       id: userId,
       firstName: username,
-      email,
     };
   }
 

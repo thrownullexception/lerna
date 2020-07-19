@@ -9,13 +9,15 @@ import {
 } from 'src/session-candidate-statuses/session-candidate-statuses.types';
 import { MailService } from 'src/shared/services';
 import { SessionCandidate } from './session-candidates.entity';
+import { ICursorParametersDTO } from 'src/shared/types';
+import { PagingResult } from 'typeorm-cursor-pagination';
 
 @Injectable()
 export class SessionCandidatesService {
   constructor(
     private readonly sessionCandidatesRepository: SessionCandidatesRepository,
     private readonly mailService: MailService,
-  ) {}
+  ) { }
 
   async shortListCandidate(shortListCandidate: ShortListCandidateDTO): Promise<void> {
     // TODO limit the amount of candidates a user can shortlist
@@ -29,6 +31,19 @@ export class SessionCandidatesService {
       to: 'user@email.com',
       context: { name: 'TODO' },
     });
+  }
+
+  async listTutorSessions(
+    tutorId: string,
+    cursorParametersDTO: ICursorParametersDTO,
+  ): Promise<PagingResult<SessionCandidate>> {
+    return this.sessionCandidatesRepository.cursorPaginateCandidatesSessions(
+      this.sessionCandidatesRepository
+        .createQueryBuilder('sessionCandidate')
+        .where(`sessionCandidate.candidateId=:tutorId`, { tutorId })
+        .leftJoinAndSelect('sessionCandidate.session', 'session'),
+      cursorParametersDTO,
+    );
   }
 
   async getSessionCandidateId(sessionId: string, userId: string): Promise<string> {

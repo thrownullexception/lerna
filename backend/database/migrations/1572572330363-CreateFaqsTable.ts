@@ -15,7 +15,7 @@ export class CreateFaqsTable1572572330363 extends BaseMigration implements Migra
         type: 'text',
       },
       {
-        name: 'account_mode_sytem_name',
+        name: 'account_mode_system_name',
         type: 'varchar',
       },
       {

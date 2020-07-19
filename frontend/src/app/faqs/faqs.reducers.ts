@@ -1,5 +1,5 @@
 import { produce } from 'immer';
-import { IFaqState, FaqsAction, ActionType } from './faqs.types';
+import { IFaqState, FaqsActionType, ActionType } from './faqs.types';
 import { FaqResponse } from './responses';
 
 const initial: IFaqState = {
@@ -8,7 +8,7 @@ const initial: IFaqState = {
   isFetching: false,
 };
 
-export const faqsReducer = (state = initial, action: FaqsAction) => {
+export const faqsReducer = (state = initial, action: FaqsActionType) => {
   return produce(state, draftState => {
     if (action.type === ActionType.FETCH_FAQS_SUCCESSFULL) {
       draftState.faqs = action.payload;

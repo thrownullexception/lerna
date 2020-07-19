@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { Skill } from './skills.entity';
-// import { skillDTO } from './faqs.dto';
 import { SkillsRepository } from './skills.repository';
 import { SkillHierarchy } from 'src/skill-hierarchies/skill-hierarchies.entity';
 import { SkillHierarchiesService } from 'src/skill-hierarchies/skill-hierarchies.service';
@@ -14,6 +13,12 @@ export class SkillsService {
 
   async getSkills(): Promise<Skill[]> {
     return await this.skillsRepository.listSkills();
+  }
+
+  async getSkillsNamesAndIds(): Promise<Skill[]> {
+    return await this.skillsRepository.listSkills({
+      select: ['id', 'name'],
+    });
   }
 
   async getSkillsAndHierarchies(): Promise<{

@@ -9,18 +9,18 @@ import { PagingResult } from 'typeorm-cursor-pagination';
 
 @Injectable()
 export class SessionsService {
-  constructor(private readonly sessionsRepository: SessionsRepository) {}
+  constructor(
+    private readonly sessionsRepository: SessionsRepository
+  ) {}
 
-  async listUserSessions(
-    accountMode: AccountModeType,
-    userId: string,
+  async listStudentsSessions(
+    studentId: string,
     cursorParametersDTO: ICursorParametersDTO,
   ): Promise<PagingResult<Session>> {
-    const accountField = accountMode === AccountModeType.Student ? 'studentId' : 'tutorId';
     return this.sessionsRepository.cursorPaginateSessions(
       this.sessionsRepository
         .createQueryBuilder('session')
-        .where(`session.${accountField}=:userId`, { userId }),
+        .where(`session.studentId=:studentId`, { studentId }),
       cursorParametersDTO,
     );
   }

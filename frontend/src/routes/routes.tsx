@@ -7,6 +7,7 @@ import { NotFound } from '../screens/NotFound';
 import { Dashboard } from '../screens/Dashboard';
 import { authenticationGuard } from '../guards';
 import { SkillsRoutes } from '../screens/Skills';
+import { SessionsRoutes } from '../screens/Sessions';
 
 export const appRoutes: IMenuItems[] = [
   {
@@ -16,8 +17,9 @@ export const appRoutes: IMenuItems[] = [
     component: authenticationGuard(Dashboard),
     showOnNavigation: true,
   },
-  ...FaqRoutes,
+  ...SessionsRoutes,
   ...SkillsRoutes,
+  ...FaqRoutes,
   {
     path: '*',
     title: 'Not Found',

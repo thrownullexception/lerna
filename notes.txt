@@ -12,7 +12,7 @@ http://amentotech.com/projects/worketic/freelancer/dashboard
 http://amentotech.com/projects/worketic/employer/dashboard
 https://dbdiagram.io/d/5dd12975edf08a25543e0486
 http://amentotech.com/htmls/worktern/dashboard-accountsettings.html
-https://www.spruko.com/demo/azira/Azira/leftmenu/faq.html#
+https://www.spruko.com/demo/azira/Azira/leftmenu/faq.html
 
 http://amentotech.com/projects/prodesk/freelancer/emerald-morison/
 http://amentotech.com/projects/prodesk/dashboard/?ref=profile&mode=settings&identity=44

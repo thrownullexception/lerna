@@ -3,7 +3,7 @@ import { User } from '../../users/users.entity';
 export class AuthenticatedUserDetailsTransformer {
   id: string;
   jwtToken: string;
-  email: string;
+  username: string;
   lastName: string;
   firstName: string;
   picture: string;
@@ -11,7 +11,7 @@ export class AuthenticatedUserDetailsTransformer {
 
   constructor(user: User, jwtToken: string) {
     this.id = user.id;
-    this.email = user.email;
+    this.username = user.username;
     this.lastName = user.profile.lastName;
     this.firstName = user.profile.firstName;
     this.picture = user.profile.picture;

@@ -49,6 +49,7 @@ export class CreateProfileTable1593354718008 extends BaseMigration implements Mi
       {
         name: 'last_online',
         type: 'timestamp',
+        default: 'CURRENT_TIMESTAMP',
       },
       {
         name: 'dob',

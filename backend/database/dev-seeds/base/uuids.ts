@@ -1,0 +1,6 @@
+export const UUIDs = {
+    users: [
+        "7fd0c9eb-fef9-4bde-b398-c9e3add8ce65",
+        "73575bb3-aee5-416c-b986-96ee65f16b41",
+    ]
+};

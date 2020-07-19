@@ -17,7 +17,7 @@ export class Faq {
   @Column()
   accountModeSystemName: AccountModeType;
 
-  @Column()
+  @Column({ select: false })
   createdAt: string;
 
   @Column({ select: false })

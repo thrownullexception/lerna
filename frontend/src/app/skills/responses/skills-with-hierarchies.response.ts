@@ -2,7 +2,7 @@ import get from 'lodash/fp/getOr';
 import { SkillResponse } from './skill.response';
 import { SkillHierarchyResponse } from './skill-hierarchy.response';
 
-export class SkillsResponse {
+export class SkillsWithHierarchiesResponse {
   skills: SkillResponse[];
   hierarchies: SkillHierarchyResponse[];
 

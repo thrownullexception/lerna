@@ -1,6 +1,10 @@
 export const NavigationService = {
-  indexPath: (path: string): string => {
-    return `/${path}`;
+  indexPath: (path$1: string): string => {
+    const path = `/${path$1}`;
+    if (path.endsWith('/')) {
+      return path.slice(0, -1);
+    }
+    return path;
   },
   studentPath: (path: string): string => {
     return NavigationService.indexPath(`student/${path}`);

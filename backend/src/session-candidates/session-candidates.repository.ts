@@ -1,6 +1,7 @@
-import { Repository, EntityRepository, FindManyOptions, FindOneOptions } from 'typeorm';
+import { Repository, EntityRepository, FindManyOptions, FindOneOptions, SelectQueryBuilder } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { SessionCandidate } from './session-candidates.entity';
+import { PagingQuery, PagingResult, buildPaginator } from 'typeorm-cursor-pagination';
 
 @Injectable()
 @EntityRepository(SessionCandidate)
@@ -19,6 +20,18 @@ export class SessionCandidatesRepository extends Repository<SessionCandidate> {
     findOneOptions: FindOneOptions<SessionCandidate>,
   ): Promise<SessionCandidate> {
     return await this.findOne(findOneOptions);
+  }
+
+  async cursorPaginateCandidatesSessions(
+    queryBuilder: SelectQueryBuilder<SessionCandidate>,
+    pagingQuery: PagingQuery,
+  ): Promise<PagingResult<SessionCandidate>> {
+    const paginator = buildPaginator({
+      entity: SessionCandidate,
+      query: pagingQuery,
+      paginationKeys: ['createdAt'], // TODO check what happens with `id`
+    });
+    return await paginator.paginate(queryBuilder);
   }
 
   async updateSessionCandidate(

@@ -43,11 +43,11 @@ module.exports = [
   },
   {
     ...commonConfig,
-    name: 'tests-seed',
-    migrations: [relativeMigrationsDir('/tests-seeds/*{.ts,.js}')],
-    migrationsTableName: 'tests-seeds',
+    name: 'dev-seed',
+    migrations: [relativeMigrationsDir('/dev-seeds/*{.ts,.js}')],
+    migrationsTableName: 'dev-seeds',
     cli: {
-      migrationsDir: relativeMigrationsDir('tests-seeds'),
+      migrationsDir: relativeMigrationsDir('dev-seeds'),
     },
   },
   {

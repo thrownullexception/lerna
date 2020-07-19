@@ -83,6 +83,7 @@ export class UsersService {
       where: {
         id: userId,
       },
+      select: ['id','username', 'accountMode'],
       relations: ['profile'],
     });
   }

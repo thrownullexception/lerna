@@ -7,10 +7,6 @@ export class SkillsSelectors {
     return state.skills;
   }
 
-  static selectIsFetching(state: IStore) {
-    return createSelector(SkillsSelectors.base, ({ isFetching }) => isFetching)(state);
-  }
-
   static selectSkillsHierarchies(state: IStore) {
     return createSelector(SkillsSelectors.base, ({ hierarchies }) => {
       return hierarchies;
@@ -20,12 +16,12 @@ export class SkillsSelectors {
   static selectSkillsInHierarchy(state: IStore) {
     return createSelector(
       [SkillsSelectors.base, SkillsSelectors.selectSkillsHierarchies],
-      ({ skills, currentSkillId }, hierarchies) => {
-        if (!currentSkillId) {
+      ({ skills, currentStudentSkillId }, hierarchies) => {
+        if (!currentStudentSkillId) {
           return skills.filter(({ hasParent }) => !hasParent);
         }
         const childrenSkills = hierarchies
-          .filter(({ parentId }) => parentId === currentSkillId)
+          .filter(({ parentId }) => parentId === currentStudentSkillId)
           .map(({ childId }) => childId);
         return skills.filter(({ id }) => childrenSkills.includes(id));
       },
@@ -33,8 +29,8 @@ export class SkillsSelectors {
   }
 
   static selectSkillInHierarchy(state: IStore): SkillResponse {
-    return createSelector(SkillsSelectors.base, ({ currentSkillId, skills }) => {
-      const skill = skills.find(({ id }) => id === currentSkillId);
+    return createSelector(SkillsSelectors.base, ({ currentStudentSkillId, skills }) => {
+      const skill = skills.find(({ id }) => id === currentStudentSkillId);
       if (skill) {
         return skill;
       }
@@ -43,9 +39,9 @@ export class SkillsSelectors {
     })(state);
   }
 
-  static selectCurrentSkill(state: IStore) {
-    return createSelector(SkillsSelectors.base, ({ currentSkill }) => {
-      return currentSkill;
+  static selectCurrentStudentSkill(state: IStore) {
+    return createSelector(SkillsSelectors.base, ({ studentSkill }) => {
+      return studentSkill;
     })(state);
   }
 
