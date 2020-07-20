@@ -32,7 +32,7 @@ export class CreateFaqsTable1572572330363 extends BaseMigration implements Migra
     });
     await this.reference(queryRunner, {
       table: 'account_modes',
-      referencedColumnHere: 'account_mode_sytem_name',
+      referencedColumnHere: 'account_mode_system_name',
       referencedColumnThere: 'system_name',
       referenceAction: ReferenceAction.Restrict,
     });

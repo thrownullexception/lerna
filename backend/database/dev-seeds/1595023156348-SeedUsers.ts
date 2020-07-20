@@ -11,6 +11,7 @@ export class SeedUsers1595023156348 extends BaseSeed implements MigrationInterfa
             password: "$2b$10$nH31Ut9nh6KlvWQRMcyfD.Ox5vMab5QvrzigeZRLkG6uAyevEKM/e",
             account_mode: "student",
             verified: true,
+            role_id: UUIDs.roles[0],
         },
         {
             id: UUIDs.users[1],
