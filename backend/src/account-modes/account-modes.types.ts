@@ -7,5 +7,5 @@ export enum AccountModeType {
 
 export const AccountModeAsOptions: ISelectOptions[] = [
   { value: AccountModeType.Tutor, label: 'Tutor' },
-  { value: AccountModeType.Tutor, label: 'Student' },
+  { value: AccountModeType.Student, label: 'Student' },
 ];
