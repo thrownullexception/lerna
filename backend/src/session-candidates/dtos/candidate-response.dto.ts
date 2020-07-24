@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsIn, IsOptional } from 'class-validator';
-import { SessionCandidateStatusTypes } from 'src/session-candidate-statuses/session-candidate-statuses.types';
+import { SessionCandidateStatusTypes } from '../../session-candidate-statuses/session-candidate-statuses.types';
 
 export class CandidateResponseDTO {
   @IsNotEmpty({

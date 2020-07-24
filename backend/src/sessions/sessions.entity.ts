@@ -7,10 +7,10 @@ import {
   JoinTable,
   JoinColumn,
 } from 'typeorm';
-import { User } from 'src/users/users.entity';
-import { Skill } from 'src/skills/skills.entity';
-import { SessionStatus } from 'src/session-statuses/session-statuses.entity';
-import { SessionStatusTypes } from 'src/session-statuses/session-statuses.types';
+import { User } from '../users/users.entity';
+import { Skill } from '../skills/skills.entity';
+import { SessionStatus } from '../session-statuses/session-statuses.entity';
+import { SessionStatusTypes } from '../session-statuses/session-statuses.types';
 
 @Entity('sessions')
 export class Session {

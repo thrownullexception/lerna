@@ -1,4 +1,4 @@
-import { ISelectOptions } from 'src/shared/types';
+import { ISelectOptions } from '../shared/types';
 
 export enum AccountModeType {
   Student = 'student',

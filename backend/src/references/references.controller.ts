@@ -11,9 +11,9 @@ import {
 import { ReferencesService } from './references.service';
 import { AdminPermission } from '../shared/decorators';
 import { PermissionsGuard } from '../auth/guards';
-import { UpdateReferenceDTO } from './references.dto';
+import { UpdateReferenceDTO } from './dtos';
 import { AuthGuard } from '@nestjs/passport';
-import { APP_CONSTANTS } from 'src/shared/constants';
+import { APP_CONSTANTS } from '../shared/constants';
 
 @Controller(APP_CONSTANTS.API_ROUTES_PREFIX('references'))
 @UseGuards(AuthGuard('jwt'))

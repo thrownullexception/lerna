@@ -1,4 +1,4 @@
-import { SkillHierarchy } from './skill-hierarchies.entity';
+import { SkillHierarchy } from '../skill-hierarchies.entity';
 
 export class SkillHierarchyTransformer {
   id: string;

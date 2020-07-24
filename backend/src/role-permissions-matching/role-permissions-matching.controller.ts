@@ -10,7 +10,7 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { RolesPermissionsMatchingService } from './role-permissions-matching.service';
-import { RolePermissionMatchingDTO } from './role-permissions-matching.dto';
+import { RolePermissionMatchingDTO } from './dtos';
 import { AdminPermission } from '../shared/decorators';
 import { PermissionsGuard } from '../auth/guards';
 

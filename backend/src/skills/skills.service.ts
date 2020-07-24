@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { Skill } from './skills.entity';
 import { SkillsRepository } from './skills.repository';
-import { SkillHierarchy } from 'src/skill-hierarchies/skill-hierarchies.entity';
-import { SkillHierarchiesService } from 'src/skill-hierarchies/skill-hierarchies.service';
+import { SkillHierarchy } from '../skill-hierarchies/skill-hierarchies.entity';
+import { SkillHierarchiesService } from '../skill-hierarchies/skill-hierarchies.service';
 
 @Injectable()
 export class SkillsService {

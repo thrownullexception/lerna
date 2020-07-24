@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { User } from '../users/users.entity';
-import { AccountMode } from 'src/account-modes/account-modes.entity';
-import { AccountModeType } from 'src/account-modes/account-modes.types';
+import { AccountMode } from '../account-modes/account-modes.entity';
+import { AccountModeType } from '../account-modes/account-modes.types';
 
 @Entity('faqs')
 export class Faq {

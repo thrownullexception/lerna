@@ -1,8 +1,8 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { FaqsService } from './faqs.service';
-import { FaqTransformer } from './faqs.transformer';
-import { APP_CONSTANTS } from 'src/shared/constants';
-import { AccountModeType } from 'src/account-modes/account-modes.types';
+import { FaqTransformer } from './transformers';
+import { APP_CONSTANTS } from '../shared/constants';
+import { AccountModeType } from '../account-modes/account-modes.types';
 
 @Controller(APP_CONSTANTS.API_ROUTES_PREFIX('faqs'))
 export class FaqsController {

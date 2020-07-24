@@ -1,7 +1,7 @@
 import { Controller, UseGuards, HttpCode, HttpStatus, Body, Post } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthenticatedUser } from '../shared/decorators';
-import { UserSettingDTO } from './user-settings.dto';
+import { UserSettingDTO } from './dtos';
 import { UserSettingsService } from './user-settings.service';
 
 @Controller('user-settings')

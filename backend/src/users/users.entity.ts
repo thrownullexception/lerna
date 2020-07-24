@@ -12,7 +12,7 @@ import { Profile } from '../profiles/profiles.entity';
 import { BankDetail } from '../bank-details/bank-details.entity';
 import { UserSetting } from '../user-settings/user-settings.entity';
 import { Role } from '../roles/roles.entity';
-import { AccountMode } from 'src/account-modes/account-modes.entity';
+import { AccountMode } from '../account-modes/account-modes.entity';
 // import { Support } from '../supports/supports.entity';
 
 @Entity('users')

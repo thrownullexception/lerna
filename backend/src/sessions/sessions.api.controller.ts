@@ -11,17 +11,21 @@ import {
   Patch,
   Query,
 } from '@nestjs/common';
-import { APP_CONSTANTS } from 'src/shared/constants';
+import { APP_CONSTANTS } from '../shared/constants';
 import { AuthGuard } from '@nestjs/passport';
-import { SessionDetailTransformer, StudentSessionTransformer, TutorSessionTransformer } from './transformers';
-import { AuthenticatedUser } from 'src/shared/decorators';
+import {
+  SessionDetailTransformer,
+  StudentSessionTransformer,
+  TutorSessionTransformer,
+} from './transformers';
+import { AuthenticatedUser } from '../shared/decorators';
 import { SessionsService } from './sessions.service';
 import { CreateSessionDTO, UpdateSessionMetadataDTO, UpdateSessionDTO } from './dtos';
-import { AccountModeType } from 'src/account-modes/account-modes.types';
-import { CursorQueryParametersPipe } from 'src/shared/pipes';
-import { ICursorParametersDTO } from 'src/shared/types';
+import { AccountModeType } from '../account-modes/account-modes.types';
+import { CursorQueryParametersPipe } from '../shared/pipes';
+import { ICursorParametersDTO } from '../shared/types';
 import { PagingResult } from 'typeorm-cursor-pagination';
-import { SessionCandidatesService } from 'src/session-candidates/session-candidates.service';
+import { SessionCandidatesService } from '../session-candidates/session-candidates.service';
 
 @Controller(APP_CONSTANTS.API_ROUTES_PREFIX('sessions'))
 @UseGuards(AuthGuard('jwt'))
@@ -29,7 +33,7 @@ export class SessionsApiController {
   constructor(
     private readonly sessionsService: SessionsService,
     private readonly sessionCandidatesService: SessionCandidatesService,
-    ) {}
+  ) {}
 
   @Get(AccountModeType.Tutor)
   async listForTutor(
@@ -75,9 +79,9 @@ export class SessionsApiController {
   @HttpCode(HttpStatus.NO_CONTENT)
   async updateBase(
     @Param('sessionId', new ParseUUIDPipe()) tutorSkillId: string,
-    @Body() UpdateSessionDTO: UpdateSessionDTO,
+    @Body() updateSessionDTO: UpdateSessionDTO,
   ): Promise<void> {
-    await this.sessionsService.updateSession(tutorSkillId, UpdateSessionDTO);
+    await this.sessionsService.updateSession(tutorSkillId, updateSessionDTO);
   }
 
   @Patch(':sessionId/meta')

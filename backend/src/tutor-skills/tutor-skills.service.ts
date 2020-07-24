@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { TutorSkillsRepository } from './tutor-skills.repository';
 import { TutorSkill } from './tutor-skills.entity';
-import { TutorSkillLevel } from 'src/tutor-skill-levels/tutor-skill-levels.entity';
-import { TutorSkillLevelsService } from 'src/tutor-skill-levels/tutor-skill-levels.service';
-import { TutorSkillDTO } from './tutor-skills.dto';
+import { TutorSkillLevel } from '../tutor-skill-levels/tutor-skill-levels.entity';
+import { TutorSkillLevelsService } from '../tutor-skill-levels/tutor-skill-levels.service';
+import { TutorSkillDTO } from './dtos';
 
 @Injectable()
 export class TutorSkillsService {

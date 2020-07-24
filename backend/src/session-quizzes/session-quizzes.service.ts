@@ -2,12 +2,12 @@ import { Injectable, Logger, Inject } from '@nestjs/common';
 import { SessionQuizDTO, AnswerQuizDTO } from './dtos';
 import { SessionQuizzesRepository } from './session-quizzes.repository';
 import { SessionQuiz } from './session-quizzes.entity';
-import { SessionQuizResponseService } from 'src/session-quiz-responses/session-quiz-responses.service';
+import { SessionQuizResponseService } from '../session-quiz-responses/session-quiz-responses.service';
 import { IsNotIn } from 'class-validator';
 import { INextSessionQuiz } from './session-quizzes.types';
-import { SessionsService } from 'src/sessions/sessions.service';
-import { SessionCandidatesService } from 'src/session-candidates/session-candidates.service';
-import { SessionCandidateStatusTypes } from 'src/session-candidate-statuses/session-candidate-statuses.types';
+import { SessionsService } from '../sessions/sessions.service';
+import { SessionCandidatesService } from '../session-candidates/session-candidates.service';
+import { SessionCandidateStatusTypes } from '../session-candidate-statuses/session-candidate-statuses.types';
 
 @Injectable()
 export class SessionQuizzesService {

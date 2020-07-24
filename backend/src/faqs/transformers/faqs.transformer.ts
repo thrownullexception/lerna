@@ -1,4 +1,4 @@
-import { Faq } from './faqs.entity';
+import { Faq } from '../faqs.entity';
 
 export class FaqTransformer {
   question: string;

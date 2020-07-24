@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { Skill } from '../skills/skills.entity';
-import { Session } from 'src/sessions/sessions.entity';
+import { Session } from '../sessions/sessions.entity';
 
 @Entity('session_skills')
 export class SessionSkill {

@@ -1,5 +1,5 @@
 import { IsNotEmpty } from 'class-validator';
-import { AccountModeType } from 'src/account-modes/account-modes.types';
+import { AccountModeType } from '../../account-modes/account-modes.types';
 
 export class FaqDTO {
   @IsNotEmpty({

@@ -1,17 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { SessionsRepository } from './sessions.repository';
 import { CreateSessionDTO } from './dtos';
-import { SessionStatusTypes } from 'src/session-statuses/session-statuses.types';
-import { AccountModeType } from 'src/account-modes/account-modes.types';
+import { SessionStatusTypes } from '../session-statuses/session-statuses.types';
 import { Session } from './sessions.entity';
-import { ICursorParametersDTO } from 'src/shared/types';
+import { ICursorParametersDTO } from '../shared/types';
 import { PagingResult } from 'typeorm-cursor-pagination';
 
 @Injectable()
 export class SessionsService {
-  constructor(
-    private readonly sessionsRepository: SessionsRepository
-  ) {}
+  constructor(private readonly sessionsRepository: SessionsRepository) {}
 
   async listStudentsSessions(
     studentId: string,

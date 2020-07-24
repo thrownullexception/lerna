@@ -9,7 +9,7 @@ import {
   Body,
   Delete,
 } from '@nestjs/common';
-import { APP_CONSTANTS } from 'src/shared/constants';
+import { APP_CONSTANTS } from '../shared/constants';
 import { AuthGuard } from '@nestjs/passport';
 import { CreateSessionSkillDTO } from './dtos';
 import { SessionSkillsService } from './session-skills.service';

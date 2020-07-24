@@ -1,4 +1,10 @@
-import { Repository, EntityRepository, FindManyOptions, FindOneOptions, SelectQueryBuilder } from 'typeorm';
+import {
+  Repository,
+  EntityRepository,
+  FindManyOptions,
+  FindOneOptions,
+  SelectQueryBuilder,
+} from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { SessionCandidate } from './session-candidates.entity';
 import { PagingQuery, PagingResult, buildPaginator } from 'typeorm-cursor-pagination';

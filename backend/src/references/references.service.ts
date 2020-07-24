@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Reference } from './references.entity';
-import { UpdateReferenceDTO } from './references.dto';
+import { UpdateReferenceDTO } from './dtos';
 
 @Injectable()
 export class ReferencesService {
