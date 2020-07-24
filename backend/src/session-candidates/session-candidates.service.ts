@@ -6,10 +6,10 @@ import {
   SessionCandidateStatusTypes,
   StatusesToReduceToAlreadyFilled,
   StatusesToReduceToNoResponse,
-} from 'src/session-candidate-statuses/session-candidate-statuses.types';
-import { MailService } from 'src/shared/services';
+} from '../session-candidate-statuses/session-candidate-statuses.types';
+import { MailService } from '../shared/services';
 import { SessionCandidate } from './session-candidates.entity';
-import { ICursorParametersDTO } from 'src/shared/types';
+import { ICursorParametersDTO } from '../shared/types';
 import { PagingResult } from 'typeorm-cursor-pagination';
 
 @Injectable()
@@ -17,7 +17,7 @@ export class SessionCandidatesService {
   constructor(
     private readonly sessionCandidatesRepository: SessionCandidatesRepository,
     private readonly mailService: MailService,
-  ) { }
+  ) {}
 
   async shortListCandidate(shortListCandidate: ShortListCandidateDTO): Promise<void> {
     // TODO limit the amount of candidates a user can shortlist

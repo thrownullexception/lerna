@@ -1,8 +1,8 @@
 import { Controller, Get, Param, ParseUUIDPipe, UseGuards } from '@nestjs/common';
 import { SkillsService } from './skills.service';
 import { SkillTransformer, BareSkillTransformer } from './transfomers';
-import { APP_CONSTANTS } from 'src/shared/constants';
-import { SkillHierarchyTransformer } from 'src/skill-hierarchies/skll-hierarchies.transformer';
+import { APP_CONSTANTS } from '../shared/constants';
+import { SkillHierarchyTransformer } from '../skill-hierarchies/transformers';
 import { AuthGuard } from '@nestjs/passport';
 
 @Controller(APP_CONSTANTS.API_ROUTES_PREFIX('skills'))

@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsEnum } from 'class-validator';
-import { UserSettingTypes } from './user-settings.types';
+import { UserSettingTypes } from '../user-settings.types';
 
 export class UserSettingDTO {
   @IsNotEmpty({

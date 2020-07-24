@@ -16,17 +16,17 @@ import {
 } from '@nestjs/common';
 import { Response } from 'express';
 import { FaqsService } from './faqs.service';
-import { FaqDTO } from './faqs.dto';
+import { FaqDTO } from './dtos';
 import {
   AuthenticatedUser,
   SessionFlash,
   ISessionFlash,
   AdminController,
 } from '../shared/decorators';
-import { PaginationQueryParametersPipe } from 'src/shared/pipes';
-import { IPaginatePayload, ISelectOptions, IQueryParametersDTO } from 'src/shared/types';
+import { PaginationQueryParametersPipe } from '../shared/pipes';
+import { IPaginatePayload, ISelectOptions, IQueryParametersDTO } from '../shared/types';
 import { Faq } from './faqs.entity';
-import { AccountModeAsOptions } from 'src/account-modes/account-modes.types';
+import { AccountModeAsOptions } from '../account-modes/account-modes.types';
 
 @AdminController('faqs', 'CAN_MANAGE_FAQS')
 export class AdminFaqsController {

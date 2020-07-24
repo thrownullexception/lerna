@@ -1,7 +1,7 @@
 import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { RolePermissionMatchingDTO } from './role-permissions-matching.dto';
+import { RolePermissionMatchingDTO } from './dtos';
 import { RolesPermissionMatching } from './role-permissions-matching.entity';
 
 @Injectable()

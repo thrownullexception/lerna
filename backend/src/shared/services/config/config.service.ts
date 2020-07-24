@@ -15,7 +15,7 @@ enum EnvironmentTypes {
   Production = 'production',
   Development = 'development',
   Staging = 'staging',
-  Testing = 'testing',
+  Testing = 'test',
 }
 
 @Injectable()
@@ -238,7 +238,8 @@ export class ConfigService implements CacheOptionsFactory {
   }
 
   createTypeOrmOptions(): TypeOrmModuleOptions {
-    const ENTITIES_DIR = this.getEnvironment() === 'production' ? './dist' : './dist/src';
+    const ENTITIES_DIR =
+      this.getEnvironment() === EnvironmentTypes.Testing ? './src' : './dist/src';
     const cache = {
       type: 'redis' as const,
       options: this.getRedisConfig(),
@@ -253,10 +254,10 @@ export class ConfigService implements CacheOptionsFactory {
       password: this.getDBPassword(),
       database: this.getDBName(),
       entities: [ENTITIES_DIR + '/**/**.entity{.ts,.js}'],
-      logging: true, // !['production', 'test', 'testing'].includes(this.getEnvironment()),
+      logging: false, // !['production', 'test', 'testing'].includes(this.getEnvironment()),
       namingStrategy: new SnakeNamingStrategy(),
       retryAttempts: 5,
-      cache: this.getEnvironment() === EnvironmentTypes.Development ? false : cache,
+      cache: this.getEnvironment() === EnvironmentTypes.Production ? cache : false,
     };
   }
 }

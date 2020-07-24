@@ -1,8 +1,8 @@
 import { Repository, EntityRepository, FindManyOptions, FindOneOptions } from 'typeorm';
 import { Faq } from './faqs.entity';
-import { FaqDTO } from './faqs.dto';
+import { FaqDTO } from './dtos';
 import { Injectable } from '@nestjs/common';
-import { APP_CONSTANTS } from 'src/shared/constants';
+import { APP_CONSTANTS } from '../shared/constants';
 
 @Injectable()
 @EntityRepository(Faq)

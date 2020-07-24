@@ -10,7 +10,7 @@ import {
   Patch,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { APP_CONSTANTS } from 'src/shared/constants';
+import { APP_CONSTANTS } from '../shared/constants';
 import { ShortListCandidateDTO, CandidateResponseDTO } from './dtos';
 import { SessionCandidatesService } from './session-candidates.service';
 

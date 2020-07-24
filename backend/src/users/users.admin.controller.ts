@@ -6,7 +6,7 @@ import { AdminPermission } from '../shared/decorators';
 import { PermissionsGuard } from '../auth/guards';
 import { PaginationQueryParametersPipe } from '../shared/pipes';
 import { IPaginatePayload, IQueryParametersDTO } from '../shared/types';
-import { APP_CONSTANTS } from 'src/shared/constants';
+import { APP_CONSTANTS } from '../shared/constants';
 
 const PERMISSION = 'CAN_MANAGE_USERS';
 

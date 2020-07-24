@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { FindConditions, FindManyOptions } from 'typeorm';
 import { Faq } from './faqs.entity';
-import { FaqDTO } from './faqs.dto';
+import { FaqDTO } from './dtos';
 import { FaqsRepository } from './faqs.repository';
-import { IPaginatePayload, IQueryParametersDTO } from 'src/shared/types';
-import { AccountModeType } from 'src/account-modes/account-modes.types';
+import { IPaginatePayload, IQueryParametersDTO } from '../shared/types';
+import { AccountModeType } from '../account-modes/account-modes.types';
 
 @Injectable()
 export class FaqsService {

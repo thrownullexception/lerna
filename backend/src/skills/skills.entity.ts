@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToMany, JoinTable } from 'typeorm';
-import { SkillResource } from 'src/skill-resources/skill-resources.entity';
-import { SkillRoadMap } from 'src/skill-road-maps/skill-road-maps.entity';
+import { SkillResource } from '../skill-resources/skill-resources.entity';
+import { SkillRoadMap } from '../skill-road-maps/skill-road-maps.entity';
 
 @Entity('skills')
 export class Skill {

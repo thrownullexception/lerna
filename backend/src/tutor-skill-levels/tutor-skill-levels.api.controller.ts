@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { TutorSkillLevelsService } from './tutor-skill-levels.service';
-import { APP_CONSTANTS } from 'src/shared/constants';
+import { APP_CONSTANTS } from '../shared/constants';
 import { SystemValueTransformer } from '../shared/transformers';
 
 @Controller(APP_CONSTANTS.API_ROUTES_PREFIX('tutor-skill-levels'))

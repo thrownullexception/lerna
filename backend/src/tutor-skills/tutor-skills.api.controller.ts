@@ -11,12 +11,12 @@ import {
   Body,
   Patch,
 } from '@nestjs/common';
-import { APP_CONSTANTS } from 'src/shared/constants';
+import { APP_CONSTANTS } from '../shared/constants';
 import { AuthGuard } from '@nestjs/passport';
 import { TutorSkillTransformer } from './transfomers';
 import { TutorSkillsService } from './tutor-skills.service';
-import { AuthenticatedUser } from 'src/shared/decorators';
-import { TutorSkillDTO } from './tutor-skills.dto';
+import { AuthenticatedUser } from '../shared/decorators';
+import { TutorSkillDTO } from './dtos';
 
 @Controller(APP_CONSTANTS.API_ROUTES_PREFIX('tutor-skills'))
 @UseGuards(AuthGuard('jwt'))

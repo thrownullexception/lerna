@@ -2,9 +2,9 @@
 import { applyDecorators, UseGuards, Controller, UseInterceptors } from '@nestjs/common';
 import { AdminPermission } from './admin-permission.decorator';
 import { APP_CONSTANTS } from '../constants';
-import { PermissionsGuard } from 'src/auth/guards';
+import { PermissionsGuard } from '../../auth/guards';
 import { AuthGuard } from '@nestjs/passport';
-import { AUTH_CONTANTS } from 'src/auth/auth.constants';
+import { AUTH_CONTANTS } from '../../auth/auth.constants';
 import { SessionFlashInterceptor } from '../interceptors';
 
 export function AdminController(

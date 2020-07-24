@@ -12,12 +12,12 @@ import {
   Delete,
   Response,
 } from '@nestjs/common';
-import { APP_CONSTANTS } from 'src/shared/constants';
+import { APP_CONSTANTS } from '../shared/constants';
 import { AuthGuard } from '@nestjs/passport';
 import { ManageSessionQuizTransformer, NextSessionQuizTransformer } from './transformers';
 import { SessionQuizDTO, AnswerQuizDTO } from './dtos';
 import { SessionQuizzesService } from './session-quizzes.service';
-import { AuthenticatedUser } from 'src/shared/decorators';
+import { AuthenticatedUser } from '../shared/decorators';
 import { Response as ExpressResponse } from 'express';
 
 @Controller(APP_CONSTANTS.API_ROUTES_PREFIX('session-quizzes'))

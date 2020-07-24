@@ -1,6 +1,6 @@
 import { Skill } from '../skills.entity';
-import { SkillResourceTransformer } from 'src/skill-resources/skill-resources.transformer';
-import { SkillRoadMapTransformer } from 'src/skill-road-maps/skill-road-maps.types';
+import { SkillResourceTransformer } from '../../skill-resources/skill-resources.transformer';
+import { SkillRoadMapTransformer } from '../../skill-road-maps/skill-road-maps.types';
 
 export class SkillTransformer {
   id: string;

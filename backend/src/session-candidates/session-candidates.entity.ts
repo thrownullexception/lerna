@@ -1,8 +1,8 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
-import { Session } from 'src/sessions/sessions.entity';
-import { User } from 'src/users/users.entity';
-import { SessionCandidateStatus } from 'src/session-candidate-statuses/session-candidate-statuses.entity';
-import { SessionCandidateStatusTypes } from 'src/session-candidate-statuses/session-candidate-statuses.types';
+import { Session } from '../sessions/sessions.entity';
+import { User } from '../users/users.entity';
+import { SessionCandidateStatus } from '../session-candidate-statuses/session-candidate-statuses.entity';
+import { SessionCandidateStatusTypes } from '../session-candidate-statuses/session-candidate-statuses.types';
 
 @Entity('session_candidates')
 export class SessionCandidate {

@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsEnum, IsUUID, IsNumber } from 'class-validator';
-import { TutorSkillLevels } from 'src/tutor-skill-levels/tutor-skill-levels.types';
+import { TutorSkillLevels } from '../../tutor-skill-levels/tutor-skill-levels.types';
 
 export class TutorSkillDTO {
   @IsUUID(4)

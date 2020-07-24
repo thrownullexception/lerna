@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
-import { TutorSkillLevels } from 'src/tutor-skill-levels/tutor-skill-levels.types';
-import { Skill } from 'src/skills/skills.entity';
+import { TutorSkillLevels } from '../tutor-skill-levels/tutor-skill-levels.types';
+import { Skill } from '../skills/skills.entity';
 
 @Entity('tutor_skills')
 export class TutorSkill {

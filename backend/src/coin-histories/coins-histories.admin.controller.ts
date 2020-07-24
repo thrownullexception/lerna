@@ -5,7 +5,7 @@ import { PermissionsGuard } from '../auth/guards';
 import { AdminPermission } from '../shared/decorators';
 import { PaginationQueryParametersPipe } from '../shared/pipes';
 import { CoinHistoryService } from './coin-histories.service';
-import { IPaginatePayload, IQueryParametersDTO } from 'src/shared/types';
+import { IPaginatePayload, IQueryParametersDTO } from '../shared/types';
 
 const PERMISSION = 'CAN_MANAGE_COINS_HISTORY';
 

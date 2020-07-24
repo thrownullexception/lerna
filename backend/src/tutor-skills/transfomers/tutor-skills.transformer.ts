@@ -1,6 +1,6 @@
 import { TutorSkill } from '../tutor-skills.entity';
-import { TutorSkillLevels } from 'src/tutor-skill-levels/tutor-skill-levels.types';
-import { TutorSkillLevel } from 'src/tutor-skill-levels/tutor-skill-levels.entity';
+import { TutorSkillLevels } from '../../tutor-skill-levels/tutor-skill-levels.types';
+import { TutorSkillLevel } from '../../tutor-skill-levels/tutor-skill-levels.entity';
 
 export class TutorSkillTransformer {
   id: string;
