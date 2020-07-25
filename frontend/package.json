@@ -62,19 +62,6 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "lint-staged": {
-    "src/**/*.{ts,tsx}": [
-      "npm run format",
-      "npm run lint",
-      "git add"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "npm test"
-    }
-  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -92,8 +79,6 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "@types/jest": "^24.0.0",
-    "husky": "^3.1.0",
-    "lint-staged": "^9.5.0",
     "prettier": "^1.19.1",
     "tslint": "^5.20.1",
     "tslint-config-airbnb": "^5.11.2",
