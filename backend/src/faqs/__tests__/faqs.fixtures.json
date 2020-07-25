@@ -1,14 +1,14 @@
 [
     {
         "id": "c351ee24-9a21-44ac-ae92-766769f80233",
-        "question": "Question 1",
+        "question": "Question For Tutor 1",
         "answer": "Answer 1",
-        "accountModeSystemName": "tutor"
+        "account_mode_system_name": "tutor"
     },
     {
         "id": "b80bc459-8879-4a3d-822e-2c255c9832f3",
-        "question": "Question 2",
+        "question": "Question For Student 2",
         "answer": "Answer 2",
-        "accountModeSystemName": "student"
+        "account_mode_system_name": "student"
     }
 ]

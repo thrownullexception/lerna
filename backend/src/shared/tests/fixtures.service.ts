@@ -1,4 +1,4 @@
-import { Repository, getRepository } from 'typeorm';
+import { Repository, getRepository, getConnection } from 'typeorm';
 import * as Path from 'path';
 import * as fs from 'fs';
 import { isArray, isObject } from 'util';
@@ -89,10 +89,16 @@ export class FixturesService {
     if (items.length === 0) {
       return;
     }
-    await repository
-      .createQueryBuilder(repository.metadata.name)
-      .insert()
-      .values(items)
-      .execute();
+    await Promise.all(
+      items.map(dataToSeed => {
+        const fields = Object.keys(dataToSeed).join(',');
+        const values = Object.values(dataToSeed)
+          .map(value => `'${value}'`)
+          .join(',');
+        return repository.query(
+          `INSERT INTO ${repository.metadata.tableName} (${fields}) VALUES (${values});`,
+        );
+      }),
+    );
   }
 }

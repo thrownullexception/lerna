@@ -20,7 +20,7 @@ const customizeNunjucks = (nunjucksInstance: nunjucks.Environment) => {
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
-  const configService = new ConfigService();
+  const configService = app.get<ConfigService>(ConfigService);
 
   app.use(helmet());
   app.use(methodOverride('_method'));

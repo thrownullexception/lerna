@@ -34,14 +34,14 @@ describe('Faqs API Controller', () => {
         expect(body).toMatchInlineSnapshot(`
           Array [
             Object {
-              "answer": "Answer 2",
-              "id": "ccb15bbd-6d5d-4fcf-b1d2-336131d1b2f1",
-              "question": "Question 2",
+              "answer": "Answer 1",
+              "id": "c351ee24-9a21-44ac-ae92-766769f80233",
+              "question": "Question For Tutor 1",
             },
             Object {
-              "answer": "Answer 1",
-              "id": "4c033bed-bb4d-42d2-b9fd-88c62e3eefd4",
-              "question": "Question 1",
+              "answer": "Answer 2",
+              "id": "b80bc459-8879-4a3d-822e-2c255c9832f3",
+              "question": "Question For Student 2",
             },
           ]
         `);
@@ -59,8 +59,8 @@ describe('Faqs API Controller', () => {
           Array [
             Object {
               "answer": "Answer 1",
-              "id": "01b16a01-6be0-44d9-9599-5d3dd08100a5",
-              "question": "Question 1",
+              "id": "c351ee24-9a21-44ac-ae92-766769f80233",
+              "question": "Question For Tutor 1",
             },
           ]
         `);
@@ -78,8 +78,8 @@ describe('Faqs API Controller', () => {
           Array [
             Object {
               "answer": "Answer 2",
-              "id": "1d01a2db-d526-4e8f-94fb-e397e64202f6",
-              "question": "Question 2",
+              "id": "b80bc459-8879-4a3d-822e-2c255c9832f3",
+              "question": "Question For Student 2",
             },
           ]
         `);
