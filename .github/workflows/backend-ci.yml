@@ -46,7 +46,7 @@ jobs:
         DB_USER: postgres
         DB_PASSWORD: postgres
         DB_PORT: ${{ job.services.postgres.ports[5432] }}
-        DB_NAME: github_actions
+        DB_NAME: github_actions_test
       run: cd backend && npm run migrate
     - name: Run tests
       run: npm run test:backend
