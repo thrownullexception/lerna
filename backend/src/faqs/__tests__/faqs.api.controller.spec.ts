@@ -2,9 +2,9 @@ import { Test } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { FixturesService, TestingModule } from '../../shared/tests';
+import { APP_CONSTANTS } from '../../shared/constants';
 
 import { FaqsModule } from '../faqs.module';
-import { APP_CONSTANTS } from '../../shared/constants';
 
 describe('Faqs API Controller', () => {
   let app: INestApplication;
@@ -26,36 +26,65 @@ describe('Faqs API Controller', () => {
 
   it('API /GET faqs', async () => {
     return request(app.getHttpServer())
-      .get(APP_CONSTANTS.API_ROUTES_PREFIX('faqs'))
+      .get(APP_CONSTANTS.API_ROUTES_PREFIX('faqs', '/'))
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200)
       .expect(({ body }) => {
-        expect(body).toMatchInlineSnapshot();
+        expect(body).toMatchInlineSnapshot(`
+          Array [
+            Object {
+              "answer": "Answer 2",
+              "id": "ccb15bbd-6d5d-4fcf-b1d2-336131d1b2f1",
+              "question": "Question 2",
+            },
+            Object {
+              "answer": "Answer 1",
+              "id": "4c033bed-bb4d-42d2-b9fd-88c62e3eefd4",
+              "question": "Question 1",
+            },
+          ]
+        `);
       });
   });
 
-  // it('/GET faqs?account_mode=tutor', async () => {
-  //   return request(app.getHttpServer())
-  //   .get(APP_CONSTANTS.API_ROUTES_PREFIX('faqs') + '?account_mode=tutor')
-  //     .set('Accept', 'application/json')
-  //     .expect('Content-Type', /json/)
-  //     .expect(200)
-  //     .expect(({ body }) => {
-  //       expect(body).toMatchInlineSnapshot();
-  //     });
-  // });
+  it('/GET faqs?account_mode=tutor', async () => {
+    return request(app.getHttpServer())
+      .get(APP_CONSTANTS.API_ROUTES_PREFIX('faqs?account_mode=tutor', '/'))
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .expect(({ body }) => {
+        expect(body).toMatchInlineSnapshot(`
+          Array [
+            Object {
+              "answer": "Answer 1",
+              "id": "01b16a01-6be0-44d9-9599-5d3dd08100a5",
+              "question": "Question 1",
+            },
+          ]
+        `);
+      });
+  });
 
-  // it('/GET faqs?account_mode=student', async () => {
-  //   return request(app.getHttpServer())
-  //   .get(APP_CONSTANTS.API_ROUTES_PREFIX('faqs') + '?account_mode=student')
-  //     .set('Accept', 'application/json')
-  //     .expect('Content-Type', /json/)
-  //     .expect(200)
-  //     .expect(({ body }) => {
-  //       expect(body).toMatchInlineSnapshot();
-  //     });
-  // });
+  it('/GET faqs?account_mode=student', async () => {
+    return request(app.getHttpServer())
+      .get(APP_CONSTANTS.API_ROUTES_PREFIX('faqs?account_mode=student', '/'))
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .expect(({ body }) => {
+        expect(body).toMatchInlineSnapshot(`
+          Array [
+            Object {
+              "answer": "Answer 2",
+              "id": "1d01a2db-d526-4e8f-94fb-e397e64202f6",
+              "question": "Question 2",
+            },
+          ]
+        `);
+      });
+  });
 
   afterAll(async () => {
     await app.close();
