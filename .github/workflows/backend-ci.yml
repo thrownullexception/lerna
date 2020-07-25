@@ -42,7 +42,7 @@ jobs:
     # - run: npm run build --if-present
     - name: Run migrations
       env:
-        DB_HOST: postgres
+        DB_HOST: 127.0.0.1
         DB_USER: postgres
         DB_PASSWORD: postgres
         DB_PORT: ${{ job.services.postgres.ports[5432] }}
