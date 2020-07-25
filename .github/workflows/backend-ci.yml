@@ -54,5 +54,5 @@ jobs:
         DB_USER: postgres
         DB_PASSWORD: postgres
         DB_PORT: ${{ job.services.postgres.ports[5432] }}
-        DB_NAME: github_actions_test
+        DB_NAME: github_actions
       run: npm run test:backend
