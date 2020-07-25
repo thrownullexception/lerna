@@ -1,4 +1,4 @@
-import { FormsAction } from '../forms/forms.types';
+import { RequestStatusAction } from '../request-status/request-status.types';
 import { TutorSessionResponse, StudentSessionResponse } from './responses';
 import { CursorData } from '../types';
 
@@ -27,7 +27,7 @@ interface IDefaultAction {
 }
 
 export type SessionsActionTypes =
-  | FormsAction
+  | RequestStatusAction
   | ISetStudentSessions
   | ISetTutorSessions
   | IDefaultAction;

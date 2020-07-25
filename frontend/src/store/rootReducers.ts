@@ -4,7 +4,7 @@ import { history } from './history';
 import { faqsReducer } from '../app/faqs/faqs.reducers';
 import { authReducer } from '../app/auth/auth.reducers';
 import { skillsReducer } from '../app/skills/skills.reducers';
-import { formsReducer } from '../app/forms/forms.reducers';
+import { requestStatusReducer } from '../app/request-status/request-status.reducers';
 import { sessionReducer } from '../app/sessions/sessions.reducers';
 
 const rootReducers = combineReducers({
@@ -12,7 +12,7 @@ const rootReducers = combineReducers({
   faqs: faqsReducer,
   skills: skillsReducer,
   auth: authReducer,
-  form: formsReducer,
+  requestStatus: requestStatusReducer,
   sessions: sessionReducer,
 });
 

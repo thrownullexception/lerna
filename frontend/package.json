@@ -57,7 +57,9 @@
     "reactstrap": "^8.2.0",
     "redux-persist": "^6.0.0",
     "reselect": "^4.0.0",
-    "typescript": "~3.7.2"
+    "typesafe-actions": "^5.1.0",
+    "typescript": "~3.7.2",
+    "uuid": "^8.2.0"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -1,19 +1,19 @@
 import { createSelector } from 'reselect';
 import { IStore } from '../../store/rootReducers';
-import { SkillResponse } from './responses';
+import { SkillResponse, SkillHierarchyResponse } from './responses';
 
 export class SkillsSelectors {
   static base(state: IStore) {
     return state.skills;
   }
 
-  static selectSkillsHierarchies(state: IStore) {
+  static selectSkillsHierarchies(state: IStore): SkillHierarchyResponse[] {
     return createSelector(SkillsSelectors.base, ({ hierarchies }) => {
       return hierarchies;
     })(state);
   }
 
-  static selectSkillsInHierarchy(state: IStore) {
+  static selectSkillsInHierarchy(state: IStore): SkillResponse[] {
     return createSelector(
       [SkillsSelectors.base, SkillsSelectors.selectSkillsHierarchies],
       ({ skills, currentStudentSkillId }, hierarchies) => {
@@ -39,13 +39,13 @@ export class SkillsSelectors {
     })(state);
   }
 
-  static selectCurrentStudentSkill(state: IStore) {
+  static selectCurrentStudentSkill(state: IStore): SkillResponse {
     return createSelector(SkillsSelectors.base, ({ studentSkill }) => {
       return studentSkill;
     })(state);
   }
 
-  static selectSkillsDepth(state: IStore) {
+  static selectSkillsDepth(state: IStore): string[] {
     return createSelector(SkillsSelectors.base, ({ skillsDepth }) => {
       return skillsDepth;
     })(state);

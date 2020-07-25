@@ -4,7 +4,7 @@ import { Redirect } from 'react-router';
 import { IStore } from '../store/rootReducers';
 import { DashboardPath } from '../screens/Dashboard';
 import { NavigationService } from '../services';
-import { selectAccountMode } from '../app/auth/auth.selectors';
+import { AuthSelectors } from '../app/auth/auth.selectors';
 import { AccountModeType } from '../app/auth/auth.types';
 import { authenticationGuard } from './authentication.guard';
 
@@ -33,7 +33,7 @@ export function studentGuard(
   }
 
   const mapStateToProps = (state: IStore) => ({
-    accountMode: selectAccountMode(state),
+    accountMode: AuthSelectors.selectAccountMode(state),
   });
 
   return connect(mapStateToProps)(GuardedComponent) as React.ComponentType;

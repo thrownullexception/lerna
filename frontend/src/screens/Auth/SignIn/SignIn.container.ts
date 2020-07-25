@@ -4,11 +4,11 @@ import { IStore } from '../../../store/rootReducers';
 import { SignIn } from './SignIn';
 import { DispatchProps, StateProps, ISignInForm } from './SignIn.types';
 import { doSignIn } from '../../../app/auth/auth.actions';
-import { selectAuthIsMakingRequest } from '../../../app/auth/auth.selectors';
+import { RequestStatusSelectors } from '../../../app/request-status/request-status.selectors';
 
 const mapStateToProps = (state: IStore): StateProps => {
   return {
-    isMakingRequest: selectAuthIsMakingRequest(state),
+    isMakingRequest: RequestStatusSelectors.selectIsMakingFormRequest(state),
   };
 };
 

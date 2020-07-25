@@ -4,6 +4,7 @@ import { Redirect } from 'react-router';
 import { IStore } from '../store/rootReducers';
 import { AuthSignInPath } from '../screens/Auth/Auth.types';
 import { NavigationService } from '../services';
+import { AuthSelectors } from '../app/auth/auth.selectors';
 
 interface IProps {
   isAuthenticated: boolean;
@@ -34,7 +35,7 @@ export function authenticationGuard(
   }
 
   const mapStateToProps = (state: IStore) => ({
-    isAuthenticated: state.auth.authenticated,
+    isAuthenticated: AuthSelectors.selectIsAuthenticated(state),
   });
 
   return connect(mapStateToProps)(AuthenticatedComponent) as React.ComponentType;

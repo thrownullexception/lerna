@@ -2,6 +2,7 @@ import React from 'react';
 import { connect, ConnectedComponent } from 'react-redux';
 import { IStore } from '../store/rootReducers';
 import { Redirect } from 'react-router';
+import { AuthSelectors } from '../app/auth/auth.selectors';
 
 interface IProps {
   isAuthenticated: boolean;
@@ -35,7 +36,7 @@ export function permissionGaurd(
   }
 
   const mapStateToProps = (state: IStore) => ({
-    isAuthenticated: state.auth.authenticated,
+    isAuthenticated: AuthSelectors.selectIsAuthenticated(state),
     permissions: [],
     role: state.auth.role,
   });

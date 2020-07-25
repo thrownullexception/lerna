@@ -8,10 +8,14 @@ import { ISignUpForm } from '../../screens/Auth/SignUp/SignUp.types';
 import { DashboardPath } from '../../screens/Dashboard';
 import { AuthSignInPath } from '../../screens/Auth/Auth.types';
 import { SignInResponse } from './responses';
+import {
+  RequestStatusActionType,
+  RequestStatusAction,
+} from '../request-status/request-status.types';
 
 export const doSignUp = (signUpForm: ISignUpForm): ThunkInterface<void> => {
-  return async (dispatch: Dispatch<AuthAction>) => {
-    dispatch(action(ActionType.MAKING_AUTH_REQUEST));
+  return async (dispatch: Dispatch<AuthAction | RequestStatusAction>) => {
+    dispatch(action(RequestStatusActionType.FORM_REQUEST_STARTED));
     try {
       const {
         data: { id },
@@ -27,7 +31,7 @@ export const doSignUp = (signUpForm: ISignUpForm): ThunkInterface<void> => {
     } catch (e) {
       ToastService.error(e);
     }
-    dispatch(action(ActionType.AUTH_REQUEST_ENDED));
+    dispatch(action(RequestStatusActionType.FORM_REQUEST_ENDED));
   };
 };
 
@@ -45,14 +49,14 @@ export const changeAccountMode = (mode: AccountModeType): ThunkInterface<void> =
 };
 
 export const doSignIn = (signInForm: ISignInForm): ThunkInterface<void> => {
-  return async (dispatch: Dispatch<AuthAction>) => {
-    dispatch(action(ActionType.MAKING_AUTH_REQUEST));
+  return async (dispatch: Dispatch<AuthAction | RequestStatusAction>) => {
+    dispatch(action(RequestStatusActionType.FORM_REQUEST_STARTED));
     try {
       const response = await RequestService.post('auth/signin', signInForm);
       const signInResponse = new SignInResponse(response.data);
       if (response.data.responseMeta === 'ACCOUNT_VERIFICATION_FAILED') {
         ToastService.error('Account Not Verifed');
-        dispatch(action(ActionType.AUTH_REQUEST_ENDED));
+        dispatch(action(RequestStatusActionType.FORM_REQUEST_ENDED));
         return;
       }
       dispatch(action(ActionType.AUTHENTICATE_USER, signInResponse));
@@ -61,7 +65,7 @@ export const doSignIn = (signInForm: ISignInForm): ThunkInterface<void> => {
     } catch (e) {
       ToastService.error(e);
     }
-    dispatch(action(ActionType.AUTH_REQUEST_ENDED));
+    dispatch(action(RequestStatusActionType.FORM_REQUEST_ENDED));
   };
 };
 
