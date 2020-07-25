@@ -4,14 +4,16 @@
     "description": "Coming Soon",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"No tests yet\"",
         "start:frontend": "cd frontend && npm start",
         "start:backend": "cd backend && npm run start:dev",
         "lint:backend": "cd backend && npm run lint",
         "lint:frontend": "cd frontend && npm run lint",
+        "test:backend": "cd backend && npm run test",
+        "test:frontend": "cd frontend && npm run test",
         "prettify:frontend": "prettier --write \"frontend/src/**/*.{ts,tsx}\"",
-        "prettify:backend": "prettier --write \"BackEnd/src/**/*.ts\"",
+        "prettify:backend": "prettier --write \"backend/src/**/*.ts\"",
         "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
+        "test": "concurrently \"npm run test:frontend\" \"npm run test:backend\"",
         "lint": "concurrently \"npm run lint:frontend\" \"npm run lint:backend\""
     },
     "devDependencies": {
