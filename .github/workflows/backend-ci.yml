@@ -49,6 +49,7 @@ jobs:
         DB_NAME: github_actions_test
       run: cd backend && npm run migrate
     - name: Run tests
+      env:
         DB_HOST: 127.0.0.1
         DB_USER: postgres
         DB_PASSWORD: postgres
