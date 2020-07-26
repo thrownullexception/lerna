@@ -1,2 +1,2 @@
 export { SkillTransformer } from './skills.transformer';
-export { BareSkillTransformer } from './bare-skill.transformer';
+export { AllSkillTransformer } from './all-skill.transformer';

@@ -1,29 +1,20 @@
-// import { createSlice, PayloadAction, configureStore, combineReducers } from '@reduxjs/toolkit';
-// import { FaqResponse } from './responses';
-// import { IFaqState, FaqsActionType, ActionType } from './faqs.types';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { FaqResponse } from './responses';
 
-// const initial: IFaqState = {
-//   faqs: [],
-//   faq: new FaqResponse({}),
-//   isFetching: false,
-// };
+interface IState {
+  faqs: FaqResponse[];
+}
 
-// const faqsSlice = createSlice({
-//   name: 'faqs',
-//   initialState: initial,
-//   reducers: {
-//     setFaqs: (state, { payload }: PayloadAction<FaqResponse[]>) => {
-//       state.faqs = payload;
-//     },
-//   },
-// });
+const initial: IState = {
+  faqs: [],
+};
 
-// const reducer = combineReducers({
-//   faqs: faqsSlice.reducer,
-// });
-
-// export const store = configureStore({
-//   reducer,
-// });
-
-export const kiss = 'foo';
+export const faqsSlice = createSlice({
+  name: 'faqs',
+  initialState: initial,
+  reducers: {
+    setFaqs: (state, { payload }: PayloadAction<FaqResponse[]>) => {
+      state.faqs = payload;
+    },
+  },
+});

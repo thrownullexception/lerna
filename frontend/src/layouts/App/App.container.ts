@@ -3,7 +3,7 @@ import { IThunkDispatch } from '../../shared/types';
 import { IStore } from '../../store/rootReducers';
 import { AppLayout } from './App';
 import { DispatchProps, StateProps } from './App.types';
-import { doLogOut, changeAccountMode } from '../../app/auth/auth.actions';
+import { AuthActions } from '../../app/auth/auth.actions';
 import { AuthSelectors } from '../../app/auth/auth.selectors';
 import { AccountModeType } from '../../app/auth/auth.types';
 
@@ -19,10 +19,10 @@ const mapStateToProps = (state: IStore): StateProps => {
 const mapDispatchToProps = (dispatch: IThunkDispatch): DispatchProps => {
   return {
     doLogOut: () => {
-      dispatch(doLogOut());
+      dispatch(AuthActions.doLogOut());
     },
     changeAccountMode: (mode: AccountModeType) => {
-      dispatch(changeAccountMode(mode));
+      dispatch(AuthActions.changeAccountMode(mode));
     },
   };
 };

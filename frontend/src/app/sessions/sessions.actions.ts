@@ -1,19 +1,18 @@
 import { Dispatch } from 'redux';
-import { action } from 'typesafe-actions';
 import { ThunkInterface } from '../../shared/types';
-import { SessionsActionTypes, ActionType } from './sessions.types';
 import { AccountModeType } from '../auth/auth.types';
 import { RequestService, ToastService, ProgressService } from '../../services';
 import { addUUIDToForm, transformCursorData, queryStringifyCursor } from '../utils';
 import { ICreateSessionForm } from '../../screens/Sessions/Create/CreateSession.types';
 import { StudentSessionResponse, TutorSessionResponse } from './responses';
 import { Cursor } from '../types';
+import { sessionsSlice } from './sessions.ducks';
 
 const BASE_PATH = 'sessions';
 
 export class SessionsActions {
   static createSession(createSessionForm: ICreateSessionForm): ThunkInterface<void> {
-    return async (dispatch: Dispatch<SessionsActionTypes>) => {
+    return async (dispatch: Dispatch) => {
       // dispatch(FormsActions.formRequestStarted());
       try {
         await RequestService.post(BASE_PATH, addUUIDToForm(createSessionForm));
@@ -31,15 +30,14 @@ export class SessionsActions {
   }
 
   static fetchStudentSessions(cursor: Cursor): ThunkInterface<void> {
-    return async (dispatch: Dispatch<SessionsActionTypes>) => {
+    return async (dispatch: Dispatch) => {
       ProgressService.start();
       try {
         const { data } = await RequestService.get(
           `${BASE_PATH}/${AccountModeType.Student}${queryStringifyCursor(cursor)}`,
         );
         dispatch(
-          action(
-            ActionType.SET_STUDENT_SESSIONS,
+          sessionsSlice.actions.setStudentSessions(
             transformCursorData<StudentSessionResponse>(data, StudentSessionResponse),
           ),
         );
@@ -51,15 +49,14 @@ export class SessionsActions {
   }
 
   static fetchTutorSessions(cursor: Cursor): ThunkInterface<void> {
-    return async (dispatch: Dispatch<SessionsActionTypes>) => {
+    return async (dispatch: Dispatch) => {
       ProgressService.start();
       try {
         const { data } = await RequestService.get(
           `${BASE_PATH}/${AccountModeType.Tutor}${queryStringifyCursor(cursor)}`,
         );
         dispatch(
-          action(
-            ActionType.SET_STUDENT_SESSIONS,
+          sessionsSlice.actions.setTutorSessions(
             transformCursorData<TutorSessionResponse>(data, TutorSessionResponse),
           ),
         );

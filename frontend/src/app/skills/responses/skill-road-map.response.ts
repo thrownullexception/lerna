@@ -1,4 +1,4 @@
-import get from 'lodash/fp/get';
+import get from 'lodash-es/get';
 
 export class SkillRoadMapResponse {
   id: string;
@@ -8,10 +8,10 @@ export class SkillRoadMapResponse {
   description: string;
 
   constructor(jsonObject: object) {
-    this.id = get('id', jsonObject);
-    this.level = get('level', jsonObject);
-    this.order = get('order', jsonObject);
-    this.title = get('title', jsonObject);
-    this.description = get('description', jsonObject);
+    this.id = get(jsonObject, 'id');
+    this.level = get(jsonObject, 'level');
+    this.order = get(jsonObject, 'order');
+    this.title = get(jsonObject, 'title');
+    this.description = get(jsonObject, 'description');
   }
 }

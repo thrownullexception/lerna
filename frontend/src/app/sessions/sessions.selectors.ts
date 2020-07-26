@@ -12,12 +12,12 @@ export class SessionsSelectors {
     return createSelector(SessionsSelectors.base, ({ tutorSessions }) => tutorSessions)(state);
   }
 
-  static selectStudentSessions$1(state: IStore): CursorData<TutorSessionResponse> {
+  static selectStudentSessions$1(state: IStore): CursorData<StudentSessionResponse> {
     return createSelector(SessionsSelectors.base, ({ studentSessions }) => studentSessions)(state);
   }
 
   static selectStudentSessionsData(state: IStore): StudentSessionResponse[] {
-    return createSelector(SessionsSelectors.selectTutorSessions$1, ({ data }) => data)(state);
+    return createSelector(SessionsSelectors.selectStudentSessions$1, ({ data }) => data)(state);
   }
 
   static selectStudentSessionCursor(state: IStore): Cursor {

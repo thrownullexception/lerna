@@ -1,5 +1,5 @@
 import { RequestService } from '../../services';
-import get from 'lodash/fp/get';
+import get from 'lodash-es/get';
 
 export const required = (value: string) =>
   value || typeof value === 'number' ? undefined : ('Required' as string);
@@ -20,7 +20,7 @@ export const minValue = (min: number) => (value: number) =>
   value && value < min ? `Must be at least ${min}` : undefined;
 
 export const matchOtherField = (otherField: string) => (value: string, allValues: object) =>
-  get([otherField], allValues) === value ? undefined : 'Not Matching';
+  get(allValues, [otherField]) === value ? undefined : 'Not Matching';
 
 export const alphaNumeric = (value: string) =>
   value && /[^a-zA-Z0-9 ]/i.test(value) ? 'Only alphanumeric characters' : undefined;

@@ -1,4 +1,4 @@
-import get from 'lodash/fp/get';
+import get from 'lodash-es/get';
 
 import { AccountModeType } from '../auth.types';
 
@@ -11,12 +11,12 @@ export class SignInResponse {
   id: string;
   token: string;
   constructor(jsonObject: Record<string, string>) {
-    this.id = get('id', jsonObject);
-    this.token = get('jwtToken', jsonObject);
-    this.email = get('email', jsonObject);
-    this.lastName = get('lastName', jsonObject);
-    this.firstName = get('firstName', jsonObject);
-    this.picture = get('picture', jsonObject);
-    this.accountMode = get('accountMode', jsonObject) as AccountModeType;
+    this.id = get(jsonObject, 'id');
+    this.token = get(jsonObject, 'jwtToken');
+    this.email = get(jsonObject, 'email');
+    this.lastName = get(jsonObject, 'lastName');
+    this.firstName = get(jsonObject, 'firstName');
+    this.picture = get(jsonObject, 'picture');
+    this.accountMode = get(jsonObject, 'accountMode') as AccountModeType;
   }
 }

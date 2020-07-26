@@ -3,7 +3,7 @@ import { IThunkDispatch } from '../../../shared/types';
 import { IStore } from '../../../store/rootReducers';
 import { SignIn } from './SignIn';
 import { DispatchProps, StateProps, ISignInForm } from './SignIn.types';
-import { doSignIn } from '../../../app/auth/auth.actions';
+import { AuthActions } from '../../../app/auth/auth.actions';
 import { RequestStatusSelectors } from '../../../app/request-status/request-status.selectors';
 
 const mapStateToProps = (state: IStore): StateProps => {
@@ -15,7 +15,7 @@ const mapStateToProps = (state: IStore): StateProps => {
 const mapDispatchToProps = (dispatch: IThunkDispatch): DispatchProps => {
   return {
     doSignIn: (signInForm: ISignInForm) => {
-      dispatch(doSignIn(signInForm));
+      dispatch(AuthActions.doSignIn(signInForm));
     },
   };
 };
