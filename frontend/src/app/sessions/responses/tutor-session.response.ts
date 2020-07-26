@@ -1,13 +1,15 @@
-import get from 'lodash/fp/get';
+import get from 'lodash-es/get';
 
 export class TutorSessionResponse {
   question: string;
   answer: string;
+  yyyyyyy: string;
   id: string;
 
   constructor(jsonObject: object) {
-    this.id = get('id', jsonObject);
-    this.question = get('question', jsonObject);
-    this.answer = get('answer', jsonObject);
+    this.id = get(jsonObject, 'id');
+    this.question = get(jsonObject, 'question');
+    this.yyyyyyy = get(jsonObject, 'yyyyyyy');
+    this.answer = get(jsonObject, 'answer');
   }
 }

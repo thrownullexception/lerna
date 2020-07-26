@@ -1,21 +1,20 @@
+import { combineReducers } from '@reduxjs/toolkit';
 import { connectRouter } from 'connected-react-router';
-import { combineReducers } from 'redux';
 import { history } from './history';
-import { faqsReducer } from '../app/faqs/faqs.reducers';
-import { authReducer } from '../app/auth/auth.reducers';
-import { skillsReducer } from '../app/skills/skills.reducers';
-import { formsReducer } from '../app/forms/forms.reducers';
-import { sessionReducer } from '../app/sessions/sessions.reducers';
 
-const rootReducers = combineReducers({
+import { faqsSlice } from '../app/faqs/faqs.ducks';
+import { requestStatusSlice } from '../app/request-status/request-status.ducks';
+import { sessionsSlice } from '../app/sessions/sessions.ducks';
+import { authSlice } from '../app/auth/auth.ducks';
+import { skillsSlice } from '../app/skills/skills.ducks';
+
+export const rootReducers = combineReducers({
   router: connectRouter(history),
-  faqs: faqsReducer,
-  skills: skillsReducer,
-  auth: authReducer,
-  form: formsReducer,
-  sessions: sessionReducer,
+  faqs: faqsSlice.reducer,
+  requestStatus: requestStatusSlice.reducer,
+  sessions: sessionsSlice.reducer,
+  auth: authSlice.reducer,
+  skills: skillsSlice.reducer,
 });
-
-export default rootReducers;
 
 export type IStore = ReturnType<typeof rootReducers>;

@@ -1,6 +1,6 @@
 import { Controller, Get, Param, ParseUUIDPipe, UseGuards } from '@nestjs/common';
 import { SkillsService } from './skills.service';
-import { SkillTransformer, BareSkillTransformer } from './transfomers';
+import { SkillTransformer, AllSkillTransformer } from './transfomers';
 import { APP_CONSTANTS } from '../shared/constants';
 import { SkillHierarchyTransformer } from '../skill-hierarchies/transformers';
 import { AuthGuard } from '@nestjs/passport';
@@ -24,10 +24,10 @@ export class SkillsApiController {
     };
   }
 
-  @Get('bare')
-  async bareSkills(): Promise<BareSkillTransformer[]> {
+  @Get('all')
+  async allSkills(): Promise<AllSkillTransformer[]> {
     const skills = await this.skillsService.getSkillsNamesAndIds();
-    return skills.map(skill => new BareSkillTransformer(skill));
+    return skills.map(skill => new AllSkillTransformer(skill));
   }
 
   @Get(':skillId')

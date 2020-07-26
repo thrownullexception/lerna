@@ -1,4 +1,4 @@
-import get from 'lodash/fp/get';
+import get from 'lodash-es/get';
 
 export class SkillHierarchyResponse {
   id: string;
@@ -7,9 +7,9 @@ export class SkillHierarchyResponse {
   parentId: string;
 
   constructor(jsonObject: object) {
-    this.id = get('id', jsonObject);
-    this.order = get('order', jsonObject);
-    this.childId = get('childId', jsonObject);
-    this.parentId = get('parentId', jsonObject);
+    this.id = get(jsonObject, 'id');
+    this.order = get(jsonObject, 'order');
+    this.childId = get(jsonObject, 'childId');
+    this.parentId = get(jsonObject, 'parentId');
   }
 }

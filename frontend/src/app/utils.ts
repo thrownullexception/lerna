@@ -1,6 +1,6 @@
 import { v4 } from 'uuid';
 import { CursorData, Cursor } from './types';
-import set from 'lodash/fp/set';
+import set from 'lodash-es/set';
 
 export const addUUIDToForm = (form: object): object => ({ ...form, id: v4() });
 
@@ -17,10 +17,10 @@ export function transformCursorData<T>(
 export function queryStringifyCursor(cursor: Cursor, filters: Record<string, string> = {}): string {
   let filters$1 = filters;
   if (cursor.afterCursor) {
-    filters$1 = set('afterCursor', cursor.afterCursor, filters$1);
+    filters$1 = set(filters$1, 'afterCursor', cursor.afterCursor);
   }
   if (cursor.beforeCursor) {
-    filters$1 = set('beforeCursor', cursor.beforeCursor, filters$1);
+    filters$1 = set(filters$1, 'beforeCursor', cursor.beforeCursor);
   }
   const querystring = Object.entries(filters$1)
     .map(([key, value]) => `${key}=${value}`)

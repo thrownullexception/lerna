@@ -1,20 +1,19 @@
 import { Dispatch } from 'redux';
-import { action } from 'typesafe-actions';
 import { ThunkInterface } from '../../shared/types';
-import { SkillsAction, ActionType } from './skills.types';
 import { RequestService, ToastService, ProgressService } from '../../services';
-import { SkillsWithHierarchiesResponse, SkillResponse, BareSkillResponse } from './responses';
+import { SkillsWithHierarchiesResponse, SkillResponse, AllSkillResponse } from './responses';
+import { skillsSlice } from './skills.ducks';
 
 const BASE_REQUEST_PATH = 'skills';
 
 export class SkillActions {
   static getSkillsWithHeirarchies(): ThunkInterface<void> {
-    return async (dispatch: Dispatch<SkillsAction>) => {
+    return async (dispatch: Dispatch) => {
       ProgressService.start();
       try {
         const { data } = await RequestService.get(`${BASE_REQUEST_PATH}/with-hierarchies`);
         dispatch(
-          action(ActionType.SET_SKILLS_WITH_HIERARCHIES, new SkillsWithHierarchiesResponse(data)),
+          skillsSlice.actions.setSkillsWithHierarchies(new SkillsWithHierarchiesResponse(data)),
         );
       } catch (e) {
         ToastService.error(e);
@@ -23,14 +22,13 @@ export class SkillActions {
     };
   }
 
-  static getBareSkills(): ThunkInterface<void> {
-    return async (dispatch: Dispatch<SkillsAction>) => {
+  static getAllSkills(): ThunkInterface<void> {
+    return async (dispatch: Dispatch) => {
       try {
-        const { data } = await RequestService.get(`${BASE_REQUEST_PATH}/bare`);
+        const { data } = await RequestService.get(`${BASE_REQUEST_PATH}/all`);
         dispatch(
-          action(
-            ActionType.SET_BARE_SKILLS,
-            data.map((datum: object) => new BareSkillResponse(datum)),
+          skillsSlice.actions.setAllSkills(
+            data.map((datum: object) => new AllSkillResponse(datum)),
           ),
         );
       } catch (e) {
@@ -40,23 +38,23 @@ export class SkillActions {
   }
 
   static goBackInSkillsDepth(): ThunkInterface<void> {
-    return async (dispatch: Dispatch<SkillsAction>) => {
-      dispatch(action(ActionType.GO_BACK_IN_SKILLS_DEPTH));
+    return async (dispatch: Dispatch) => {
+      dispatch(skillsSlice.actions.goBackInSkillsDepth());
     };
   }
 
   static setCurrentSkillId(skillId: string): ThunkInterface<void> {
-    return async (dispatch: Dispatch<SkillsAction>) => {
-      dispatch(action(ActionType.SET_CURRENT_SKILL_ID, skillId));
+    return async (dispatch: Dispatch) => {
+      dispatch(skillsSlice.actions.setCurrentSkillId(skillId));
     };
   }
 
   static getStudentSkill(skillId: string): ThunkInterface<void> {
-    return async (dispatch: Dispatch<SkillsAction>) => {
+    return async (dispatch: Dispatch) => {
       ProgressService.start();
       try {
         const { data } = await RequestService.get(`${BASE_REQUEST_PATH}/${skillId}`);
-        dispatch(action(ActionType.SET_STUDENT_SKILL, new SkillResponse(data)));
+        dispatch(skillsSlice.actions.setStudentSkill(new SkillResponse(data)));
       } catch (e) {
         ToastService.error(e);
       }

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Radio, Button, Input, Switch, Icon } from 'antd';
 import { PaginationConfig, SorterResult } from 'antd/lib/table';
-import get from 'lodash/get';
+import get from 'lodash-es/get';
 
 export enum FilterTypes {
   TEXT_SEARCH = 'text_search',

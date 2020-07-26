@@ -1,4 +1,4 @@
-import get from 'lodash/fp/get';
+import get from 'lodash-es/get';
 
 export class SkillResourceResponse {
   id: string;
@@ -7,9 +7,9 @@ export class SkillResourceResponse {
   mediaType: string;
 
   constructor(jsonObject: object) {
-    this.id = get('id', jsonObject);
-    this.title = get('title', jsonObject);
-    this.link = get('link', jsonObject);
-    this.mediaType = get('mediaType', jsonObject);
+    this.id = get(jsonObject, 'id');
+    this.title = get(jsonObject, 'title');
+    this.link = get(jsonObject, 'link');
+    this.mediaType = get(jsonObject, 'mediaType');
   }
 }

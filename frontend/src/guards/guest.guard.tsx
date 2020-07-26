@@ -2,6 +2,7 @@ import React from 'react';
 import { connect, ConnectedComponent } from 'react-redux';
 import { Redirect } from 'react-router';
 import { IStore } from '../store/rootReducers';
+import { AuthSelectors } from '../app/auth/auth.selectors';
 
 interface IProps {
   isAuthenticated: boolean;
@@ -27,7 +28,7 @@ export function guestGuard(
   }
 
   const mapStateToProps = (state: IStore) => ({
-    isAuthenticated: state.auth.authenticated,
+    isAuthenticated: AuthSelectors.selectIsAuthenticated(state),
   });
 
   return connect(mapStateToProps)(AuthenticatedComponent) as React.ComponentType;

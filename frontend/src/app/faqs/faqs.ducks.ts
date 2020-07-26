@@ -1,14 +1,15 @@
-import { createSlice, PayloadAction, configureStore, combineReducers } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { FaqResponse } from './responses';
-import { IFaqState, FaqsActionType, ActionType } from './faqs.types';
 
-const initial: IFaqState = {
+interface IState {
+  faqs: FaqResponse[];
+}
+
+const initial: IState = {
   faqs: [],
-  faq: new FaqResponse({}),
-  isFetching: false,
 };
 
-const faqsSlice = createSlice({
+export const faqsSlice = createSlice({
   name: 'faqs',
   initialState: initial,
   reducers: {
@@ -16,12 +17,4 @@ const faqsSlice = createSlice({
       state.faqs = payload;
     },
   },
-});
-
-const reducer = combineReducers({
-  faqs: faqsSlice.reducer,
-});
-
-export const store = configureStore({
-  reducer,
 });

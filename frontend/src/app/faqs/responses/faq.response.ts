@@ -1,4 +1,4 @@
-import get from 'lodash/fp/get';
+import get from 'lodash-es/get';
 
 export class FaqResponse {
   question: string;
@@ -6,8 +6,8 @@ export class FaqResponse {
   id: string;
 
   constructor(jsonObject: object) {
-    this.id = get('id', jsonObject);
-    this.question = get('question', jsonObject);
-    this.answer = get('answer', jsonObject);
+    this.id = get(jsonObject, 'id');
+    this.question = get(jsonObject, 'question');
+    this.answer = get(jsonObject, 'answer');
   }
 }
