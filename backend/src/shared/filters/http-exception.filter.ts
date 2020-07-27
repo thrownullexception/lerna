@@ -10,6 +10,7 @@ import { Request, Response } from 'express';
 import { Logger } from 'winston';
 import { ValidationError } from 'class-validator';
 import { APP_CONSTANTS } from '../constants';
+import { get } from 'lodash';
 
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
@@ -44,14 +45,15 @@ export class HttpExceptionFilter implements ExceptionFilter {
           response.redirect(APP_CONSTANTS.ADMIN_ROUTES_PREFIX('dashboard', '/'));
 
         case HttpStatus.BAD_REQUEST:
-          // Some logging is needed here
-          console.log(request.headers.referer);
-          console.log(exception.getResponse());
-        // response.redirect(APP_CONSTANTS.ADMIN_ROUTES_PREFIX('dashboard', '/'));
+          const message = get(
+            exception.getResponse(),
+            ['message'],
+            'Some nasty thing has been done',
+          );
+          request.session.flash = { error: message[0] };
+          response.redirect(request.headers.referer);
       }
     }
-
-    console.log(exception);
 
     if (status === HttpStatus.BAD_REQUEST && typeof exception.message === 'object') {
       errorResponse.validations = this.transformClassValidatorsErrors(exception.message);

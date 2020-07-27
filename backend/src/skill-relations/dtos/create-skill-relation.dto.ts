@@ -1,10 +1,14 @@
 import { IsNotEmpty, IsUUID } from 'class-validator';
+import { Unique } from '../../shared/constraints';
 
 export class CreateSkillRelationDTO {
   @IsNotEmpty({
     message: 'Skill A is required',
   })
   @IsUUID(4)
+  @Unique('SkillRelation', {
+    message: 'Relation Ship exists',
+  })
   skillAId: string;
 
   @IsNotEmpty({

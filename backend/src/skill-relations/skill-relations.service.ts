@@ -11,8 +11,8 @@ export class SkillRelationsService {
     const alreadyExist = this.skillRelationsRepository.listSkillRelations({
       where: [
         {
-          skillAId: skillAId,
-          skillBId: skillBId,
+          skillAId,
+          skillBId,
         },
         {
           skillBId: skillAId,

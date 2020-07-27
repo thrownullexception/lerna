@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import { getRepository, Not } from 'typeorm';
 import { get } from 'lodash';
 import {
@@ -42,7 +43,7 @@ export class UniqueConstraint implements ValidatorConstraintInterface {
 export function Unique(
   RepositoryModel: string,
   validationOptions?: UniqueConstraintValidationOptions,
-) {
+): (object: object, propertyName: string) => void {
   return (object: object, propertyName: string): void => {
     registerDecorator({
       target: object.constructor,
