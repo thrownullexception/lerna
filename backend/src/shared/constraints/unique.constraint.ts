@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import { getRepository, Not } from 'typeorm';
+import { get } from 'lodash';
 import {
   registerDecorator,
   ValidationOptions,
@@ -7,16 +9,19 @@ import {
   ValidationArguments,
 } from 'class-validator';
 
-class Serializable {}
+interface UniqueConstraintValidationOptions extends ValidationOptions {
+  columnName?: string;
+}
 
 @ValidatorConstraint({ async: true })
 export class UniqueConstraint implements ValidatorConstraintInterface {
   async validate(field: string, args: ValidationArguments): Promise<boolean> {
-    const [RepositoryModel] = args.constraints;
+    const [RepositoryModel, columnName] = args.constraints;
+    const dbColumnName: string = columnName || args.property;
     let where = {
-      [args.property]: args.value,
+      [dbColumnName]: args.value,
     };
-    const skipId = args.object[`${args.property}Skip`];
+    const skipId = args.object[`${args.property}Skip`] || get(args.object, ['id']);
     if (skipId) {
       where = { ...where, id: Not(skipId) };
     }
@@ -37,14 +42,14 @@ export class UniqueConstraint implements ValidatorConstraintInterface {
 
 export function Unique(
   RepositoryModel: string,
-  validationOptions?: ValidationOptions,
-): (object: Serializable, propertyName: string) => void {
-  return (object: Serializable, propertyName: string): void => {
+  validationOptions?: UniqueConstraintValidationOptions,
+): (object: object, propertyName: string) => void {
+  return (object: object, propertyName: string): void => {
     registerDecorator({
       target: object.constructor,
       propertyName,
       options: validationOptions,
-      constraints: [RepositoryModel],
+      constraints: [RepositoryModel, validationOptions.columnName],
       validator: UniqueConstraint,
     });
   };

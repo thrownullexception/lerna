@@ -145,7 +145,7 @@ export class SessionCandidatesService {
   }
 
   async reduceNoResponseCandidates(): Promise<void> {
-    const candidates = await this.sessionCandidatesRepository.listSessionCandidates({
+    await this.sessionCandidatesRepository.listSessionCandidates({
       where: {
         statusSystemName: In(StatusesToReduceToNoResponse),
       },

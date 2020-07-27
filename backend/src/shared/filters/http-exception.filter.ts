@@ -10,6 +10,7 @@ import { Request, Response } from 'express';
 import { Logger } from 'winston';
 import { ValidationError } from 'class-validator';
 import { APP_CONSTANTS } from '../constants';
+import { get } from 'lodash';
 
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
@@ -30,10 +31,6 @@ export class HttpExceptionFilter implements ExceptionFilter {
 
     this.logger.error(`${request.method} ${request.url} ${JSON.stringify(errorResponse)}`);
 
-    if (status === HttpStatus.BAD_REQUEST && typeof exception.message === 'object') {
-      errorResponse.validations = this.transformClassValidatorsErrors(exception.message);
-    }
-
     if (request.url.startsWith(APP_CONSTANTS.ADMIN_ROUTES_PREFIX('', '/'))) {
       switch (status) {
         case HttpStatus.UNAUTHORIZED:
@@ -46,13 +43,27 @@ export class HttpExceptionFilter implements ExceptionFilter {
         case HttpStatus.FORBIDDEN:
           // Some logging is needed here
           response.redirect(APP_CONSTANTS.ADMIN_ROUTES_PREFIX('dashboard', '/'));
+
+        case HttpStatus.BAD_REQUEST:
+          const message = get(
+            exception.getResponse(),
+            ['message'],
+            'Some nasty thing has been done',
+          );
+          request.session.flash = { error: message[0] };
+          response.redirect(request.headers.referer);
       }
+    }
+
+    if (status === HttpStatus.BAD_REQUEST && typeof exception.message === 'object') {
+      errorResponse.validations = this.transformClassValidatorsErrors(exception.message);
     }
 
     response.status(status).json(errorResponse);
   }
 
   private transformClassValidatorsErrors(errorBag: ValidationError[]): ValidationError[] {
+    console.log(errorBag);
     return errorBag;
     // TODO
     // return errorBag.reduce((allStrings: [], error) => {

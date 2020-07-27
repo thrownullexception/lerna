@@ -4,4 +4,4 @@ export enum SessionStatusTypes {
   SelectedTutor = 'selected_tutor',
 }
 
-const StatusesToStopMailingStudentAboutNoResponse = [SessionStatusTypes.SelectedTutor];
+export const StatusesToStopMailingStudentAboutNoResponse = [SessionStatusTypes.SelectedTutor];

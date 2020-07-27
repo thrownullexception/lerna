@@ -70,7 +70,6 @@ export class AdminFaqsController {
     @Headers('referer') back: string,
     @SessionFlash() sessionFlash: ISessionFlash,
   ): Promise<void> {
-    // Try to make a validation error
     await this.faqsService.createFaq(faqDTO, userId);
     sessionFlash.success('Faq Created Successfully');
     res.redirect(back);

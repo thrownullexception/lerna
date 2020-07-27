@@ -16,3 +16,5 @@ export class CreateSessionSkillDTO {
   @IsUUID(4)
   sessionId: string;
 }
+
+// TODO Add sessionId-skillId unique constraints

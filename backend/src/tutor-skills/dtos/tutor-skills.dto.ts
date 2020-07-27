@@ -29,3 +29,5 @@ export class TutorSkillDTO {
   @IsNumber()
   years: number;
 }
+
+// Add unique contraint // skillId-userId

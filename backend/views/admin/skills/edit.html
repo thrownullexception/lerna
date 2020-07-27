@@ -8,6 +8,7 @@
     </div>
     <form class="form-horizontal" method="POST" action="{{ route('skills/' + skill.id) }}?_method=PATCH">
         <div class="box-body">
+            <input name="id" value="{{skill.id}}" type="hidden" />
             {{ forms.textInput('name', 'Name', skill.name) }}
             {{ forms.textArea('description', 'Description', skill.description) }}
             {{ forms.checkBox('isPath', 'Is Path', skill.isPath) }}
@@ -134,4 +135,7 @@
         </ul>
     </div>
 </div>
+
+// Skill Hierarchies
+
 {% endblock %}

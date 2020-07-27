@@ -13,3 +13,4 @@ export class ShortListCandidateDTO {
   @IsUUID(4)
   candidateId: string;
 }
+// TODO Add sessionId-candidateId unique contrainst

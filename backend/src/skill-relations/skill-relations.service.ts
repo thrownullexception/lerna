@@ -11,8 +11,8 @@ export class SkillRelationsService {
     const alreadyExist = this.skillRelationsRepository.listSkillRelations({
       where: [
         {
-          skillAId: skillAId,
-          skillBId: skillBId,
+          skillAId,
+          skillBId,
         },
         {
           skillBId: skillAId,
@@ -20,7 +20,6 @@ export class SkillRelationsService {
         },
       ],
     });
-    // TODO test this;
     if ((await alreadyExist).length > 0) {
       // Will like to throw a BadRequestException
       return;
