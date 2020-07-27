@@ -18,6 +18,9 @@ export class Faq {
   accountModeSystemName: AccountModeType;
 
   @Column({ select: false })
+  lastTouchedById: string;
+
+  @Column({ select: false })
   createdAt: string;
 
   @Column({ select: false })
@@ -32,9 +35,6 @@ export class Faq {
     referencedColumnName: 'systemName',
   })
   accountMode: AccountMode;
-
-  @Column()
-  lastTouchedById: string;
 
   @ManyToOne(
     () => User,

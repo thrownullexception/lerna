@@ -3,6 +3,9 @@ import { Skill } from './skills.entity';
 import { SkillsRepository } from './skills.repository';
 import { SkillHierarchy } from '../skill-hierarchies/skill-hierarchies.entity';
 import { SkillHierarchiesService } from '../skill-hierarchies/skill-hierarchies.service';
+import { CreateSkillDTO, EditSkillDTO } from './dtos';
+import { IQueryParametersDTO, IPaginatePayload } from 'src/shared/types';
+import { FindConditions } from 'typeorm';
 
 @Injectable()
 export class SkillsService {
@@ -21,6 +24,53 @@ export class SkillsService {
     });
   }
 
+  async getSingleFieldFromSkillId<T extends keyof Skill>(
+    skillId: string,
+    field: T,
+  ): Promise<Pick<Skill, T>> {
+    const skill = await this.skillsRepository.showSkill({
+      select: [field],
+      where: {
+        id: skillId,
+      },
+    });
+    if (!skill) {
+      return;
+    }
+    return (skill[field] as unknown) as Pick<Skill, T>;
+  }
+
+  async getSkillDetailsForAdmin(skillId: string): Promise<Skill> {
+    return await this.skillsRepository.showSkill({
+      where: { id: skillId },
+      select: ['id', 'name', 'description', 'isPath'],
+      relations: ['resources', 'roadMaps', 'forwardRelatedSkill', 'backwardRelatedSkill'],
+    });
+  }
+
+  async listSkillsByQueryParamters(
+    queryParametersDTO: IQueryParametersDTO,
+  ): Promise<IPaginatePayload<Skill>> {
+    const where: FindConditions<Skill> = {};
+    // if (filters) {
+    //   const replied = get(filters, ['replied', 0]);
+    //   if (replied) {
+    //     where.replied = replied;
+    //   }
+    // }
+    const [result, total] = await this.skillsRepository.listSkillsAndCount({
+      ...where,
+      ...queryParametersDTO,
+    });
+    const { take, page } = queryParametersDTO;
+    return {
+      data: result,
+      count: total,
+      take,
+      page,
+    };
+  }
+
   async getSkillsAndHierarchies(): Promise<{
     skills: Skill[];
     skillHierarchies: SkillHierarchy[];
@@ -33,19 +83,24 @@ export class SkillsService {
   }
 
   async getSkill(skillId: string): Promise<Skill> {
-    return await this.skillsRepository.showSkill(skillId, {
+    return await this.skillsRepository.showSkill({
+      where: { id: skillId },
       select: ['id', 'name', 'description', 'isPath'],
       relations: ['resources', 'roadMaps', 'forwardRelatedSkill', 'backwardRelatedSkill'],
     });
   }
 
-  //   async createSkill(skillDTO: skillDTO, adminId: string): Promise<void> {
-  //     return await this.skillsRepository.createSkill(skillDTO, adminId);
-  //   }
+  async createSkill(skillDTO: CreateSkillDTO, lastTouchedById: string): Promise<void> {
+    return await this.skillsRepository.createSkill({ ...skillDTO, lastTouchedById });
+  }
 
-  //   async updateSkill(skillId: string, skillDTO: skillDTO, lastTouchedBy: string): Promise<void> {
-  //     await this.skillsRepository.updateSkill(skillId, skillDTO, lastTouchedBy);
-  //   }
+  async updateSkill(
+    skillId: string,
+    skillDTO: EditSkillDTO,
+    lastTouchedById: string,
+  ): Promise<void> {
+    await this.skillsRepository.updateSkill(skillId, { ...skillDTO, lastTouchedById });
+  }
 
   async deleteSkill(skillId: string): Promise<void> {
     await this.skillsRepository.deleteSkill(skillId);

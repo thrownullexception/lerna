@@ -1,7 +1,6 @@
 import { Repository, EntityRepository, FindManyOptions, FindOneOptions } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { TutorSkill } from './tutor-skills.entity';
-import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
 
 @Injectable()
 @EntityRepository(TutorSkill)
@@ -24,14 +23,11 @@ export class TutorSkillsRepository extends Repository<TutorSkill> {
     });
   }
 
-  async createTutorSkill(tutorSkill: QueryDeepPartialEntity<TutorSkill>): Promise<void> {
+  async createTutorSkill(tutorSkill: Partial<TutorSkill>): Promise<void> {
     await this.insert(tutorSkill);
   }
 
-  async updateTutorSkill(
-    tutorSkillId: string,
-    tutorSkill: QueryDeepPartialEntity<TutorSkill>,
-  ): Promise<void> {
+  async updateTutorSkill(tutorSkillId: string, tutorSkill: Partial<TutorSkill>): Promise<void> {
     await this.update(tutorSkillId, tutorSkill);
     this.manager.connection.queryResultCache?.clear();
   }

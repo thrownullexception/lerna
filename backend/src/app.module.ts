@@ -24,6 +24,7 @@ import { SessionQuizzesModule } from './session-quizzes/session-quizzes.module';
 import { SessionQuizResponsesModule } from './session-quiz-responses/session-quiz-responses.module';
 import { MailModule } from './shared/services/mail/mail-module';
 import { SessionCandidatesModule } from './session-candidates/session-candidates.module';
+import { SkillRelationsModule } from './skill-relations/skill-relations.module';
 
 @Module({
   imports: [
@@ -60,6 +61,7 @@ import { SessionCandidatesModule } from './session-candidates/session-candidates
     SessionQuizzesModule,
     SessionQuizResponsesModule,
     SessionCandidatesModule,
+    SkillRelationsModule,
   ],
   providers: [
     {

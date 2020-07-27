@@ -10,8 +10,12 @@ import { ConfigService } from './shared/services';
 import { APP_CONSTANTS } from './shared/constants';
 import * as cookieParser from 'cookie-parser';
 
-const customizeNunjucks = (nunjucksInstance: nunjucks.Environment) => {
+const customizeNunjucks = (
+  nunjucksInstance: nunjucks.Environment,
+  configService: ConfigService,
+) => {
   nunjucksInstance.addGlobal('__adminPrefix', APP_CONSTANTS.ADMIN_ROUTES_PREFIX(''));
+  nunjucksInstance.addGlobal('__assetsLocation', configService.getAdminAssetsLocation());
   nunjucksInstance.addFilter('ceil', function(number: number) {
     return Math.ceil(number);
   });
@@ -40,7 +44,7 @@ async function bootstrap() {
     watch: configService.isDevelopment(),
   });
 
-  customizeNunjucks(nunjucksInstance);
+  customizeNunjucks(nunjucksInstance, configService);
 
   app.setBaseViewsDir(join(__dirname, '..', '..', 'views'));
   app.setViewEngine('html');

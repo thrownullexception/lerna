@@ -48,12 +48,12 @@ export class FaqsService {
     });
   }
 
-  async createFaq(faqDTO: FaqDTO, adminId: string): Promise<void> {
-    return await this.faqsRepository.createFaq(faqDTO, adminId);
+  async createFaq(faqDTO: FaqDTO, lastTouchedById: string): Promise<void> {
+    return await this.faqsRepository.createFaq({ ...faqDTO, lastTouchedById });
   }
 
-  async updateFaq(faqId: string, faqDTO: FaqDTO, lastTouchedBy: string): Promise<void> {
-    await this.faqsRepository.updateFaq(faqId, faqDTO, lastTouchedBy);
+  async updateFaq(faqId: string, faqDTO: FaqDTO, lastTouchedById: string): Promise<void> {
+    await this.faqsRepository.updateFaq(faqId, { ...faqDTO, lastTouchedById });
   }
 
   async deleteFaq(faqId: string): Promise<void> {

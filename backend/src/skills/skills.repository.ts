@@ -18,29 +18,34 @@ export class SkillsRepository extends Repository<Skill> {
     });
   }
 
-  async showSkill(skillId: string, options: FindOneOptions<Skill>): Promise<Skill> {
+  async listSkillsAndCount(
+    findAndCountOptions: FindManyOptions<Skill>,
+  ): Promise<[Skill[], number]> {
+    return await this.findAndCount(findAndCountOptions);
+  }
+
+  async showSkill(options: FindOneOptions<Skill>): Promise<Skill> {
     return await this.findOne({
-      where: { id: skillId },
       cache: {
-        id: `${this.cachePrefix}-showSkill_${skillId}`,
+        id: `${this.cachePrefix}-showSkill_${JSON.stringify(options)}`,
         milliseconds: APP_CONSTANTS.A_DAY_IN_MILLIOSECONDS,
       },
       ...options,
     });
   }
 
-  //   async createSkill(skillDTO: SkillDTO, lastTouchedById: string): Promise<void> {
-  //     await this.insert({ ...skillDTO, lastTouchedById });
-  //     this.queryRunner.connection.queryResultCache.clear();
-  //   }
+  async createSkill(skill: Partial<Skill>): Promise<void> {
+    await this.insert(skill);
+    this.manager.connection.queryResultCache?.clear();
+  }
 
-  //   async updateSkill(skillId: string, skillDTO: SkillDTO, lastTouchedById: string): Promise<void> {
-  //     await this.update(skillId, { ...skillDTO, lastTouchedById });
-  //     this.queryRunner.connection.queryResultCache.clear();
-  //   }
+  async updateSkill(skillId: string, skill: Partial<Skill>): Promise<void> {
+    await this.update(skillId, skill);
+    this.manager.connection.queryResultCache?.clear();
+  }
 
   async deleteSkill(skillId: string): Promise<void> {
     await this.delete(skillId);
-    this.queryRunner.connection.queryResultCache.clear();
+    this.manager.connection.queryResultCache?.clear();
   }
 }

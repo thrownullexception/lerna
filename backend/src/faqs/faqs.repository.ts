@@ -1,6 +1,5 @@
 import { Repository, EntityRepository, FindManyOptions, FindOneOptions } from 'typeorm';
 import { Faq } from './faqs.entity';
-import { FaqDTO } from './dtos';
 import { Injectable } from '@nestjs/common';
 import { APP_CONSTANTS } from '../shared/constants';
 
@@ -32,14 +31,14 @@ export class FaqsRepository extends Repository<Faq> {
     });
   }
 
-  async createFaq(faqDTO: FaqDTO, lastTouchedById: string): Promise<void> {
-    await this.insert({ ...faqDTO, lastTouchedById });
+  async createFaq(faq: Partial<Faq>): Promise<void> {
+    await this.insert(faq);
     this.manager.connection.queryResultCache?.clear();
   }
 
-  async updateFaq(faqId: string, faqDTO: FaqDTO, lastTouchedById: string): Promise<void> {
-    await this.update(faqId, { ...faqDTO, lastTouchedById });
-    this.manager.connection.queryResultCache?.clear();
+  async updateFaq(faqId: string, faq: Partial<Faq>): Promise<void> {
+    await this.update(faqId, faq);
+    this.manager.connection.queryResultCache?.clear(); // TODO Not a good idea should only clean domain data
   }
 
   async deleteFaq(faqId: string): Promise<void> {

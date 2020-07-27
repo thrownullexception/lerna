@@ -5,7 +5,7 @@ export class CreatePermissionsTable1593940630649 extends BaseMigration
   implements MigrationInterface {
   protected table = 'permissions';
 
-  public async up(queryRunner: QueryRunner): Promise<any> {
+  public async up(queryRunner: QueryRunner): Promise<void> {
     await this.createTable(queryRunner, [
       {
         name: 'permission',
@@ -14,7 +14,7 @@ export class CreatePermissionsTable1593940630649 extends BaseMigration
     ]);
   }
 
-  public async down(queryRunner: QueryRunner): Promise<any> {
+  public async down(queryRunner: QueryRunner): Promise<void> {
     await this.drop(queryRunner);
   }
 }
