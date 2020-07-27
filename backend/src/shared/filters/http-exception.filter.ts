@@ -30,10 +30,6 @@ export class HttpExceptionFilter implements ExceptionFilter {
 
     this.logger.error(`${request.method} ${request.url} ${JSON.stringify(errorResponse)}`);
 
-    if (status === HttpStatus.BAD_REQUEST && typeof exception.message === 'object') {
-      errorResponse.validations = this.transformClassValidatorsErrors(exception.message);
-    }
-
     if (request.url.startsWith(APP_CONSTANTS.ADMIN_ROUTES_PREFIX('', '/'))) {
       switch (status) {
         case HttpStatus.UNAUTHORIZED:
@@ -46,13 +42,26 @@ export class HttpExceptionFilter implements ExceptionFilter {
         case HttpStatus.FORBIDDEN:
           // Some logging is needed here
           response.redirect(APP_CONSTANTS.ADMIN_ROUTES_PREFIX('dashboard', '/'));
+
+        case HttpStatus.BAD_REQUEST:
+          // Some logging is needed here
+          console.log(request.headers.referer);
+          console.log(exception.getResponse());
+        // response.redirect(APP_CONSTANTS.ADMIN_ROUTES_PREFIX('dashboard', '/'));
       }
+    }
+
+    console.log(exception);
+
+    if (status === HttpStatus.BAD_REQUEST && typeof exception.message === 'object') {
+      errorResponse.validations = this.transformClassValidatorsErrors(exception.message);
     }
 
     response.status(status).json(errorResponse);
   }
 
   private transformClassValidatorsErrors(errorBag: ValidationError[]): ValidationError[] {
+    console.log(errorBag);
     return errorBag;
     // TODO
     // return errorBag.reduce((allStrings: [], error) => {

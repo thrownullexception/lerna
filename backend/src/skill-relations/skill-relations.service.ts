@@ -20,7 +20,6 @@ export class SkillRelationsService {
         },
       ],
     });
-    // TODO test this;
     if ((await alreadyExist).length > 0) {
       // Will like to throw a BadRequestException
       return;

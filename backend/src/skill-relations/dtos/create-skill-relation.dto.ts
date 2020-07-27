@@ -13,3 +13,6 @@ export class CreateSkillRelationDTO {
   @IsUUID(4)
   skillBId: string;
 }
+
+// TODO Add skillBId-skillAId unique constraints
+// TODO Add skillAId-skillBId unique constraints
