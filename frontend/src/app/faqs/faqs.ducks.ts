@@ -1,6 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { FaqResponse } from './responses';
 
+const DOMAIN = 'faqs';
+
 interface IState {
   faqs: FaqResponse[];
 }
@@ -10,7 +12,7 @@ const initial: IState = {
 };
 
 export const faqsSlice = createSlice({
-  name: 'faqs',
+  name: DOMAIN,
   initialState: initial,
   reducers: {
     setFaqs: (state, { payload }: PayloadAction<FaqResponse[]>) => {

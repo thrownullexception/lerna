@@ -3,7 +3,7 @@ import { BaseMigration, ReferenceAction } from './base/base-migration';
 
 export class CreateUsersTable1572487741663 extends BaseMigration implements MigrationInterface {
   protected table = 'users';
-  public async up(queryRunner: QueryRunner): Promise<any> {
+  public async up(queryRunner: QueryRunner): Promise<void> {
     await this.createSystemTable(queryRunner, 'account_modes');
 
     await this.createTable(queryRunner, [
@@ -55,7 +55,7 @@ export class CreateUsersTable1572487741663 extends BaseMigration implements Migr
     await this.index(queryRunner, 'username');
   }
 
-  public async down(queryRunner: QueryRunner): Promise<any> {
+  public async down(queryRunner: QueryRunner): Promise<void> {
     await this.drop(queryRunner, 'users');
     await this.drop(queryRunner, 'account_modes');
   }

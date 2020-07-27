@@ -28,12 +28,14 @@ import { IPaginatePayload, ISelectOptions, IQueryParametersDTO } from '../shared
 import { Faq } from './faqs.entity';
 import { AccountModeAsOptions } from '../account-modes/account-modes.types';
 
-@AdminController('faqs', 'CAN_MANAGE_FAQS')
+const DOMAIN = 'faqs';
+
+@AdminController(DOMAIN, 'CAN_MANAGE_FAQS')
 export class AdminFaqsController {
   constructor(private readonly faqsService: FaqsService) {}
 
   @Get()
-  @Render('admin/faqs/list')
+  @Render(`admin/${DOMAIN}/list`)
   @UsePipes()
   async list(
     @Query(new PaginationQueryParametersPipe()) queryParametersDTO: IQueryParametersDTO,
@@ -43,7 +45,7 @@ export class AdminFaqsController {
   }
 
   @Get('create')
-  @Render('admin/faqs/create')
+  @Render(`admin/${DOMAIN}/create`)
   createPage(): { accountModeOptions: ISelectOptions[] } {
     return {
       accountModeOptions: AccountModeAsOptions,
@@ -51,8 +53,10 @@ export class AdminFaqsController {
   }
 
   @Get(':faqId/edit')
-  @Render('admin/faqs/edit')
-  async editPage(@Param('faqId', new ParseUUIDPipe()) faqId: string): Promise<any> {
+  @Render(`admin/${DOMAIN}/edit`)
+  async editPage(
+    @Param('faqId', new ParseUUIDPipe()) faqId: string,
+  ): Promise<Record<string, unknown>> {
     const faq = await this.faqsService.getFaqWithAllRelations(faqId);
     return { faq, accountModeOptions: AccountModeAsOptions };
   }
@@ -72,17 +76,17 @@ export class AdminFaqsController {
     res.redirect(back);
   }
 
-  @Patch(':id')
+  @Patch(':faqId')
   @HttpCode(HttpStatus.NO_CONTENT)
   async update(
-    @Param('id') id: string,
+    @Param('faqId') faqId: string,
     @Body() faqDTO: FaqDTO,
     @Res() res: Response,
     @Headers('referer') back: string,
     @AuthenticatedUser('id') userId: string,
     @SessionFlash() sessionFlash: ISessionFlash,
   ): Promise<void> {
-    await this.faqsService.updateFaq(id, faqDTO, userId);
+    await this.faqsService.updateFaq(faqId, faqDTO, userId);
     sessionFlash.success('Faq Updated Successfully');
     res.redirect(back);
   }

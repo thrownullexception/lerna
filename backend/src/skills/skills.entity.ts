@@ -16,6 +16,15 @@ export class Skill {
   @Column()
   isPath: boolean;
 
+  @Column({ select: false })
+  lastTouchedById: string;
+
+  @Column({ select: false })
+  createdAt: string;
+
+  @Column({ select: false })
+  updatedAt: string;
+
   @OneToMany(
     () => SkillResource,
     ({ skill }) => skill,

@@ -1,0 +1,20 @@
+{% import "admin/templates/forms.html" as forms %}
+{% extends "admin/layout/main.html" %}
+{% block content %}
+<div class="box box-info">
+    <div class="box-header with-border">
+        <h3 class="box-title">Create Skill</h3>
+    </div>
+    <form class="form-horizontal" method="POST" action="{{ route('skills') }}">
+        <div class="box-body">
+            {{ forms.textInput('name', 'Name') }}
+            {{ forms.textArea('description', 'Description') }}
+            {{ forms.checkBox('isPath', 'Is Path') }}
+        </div>
+        <div class="box-footer">
+            <a href="{{ route('skills') }}" class="btn btn-default"> &laquo; Back To Skills </a>
+            <button type="submit" class="btn btn-info pull-right">Submit</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

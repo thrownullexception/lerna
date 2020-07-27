@@ -1,0 +1,137 @@
+{% import "admin/templates/forms.html" as forms %}
+{% extends "admin/layout/main.html" %}
+{% import "admin/templates/delete.html" as delete %}
+{% block content %}
+<div class="box box-info">
+    <div class="box-header with-border">
+        <h3 class="box-title">Edit Skill</h3>
+    </div>
+    <form class="form-horizontal" method="POST" action="{{ route('skills/' + skill.id) }}?_method=PATCH">
+        <div class="box-body">
+            {{ forms.textInput('name', 'Name', skill.name) }}
+            {{ forms.textArea('description', 'Description', skill.description) }}
+            {{ forms.checkBox('isPath', 'Is Path', skill.isPath) }}
+        </div>
+        <div class="box-footer">
+            <a href="{{ route('skills') }}" class="btn btn-default"> &laquo; Back To Skills</a>
+            <button type="submit" class="btn btn-info pull-right">Submit</button>
+        </div>
+    </form>
+</div>
+
+<div class="box box-info">
+    <div class="box-header with-border">
+        <h3 class="box-title">Resources</h3>
+        <div class="box-tools pull-right">
+            <a href="{{ route('skills/' + skill.id + '/resources') }}" class="btn btn-primary btn-sm">
+                Add Resource
+            </a>
+        </div>
+    </div>
+    <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+            <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Link</th>
+                <th>Type</th>
+                <th>Is Free</th>
+                <th>Actions</th>
+            </tr>
+            {% for resource in skills.resources %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ resource.title }}</td>
+                <td>{{ resource.link }}</td>
+                <td>{{ resource.type }}</td>
+                <td>{{ resource.isFree }}</td>
+                <td>
+                    <a href="{{ route('skills/' + resource.id + '/edit') }}" class="btn btn-primary btn-sm">Edit</a>
+                    {{ delete.button('skills-resource/' + resource.id)  }}
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="100" class="text-center">No Resource</td>
+            </tr>
+            {% endfor %}
+        </table>
+        </ul>
+    </div>
+</div>
+
+<div class="box box-info">
+    <div class="box-header with-border">
+        <h3 class="box-title">Road Maps</h3>
+        <div class="box-tools pull-right">
+            <a href="{{ route('skills/' + skill.id + '/roadmap') }}" class="btn btn-primary btn-sm">
+                Add Road Map
+            </a>
+        </div>
+    </div>
+    <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+            <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Level</th>
+                <th>Description</th>
+                <th>Order</th>
+                <th>Actions</th>
+            </tr>
+            {% for roadMap in skills.roadMaps %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ roadMap.title }}</td>
+                <td>{{ roadMap.level }}</td>
+                <td>{{ roadMap.description }}</td>
+                <td>{{ roadMap.order }}</td>
+                <td>
+                    <a href="{{ route('skills/' + roadMap.id + '/edit') }}" class="btn btn-primary btn-sm">Edit</a>
+                    {{ delete.button('skills-road/' + roadMap.id)  }}
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="100" class="text-center">No Road Map</td>
+            </tr>
+            {% endfor %}
+        </table>
+        </ul>
+    </div>
+</div>
+
+<div class="box box-info">
+    <div class="box-header with-border">
+        <h3 class="box-title">Related Skill</h3>
+        <div class="box-tools pull-right">
+            <a href="{{ route('skill-relations/' + skill.id + '/create') }}" class="btn btn-primary btn-sm">
+                Add Related Skill
+            </a>
+        </div>
+    </div>
+    <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+            {% for relatedSkill in relatedSkills %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ relatedSkill.name }}</td>
+                <td>
+                    {{ delete.button('skill-relations/' + relatedSkill.id + '/' + skill.id)  }}
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="100" class="text-center">No Related Skills</td>
+            </tr>
+            {% endfor %}
+        </table>
+        </ul>
+    </div>
+</div>
+{% endblock %}

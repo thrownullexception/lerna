@@ -97,6 +97,10 @@ export class ConfigService implements CacheOptionsFactory {
     return this.get('PORT') || '4000';
   }
 
+  getAdminAssetsLocation(): string {
+    return this.get('ADMIN_ASSETS_LOCATION');
+  }
+
   getFacebookClientID(): string {
     return this.get('FACEBOOK_CLIENT_ID');
   }

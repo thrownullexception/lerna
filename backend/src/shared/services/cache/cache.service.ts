@@ -27,9 +27,9 @@ export class CacheService {
   //     ));
   //   }
 
-  clearLeaderBoardCache(): void {
-    this.clearAllCacheMatching('leaderboard');
-  }
+  // clearLeaderBoardCache(): void {
+  //   this.clearAllCacheMatching('leaderboard');
+  // }
 
   clearAllCacheMatching(key: string): void {
     this.redisClient.keys(`*${key}*`, (err, keys) => {

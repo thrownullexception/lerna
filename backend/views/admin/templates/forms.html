@@ -8,6 +8,15 @@
 </div>
 {% endmacro %}
 
+{% macro checkBox(name, label, value) %}
+<div class="form-group">
+    <label for="input__{{ name }}" class="col-sm-2 control-label">{{ label }}</label>
+    <div class="col-sm-10">
+        <input type="checkbox" {{ 'checked' if value }} name="{{ name }}" id="input__{{ name }}" style="width: 20px; height: 20px;">
+    </div>
+</div>
+{% endmacro %}
+
 {% macro textArea(name, label, value='') %}
 <div class="form-group">
     <label for="input__{{ name }}" class="col-sm-2 control-label">{{ label }}</label>

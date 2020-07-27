@@ -1,8 +1,7 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
-import { BaseMigration } from './base/base-migration';
+import { BaseMigration, ReferenceAction } from './base/base-migration';
 
-export class CreateSkillsTable1593292900403 extends BaseMigration
-  implements MigrationInterface {
+export class CreateSkillsTable1593292900403 extends BaseMigration implements MigrationInterface {
   protected table = 'skills';
 
   public async up(queryRunner: QueryRunner): Promise<void> {
@@ -19,7 +18,18 @@ export class CreateSkillsTable1593292900403 extends BaseMigration
         name: 'is_path',
         type: 'boolean',
       },
+      {
+        name: 'last_touched_by_id',
+        type: 'uuid',
+        isNullable: true,
+      },
     ]);
+
+    await this.reference(queryRunner, {
+      table: 'users',
+      referencedColumnHere: 'last_touched_by_id',
+      referenceAction: ReferenceAction.SetNull,
+    });
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
