@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SkillsApiController } from './skills.api.controller';
 import { SkillsRepository } from './skills.repository';
@@ -7,7 +7,7 @@ import { SkillHierarchiesModule } from '../skill-hierarchies/skill-hierarchies.m
 import { AdminSkillsController } from './skills.admin.controller';
 
 @Module({
-  imports: [SkillHierarchiesModule, TypeOrmModule.forFeature([SkillsRepository])],
+  imports: [TypeOrmModule.forFeature([SkillsRepository]), forwardRef(() => SkillHierarchiesModule)],
   controllers: [SkillsApiController, AdminSkillsController],
   providers: [SkillsService],
   exports: [SkillsService],

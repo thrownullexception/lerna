@@ -12,12 +12,14 @@
         "test:frontend": "cd frontend && npm run test",
         "prettify:frontend": "prettier --write \"frontend/src/**/*.{ts,tsx}\"",
         "prettify:backend": "prettier --write \"backend/src/**/*.ts\"",
+        "server:admin": "cd frontend/public && http-server --port=3001",
         "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
         "test": "concurrently \"npm run test:frontend\" \"npm run test:backend\"",
         "lint": "concurrently \"npm run lint:frontend\" \"npm run lint:backend\""
     },
     "devDependencies": {
         "concurrently": "^4.1.0",
+        "http-server": "^0.12.3",
         "husky": "^3.1.0",
         "lint-staged": "^9.2.5",
         "prettier": "^1.18.2"

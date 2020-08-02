@@ -1,4 +1,4 @@
-import { Repository, EntityRepository } from 'typeorm';
+import { Repository, EntityRepository, FindOneOptions } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { APP_CONSTANTS } from '../shared/constants';
 import { SkillHierarchy } from './skill-hierarchies.entity';
@@ -17,28 +17,31 @@ export class SkillHierarchiesRepository extends Repository<SkillHierarchy> {
     });
   }
 
-  async showSkillHierarchy(skillHierarchyId: string): Promise<SkillHierarchy> {
+  async showSkillHierarchy(options: FindOneOptions<SkillHierarchy>): Promise<SkillHierarchy> {
     return await this.findOne({
-      where: { id: skillHierarchyId },
+      ...options,
       cache: {
-        id: `${this.cachePrefix}-showSkill_${skillHierarchyId}`,
+        id: `${this.cachePrefix}-showSkill_${JSON.stringify(options)}`,
         milliseconds: APP_CONSTANTS.A_DAY_IN_MILLIOSECONDS,
       },
     });
   }
 
-  //   async createSkillHierarchy(skillDTO: SkillDTO, lastTouchedById: string): Promise<void> {
-  //     await this.insert({ ...skillDTO, lastTouchedById });
-  //     this.queryRunner.connection.queryResultCache.clear();
-  //   }
+  async createSkillHierarchy(skillHierarchy: Partial<SkillHierarchy>): Promise<void> {
+    await this.insert(skillHierarchy);
+    this.manager.connection.queryResultCache?.clear();
+  }
 
-  //   async updateSkillHierarchy(skillId: string, skillDTO: SkillDTO, lastTouchedById: string): Promise<void> {
-  //     await this.update(skillId, { ...skillDTO, lastTouchedById });
-  //     this.queryRunner.connection.queryResultCache.clear();
-  //   }
+  async updateSkillHierarchy(
+    skillHierarchyId: string,
+    skillHierarchy: Partial<SkillHierarchy>,
+  ): Promise<void> {
+    await this.update(skillHierarchyId, skillHierarchy);
+    this.manager.connection.queryResultCache?.clear();
+  }
 
-  //   async deleteSkillHierarchy(skillId: string): Promise<void> {
-  //     await this.delete(skillId);
-  //     this.queryRunner.connection.queryResultCache.clear();
-  //   }
+  async deleteSkillHierarchy(skillHierarchyId: string): Promise<void> {
+    await this.delete(skillHierarchyId);
+    this.manager.connection.queryResultCache?.clear();
+  }
 }

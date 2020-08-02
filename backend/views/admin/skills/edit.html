@@ -39,7 +39,7 @@
                 <th>Is Free</th>
                 <th>Actions</th>
             </tr>
-            {% for resource in skills.resources %}
+            {% for resource in skill.resources %}
             <tr>
                 <td>{{ loop.index }}</td>
                 <td>{{ resource.title }}</td>
@@ -65,7 +65,7 @@
     <div class="box-header with-border">
         <h3 class="box-title">Road Maps</h3>
         <div class="box-tools pull-right">
-            <a href="{{ route('skills/' + skill.id + '/roadmap') }}" class="btn btn-primary btn-sm">
+            <a href="{{ route('skill-road-maps/' + skill.id + '/create') }}" class="btn btn-primary btn-sm">
                 Add Road Map
             </a>
         </div>
@@ -75,21 +75,21 @@
             <tr>
                 <th>#</th>
                 <th>Title</th>
-                <th>Level</th>
                 <th>Description</th>
+                <th>Level</th>
                 <th>Order</th>
                 <th>Actions</th>
             </tr>
-            {% for roadMap in skills.roadMaps %}
+            {% for roadMap in skill.roadMaps %}
             <tr>
                 <td>{{ loop.index }}</td>
                 <td>{{ roadMap.title }}</td>
-                <td>{{ roadMap.level }}</td>
                 <td>{{ roadMap.description }}</td>
+                <td>{{ roadMap.level }}</td>
                 <td>{{ roadMap.order }}</td>
                 <td>
-                    <a href="{{ route('skills/' + roadMap.id + '/edit') }}" class="btn btn-primary btn-sm">Edit</a>
-                    {{ delete.button('skills-road/' + roadMap.id)  }}
+                    <a href="{{ route('skill-road-maps/' + roadMap.id + '/edit') }}" class="btn btn-primary btn-sm">Edit</a>
+                    {{ delete.button('skill-road-maps/' + roadMap.id)  }}
                 </td>
             </tr>
             {% else %}
@@ -136,6 +136,78 @@
     </div>
 </div>
 
-// Skill Hierarchies
+<div class="box box-info" id="skill-parents">
+    <div class="box-header with-border">
+        <h3 class="box-title">Skill Parents</h3>
+        <div class="box-tools pull-right">
+            <a href="{{ route('skill-hierarchies/' + skill.id + '/create') }}" class="btn btn-primary btn-sm">
+                Add Hierarchy Skill
+            </a>
+        </div>
+    </div>
+    <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Order</th>
+                <th>Actions</th>
+            </tr>
+            {% for parent in skill.parents %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td><a href="{{ route('skills/' + parent.parentId + '/edit') }}#skill-parents">{{ parent.parent.name }}</a></td>
+                <td>{{ parent.order }}</td>
+                <td>
+                    <a href="{{ route('skill-hierarchies/' + skill.id + '/' + parent.id + '/edit') }}" class="btn btn-primary btn-sm">Edit</a>
+                    {{ delete.button('skill-hierarchies/' + parent.id)  }}
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="100" class="text-center">No Parent Skills</td>
+            </tr>
+            {% endfor %}
+        </table>
+        </ul>
+    </div>
+</div>
+
+<div class="box box-info" id="skill-children">
+    <div class="box-header with-border">
+        <h3 class="box-title">Skill Children</h3>
+        <div class="box-tools pull-right">
+            <a href="{{ route('skill-hierarchies/' + skill.id + '/create') }}" class="btn btn-primary btn-sm">
+                Add Hierarchy Skill
+            </a>
+        </div>
+    </div>
+    <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Order</th>
+                <th>Actions</th>
+            </tr>
+            {% for child in skill.children %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td><a href="{{ route('skills/' + child.childId + '/edit') }}#skill-children">{{ child.child.name }}</a></td>
+                <td>{{ child.order }}</td>
+                <td>
+                    <a href="{{ route('skill-hierarchies/' + skill.id + '/' + child.id + '/edit') }}" class="btn btn-primary btn-sm">Edit</a>
+                    {{ delete.button('skill-hierarchies/' + child.id)  }}
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="100" class="text-center">No Child Skills</td>
+            </tr>
+            {% endfor %}
+        </table>
+        </ul>
+    </div>
+</div>
 
 {% endblock %}

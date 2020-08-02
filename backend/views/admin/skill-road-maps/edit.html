@@ -1,0 +1,21 @@
+{% import "admin/templates/forms.html" as forms %}
+{% extends "admin/layout/main.html" %}
+{% block content %}
+<div class="box box-info">
+    <div class="box-header with-border">
+        <h3 class="box-title">Edit Road Map</h3>
+    </div>
+    <form class="form-horizontal" method="POST" action="{{ route('skill-road-maps/' + skillRoadMap.id) }}?_method=PATCH">
+        <div class="box-body">
+            {{ forms.textInput('title', 'Title', skillRoadMap.title) }}
+            {{ forms.textArea('description', 'Description', skillRoadMap.description) }}
+            {{ forms.textInput('level', 'Level', skillRoadMap.level, 'number') }}
+            {{ forms.textInput('order', 'Order', skillRoadMap.order, 'number') }}
+        </div>
+        <div class="box-footer">
+            <a href="{{ route('skills/' + skillRoadMap.skillId + '/edit') }}" class="btn btn-default"> &laquo; Back To Skill </a>
+            <button type="submit" class="btn btn-info pull-right">Submit</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

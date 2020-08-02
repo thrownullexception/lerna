@@ -1,0 +1,20 @@
+{% import "admin/templates/forms.html" as forms %}
+{% extends "admin/layout/main.html" %}
+{% block content %}
+<div class="box box-info">
+    <div class="box-header with-border">
+        <h3 class="box-title">Edit Skill Hierarchy</h3>
+    </div>
+    <form class="form-horizontal" method="POST" action="{{ route('skill-hierarchies/' + skillHierarchy.id) }}?_method=PATCH">
+        <div class="box-body">
+            {{ forms.textInput('', 'Parent', skillHierarchy.parent.name, 'text', true) }}
+            {{ forms.textInput('', 'Child', skillHierarchy.child.name, 'text', true) }}
+            {{ forms.textInput('order', 'Order', skillHierarchy.order, 'number') }}
+        </div>
+        <div class="box-footer">
+            <a href="{{ route('skills/' + skillId + '/edit') }}" class="btn btn-default"> &laquo; Back To Skill </a>
+            <button type="submit" class="btn btn-info pull-right">Submit</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

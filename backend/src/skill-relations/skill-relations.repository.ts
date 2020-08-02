@@ -18,7 +18,6 @@ export class SkillRelationsRepository extends Repository<SkillRelation> {
   }
 
   async deleteSkillRelation(skillRelationId: string): Promise<void> {
-    console.log(skillRelationId);
     await this.delete(skillRelationId);
   }
 }

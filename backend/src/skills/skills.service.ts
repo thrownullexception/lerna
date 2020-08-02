@@ -4,8 +4,9 @@ import { SkillsRepository } from './skills.repository';
 import { SkillHierarchy } from '../skill-hierarchies/skill-hierarchies.entity';
 import { SkillHierarchiesService } from '../skill-hierarchies/skill-hierarchies.service';
 import { CreateSkillDTO, EditSkillDTO } from './dtos';
-import { IQueryParametersDTO, IPaginatePayload } from 'src/shared/types';
+import { IQueryParametersDTO, IPaginatePayload } from '../shared/types';
 import { FindConditions } from 'typeorm';
+import { ISkillWithRestAsOptions } from './skills.types';
 
 @Injectable()
 export class SkillsService {
@@ -44,7 +45,16 @@ export class SkillsService {
     return await this.skillsRepository.showSkill({
       where: { id: skillId },
       select: ['id', 'name', 'description', 'isPath'],
-      relations: ['resources', 'roadMaps', 'forwardRelatedSkill', 'backwardRelatedSkill'],
+      relations: [
+        'resources',
+        'roadMaps',
+        'forwardRelatedSkill',
+        'backwardRelatedSkill',
+        'parents',
+        'parents.parent',
+        'children',
+        'children.child',
+      ],
     });
   }
 
@@ -68,6 +78,16 @@ export class SkillsService {
       count: total,
       take,
       page,
+    };
+  }
+
+  async getSkillWithTheRestAsOptions(skillId: string): Promise<ISkillWithRestAsOptions> {
+    const skills = await this.getSkillsNamesAndIds();
+    return {
+      skill: skills.find(({ id }) => id === skillId),
+      skills: skills
+        .filter(({ id }) => id != skillId)
+        .map(({ id, name }) => ({ label: name, value: id })),
     };
   }
 
