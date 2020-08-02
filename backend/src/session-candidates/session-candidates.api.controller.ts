@@ -26,7 +26,6 @@ export class SessionCandidatesApiController {
   }
 
   @Patch(':sessionCandidateId/response')
-  @HttpCode(HttpStatus.CREATED)
   async updateStatus(
     @Body() candidateResponseDTO: CandidateResponseDTO,
     @Param('sessionCandidateId', new ParseUUIDPipe()) sessionCandidateId: string,

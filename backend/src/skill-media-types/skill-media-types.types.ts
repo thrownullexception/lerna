@@ -1,5 +1,5 @@
 export enum SkillMediaTypes {
-  PNG = 'png',
   PDF = 'pdf',
+  Video = 'video',
   Youtube = 'youtube',
 }

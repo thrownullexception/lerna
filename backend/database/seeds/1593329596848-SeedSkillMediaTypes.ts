@@ -1,13 +1,12 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
 import { BaseSeed } from './base/base-seed';
 
-export class SeedSkillMediaTypes1593329596848 extends BaseSeed
-  implements MigrationInterface {
+export class SeedSkillMediaTypes1593329596848 extends BaseSeed implements MigrationInterface {
   table = 'skill_media_types';
   systemEnumerationFields = [
     {
-      systemName: 'png',
-      displayName: 'PNG',
+      systemName: 'video',
+      displayName: 'Video',
     },
     {
       systemName: 'pdf',

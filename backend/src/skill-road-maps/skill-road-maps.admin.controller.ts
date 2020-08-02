@@ -64,7 +64,6 @@ export class SkillRoadMapsAdminController {
   }
 
   @Patch(':skillRoadMapId')
-  @HttpCode(HttpStatus.CREATED)
   async update(
     @Body() updateSkillRoadMapDTO: UpdateSkillRoadMapDTO,
     @Param('skillRoadMapId', new ParseUUIDPipe()) skillRoadMapId: string,

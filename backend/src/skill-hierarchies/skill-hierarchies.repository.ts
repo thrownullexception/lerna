@@ -1,4 +1,4 @@
-import { Repository, EntityRepository, FindOneOptions } from 'typeorm';
+import { Repository, EntityRepository, FindOneOptions, FindManyOptions } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { APP_CONSTANTS } from '../shared/constants';
 import { SkillHierarchy } from './skill-hierarchies.entity';
@@ -8,10 +8,13 @@ import { SkillHierarchy } from './skill-hierarchies.entity';
 export class SkillHierarchiesRepository extends Repository<SkillHierarchy> {
   private cachePrefix = '__SkillHierarchy__';
 
-  async listSkillHierarchies(): Promise<SkillHierarchy[]> {
+  async listSkillHierarchies(
+    findManyOptions?: FindManyOptions<SkillHierarchy>,
+  ): Promise<SkillHierarchy[]> {
     return await this.find({
+      ...findManyOptions,
       cache: {
-        id: `${this.cachePrefix}-listSkillHierarchies`,
+        id: `${this.cachePrefix}-list_${findManyOptions}`,
         milliseconds: APP_CONSTANTS.A_DAY_IN_MILLIOSECONDS,
       },
     });
@@ -21,7 +24,7 @@ export class SkillHierarchiesRepository extends Repository<SkillHierarchy> {
     return await this.findOne({
       ...options,
       cache: {
-        id: `${this.cachePrefix}-showSkill_${JSON.stringify(options)}`,
+        id: `${this.cachePrefix}-show_${JSON.stringify(options)}`,
         milliseconds: APP_CONSTANTS.A_DAY_IN_MILLIOSECONDS,
       },
     });

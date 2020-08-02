@@ -1,0 +1,21 @@
+{% import "admin/templates/forms.html" as forms %}
+{% extends "admin/layout/main.html" %}
+{% block content %}
+<div class="box box-info">
+    <div class="box-header with-border">
+        <h3 class="box-title">Edit Resource</h3>
+    </div>
+    <form class="form-horizontal" method="POST" action="{{ route('skill-resources/' + skillResource.id) }}?_method=PATCH">
+        <div class="box-body">
+            {{ forms.textInput('title', 'Title', skillResource.title) }}
+            {{ forms.textInput('link', 'Link', skillResource.link) }}
+            {{ forms.select('mediaType', 'Media Type', skillMediaTypes, skillResource.mediaType) }}
+            {{ forms.checkBox('isFree', 'Is Free', skillResource.isFree) }}
+        </div>
+        <div class="box-footer">
+            <a href="{{ route('skills/' + skillResource.skillId + '/edit') }}" class="btn btn-default"> &laquo; Back To Skill </a>
+            <button type="submit" class="btn btn-info pull-right">Submit</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -12,7 +12,7 @@ export class SkillsRepository extends Repository<Skill> {
     return await this.find({
       ...findManyOptions,
       cache: {
-        id: `${this.cachePrefix}-listSkills_${JSON.stringify(findManyOptions)}`,
+        id: `${this.cachePrefix}-list_${JSON.stringify(findManyOptions)}`,
         milliseconds: APP_CONSTANTS.A_DAY_IN_MILLIOSECONDS,
       },
     });
@@ -27,7 +27,7 @@ export class SkillsRepository extends Repository<Skill> {
   async showSkill(options: FindOneOptions<Skill>): Promise<Skill> {
     return await this.findOne({
       cache: {
-        id: `${this.cachePrefix}-showSkill_${JSON.stringify(options)}`,
+        id: `${this.cachePrefix}-show_${JSON.stringify(options)}`,
         milliseconds: APP_CONSTANTS.A_DAY_IN_MILLIOSECONDS,
       },
       ...options,

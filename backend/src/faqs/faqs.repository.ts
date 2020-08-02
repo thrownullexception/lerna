@@ -11,7 +11,7 @@ export class FaqsRepository extends Repository<Faq> {
     return await this.find({
       ...findManyOptions,
       cache: {
-        id: `${this.cachePrefix}-listFaqs`,
+        id: `${this.cachePrefix}-list_${JSON.stringify(findManyOptions)}`,
         milliseconds: APP_CONSTANTS.A_DAY_IN_MILLIOSECONDS,
       },
     });
@@ -25,7 +25,7 @@ export class FaqsRepository extends Repository<Faq> {
     return await this.findOne({
       ...options,
       cache: {
-        id: `${this.cachePrefix}-showFaq_${JSON.stringify(options)}`,
+        id: `${this.cachePrefix}-show_${JSON.stringify(options)}`,
         milliseconds: APP_CONSTANTS.A_DAY_IN_MILLIOSECONDS,
       },
     });

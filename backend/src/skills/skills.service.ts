@@ -46,7 +46,9 @@ export class SkillsService {
       where: { id: skillId },
       select: ['id', 'name', 'description', 'isPath'],
       relations: [
+        // TODO look at me
         'resources',
+        'resources.skillMediaType',
         'roadMaps',
         'forwardRelatedSkill',
         'backwardRelatedSkill',

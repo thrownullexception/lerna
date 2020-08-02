@@ -1,16 +1,14 @@
 import { Repository, EntityRepository, FindManyOptions } from 'typeorm';
 import { Injectable } from '@nestjs/common';
-import { TutorSkillLevel } from './tutor-skill-levels.entity';
+import { AccountMode } from './account-modes.entity';
 import { APP_CONSTANTS } from '../shared/constants';
 
 @Injectable()
-@EntityRepository(TutorSkillLevel)
-export class TutorSkillLevelsRepository extends Repository<TutorSkillLevel> {
-  private cachePrefix = '__TutorSkillLevel__';
+@EntityRepository(AccountMode)
+export class AcccountModesRepository extends Repository<AccountMode> {
+  private cachePrefix = '__AccountMode__';
 
-  async listTutorSkillLevels(
-    findManyOptions?: FindManyOptions<TutorSkillLevel>,
-  ): Promise<TutorSkillLevel[]> {
+  async listAccountModes(findManyOptions?: FindManyOptions<AccountMode>): Promise<AccountMode[]> {
     return await this.find({
       ...findManyOptions,
       cache: {
