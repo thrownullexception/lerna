@@ -1,16 +1,16 @@
 import { Repository, EntityRepository, FindManyOptions } from 'typeorm';
 import { Injectable } from '@nestjs/common';
-import { TutorSkillLevel } from './tutor-skill-levels.entity';
+import { SkillMediaType } from './skill-media-types.entity';
 import { APP_CONSTANTS } from '../shared/constants';
 
 @Injectable()
-@EntityRepository(TutorSkillLevel)
-export class TutorSkillLevelsRepository extends Repository<TutorSkillLevel> {
-  private cachePrefix = '__TutorSkillLevel__';
+@EntityRepository(SkillMediaType)
+export class SkillMediaTypesRepository extends Repository<SkillMediaType> {
+  private cachePrefix = '__SkillMediaType__';
 
-  async listTutorSkillLevels(
-    findManyOptions?: FindManyOptions<TutorSkillLevel>,
-  ): Promise<TutorSkillLevel[]> {
+  async listSkillMediaTypes(
+    findManyOptions?: FindManyOptions<SkillMediaType>,
+  ): Promise<SkillMediaType[]> {
     return await this.find({
       ...findManyOptions,
       cache: {

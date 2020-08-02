@@ -26,6 +26,9 @@ import { MailModule } from './shared/services/mail/mail-module';
 import { SessionCandidatesModule } from './session-candidates/session-candidates.module';
 import { SkillRelationsModule } from './skill-relations/skill-relations.module';
 import { SkillRoadMapsModule } from './skill-road-maps/skill-road-maps.module';
+import { SkillResourcesModule } from './skill-resources/skill-resources.module';
+import { AccountModesModule } from './account-modes/account-modes.module';
+import { SkillMediaTypesModule } from './skill-media-types/skill-media-types.module';
 
 @Module({
   imports: [
@@ -64,6 +67,9 @@ import { SkillRoadMapsModule } from './skill-road-maps/skill-road-maps.module';
     SessionCandidatesModule,
     SkillRelationsModule,
     SkillRoadMapsModule,
+    SkillResourcesModule,
+    AccountModesModule,
+    SkillMediaTypesModule,
   ],
   providers: [
     {

@@ -1,4 +1,4 @@
-import { SkillRoadMap } from './skill-road-maps.entity';
+import { SkillRoadMap } from '../skill-road-maps.entity';
 
 export class SkillRoadMapTransformer {
   id: string;

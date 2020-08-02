@@ -18,7 +18,6 @@ import { SkillHierarchiesService } from './skill-hierarchies.service';
 import { AdminController, ISessionFlash, SessionFlash } from '../shared/decorators';
 import { SkillsService } from '../skills/skills.service';
 import { ISkillWithRestAsOptions } from '../skills/skills.types';
-import { SkillHierarchy } from './skill-hierarchies.entity';
 
 const DOMAIN = 'skill-hierarchies';
 
@@ -63,7 +62,6 @@ export class SkillHierarchiesAdminController {
   }
 
   @Patch(':skillHierarchyId')
-  @HttpCode(HttpStatus.CREATED)
   async update(
     @Body() updateSkillHierarchyDTO: UpdateSkillHierarchyDTO,
     @Param('skillHierarchyId', new ParseUUIDPipe()) skillHierarchyId: string,

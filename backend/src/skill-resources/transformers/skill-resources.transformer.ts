@@ -1,5 +1,5 @@
-import { SkillResource } from './skill-resources.entity';
-import { SkillMediaTypes } from '../skill-media-types/skill-media-types.types';
+import { SkillResource } from '../skill-resources.entity';
+import { SkillMediaTypes } from '../../skill-media-types/skill-media-types.types';
 
 export class SkillResourceTransformer {
   id: string;

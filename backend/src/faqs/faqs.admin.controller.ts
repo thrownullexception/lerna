@@ -26,13 +26,16 @@ import {
 import { PaginationQueryParametersPipe } from '../shared/pipes';
 import { IPaginatePayload, ISelectOptions, IQueryParametersDTO } from '../shared/types';
 import { Faq } from './faqs.entity';
-import { AccountModeAsOptions } from '../account-modes/account-modes.types';
+import { AccountModesService } from '../account-modes/account-modes.service';
 
 const DOMAIN = 'faqs';
 
 @AdminController(DOMAIN, 'CAN_MANAGE_FAQS')
 export class AdminFaqsController {
-  constructor(private readonly faqsService: FaqsService) {}
+  constructor(
+    private readonly faqsService: FaqsService,
+    private readonly accountModesService: AccountModesService,
+  ) {}
 
   @Get()
   @Render(`admin/${DOMAIN}/list`)
@@ -46,9 +49,9 @@ export class AdminFaqsController {
 
   @Get('create')
   @Render(`admin/${DOMAIN}/create`)
-  createPage(): { accountModeOptions: ISelectOptions[] } {
+  async createPage(): Promise<{ accountModeOptions: ISelectOptions[] }> {
     return {
-      accountModeOptions: AccountModeAsOptions,
+      accountModeOptions: await this.accountModesService.listAccountModesAsSelectOptions(),
     };
   }
 
@@ -58,7 +61,10 @@ export class AdminFaqsController {
     @Param('faqId', new ParseUUIDPipe()) faqId: string,
   ): Promise<Record<string, unknown>> {
     const faq = await this.faqsService.getFaqWithAllRelations(faqId);
-    return { faq, accountModeOptions: AccountModeAsOptions };
+    return {
+      faq,
+      accountModeOptions: await this.accountModesService.listAccountModesAsSelectOptions(),
+    };
   }
 
   @Post()
