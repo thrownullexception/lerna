@@ -25,6 +25,7 @@ import { SessionQuizResponsesModule } from './session-quiz-responses/session-qui
 import { MailModule } from './shared/services/mail/mail-module';
 import { SessionCandidatesModule } from './session-candidates/session-candidates.module';
 import { SkillRelationsModule } from './skill-relations/skill-relations.module';
+import { SkillRoadMapsModule } from './skill-road-maps/skill-road-maps.module';
 
 @Module({
   imports: [
@@ -62,6 +63,7 @@ import { SkillRelationsModule } from './skill-relations/skill-relations.module';
     SessionQuizResponsesModule,
     SessionCandidatesModule,
     SkillRelationsModule,
+    SkillRoadMapsModule,
   ],
   providers: [
     {

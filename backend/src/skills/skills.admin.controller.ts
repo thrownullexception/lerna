@@ -13,6 +13,7 @@ import {
   Headers,
   ParseUUIDPipe,
   UsePipes,
+  NotFoundException,
 } from '@nestjs/common';
 import { Response } from 'express';
 import { SkillsService } from './skills.service';
@@ -28,6 +29,11 @@ import { IPaginatePayload, IQueryParametersDTO } from '../shared/types';
 import { Skill } from './skills.entity';
 
 const DOMAIN = 'skills';
+
+interface ISkillWithRelatedSkills {
+  skill: Skill;
+  relatedSkills: Skill[];
+}
 
 @AdminController(DOMAIN, 'CAN_MANAGE_SKILLS')
 export class AdminSkillsController {
@@ -53,9 +59,20 @@ export class AdminSkillsController {
   @Render(`admin/${DOMAIN}/edit`)
   async editPage(
     @Param('skillId', new ParseUUIDPipe()) skillId: string,
-  ): Promise<Record<string, unknown>> {
+  ): Promise<ISkillWithRelatedSkills> {
     const skill = await this.skillsService.getSkillDetailsForAdmin(skillId);
-    return { skill, relatedSkills: [...skill.forwardRelatedSkill, ...skill.backwardRelatedSkill] };
+    if (!skill) {
+      throw new NotFoundException('Skill Not Found');
+    }
+    return {
+      skill: {
+        ...skill,
+        roadMaps: [...skill.roadMaps.sort((a, b) => a.level - b.level || a.order - b.order)],
+        parents: [...skill.parents.sort((a, b) => a.order - b.order)],
+        children: [...skill.children.sort((a, b) => a.order - b.order)],
+      },
+      relatedSkills: [...skill.forwardRelatedSkill, ...skill.backwardRelatedSkill],
+    };
   }
 
   @Post()

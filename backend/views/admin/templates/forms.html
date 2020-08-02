@@ -1,9 +1,9 @@
-{% macro textInput(name, label, value='', type='text') %}
+{% macro textInput(name, label, value='', type='text', disabled=false) %}
 <div class="form-group">
     <label for="input__{{ name }}" class="col-sm-2 control-label">{{ label }}</label>
     <div class="col-sm-10">
         <input type="{{ type }}" name="{{ name }}" class="form-control" id="input__{{ name }}" placeholder="{{ label }}"
-            value="{{ value }}">
+            value="{{ value }}"  {{ 'disabled' if disabled }}>
     </div>
 </div>
 {% endmacro %}

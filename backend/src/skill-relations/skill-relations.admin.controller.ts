@@ -14,8 +14,9 @@ import {
 import { Response } from 'express';
 import { CreateSkillRelationDTO } from './dtos';
 import { SkillRelationsService } from './skill-relations.service';
-import { AdminController, ISessionFlash, SessionFlash } from 'src/shared/decorators';
-import { SkillsService } from 'src/skills/skills.service';
+import { AdminController, ISessionFlash, SessionFlash } from '../shared/decorators';
+import { SkillsService } from '../skills/skills.service';
+import { ISkillWithRestAsOptions } from '../skills/skills.types';
 
 const DOMAIN = 'skill-relations';
 
@@ -30,14 +31,8 @@ export class SkillRelationsAdminController {
   @Render(`admin/${DOMAIN}/create`)
   async renderCreate(
     @Param('skillId', new ParseUUIDPipe()) skillId: string,
-  ): Promise<Record<string, unknown>> {
-    const skills = await this.skillsService.getSkillsNamesAndIds();
-    return {
-      skill: skills.find(({ id }) => id === skillId),
-      skills: skills
-        .filter(({ id }) => id != skillId)
-        .map(({ id, name }) => ({ label: name, value: id })),
-    };
+  ): Promise<ISkillWithRestAsOptions> {
+    return await this.skillsService.getSkillWithTheRestAsOptions(skillId);
   }
 
   @Post()

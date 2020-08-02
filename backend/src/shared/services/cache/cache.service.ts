@@ -32,6 +32,7 @@ export class CacheService {
   // }
 
   clearAllCacheMatching(key: string): void {
+    // TODO This must be used
     this.redisClient.keys(`*${key}*`, (err, keys) => {
       keys.forEach(redisKey => {
         this.redisClient.del(redisKey);

@@ -1,0 +1,22 @@
+{% import "admin/templates/forms.html" as forms %}
+{% extends "admin/layout/main.html" %}
+{% block content %}
+<div class="box box-info">
+    <div class="box-header with-border">
+        <h3 class="box-title">Add Road Map To {{ skillName }}</h3>
+    </div>
+    <form class="form-horizontal" method="POST" action="{{ route('skill-road-maps') }}">
+        <div class="box-body">
+            <input type="hidden" name="skillId" value="{{ skillId }}">
+            {{ forms.textInput('title', 'Title') }}
+            {{ forms.textArea('description', 'Description') }}
+            {{ forms.textInput('level', 'Level', '', 'number') }}
+            {{ forms.textInput('order', 'Order', '', 'number') }}
+        </div>
+        <div class="box-footer">
+            <a href="{{ route('skills/' + skillId + '/edit') }}" class="btn btn-default"> &laquo; Back To Skill </a>
+            <button type="submit" class="btn btn-info pull-right">Submit</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
