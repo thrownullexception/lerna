@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToMany, JoinTable } from 'typeorm';
 import { SkillResource } from '../skill-resources/skill-resources.entity';
 import { SkillRoadMap } from '../skill-road-maps/skill-road-maps.entity';
-import { SkillHierarchy } from 'src/skill-hierarchies/skill-hierarchies.entity';
+import { SkillHierarchy } from '../skill-hierarchies/skill-hierarchies.entity';
 
 @Entity('skills')
 export class Skill {

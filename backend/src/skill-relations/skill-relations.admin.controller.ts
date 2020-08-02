@@ -14,9 +14,9 @@ import {
 import { Response } from 'express';
 import { CreateSkillRelationDTO } from './dtos';
 import { SkillRelationsService } from './skill-relations.service';
-import { AdminController, ISessionFlash, SessionFlash } from 'src/shared/decorators';
-import { SkillsService } from 'src/skills/skills.service';
-import { ISkillWithRestAsOptions } from 'src/skills/skills.types';
+import { AdminController, ISessionFlash, SessionFlash } from '../shared/decorators';
+import { SkillsService } from '../skills/skills.service';
+import { ISkillWithRestAsOptions } from '../skills/skills.types';
 
 const DOMAIN = 'skill-relations';
 
