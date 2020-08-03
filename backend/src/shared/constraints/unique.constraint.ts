@@ -28,7 +28,6 @@ class UniqueConstraint<T> implements ValidatorConstraintInterface {
   async validate(field: string, args: UniqueConstraintValidationArguments<T>): Promise<boolean> {
     const [constraintOptions, columnName] = args.constraints;
     const dbColumnName: string = columnName || args.property;
-
     let where = {
       [dbColumnName]: args.value,
     };

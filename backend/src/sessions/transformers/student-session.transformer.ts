@@ -1,4 +1,3 @@
-import { Session } from '../sessions.entity';
 import { SessionCandidate } from '../../session-candidates/session-candidates.entity';
 
 export class StudentSessionTransformer {

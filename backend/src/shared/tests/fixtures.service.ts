@@ -1,4 +1,4 @@
-import { Repository, getRepository, getConnection } from 'typeorm';
+import { Repository, getRepository } from 'typeorm';
 import * as Path from 'path';
 import * as fs from 'fs';
 import { isArray, isObject } from 'util';

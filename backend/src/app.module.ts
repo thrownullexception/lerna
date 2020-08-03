@@ -30,6 +30,7 @@ import { SkillResourcesModule } from './skill-resources/skill-resources.module';
 import { AccountModesModule } from './account-modes/account-modes.module';
 import { SkillMediaTypesModule } from './skill-media-types/skill-media-types.module';
 import { UserFavouriteSkillsModule } from './user-favourite-skills/user-favourite-skills.module';
+import { UserCompletedSkillRoadMapsModule } from './user-completed-skill-road-maps/user-completed-skill-road-maps.module';
 
 @Module({
   imports: [
@@ -72,6 +73,7 @@ import { UserFavouriteSkillsModule } from './user-favourite-skills/user-favourit
     AccountModesModule,
     SkillMediaTypesModule,
     UserFavouriteSkillsModule,
+    UserCompletedSkillRoadMapsModule,
   ],
   providers: [
     {

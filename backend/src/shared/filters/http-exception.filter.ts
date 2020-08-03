@@ -8,7 +8,6 @@ import {
 } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { Logger } from 'winston';
-import { ValidationError } from 'class-validator';
 import { APP_CONSTANTS } from '../constants';
 import { get } from 'lodash';
 
