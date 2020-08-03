@@ -47,7 +47,8 @@ class UniqueConstraint<T> implements ValidatorConstraintInterface {
     }
 
     if (constraintOptions.biDirectional) {
-      // TODO
+      const otherWhereClause = {};
+      where = [where, otherWhereClause];
     }
 
     const data = await getRepository(constraintOptions.repositoryModel).findOne({

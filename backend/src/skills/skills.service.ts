@@ -7,7 +7,7 @@ import { CreateSkillDTO, EditSkillDTO } from './dtos';
 import { IQueryParametersDTO, IPaginatePayload } from '../shared/types';
 import { FindConditions } from 'typeorm';
 import { ISkillWithRestAsOptions, IMySkillActions } from './skills.types';
-import { UserFavouriteSkillsService } from 'src/user-favourite-skills/user-favourite-skills.service';
+import { UserFavouriteSkillsService } from '../user-favourite-skills/user-favourite-skills.service';
 
 @Injectable()
 export class SkillsService {

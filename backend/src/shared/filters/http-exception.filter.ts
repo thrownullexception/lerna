@@ -61,14 +61,4 @@ export class HttpExceptionFilter implements ExceptionFilter {
   private getErrorMessage(exception: any) {
     return get(exception.getResponse(), ['message', 0], 'Some nasty thing has been done');
   }
-
-  private transformClassValidatorsErrors(errorBag: ValidationError[]): ValidationError[] {
-    console.log(errorBag);
-    return errorBag;
-    // TODO
-    // return errorBag.reduce((allStrings: [], error) => {
-    //   const constraints = Object.values(error.constraints);
-    //   return [...constraints, ...allStrings];
-    // }, []);
-  }
 }
