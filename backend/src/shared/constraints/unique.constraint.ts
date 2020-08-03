@@ -9,26 +9,53 @@ import {
   ValidationArguments,
 } from 'class-validator';
 
-interface UniqueConstraintValidationOptions extends ValidationOptions {
+interface UniqueConstraintValidationOptions<T> extends ValidationOptions {
   columnName?: string;
 }
 
+interface UniqueConstraintValidationArguments<T> extends ValidationArguments {
+  constraints: [IConstraintOptions<T>, string];
+}
+
+interface IConstraintOptions<T> {
+  repositoryModel: new () => unknown;
+  otherColumn?: keyof T;
+  biDirectional?: boolean;
+}
+
 @ValidatorConstraint({ async: true })
-export class UniqueConstraint implements ValidatorConstraintInterface {
-  async validate(field: string, args: ValidationArguments): Promise<boolean> {
-    const [RepositoryModel, columnName] = args.constraints;
+class UniqueConstraint<T> implements ValidatorConstraintInterface {
+  async validate(field: string, args: UniqueConstraintValidationArguments<T>): Promise<boolean> {
+    const [constraintOptions, columnName] = args.constraints;
     const dbColumnName: string = columnName || args.property;
+
     let where = {
       [dbColumnName]: args.value,
     };
-    const skipId = args.object[`${args.property}Skip`] || get(args.object, ['id']);
+
+    if (constraintOptions.otherColumn) {
+      where = {
+        ...where,
+        [constraintOptions.otherColumn]: get(args.object, [constraintOptions.otherColumn]),
+      };
+    }
+
+    const skipId = get(args.object, [`${args.property}Skip`], get(args.object, ['id']));
+
     if (skipId) {
       where = { ...where, id: Not(skipId) };
     }
-    const data = await getRepository(RepositoryModel).findOne({
+
+    if (constraintOptions.biDirectional) {
+      const otherWhereClause = {};
+      where = [where, otherWhereClause];
+    }
+
+    const data = await getRepository(constraintOptions.repositoryModel).findOne({
       where,
       select: ['id'],
     });
+
     if (data) {
       return false;
     }
@@ -40,16 +67,16 @@ export class UniqueConstraint implements ValidatorConstraintInterface {
   }
 }
 
-export function Unique(
-  RepositoryModel: string,
-  validationOptions?: UniqueConstraintValidationOptions,
+export function Unique<T>(
+  constraintOptions: IConstraintOptions<T>,
+  validationOptions?: UniqueConstraintValidationOptions<T>,
 ): (object: object, propertyName: string) => void {
   return (object: object, propertyName: string): void => {
     registerDecorator({
       target: object.constructor,
       propertyName,
       options: validationOptions,
-      constraints: [RepositoryModel, validationOptions.columnName],
+      constraints: [constraintOptions, validationOptions.columnName],
       validator: UniqueConstraint,
     });
   };

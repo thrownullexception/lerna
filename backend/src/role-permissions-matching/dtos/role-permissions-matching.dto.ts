@@ -1,26 +1,26 @@
-import { IsNotEmpty, IsInt, IsUUID } from 'class-validator';
+import { IsNotEmpty, IsUUID } from 'class-validator';
+import { RolesPermissionMatching } from '../role-permissions-matching.entity';
+import { Unique } from '../../shared/constraints';
 
 export class RolePermissionMatchingDTO {
-  @IsNotEmpty({
-    message: 'Id is required',
-  })
+  @Unique<RolePermissionMatchingDTO>(
+    {
+      repositoryModel: RolesPermissionMatching,
+      otherColumn: 'permissionId',
+    },
+    {
+      message: 'Permission Already Added',
+    },
+  )
   @IsUUID(4)
-  id: string;
-
   @IsNotEmpty({
     message: 'Role Id is required',
   })
-  @IsInt({
-    message: 'Role Id should be an Int',
-  })
-  roleId: number;
+  roleId: string;
 
+  @IsUUID(4)
   @IsNotEmpty({
     message: 'Permission Id is required',
   })
-  @IsInt({
-    message: 'Permission Id should be an Int',
-  })
-  permissionId: number;
-  // TODO: unique `${serviceAccountId}_${permissionId}` check
+  permissionId: string;
 }

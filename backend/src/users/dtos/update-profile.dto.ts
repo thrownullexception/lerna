@@ -12,9 +12,9 @@ export class UpdateProfileDTO {
   })
   dob: string;
 
+  @IsEnum(GenderTypes)
   @IsNotEmpty({
     message: 'Gender is required',
   })
-  @IsEnum(GenderTypes)
   gender: GenderTypes;
 }

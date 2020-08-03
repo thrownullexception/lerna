@@ -1,27 +1,35 @@
 import { IsNotEmpty, MaxLength, IsEmail, IsAlphanumeric, MinLength } from 'class-validator';
 import { Unique } from '../../shared/constraints';
+import { User } from '../../users/users.entity';
 
 export class SignUpDTO {
-  @IsNotEmpty({
-    message: 'Email is required',
-  })
+  @Unique<SignUpDTO>(
+    {
+      repositoryModel: User,
+    },
+    {
+      message: 'Email already exists',
+    },
+  )
   @IsEmail(
     {},
     {
       message: 'Invalid Email',
     },
   )
-  @Unique('User', {
-    message: 'Email already exists',
+  @IsNotEmpty({
+    message: 'Email is required',
   })
   email: string;
 
-  @IsNotEmpty({
-    message: 'Username is required',
-  })
-  @Unique('User', {
-    message: 'Username already exists',
-  })
+  @Unique<SignUpDTO>(
+    {
+      repositoryModel: User,
+    },
+    {
+      message: 'Username already exists',
+    },
+  )
   @IsAlphanumeric('en-GB', {
     message: 'Only letters and numbers are allowed for username',
   })
@@ -31,16 +39,19 @@ export class SignUpDTO {
   @MaxLength(32, {
     message: 'Username too long',
   })
+  @IsNotEmpty({
+    message: 'Username is required',
+  })
   username: string;
 
-  @IsNotEmpty({
-    message: 'Password is required',
-  })
   @MinLength(4, {
     message: 'Password too short',
   })
   @MaxLength(24, {
     message: 'Password too long',
+  })
+  @IsNotEmpty({
+    message: 'Password is required',
   })
   // password strength
   password: string;

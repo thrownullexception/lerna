@@ -14,15 +14,15 @@ export class BaseSessionDTO {
   })
   description: string;
 
+  @IsNumber()
   @IsNotEmpty({
     message: 'Title is required',
   })
-  @IsNumber()
   budgetFrom: number;
 
+  @IsNumber()
   @IsNotEmpty({
     message: 'Title is required',
   })
-  @IsNumber()
   budgetTo: number;
 }

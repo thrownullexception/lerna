@@ -6,13 +6,15 @@ import { SkillHierarchiesService } from '../skill-hierarchies/skill-hierarchies.
 import { CreateSkillDTO, EditSkillDTO } from './dtos';
 import { IQueryParametersDTO, IPaginatePayload } from '../shared/types';
 import { FindConditions } from 'typeorm';
-import { ISkillWithRestAsOptions } from './skills.types';
+import { ISkillWithRestAsOptions, IMySkillActions } from './skills.types';
+import { UserFavouriteSkillsService } from '../user-favourite-skills/user-favourite-skills.service';
 
 @Injectable()
 export class SkillsService {
   constructor(
     private readonly skillsRepository: SkillsRepository,
     private readonly skillHierarchiesService: SkillHierarchiesService,
+    private readonly userFavouriteSkillsService: UserFavouriteSkillsService,
   ) {}
 
   async getSkills(): Promise<Skill[]> {
@@ -23,6 +25,15 @@ export class SkillsService {
     return await this.skillsRepository.listSkills({
       select: ['id', 'name'],
     });
+  }
+
+  async getMySkillActions(userId: string): Promise<IMySkillActions> {
+    return {
+      favouriteSkills: (await this.userFavouriteSkillsService.getUserFavouriteSkills(userId)).map(
+        ({ skillId }) => skillId,
+      ),
+      completedRoadMaps: ['a'],
+    };
   }
 
   async getSingleFieldFromSkillId<T extends keyof Skill>(
@@ -46,7 +57,6 @@ export class SkillsService {
       where: { id: skillId },
       select: ['id', 'name', 'description', 'isPath'],
       relations: [
-        // TODO look at me
         'resources',
         'resources.skillMediaType',
         'roadMaps',

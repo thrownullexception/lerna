@@ -1,8 +1,8 @@
 import { IsNotEmpty, IsNumberString, Length } from 'class-validator';
 
 export class UpdateBankDetailsDTO {
-  @IsNotEmpty({
-    message: 'Account Number is required',
+  @Length(10, 10, {
+    message: 'Account Number should be of 10 Characters',
   })
   @IsNumberString(
     {},
@@ -10,8 +10,8 @@ export class UpdateBankDetailsDTO {
       message: 'Account Number should be only numbers',
     },
   )
-  @Length(10, 10, {
-    message: 'Account Number should be of 10 Characters',
+  @IsNotEmpty({
+    message: 'Account Number is required',
   })
   accountNumber: number;
 
@@ -23,11 +23,5 @@ export class UpdateBankDetailsDTO {
   @IsNotEmpty({
     message: 'Bank is required',
   })
-  @IsNumberString(
-    {},
-    {
-      message: 'Invalid Bank',
-    },
-  )
   bankId: number;
 }

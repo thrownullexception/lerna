@@ -3,7 +3,7 @@ import { TutorSkillsRepository } from './tutor-skills.repository';
 import { TutorSkill } from './tutor-skills.entity';
 import { TutorSkillLevel } from '../tutor-skill-levels/tutor-skill-levels.entity';
 import { TutorSkillLevelsService } from '../tutor-skill-levels/tutor-skill-levels.service';
-import { TutorSkillDTO } from './dtos';
+import { CreateTutorSkillDTO, UpdateTutorSkillDTO } from './dtos';
 
 @Injectable()
 export class TutorSkillsService {
@@ -23,12 +23,12 @@ export class TutorSkillsService {
     return { tutorSkills, tutorSkillLevels };
   }
 
-  async createTutorSkill(tutorSkillDTO: TutorSkillDTO, userId: string): Promise<void> {
-    return await this.tutorSkillsRepository.createTutorSkill({ ...tutorSkillDTO, userId });
+  async createTutorSkill(createTutorSkillDTO: CreateTutorSkillDTO, userId: string): Promise<void> {
+    return await this.tutorSkillsRepository.createTutorSkill({ ...createTutorSkillDTO, userId });
   }
 
-  async updateTutorSkill(skillId: string, tutorSkillDTO: TutorSkillDTO): Promise<void> {
-    await this.tutorSkillsRepository.updateTutorSkill(skillId, tutorSkillDTO);
+  async updateTutorSkill(skillId: string, updateTutorSkillDTO: UpdateTutorSkillDTO): Promise<void> {
+    await this.tutorSkillsRepository.updateTutorSkill(skillId, updateTutorSkillDTO);
   }
 
   async deleteTutorSkill(tutorSkillId: string): Promise<void> {

@@ -60,3 +60,32 @@ You vet your area of interest
 10 secs to select answer
 
 IP_ADDRESS FINGERPRINTS on login
+
+========= Tasks
+
+tutor_skills
+Tutor_profile
+
+- Tutors be able to add skills
+- Tutors be able edit their profile
+
+
+- Students be able to create a session
+- Students be able to get suggestions based on the session details
+- Students should be able to search
+
+Guests
+
+========== Links
+Dashboard
+Messages
+Skills
+Sessions
+Payouts
+Invoice
+Transactions
+Support
+Reviews
+Disputes
+Profile =>
+no links for messages

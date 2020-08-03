@@ -1,16 +1,16 @@
 import { IsNotEmpty, IsNumberString } from 'class-validator';
 
 export class BaseSkillRoadMapDTO {
+  @IsNumberString()
   @IsNotEmpty({
     message: 'Level is required',
   })
-  @IsNumberString()
   level: number;
 
+  @IsNumberString()
   @IsNotEmpty({
     message: 'Order is required',
   })
-  @IsNumberString()
   order: number;
 
   @IsNotEmpty({

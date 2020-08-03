@@ -1,20 +1,29 @@
 import { IsNotEmpty, IsUUID } from 'class-validator';
+import { SessionSkill } from '../session-skills.entity';
+import { Unique } from '../../shared/constraints';
 
 export class CreateSessionSkillDTO {
   @IsUUID(4)
   id: string;
 
+  @Unique<CreateSessionSkillDTO>(
+    {
+      repositoryModel: SessionSkill,
+      otherColumn: 'sessionId',
+    },
+    {
+      message: 'Skill was already added',
+    },
+  )
+  @IsUUID(4)
   @IsNotEmpty({
     message: 'SkillID is required',
   })
-  @IsUUID(4)
   skillId: string;
 
+  @IsUUID(4)
   @IsNotEmpty({
     message: 'SessionID is required',
   })
-  @IsUUID(4)
   sessionId: string;
 }
-
-// TODO Add sessionId-skillId unique constraints

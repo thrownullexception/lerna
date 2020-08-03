@@ -38,7 +38,7 @@ export class SessionsApiController {
   @Get(AccountModeType.Tutor)
   async listForTutor(
     @Query(new CursorQueryParametersPipe()) cursorParametersDTO: ICursorParametersDTO,
-    @AuthenticatedUser('userId', new ParseUUIDPipe()) userId: string,
+    @AuthenticatedUser('id', new ParseUUIDPipe()) userId: string,
   ): Promise<PagingResult<TutorSessionTransformer>> {
     const { data, cursor } = await this.sessionsService.listStudentsSessions(
       userId,
@@ -50,7 +50,7 @@ export class SessionsApiController {
   @Get(AccountModeType.Student)
   async listForStudent(
     @Query(new CursorQueryParametersPipe()) cursorParametersDTO: ICursorParametersDTO,
-    @AuthenticatedUser('userId', new ParseUUIDPipe()) userId: string,
+    @AuthenticatedUser('id', new ParseUUIDPipe()) userId: string,
   ): Promise<PagingResult<StudentSessionTransformer>> {
     const { data, cursor } = await this.sessionCandidatesService.listTutorSessions(
       userId,
@@ -69,7 +69,7 @@ export class SessionsApiController {
   @Post()
   @HttpCode(HttpStatus.CREATED)
   async create(
-    @AuthenticatedUser('userId', new ParseUUIDPipe()) userId: string,
+    @AuthenticatedUser('id', new ParseUUIDPipe()) userId: string,
     @Body() createSessionDTO: CreateSessionDTO,
   ): Promise<void> {
     await this.sessionsService.createSession(createSessionDTO, userId);

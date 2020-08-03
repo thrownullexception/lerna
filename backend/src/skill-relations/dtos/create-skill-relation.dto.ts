@@ -1,22 +1,27 @@
 import { IsNotEmpty, IsUUID } from 'class-validator';
 import { Unique } from '../../shared/constraints';
+import { SkillRelation } from '../skill-relations.entity';
 
 export class CreateSkillRelationDTO {
+  @Unique<CreateSkillRelationDTO>(
+    {
+      repositoryModel: SkillRelation,
+      otherColumn: 'skillBId',
+      biDirectional: true,
+    },
+    {
+      message: 'Relations already exists',
+    },
+  )
+  @IsUUID(4)
   @IsNotEmpty({
     message: 'Skill A is required',
   })
-  @IsUUID(4)
-  @Unique('SkillRelation', {
-    message: 'Relation Ship exists',
-  })
   skillAId: string;
 
+  @IsUUID(4)
   @IsNotEmpty({
     message: 'Skill B is required',
   })
-  @IsUUID(4)
   skillBId: string;
 }
-
-// TODO Add skillBId-skillAId unique constraints
-// TODO Add skillAId-skillBId unique constraints

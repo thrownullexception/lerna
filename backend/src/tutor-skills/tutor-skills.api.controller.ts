@@ -16,7 +16,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { TutorSkillTransformer } from './transfomers';
 import { TutorSkillsService } from './tutor-skills.service';
 import { AuthenticatedUser } from '../shared/decorators';
-import { TutorSkillDTO } from './dtos';
+import { CreateTutorSkillDTO, UpdateTutorSkillDTO } from './dtos';
 
 @Controller(APP_CONSTANTS.API_ROUTES_PREFIX('tutor-skills'))
 @UseGuards(AuthGuard('jwt'))
@@ -36,19 +36,19 @@ export class TutorSkillsApiController {
   @Post()
   @HttpCode(HttpStatus.CREATED)
   async create(
-    @AuthenticatedUser('userId', new ParseUUIDPipe()) userId: string,
-    @Body() tutorSkillDTO: TutorSkillDTO,
+    @AuthenticatedUser('id', new ParseUUIDPipe()) userId: string,
+    @Body() createTutorSkillDTO: CreateTutorSkillDTO, // TODO a pipe to reduce the userId into body
   ): Promise<void> {
-    await this.tutorSkillsService.createTutorSkill(tutorSkillDTO, userId);
+    await this.tutorSkillsService.createTutorSkill(createTutorSkillDTO, userId);
   }
 
   @Patch(':tutorSkillId')
   @HttpCode(HttpStatus.NO_CONTENT)
   async update(
     @Param('tutorSkillId', new ParseUUIDPipe()) tutorSkillId: string,
-    @Body() tutorSkillDTO: TutorSkillDTO,
+    @Body() updateTutorSkillDTO: UpdateTutorSkillDTO,
   ): Promise<void> {
-    await this.tutorSkillsService.updateTutorSkill(tutorSkillId, tutorSkillDTO);
+    await this.tutorSkillsService.updateTutorSkill(tutorSkillId, updateTutorSkillDTO);
   }
 
   @Delete(':tutorSkillId')

@@ -1,21 +1,21 @@
 import { IsNumber, IsNotEmpty } from 'class-validator';
 
 export class UpdateSessionMetadataDTO {
+  @IsNumber()
   @IsNotEmpty({
     message: 'Title is required',
   })
-  @IsNumber()
   passPercentage: number;
 
+  @IsNumber()
   @IsNotEmpty({
     message: 'Title is required',
   })
-  @IsNumber()
   quizDuration: number;
 
+  @IsNumber()
   @IsNotEmpty({
     message: 'Title is required',
   })
-  @IsNumber()
   noResponseDuration: number;
 }

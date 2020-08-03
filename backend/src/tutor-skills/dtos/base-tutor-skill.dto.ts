@@ -1,33 +1,48 @@
 import { IsNotEmpty, IsEnum, IsUUID, IsNumber } from 'class-validator';
 import { TutorSkillLevels } from '../../tutor-skill-levels/tutor-skill-levels.types';
+import { Unique } from '../../shared/constraints';
+import { TutorSkill } from '../tutor-skills.entity';
 
-export class TutorSkillDTO {
+export class BaseTutorSkillDTO {
   @IsUUID(4)
   id: string;
 
+  @Unique<BaseTutorSkillDTO>(
+    {
+      repositoryModel: TutorSkill,
+      otherColumn: 'userId',
+    },
+    {
+      message: 'Skill was already added',
+    },
+  )
+  @IsUUID(4)
   @IsNotEmpty({
     message: 'Skill is required',
   })
-  @IsUUID(4)
   skillId: string;
 
+  @IsUUID(4)
+  @IsNotEmpty({
+    message: 'User is required',
+  })
+  userId: string;
+
+  @IsEnum(TutorSkillLevels)
   @IsNotEmpty({
     message: 'Answer is required',
   })
-  @IsEnum(TutorSkillLevels) // Test me out
   level: TutorSkillLevels;
 
+  @IsNumber()
   @IsNotEmpty({
     message: 'Rate is required',
   })
-  @IsNumber()
   rate: number;
 
+  @IsNumber()
   @IsNotEmpty({
     message: 'Years of Experience is required',
   })
-  @IsNumber()
   years: number;
 }
-
-// Add unique contraint // skillId-userId
