@@ -12,10 +12,10 @@ export class BaseSkillResourceDTO {
   })
   link: string;
 
+  @IsEnum(SkillMediaTypes)
   @IsNotEmpty({
     message: 'Media Type is required',
   })
-  @IsEnum(SkillMediaTypes)
   mediaType: SkillMediaTypes;
 
   @IsOptional()

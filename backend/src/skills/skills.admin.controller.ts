@@ -87,7 +87,6 @@ export class AdminSkillsController {
     @Headers('referer') back: string,
     @SessionFlash() sessionFlash: ISessionFlash,
   ): Promise<void> {
-    console.log(createSkillDTO);
     await this.skillsService.createSkill(createSkillDTO, userId);
     sessionFlash.success('Skill Created Successfully');
     res.redirect(back);

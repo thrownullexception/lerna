@@ -1,9 +1,9 @@
 import { IsNotEmpty, IsNumberString } from 'class-validator';
 
 export class BaseSkillHierarchyDTO {
+  @IsNumberString()
   @IsNotEmpty({
     message: 'Order is required',
   })
-  @IsNumberString()
   order: number;
 }

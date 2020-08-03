@@ -6,7 +6,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
 import './index.scss'; // Its Position Here Is Important :)
-import { store } from './store/configureStore';
+import configureStore from './store/configureStore';
 import { history } from './store/history';
 import { route } from './routes/routes';
 import 'font-awesome/css/font-awesome.min.css';
@@ -14,15 +14,15 @@ import 'nprogress/nprogress.css';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import 'react-toastify/dist/ReactToastify.css';
 
-// const persistor = persistStore(store);
+const { store, persistor } = configureStore();
 
 ReactDOM.render(
   <Provider store={store}>
-    {/* <PersistGate loading={null} persistor={persistor}> */}
-    <ConnectedRouter history={history}>
-      <HashRouter children={route} />
-    </ConnectedRouter>
-    {/* </PersistGate> */}
+    <PersistGate loading={null} persistor={persistor}>
+      <ConnectedRouter history={history}>
+        <HashRouter children={route} />
+      </ConnectedRouter>
+    </PersistGate>
   </Provider>,
   document.getElementById('root'),
 );

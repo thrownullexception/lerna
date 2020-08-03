@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { IProps } from './FaqsList.types';
 import { Spinner } from '../../../components/Spinner';
+import './styles.scss';
 
 export class FaqsList extends React.PureComponent<IProps> {
   componentDidMount() {
@@ -15,8 +16,8 @@ export class FaqsList extends React.PureComponent<IProps> {
             <div className="card">
               {faqs.map(({ question, answer, id }) => (
                 <div className="card-body" key={id}>
-                  <h4 className="font-weight-semibold tx-15">{question}</h4>
-                  <p className="text-muted mb-0 tx-13">{answer}</p>
+                  <h4 className="faqs-list__question">{question}</h4>
+                  <p className="faqs-list__answer">{answer}</p>
                 </div>
               ))}
             </div>

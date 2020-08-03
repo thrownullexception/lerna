@@ -4,39 +4,39 @@ export class SessionQuizDTO {
   @IsUUID(4)
   id: string;
 
+  @IsUUID(4)
   @IsNotEmpty({
     message: 'SessionID is required',
   })
-  @IsUUID(4)
   sessionId: string;
 
+  @Length(10, 140)
   @IsNotEmpty({
     message: 'Question is required',
   })
-  @Length(10, 140)
   question: string;
 
+  @Length(1, 50)
   @IsNotEmpty({
     message: 'Option A is required',
   })
-  @Length(1, 50)
   optionA: string;
 
+  @Length(1, 50)
   @IsNotEmpty({
     message: 'Option B is required',
   })
-  @Length(1, 50)
   optionB: string;
 
-  @IsOptional()
   @Length(1, 50)
+  @IsOptional()
   optionC: string;
 
-  @IsOptional()
   @Length(1, 50)
+  @IsOptional()
   optionD: string;
 
-  @IsOptional()
   @Length(1, 50)
+  @IsOptional()
   optionE: string;
 }

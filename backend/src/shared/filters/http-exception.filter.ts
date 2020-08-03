@@ -45,21 +45,21 @@ export class HttpExceptionFilter implements ExceptionFilter {
           response.redirect(APP_CONSTANTS.ADMIN_ROUTES_PREFIX('dashboard', '/'));
 
         case HttpStatus.BAD_REQUEST:
-          const message = get(
-            exception.getResponse(),
-            ['message'],
-            'Some nasty thing has been done',
-          );
-          request.session.flash = { error: message[0] };
+          const message = this.getErrorMessage(exception);
+          request.session.flash = { error: message };
           response.redirect(request.headers.referer);
       }
     }
 
-    if (status === HttpStatus.BAD_REQUEST && typeof exception.message === 'object') {
-      errorResponse.validations = this.transformClassValidatorsErrors(exception.message);
+    if (status === HttpStatus.BAD_REQUEST) {
+      errorResponse.message = this.getErrorMessage(exception);
     }
 
     response.status(status).json(errorResponse);
+  }
+
+  private getErrorMessage(exception: any) {
+    return get(exception.getResponse(), ['message', 0], 'Some nasty thing has been done');
   }
 
   private transformClassValidatorsErrors(errorBag: ValidationError[]): ValidationError[] {

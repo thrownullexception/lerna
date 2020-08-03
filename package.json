@@ -12,7 +12,7 @@
         "test:frontend": "cd frontend && npm run test",
         "prettify:frontend": "prettier --write \"frontend/src/**/*.{ts,tsx}\"",
         "prettify:backend": "prettier --write \"backend/src/**/*.ts\"",
-        "server:admin": "cd frontend/public && http-server --port=3001",
+        "serve:admin": "cd frontend/public && http-server --port=3001",
         "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
         "test": "concurrently \"npm run test:frontend\" \"npm run test:backend\"",
         "lint": "concurrently \"npm run lint:frontend\" \"npm run lint:backend\""

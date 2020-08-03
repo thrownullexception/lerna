@@ -1,4 +1,4 @@
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsEnum } from 'class-validator';
 import { AccountModeType } from '../../account-modes/account-modes.types';
 
 export class FaqDTO {
@@ -12,8 +12,9 @@ export class FaqDTO {
   })
   answer: string;
 
+  @IsEnum(AccountModeType)
   @IsNotEmpty({
-    message: 'Answer is required',
+    message: 'Account Mode is required',
   })
   accountModeSystemName: AccountModeType;
 }

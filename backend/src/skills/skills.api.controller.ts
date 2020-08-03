@@ -4,6 +4,8 @@ import { SkillTransformer, AllSkillTransformer } from './transfomers';
 import { APP_CONSTANTS } from '../shared/constants';
 import { SkillHierarchyTransformer } from '../skill-hierarchies/transformers';
 import { AuthGuard } from '@nestjs/passport';
+import { AuthenticatedUser } from '../shared/decorators';
+import { IMySkillActions } from './skills.types';
 
 @Controller(APP_CONSTANTS.API_ROUTES_PREFIX('skills'))
 @UseGuards(AuthGuard('jwt'))
@@ -22,6 +24,13 @@ export class SkillsApiController {
         skillHierarchy => new SkillHierarchyTransformer(skillHierarchy),
       ),
     };
+  }
+
+  @Get('my-actions')
+  async mySkillActions(
+    @AuthenticatedUser('id', new ParseUUIDPipe()) userId: string,
+  ): Promise<IMySkillActions> {
+    return await this.skillsService.getMySkillActions(userId);
   }
 
   @Get('all')

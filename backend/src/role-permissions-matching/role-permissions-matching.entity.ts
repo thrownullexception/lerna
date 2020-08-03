@@ -8,10 +8,10 @@ export class RolesPermissionMatching {
   id: string;
 
   @Column()
-  roleId: number;
+  roleId: string;
 
   @Column()
-  permissionId: number;
+  permissionId: string;
 
   @ManyToOne(
     () => Role,

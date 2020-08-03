@@ -1,12 +1,16 @@
 import { IsNotEmpty, IsOptional } from 'class-validator';
 import { Unique } from '../../shared/constraints';
+import { Skill } from '../skills.entity';
 
 export class BaseSkillDTO {
+  @Unique<BaseSkillDTO>(
+    { repositoryModel: Skill },
+    {
+      message: 'Skill already exists',
+    },
+  )
   @IsNotEmpty({
     message: 'Skill Name is required',
-  })
-  @Unique('Skill', {
-    message: 'Skill already exists',
   })
   name: string;
 

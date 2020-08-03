@@ -29,6 +29,7 @@ import { SkillRoadMapsModule } from './skill-road-maps/skill-road-maps.module';
 import { SkillResourcesModule } from './skill-resources/skill-resources.module';
 import { AccountModesModule } from './account-modes/account-modes.module';
 import { SkillMediaTypesModule } from './skill-media-types/skill-media-types.module';
+import { UserFavouriteSkillsModule } from './user-favourite-skills/user-favourite-skills.module';
 
 @Module({
   imports: [
@@ -70,6 +71,7 @@ import { SkillMediaTypesModule } from './skill-media-types/skill-media-types.mod
     SkillResourcesModule,
     AccountModesModule,
     SkillMediaTypesModule,
+    UserFavouriteSkillsModule,
   ],
   providers: [
     {

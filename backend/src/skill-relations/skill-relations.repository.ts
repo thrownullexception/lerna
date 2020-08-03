@@ -1,4 +1,4 @@
-import { Repository, EntityRepository, FindManyOptions } from 'typeorm';
+import { Repository, EntityRepository, FindManyOptions, FindConditions } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { SkillRelation } from './skill-relations.entity';
 
@@ -17,7 +17,7 @@ export class SkillRelationsRepository extends Repository<SkillRelation> {
     await this.insert(skillRelation);
   }
 
-  async deleteSkillRelation(skillRelationId: string): Promise<void> {
-    await this.delete(skillRelationId);
+  async deleteSkillRelation(conditions: FindConditions<SkillRelation>): Promise<void> {
+    await this.delete(conditions);
   }
 }
