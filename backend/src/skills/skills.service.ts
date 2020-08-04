@@ -8,6 +8,7 @@ import { IQueryParametersDTO, IPaginatePayload } from '../shared/types';
 import { FindConditions } from 'typeorm';
 import { ISkillWithRestAsOptions, IMySkillActions } from './skills.types';
 import { UserFavouriteSkillsService } from '../user-favourite-skills/user-favourite-skills.service';
+import { UserCompletedSkillRoadMapsService } from '../user-completed-skill-road-maps/user-completed-skill-road-maps.service';
 
 @Injectable()
 export class SkillsService {
@@ -15,6 +16,7 @@ export class SkillsService {
     private readonly skillsRepository: SkillsRepository,
     private readonly skillHierarchiesService: SkillHierarchiesService,
     private readonly userFavouriteSkillsService: UserFavouriteSkillsService,
+    private readonly userCompletedSkillRoadMapsService: UserCompletedSkillRoadMapsService,
   ) {}
 
   async getSkills(): Promise<Skill[]> {
@@ -28,11 +30,14 @@ export class SkillsService {
   }
 
   async getMySkillActions(userId: string): Promise<IMySkillActions> {
+    const [favouriteSkills, completedRoadMaps] = await Promise.all([
+      await this.userFavouriteSkillsService.getUserFavouriteSkills(userId),
+      await this.userCompletedSkillRoadMapsService.getUserCompletedSkillRoadMaps(userId),
+    ]);
+
     return {
-      favouriteSkills: (await this.userFavouriteSkillsService.getUserFavouriteSkills(userId)).map(
-        ({ skillId }) => skillId,
-      ),
-      completedRoadMaps: ['a'],
+      favouriteSkills: favouriteSkills.map(({ skillId }) => skillId),
+      completedRoadMaps: completedRoadMaps.map(({ skillRoadMapId }) => skillRoadMapId),
     };
   }
 

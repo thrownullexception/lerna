@@ -18,7 +18,7 @@ export class UserCompletedSkillRoadMapsService {
   async createUserCompletedSkillRoadMap(
     createUserCompletedSkillRoadMapDTO: CreateUserCompletedSkillRoadMapDTO,
   ): Promise<void> {
-    return await this.userCompletedSkillRoadMapsRepository.createUserCompletedSkillRoadMap(
+    await this.userCompletedSkillRoadMapsRepository.createUserCompletedSkillRoadMap(
       createUserCompletedSkillRoadMapDTO,
     );
   }

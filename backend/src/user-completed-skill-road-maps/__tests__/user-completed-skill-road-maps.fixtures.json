@@ -1,0 +1,13 @@
+{
+    "data" : [],
+    "dependsOn": [
+        {
+            "repository": "User",
+            "path": "users"
+        },
+        {
+            "repository": "SkillRoadMap",
+            "path": "skill-road-maps"
+        }
+    ]
+}
