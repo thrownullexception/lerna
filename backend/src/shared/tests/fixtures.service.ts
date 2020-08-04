@@ -22,14 +22,14 @@ export class FixturesService {
     }
   }
 
-  async resetEntityFixtures(entityName: string, path: string): Promise<void> {
-    const repository = getRepository(entityName);
+  async resetEntityFixtures(entity: string | (new () => unknown), path: string): Promise<void> {
+    const repository = getRepository(entity);
     await this.clean(repository);
     await this.load(repository, path);
   }
 
-  async clearEntityFixtures(entityName: string): Promise<void> {
-    const repository = getRepository(entityName);
+  async clearEntityFixtures(entity: string | (new () => unknown)): Promise<void> {
+    const repository = getRepository(entity);
     await this.clean(repository);
   }
 
@@ -91,7 +91,9 @@ export class FixturesService {
     }
     await Promise.all(
       items.map(dataToSeed => {
-        const fields = Object.keys(dataToSeed).join(',');
+        const fields = Object.keys(dataToSeed)
+          .map(value => '"' + value + '"')
+          .join(',');
         const values = Object.values(dataToSeed)
           .map(value => `'${value}'`)
           .join(',');

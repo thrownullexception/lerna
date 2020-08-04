@@ -1,0 +1,18 @@
+{
+    "data" : [
+        {
+            "id": "e001b1e8-c885-442a-8098-3d23e8561962",
+            "skill_id": "49eca663-4727-424f-9f9d-b7838c8f7dff",
+            "level": 3,
+            "order": 2,
+            "title": "Some Skill Road Map Title",
+            "description": "Some Skill Road Map Description"
+        }
+    ],
+    "dependsOn": [
+        {
+            "repository": "Skill",
+            "path": "skills"
+        }
+    ]
+}

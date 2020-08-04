@@ -5,6 +5,7 @@ import { FixturesService, TestingModule } from '../../shared/tests';
 import { APP_CONSTANTS } from '../../shared/constants';
 
 import { FaqsModule } from '../faqs.module';
+import { Faq } from '../faqs.entity';
 
 describe('Faqs API Controller', () => {
   let app: INestApplication;
@@ -21,7 +22,7 @@ describe('Faqs API Controller', () => {
   });
 
   beforeEach(async () => {
-    await fixturesService.resetEntityFixtures('Faq', 'faqs');
+    await fixturesService.resetEntityFixtures(Faq, 'faqs');
   });
 
   it('API /GET faqs', async () => {
