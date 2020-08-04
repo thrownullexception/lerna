@@ -20,7 +20,7 @@ import { SessionQuizzesService } from './session-quizzes.service';
 import { AuthenticatedUser } from '../shared/decorators';
 import { Response as ExpressResponse } from 'express';
 
-@Controller(APP_CONSTANTS.API_ROUTES_PREFIX('session-quizzes'))
+@Controller(APP_CONSTANTS.API_ROUTES_PREFIX('session-quizzes')) // TODO test
 @UseGuards(AuthGuard('jwt'))
 export class SessionQuizzesApiController {
   constructor(private readonly sessionQuizzesService: SessionQuizzesService) {}

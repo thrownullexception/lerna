@@ -19,9 +19,6 @@ describe('Faqs API Controller', () => {
     app = moduleRef.createNestApplication();
     await app.init();
     fixturesService = moduleRef.get<FixturesService>(FixturesService);
-  });
-
-  beforeEach(async () => {
     await fixturesService.resetEntityFixtures(Faq, 'faqs');
   });
 
@@ -29,7 +26,6 @@ describe('Faqs API Controller', () => {
     return request(app.getHttpServer())
       .get(APP_CONSTANTS.API_ROUTES_PREFIX('faqs', '/'))
       .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
       .expect(200)
       .expect(({ body }) => {
         expect(body).toMatchInlineSnapshot(`
@@ -53,7 +49,6 @@ describe('Faqs API Controller', () => {
     return request(app.getHttpServer())
       .get(APP_CONSTANTS.API_ROUTES_PREFIX('faqs?account_mode=tutor', '/'))
       .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
       .expect(200)
       .expect(({ body }) => {
         expect(body).toMatchInlineSnapshot(`
@@ -72,7 +67,6 @@ describe('Faqs API Controller', () => {
     return request(app.getHttpServer())
       .get(APP_CONSTANTS.API_ROUTES_PREFIX('faqs?account_mode=student', '/'))
       .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
       .expect(200)
       .expect(({ body }) => {
         expect(body).toMatchInlineSnapshot(`

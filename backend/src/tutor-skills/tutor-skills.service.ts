@@ -17,6 +17,7 @@ export class TutorSkillsService {
   ): Promise<{ tutorSkills: TutorSkill[]; tutorSkillLevels: TutorSkillLevel[] }> {
     const tutorSkills = await this.tutorSkillsRepository.listTutorSkills({
       where: { userId },
+      relations: ['skill'],
     });
     const tutorSkillLevels = await this.tutorSkillLevelsService.getTutorSkillLevels();
 

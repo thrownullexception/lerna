@@ -23,9 +23,9 @@ import { CreateTutorSkillDTO, UpdateTutorSkillDTO } from './dtos';
 export class TutorSkillsApiController {
   constructor(private readonly tutorSkillsService: TutorSkillsService) {}
 
-  @Get(':userId')
+  @Get()
   async show(
-    @Param('userId', new ParseUUIDPipe()) userId: string,
+    @AuthenticatedUser('id', new ParseUUIDPipe()) userId: string,
   ): Promise<TutorSkillTransformer[]> {
     const { tutorSkills, tutorSkillLevels } = await this.tutorSkillsService.getUserTutorSkills(
       userId,

@@ -1,10 +1,11 @@
-import { IsNotEmpty, IsEnum, IsUUID, IsNumber } from 'class-validator';
+import { IsNotEmpty, IsEnum, IsUUID, IsNumber, IsOptional } from 'class-validator';
 import { TutorSkillLevels } from '../../tutor-skill-levels/tutor-skill-levels.types';
 import { Unique } from '../../shared/constraints';
 import { TutorSkill } from '../tutor-skills.entity';
 
 export class BaseTutorSkillDTO {
   @IsUUID(4)
+  @IsOptional()
   id: string;
 
   @Unique<BaseTutorSkillDTO>(

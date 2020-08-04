@@ -1,0 +1,5 @@
+export const FIXTURE_IDS = {
+  SKILLS: ['49eca663-4727-424f-9f9d-b7838c8f7dff', '507378a4-53ac-4f70-acda-ff15111c989b'],
+  USERS: ['c351ee24-9a21-44ac-ae92-766769f80233'],
+  SKILL_ROAD_MAPS: ['e001b1e8-c885-442a-8098-3d23e8561962'],
+};

@@ -2,7 +2,7 @@ import { Test } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AuthGuard } from '@nestjs/passport';
-import { FixturesService, mockJWTGuard, TestingModule } from '../../shared/tests';
+import { FixturesService, mockJWTGuard, TestingModule, FIXTURE_IDS } from '../../shared/tests';
 import { APP_CONSTANTS } from '../../shared/constants';
 
 import { getRepository } from 'typeorm';
@@ -12,8 +12,6 @@ import { UserFavouriteSkill } from '../user-favourite-skills.entity';
 describe('UserFavouriteSkills API Controller', () => {
   let app: INestApplication;
   let fixturesService: FixturesService;
-  const SKILL_ID = '49eca663-4727-424f-9f9d-b7838c8f7dff';
-  const USER_ID = 'c351ee24-9a21-44ac-ae92-766769f80233';
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
@@ -26,9 +24,6 @@ describe('UserFavouriteSkills API Controller', () => {
     app = moduleRef.createNestApplication();
     await app.init();
     fixturesService = moduleRef.get<FixturesService>(FixturesService);
-  });
-
-  beforeEach(async () => {
     await fixturesService.resetEntityFixtures(UserFavouriteSkill, 'user-favourite-skills');
   });
 
@@ -37,8 +32,8 @@ describe('UserFavouriteSkills API Controller', () => {
       .post(APP_CONSTANTS.API_ROUTES_PREFIX('user-favourite-skills', '/'))
       .send({
         id: '035f03cc-e45b-4441-90de-dd9deed62854',
-        userId: USER_ID,
-        skillId: SKILL_ID,
+        userId: FIXTURE_IDS.USERS[0],
+        skillId: FIXTURE_IDS.SKILLS[0],
       })
       .set('Accept', 'application/json')
       .expect(201)
@@ -57,7 +52,9 @@ describe('UserFavouriteSkills API Controller', () => {
 
   it('API /DELETE user-favourite-skills', async () => {
     return request(app.getHttpServer())
-      .delete(APP_CONSTANTS.API_ROUTES_PREFIX(`user-favourite-skills/${SKILL_ID}`, '/'))
+      .delete(
+        APP_CONSTANTS.API_ROUTES_PREFIX(`user-favourite-skills/${FIXTURE_IDS.SKILLS[0]}`, '/'),
+      )
       .set('Accept', 'application/json')
       .expect(204)
       .then(async () => {
