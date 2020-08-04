@@ -2,7 +2,7 @@ import { Test } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AuthGuard } from '@nestjs/passport';
-import { FixturesService, mockJWTGuard, TestingModule } from '../../shared/tests';
+import { FixturesService, mockJWTGuard, TestingModule, FIXTURE_IDS } from '../../shared/tests';
 import { APP_CONSTANTS } from '../../shared/constants';
 
 import { UserCompletedSkillRoadMapsModule } from '../user-completed-skill-road-maps.module';
@@ -12,8 +12,6 @@ import { getRepository } from 'typeorm';
 describe('UserCompletedSkillRoadMaps API Controller', () => {
   let app: INestApplication;
   let fixturesService: FixturesService;
-  const SKILL_ROAD_MAP_ID = 'e001b1e8-c885-442a-8098-3d23e8561962';
-  const USER_ID = 'c351ee24-9a21-44ac-ae92-766769f80233';
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
@@ -26,9 +24,6 @@ describe('UserCompletedSkillRoadMaps API Controller', () => {
     app = moduleRef.createNestApplication();
     await app.init();
     fixturesService = moduleRef.get<FixturesService>(FixturesService);
-  });
-
-  beforeEach(async () => {
     await fixturesService.resetEntityFixtures(
       UserCompletedSkillRoadMap,
       'user-completed-skill-road-maps',
@@ -40,8 +35,8 @@ describe('UserCompletedSkillRoadMaps API Controller', () => {
       .post(APP_CONSTANTS.API_ROUTES_PREFIX('user-completed-skill-road-maps', '/'))
       .send({
         id: 'e001b1e8-c885-442a-8098-3d23e8561962',
-        userId: USER_ID,
-        skillRoadMapId: SKILL_ROAD_MAP_ID,
+        userId: FIXTURE_IDS.USERS[0],
+        skillRoadMapId: FIXTURE_IDS.SKILL_ROAD_MAPS[0],
       })
       .set('Accept', 'application/json')
       .expect(201)
@@ -61,7 +56,10 @@ describe('UserCompletedSkillRoadMaps API Controller', () => {
   it('API /DELETE user-completed-skill-road-maps', async () => {
     return request(app.getHttpServer())
       .delete(
-        APP_CONSTANTS.API_ROUTES_PREFIX(`user-completed-skill-road-maps/${SKILL_ROAD_MAP_ID}`, '/'),
+        APP_CONSTANTS.API_ROUTES_PREFIX(
+          `user-completed-skill-road-maps/${FIXTURE_IDS.SKILL_ROAD_MAPS[0]}`,
+          '/',
+        ),
       )
       .set('Accept', 'application/json')
       .expect(204)

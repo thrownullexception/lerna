@@ -14,7 +14,7 @@ import { APP_CONSTANTS } from '../shared/constants';
 import { ShortListCandidateDTO, CandidateResponseDTO } from './dtos';
 import { SessionCandidatesService } from './session-candidates.service';
 
-@Controller(APP_CONSTANTS.API_ROUTES_PREFIX('session-candidates'))
+@Controller(APP_CONSTANTS.API_ROUTES_PREFIX('session-candidates')) // TODO test
 @UseGuards(AuthGuard('jwt'))
 export class SessionCandidatesApiController {
   constructor(private readonly sessionCandidatesService: SessionCandidatesService) {}

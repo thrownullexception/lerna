@@ -7,7 +7,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { AuthenticatedUser } from '../shared/decorators';
 import { IMySkillActions } from './skills.types';
 
-@Controller(APP_CONSTANTS.API_ROUTES_PREFIX('skills'))
+@Controller(APP_CONSTANTS.API_ROUTES_PREFIX('skills')) // TODO test
 @UseGuards(AuthGuard('jwt'))
 export class SkillsApiController {
   constructor(private readonly skillsService: SkillsService) {}

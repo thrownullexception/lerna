@@ -14,7 +14,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { CreateSessionSkillDTO } from './dtos';
 import { SessionSkillsService } from './session-skills.service';
 
-@Controller(APP_CONSTANTS.API_ROUTES_PREFIX('session-skills'))
+@Controller(APP_CONSTANTS.API_ROUTES_PREFIX('session-skills')) // TODO test
 @UseGuards(AuthGuard('jwt'))
 export class SessionSkillsApiController {
   constructor(private readonly sessionSkillsService: SessionSkillsService) {}

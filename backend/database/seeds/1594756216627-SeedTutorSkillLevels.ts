@@ -5,19 +5,19 @@ export class SeedTutorSkillLevels1594756216627 extends BaseSeed implements Migra
   table = 'tutor_skills_levels';
   systemEnumerationFields = [
     {
-      systemName: 'beginner',
+      systemName: 'level_1',
       displayName: 'Beginner',
     },
     {
-      systemName: 'intermediate',
+      systemName: 'level_2',
       displayName: 'Intermediate',
     },
     {
-      systemName: 'advanced',
+      systemName: 'level_3',
       displayName: 'Advanced',
     },
     {
-      systemName: 'expert',
+      systemName: 'level_4',
       displayName: 'Expert',
     },
   ];
