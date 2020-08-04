@@ -1,8 +1,12 @@
-import { IsNotEmpty, IsUUID } from 'class-validator';
+import { IsNotEmpty, IsUUID, IsOptional } from 'class-validator';
 import { Unique } from '../../shared/constraints';
 import { UserFavouriteSkill } from '../user-favourite-skills.entity';
 
 export class CreateUserFavouriteSkillDTO {
+  @IsUUID(4)
+  @IsOptional()
+  id: string;
+
   @IsUUID(4)
   @IsNotEmpty({
     message: 'User is required',

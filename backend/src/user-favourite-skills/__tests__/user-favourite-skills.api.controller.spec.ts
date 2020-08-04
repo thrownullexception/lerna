@@ -5,19 +5,19 @@ import { AuthGuard } from '@nestjs/passport';
 import { FixturesService, mockJWTGuard, TestingModule } from '../../shared/tests';
 import { APP_CONSTANTS } from '../../shared/constants';
 
-import { UserCompletedSkillRoadMapsModule } from '../user-completed-skill-road-maps.module';
-import { UserCompletedSkillRoadMap } from '../user-completed-skill-road-maps.entity';
 import { getRepository } from 'typeorm';
+import { UserFavouriteSkillsModule } from '../user-favourite-skills.module';
+import { UserFavouriteSkill } from '../user-favourite-skills.entity';
 
-describe('UserCompletedSkillRoadMaps API Controller', () => {
+describe('UserFavouriteSkills API Controller', () => {
   let app: INestApplication;
   let fixturesService: FixturesService;
-  const SKILL_ROAD_MAP_ID = 'e001b1e8-c885-442a-8098-3d23e8561962';
+  const SKILL_ID = '49eca663-4727-424f-9f9d-b7838c8f7dff';
   const USER_ID = 'c351ee24-9a21-44ac-ae92-766769f80233';
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
-      imports: [TestingModule, UserCompletedSkillRoadMapsModule],
+      imports: [TestingModule, UserFavouriteSkillsModule],
     })
       .overrideGuard(AuthGuard('jwt'))
       .useValue(mockJWTGuard)
@@ -29,28 +29,25 @@ describe('UserCompletedSkillRoadMaps API Controller', () => {
   });
 
   beforeEach(async () => {
-    await fixturesService.resetEntityFixtures(
-      UserCompletedSkillRoadMap,
-      'user-completed-skill-road-maps',
-    );
+    await fixturesService.resetEntityFixtures(UserFavouriteSkill, 'user-favourite-skills');
   });
 
-  it('API /POST user-completed-skill-road-maps', async () => {
+  it('API /POST user-favourite-skills', async () => {
     return request(app.getHttpServer())
-      .post(APP_CONSTANTS.API_ROUTES_PREFIX('user-completed-skill-road-maps', '/'))
+      .post(APP_CONSTANTS.API_ROUTES_PREFIX('user-favourite-skills', '/'))
       .send({
-        id: 'e001b1e8-c885-442a-8098-3d23e8561962',
+        id: '035f03cc-e45b-4441-90de-dd9deed62854',
         userId: USER_ID,
-        skillRoadMapId: SKILL_ROAD_MAP_ID,
+        skillId: SKILL_ID,
       })
       .set('Accept', 'application/json')
       .expect(201)
       .then(async () => {
-        expect(await getRepository(UserCompletedSkillRoadMap).find()).toMatchInlineSnapshot(`
+        expect(await getRepository(UserFavouriteSkill).find()).toMatchInlineSnapshot(`
           Array [
-            UserCompletedSkillRoadMap {
-              "id": "e001b1e8-c885-442a-8098-3d23e8561962",
-              "skillRoadMapId": "e001b1e8-c885-442a-8098-3d23e8561962",
+            UserFavouriteSkill {
+              "id": "035f03cc-e45b-4441-90de-dd9deed62854",
+              "skillId": "49eca663-4727-424f-9f9d-b7838c8f7dff",
               "userId": "c351ee24-9a21-44ac-ae92-766769f80233",
             },
           ]
@@ -58,17 +55,13 @@ describe('UserCompletedSkillRoadMaps API Controller', () => {
       });
   });
 
-  it('API /DELETE user-completed-skill-road-maps', async () => {
+  it('API /DELETE user-favourite-skills', async () => {
     return request(app.getHttpServer())
-      .delete(
-        APP_CONSTANTS.API_ROUTES_PREFIX(`user-completed-skill-road-maps/${SKILL_ROAD_MAP_ID}`, '/'),
-      )
+      .delete(APP_CONSTANTS.API_ROUTES_PREFIX(`user-favourite-skills/${SKILL_ID}`, '/'))
       .set('Accept', 'application/json')
       .expect(204)
       .then(async () => {
-        expect(await getRepository(UserCompletedSkillRoadMap).find()).toMatchInlineSnapshot(
-          `Array []`,
-        );
+        expect(await getRepository(UserFavouriteSkill).find()).toMatchInlineSnapshot(`Array []`);
       });
   });
 
