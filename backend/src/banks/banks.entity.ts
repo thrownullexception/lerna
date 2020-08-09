@@ -11,7 +11,7 @@ export class Bank {
 
   @OneToMany(
     () => BankDetail,
-    bankDetail => bankDetail.bank,
+    ({ bank }) => bank,
   )
   bankDetails: BankDetail[];
 }

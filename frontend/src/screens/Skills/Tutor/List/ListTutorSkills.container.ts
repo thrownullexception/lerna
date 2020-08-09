@@ -1,0 +1,36 @@
+import { connect } from 'react-redux';
+import { IStore } from '../../../../store/rootReducers';
+import { DispatchProps, StateProps, ITutorSkillForm } from './ListTutorSkills.types';
+import { IThunkDispatch } from '../../../../shared/types';
+import { ListTutorSkills } from './ListTutorSkills';
+import { TutorSkillsActions } from '../../../../app/tutor-skills/tutor-skills.actions';
+import { TutorSkillsSelectors } from '../../../../app/tutor-skills/tutor-skills.selectors';
+import { RequestStatusSelectors } from '../../../../app/request-status/request-status.selectors';
+import { SkillsActions } from '../../../../app/skills/skills.actions';
+import { SkillsSelectors } from '../../../../app/skills/skills.selectors';
+
+const mapStateToProps = (state: IStore): StateProps => {
+  return {
+    tutorSkills: TutorSkillsSelectors.selectTutorSkills(state),
+    isMakingFormRequest: RequestStatusSelectors.selectIsMakingFormRequest(state),
+    tutorSkillLevels: TutorSkillsSelectors.selectTutorSkillLevels(state),
+    skillsWithNoChildren: SkillsSelectors.selectSkillsWithNoChildrenList(state),
+  };
+};
+
+const mapDispatchToProps = (dispatch: IThunkDispatch): DispatchProps => {
+  return {
+    getTutorSkills: () => dispatch(TutorSkillsActions.getTutorSkills()),
+    getSkillsWithNoChildrenList: () => dispatch(SkillsActions.getSkillsWithNoChildrenList()),
+    getTutorSkillLevels: () => dispatch(TutorSkillsActions.getTutorSkillLevels()),
+    createTutorSkill: (tutorSkill: ITutorSkillForm) =>
+      dispatch(TutorSkillsActions.createTutorSkill(tutorSkill)),
+  };
+};
+
+const connected = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ListTutorSkills) as React.ComponentType;
+
+export { connected as ListTutorSkillsContainer };

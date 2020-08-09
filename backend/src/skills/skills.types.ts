@@ -7,6 +7,6 @@ export interface ISkillWithRestAsOptions {
 }
 
 export interface IMySkillActions {
-  completedRoadMaps: string[];
-  favouriteSkills: string[];
+  completedRoadMapIds: string[];
+  favouriteSkillIds: string[];
 }

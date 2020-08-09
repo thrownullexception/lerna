@@ -1,34 +1,19 @@
 import { Dispatch } from 'redux';
 import { ThunkInterface } from '../../shared/types';
-import { RequestService, ToastService, ProgressService } from '../../services';
-import { SkillsWithHierarchiesResponse, SkillResponse, AllSkillResponse } from './responses';
+import { RequestService, ToastService } from '../../services';
+import { SkillListResponse, SkillWithNoChildrenResponse } from './responses';
 import { skillsSlice } from './skills.ducks';
 
 const BASE_REQUEST_PATH = 'skills';
 
-export class SkillActions {
-  static getSkillsWithHeirarchies(): ThunkInterface<void> {
-    return async (dispatch: Dispatch) => {
-      ProgressService.start();
-      try {
-        const { data } = await RequestService.get(`${BASE_REQUEST_PATH}/with-hierarchies`);
-        dispatch(
-          skillsSlice.actions.setSkillsWithHierarchies(new SkillsWithHierarchiesResponse(data)),
-        );
-      } catch (e) {
-        ToastService.error(e);
-      }
-      ProgressService.end();
-    };
-  }
-
-  static getAllSkills(): ThunkInterface<void> {
+export class SkillsActions {
+  static getSkillsList(): ThunkInterface<void> {
     return async (dispatch: Dispatch) => {
       try {
-        const { data } = await RequestService.get(`${BASE_REQUEST_PATH}/all`);
+        const { data } = await RequestService.get(`${BASE_REQUEST_PATH}/list`);
         dispatch(
-          skillsSlice.actions.setAllSkills(
-            data.map((datum: object) => new AllSkillResponse(datum)),
+          skillsSlice.actions.setSkillsList(
+            data.map((datum: object) => new SkillListResponse(datum)),
           ),
         );
       } catch (e) {
@@ -37,28 +22,18 @@ export class SkillActions {
     };
   }
 
-  static goBackInSkillsDepth(): ThunkInterface<void> {
+  static getSkillsWithNoChildrenList(): ThunkInterface<void> {
     return async (dispatch: Dispatch) => {
-      dispatch(skillsSlice.actions.goBackInSkillsDepth());
-    };
-  }
-
-  static setCurrentSkillId(skillId: string): ThunkInterface<void> {
-    return async (dispatch: Dispatch) => {
-      dispatch(skillsSlice.actions.setCurrentSkillId(skillId));
-    };
-  }
-
-  static getStudentSkill(skillId: string): ThunkInterface<void> {
-    return async (dispatch: Dispatch) => {
-      ProgressService.start();
       try {
-        const { data } = await RequestService.get(`${BASE_REQUEST_PATH}/${skillId}`);
-        dispatch(skillsSlice.actions.setStudentSkill(new SkillResponse(data)));
+        const { data } = await RequestService.get(`${BASE_REQUEST_PATH}/with-no-children`);
+        dispatch(
+          skillsSlice.actions.setSkillsWithNoChildrenList(
+            data.map((datum: object) => new SkillWithNoChildrenResponse(datum)),
+          ),
+        );
       } catch (e) {
         ToastService.error(e);
       }
-      ProgressService.end();
     };
   }
 }

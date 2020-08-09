@@ -1,53 +1,21 @@
 import { createSelector } from 'reselect';
 import { IStore } from '../../store/rootReducers';
-import { SkillResponse, SkillHierarchyResponse } from './responses';
+import { SkillListResponse, SkillWithNoChildrenResponse } from './responses';
 
 export class SkillsSelectors {
   static base(state: IStore) {
     return state.skills;
   }
 
-  static selectSkillsHierarchies(state: IStore): SkillHierarchyResponse[] {
-    return createSelector(SkillsSelectors.base, ({ hierarchies }) => {
-      return hierarchies;
+  static selectSkillsList(state: IStore): SkillListResponse[] {
+    return createSelector(SkillsSelectors.base, ({ skillsList }) => {
+      return skillsList;
     })(state);
   }
 
-  static selectSkillsInHierarchy(state: IStore): SkillResponse[] {
-    return createSelector(
-      [SkillsSelectors.base, SkillsSelectors.selectSkillsHierarchies],
-      ({ skills, currentStudentSkillId }, hierarchies) => {
-        if (!currentStudentSkillId) {
-          return skills.filter(({ hasParent }) => !hasParent);
-        }
-        const childrenSkills = hierarchies
-          .filter(({ parentId }) => parentId === currentStudentSkillId)
-          .map(({ childId }) => childId);
-        return skills.filter(({ id }) => childrenSkills.includes(id));
-      },
-    )(state);
-  }
-
-  static selectSkillInHierarchy(state: IStore): SkillResponse {
-    return createSelector(SkillsSelectors.base, ({ currentStudentSkillId, skills }) => {
-      const skill = skills.find(({ id }) => id === currentStudentSkillId);
-      if (skill) {
-        return skill;
-      }
-
-      return new SkillResponse({});
-    })(state);
-  }
-
-  static selectCurrentStudentSkill(state: IStore): SkillResponse {
-    return createSelector(SkillsSelectors.base, ({ studentSkill }) => {
-      return studentSkill;
-    })(state);
-  }
-
-  static selectSkillsDepth(state: IStore): string[] {
-    return createSelector(SkillsSelectors.base, ({ skillsDepth }) => {
-      return skillsDepth;
+  static selectSkillsWithNoChildrenList(state: IStore): SkillWithNoChildrenResponse[] {
+    return createSelector(SkillsSelectors.base, ({ skillsWithNoChildrenList }) => {
+      return skillsWithNoChildrenList;
     })(state);
   }
 }

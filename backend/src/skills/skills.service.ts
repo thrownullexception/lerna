@@ -23,21 +23,28 @@ export class SkillsService {
     return await this.skillsRepository.listSkills();
   }
 
-  async getSkillsNamesAndIds(): Promise<Skill[]> {
+  async listSkills(): Promise<Skill[]> {
     return await this.skillsRepository.listSkills({
       select: ['id', 'name'],
     });
   }
 
-  async getMySkillActions(userId: string): Promise<IMySkillActions> {
+  async listSkillsWithNoChildren(): Promise<Skill[]> {
+    const skills = await this.listSkills();
+    const skillHierarchies = await this.getSkillHierarchies();
+    const skillsAsParentIds = skillHierarchies.map(({ parentId }) => parentId);
+    return skills.filter(({ id }) => !skillsAsParentIds.includes(id));
+  }
+
+  async getMyFavouriteSkillsAndCompletedRoadMaps(userId: string): Promise<IMySkillActions> {
     const [favouriteSkills, completedRoadMaps] = await Promise.all([
       await this.userFavouriteSkillsService.getUserFavouriteSkills(userId),
       await this.userCompletedSkillRoadMapsService.getUserCompletedSkillRoadMaps(userId),
     ]);
 
     return {
-      favouriteSkills: favouriteSkills.map(({ skillId }) => skillId),
-      completedRoadMaps: completedRoadMaps.map(({ skillRoadMapId }) => skillRoadMapId),
+      favouriteSkillIds: favouriteSkills.map(({ skillId }) => skillId),
+      completedRoadMapIds: completedRoadMaps.map(({ skillRoadMapId }) => skillRoadMapId),
     };
   }
 
@@ -60,7 +67,7 @@ export class SkillsService {
   async getSkillDetailsForAdmin(skillId: string): Promise<Skill> {
     return await this.skillsRepository.showSkill({
       where: { id: skillId },
-      select: ['id', 'name', 'description', 'isPath'],
+      select: ['id', 'name', 'description'],
       relations: [
         'resources',
         'resources.skillMediaType',
@@ -99,7 +106,7 @@ export class SkillsService {
   }
 
   async getSkillWithTheRestAsOptions(skillId: string): Promise<ISkillWithRestAsOptions> {
-    const skills = await this.getSkillsNamesAndIds();
+    const skills = await this.listSkills();
     return {
       skill: skills.find(({ id }) => id === skillId),
       skills: skills
@@ -108,21 +115,20 @@ export class SkillsService {
     };
   }
 
-  async getSkillsAndHierarchies(): Promise<{
-    skills: Skill[];
-    skillHierarchies: SkillHierarchy[];
-  }> {
-    const [skills, skillHierarchies] = await Promise.all([
-      this.getSkills(),
-      this.skillHierarchiesService.listSkillHierarchies(),
-    ]);
-    return { skills, skillHierarchies };
+  async getSkillHierarchies(): Promise<SkillHierarchy[]> {
+    return await this.skillHierarchiesService.listSkillHierarchies();
   }
 
-  async getSkill(skillId: string): Promise<Skill> {
+  async getBasicSkillDetails(skillId: string): Promise<Skill> {
     return await this.skillsRepository.showSkill({
       where: { id: skillId },
-      select: ['id', 'name', 'description', 'isPath'],
+    });
+  }
+
+  async getSkillDetailsForUser(skillId: string): Promise<Skill> {
+    return await this.skillsRepository.showSkill({
+      where: { id: skillId },
+      select: ['id', 'name', 'description'],
       relations: ['resources', 'roadMaps', 'forwardRelatedSkill', 'backwardRelatedSkill'],
     });
   }

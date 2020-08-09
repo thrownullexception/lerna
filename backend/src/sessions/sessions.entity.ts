@@ -1,16 +1,8 @@
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  ManyToOne,
-  ManyToMany,
-  JoinTable,
-  JoinColumn,
-} from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
 import { User } from '../users/users.entity';
-import { Skill } from '../skills/skills.entity';
 import { SessionStatus } from '../session-statuses/session-statuses.entity';
 import { SessionStatusTypes } from '../session-statuses/session-statuses.types';
+import { SessionSkill } from '../session-skills/session-skills.entity';
 
 @Entity('sessions')
 export class Session {
@@ -59,17 +51,11 @@ export class Session {
   )
   tutor: User;
 
-  @ManyToMany(() => Skill)
-  @JoinTable({
-    name: 'session_skills',
-    joinColumn: {
-      name: 'session_id',
-    },
-    inverseJoinColumn: {
-      name: 'skill_id',
-    },
-  })
-  permissions: Skill[];
+  @OneToMany(
+    () => SessionSkill,
+    ({ session }) => session,
+  )
+  skills: SessionSkill[];
 
   @ManyToOne(
     () => SessionStatus,

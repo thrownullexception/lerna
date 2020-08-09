@@ -14,9 +14,6 @@ export class Skill {
   @Column({ select: false })
   description: string;
 
-  @Column()
-  isPath: boolean;
-
   @Column({ select: false })
   lastTouchedById: string;
 

@@ -27,6 +27,13 @@ Tutors to be able to add their profile
 - tutor_awards_and_certifications
 - tutor_skills, Level, rate (AVG rate)
 
+Skills
+
+About Me
+Experience
+Projects
+Education
+
 Setup Meeting
 
 Was it worth it having my services?

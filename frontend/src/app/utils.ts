@@ -4,6 +4,10 @@ import set from 'lodash-es/set';
 
 export const addUUIDToForm = (form: object): object => ({ ...form, id: v4() });
 
+export const mutateAUUIDIdOnMe = (form: object) => {
+  return set(form, ['id'], v4());
+};
+
 export function transformCursorData<T>(
   cursorObject: CursorData<object>,
   transformer: any,

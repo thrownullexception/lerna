@@ -35,7 +35,7 @@ export class SkillResourcesAdminController {
   async renderCreate(
     @Param('skillId', new ParseUUIDPipe()) skillId: string,
   ): Promise<Record<string, unknown>> {
-    const skill = await this.skillsService.getSkill(skillId);
+    const skill = await this.skillsService.getBasicSkillDetails(skillId);
     return {
       skill,
       skillMediaTypes: await this.skillMediaTypesService.listSkillMediaTypesAsSelectOptions(),

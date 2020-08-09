@@ -1,6 +1,6 @@
 import get from 'lodash-es/get';
 
-export class AllSkillResponse {
+export class DataListResponse {
   id: string;
   name: string;
 

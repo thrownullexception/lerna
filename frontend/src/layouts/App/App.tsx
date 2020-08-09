@@ -85,37 +85,29 @@ export const AppLayout: React.SFC<IProps> = ({
     <div className={navClassName}>
       <ToastContainer />
       <div id="global-loader" style={{ display: 'none' }}>
-        <img src="../assets/img/loaders/loader-4.svg" className="loader-img" alt="Loader" />
+        <img src="../assets/img/loaders/loader-4.svg" className="loader-img" />
       </div>
       <div className="app-sidebar__overlay" data-toggle="sidebar" />
       <aside className="main-sidebar app-sidebar sidebar-scroll ps ps--active-y">
         <div className="main-sidebar-header">
           <a className="desktop-logo logo-light active" href="/">
-            <img src="../assets/img/brand/logo.png" alt="" className="main-logo" />
+            <img src="../assets/img/brand/logo.png" className="main-logo" />
           </a>
           <a className="desktop-logo icon-logo active" href="/">
-            <img src="../assets/img/brand/favicon.png" alt="" className="logo-icon" />
+            <img src="../assets/img/brand/favicon.png" className="logo-icon" />
           </a>
           <a className="desktop-logo logo-dark active" href="/">
-            <img
-              src="../assets/img/brand/logo-white.png"
-              className="main-logo dark-theme"
-              alt="logo"
-            />
+            <img src="../assets/img/brand/logo-white.png" className="main-logo dark-theme" />
           </a>
           <a className="logo-icon mobile-logo icon-dark active" href="/">
-            <img
-              src="../assets/img/brand/favicon-white.png"
-              className="logo-icon dark-theme"
-              alt="logo"
-            />
+            <img src="../assets/img/brand/favicon-white.png" className="logo-icon dark-theme" />
           </a>
         </div>
         <div className="main-sidebar-loggedin">
           <div className="app-sidebar__user">
             <div className="dropdown user-pro-body text-center">
               <div className="user-pic">
-                <img src={picture} alt="user-img" className="rounded-circle mCS_img_loaded" />
+                <img src={picture} className="rounded-circle mCS_img_loaded" />
               </div>
               <div className="user-info">
                 <h6 className=" mb-0 text-dark">{fullName}</h6>
@@ -187,16 +179,16 @@ export const AppLayout: React.SFC<IProps> = ({
               </div>
               <div className="responsive-logo">
                 <a href="/">
-                  <img src="../assets/img/brand/logo-white.png" alt="" className="logo-1" />
+                  <img src="../assets/img/brand/logo-white.png" className="logo-1" />
                 </a>
                 <a href="/">
-                  <img src="../assets/img/brand/logo.png" alt="" className="logo-11" />
+                  <img src="../assets/img/brand/logo.png" className="logo-11" />
                 </a>
                 <a href="/">
-                  <img src="../assets/img/brand/favicon-white.png" alt="" className="logo-2" />
+                  <img src="../assets/img/brand/favicon-white.png" className="logo-2" />
                 </a>
                 <a href="/">
-                  <img src="../assets/img/brand/favicon.png" alt="" className="logo-12" />
+                  <img src="../assets/img/brand/favicon.png" className="logo-12" />
                 </a>
               </div>
               <ul className="header-megamenu-dropdown  nav">
@@ -505,12 +497,12 @@ export const AppLayout: React.SFC<IProps> = ({
                   className="dropdown main-profile-menu nav nav-item nav-link"
                 >
                   <DropdownToggle tag="a" className="profile-user d-flex">
-                    <img src={picture} alt="user-img" className="rounded-circle mCS_img_loaded" />
+                    <img src={picture} className="rounded-circle mCS_img_loaded" />
                   </DropdownToggle>
                   <DropdownMenu right={true} className="dropdown-menu">
                     <div className="main-header-profile header-img">
                       <div className="main-img-user">
-                        <img alt="" src={picture} />
+                        <img src={picture} />
                       </div>
                       <h6>{fullName}</h6>
                       <span>Premium Member</span>

@@ -15,10 +15,6 @@ export class CreateSkillsTable1593292900403 extends BaseMigration implements Mig
         type: 'text',
       },
       {
-        name: 'is_path',
-        type: 'boolean',
-      },
-      {
         name: 'last_touched_by_id',
         type: 'uuid',
         isNullable: true,

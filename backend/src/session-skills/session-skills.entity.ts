@@ -13,6 +13,8 @@ export class SessionSkill {
   @Column()
   skillId: string;
 
+  // TODO level
+
   @ManyToOne(
     () => Session,
     ({ id }) => id,

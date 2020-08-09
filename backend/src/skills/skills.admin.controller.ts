@@ -78,10 +78,7 @@ export class AdminSkillsController {
   @Post()
   @HttpCode(HttpStatus.NO_CONTENT)
   async create(
-    @Body(
-      new CastBooleanParametersPipe<CreateSkillDTO>(['isPath']),
-    )
-    createSkillDTO: CreateSkillDTO,
+    @Body() createSkillDTO: CreateSkillDTO,
     @AuthenticatedUser('id') userId: string,
     @Res() res: Response,
     @Headers('referer') back: string,
@@ -96,10 +93,7 @@ export class AdminSkillsController {
   @HttpCode(HttpStatus.NO_CONTENT)
   async update(
     @Param('skillId') skillId: string,
-    @Body(
-      new CastBooleanParametersPipe<CreateSkillDTO>(['isPath']),
-    )
-    editSkillDTO: EditSkillDTO,
+    @Body() editSkillDTO: EditSkillDTO,
     @Res() res: Response,
     @Headers('referer') back: string,
     @AuthenticatedUser('id') userId: string,

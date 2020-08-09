@@ -13,6 +13,10 @@ export class AuthSelectors {
     return createSelector(base, ({ accountMode }) => accountMode)(state);
   }
 
+  static selectCurrentUserId(state: IStore): string {
+    return createSelector(base, ({ id }) => id)(state);
+  }
+
   static selectIsAuthenticated(state: IStore): boolean {
     return createSelector(base, ({ isAuthenticated }) => isAuthenticated)(state);
   }

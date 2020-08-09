@@ -8,12 +8,14 @@ import {
   HttpStatus,
   Post,
   Body,
+  UseInterceptors,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { APP_CONSTANTS } from '../shared/constants';
 import { AuthenticatedUser } from '../shared/decorators';
 import { CreateUserCompletedSkillRoadMapDTO } from './dtos';
 import { UserCompletedSkillRoadMapsService } from './user-completed-skill-road-maps.service';
+import { ReduceAuthenticatedUserIdToBodyInterceptor } from '../shared/interceptors';
 
 @Controller(APP_CONSTANTS.API_ROUTES_PREFIX('user-completed-skill-road-maps'))
 @UseGuards(AuthGuard('jwt'))
@@ -24,6 +26,7 @@ export class UserCompletedSkillRoadMapsApiController {
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
+  @UseInterceptors(ReduceAuthenticatedUserIdToBodyInterceptor)
   async create(
     @Body() createUserCompletedSkillRoadMapDTO: CreateUserCompletedSkillRoadMapDTO,
   ): Promise<void> {

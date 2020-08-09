@@ -12217,61 +12217,6 @@ body {
   background: rgba(234, 239, 254, 0.5);
   border-radius: 0 0 300px 300px; }
 
-.project-card {
-  overflow: hidden; }
-  .project-card:hover i {
-    color: #285cf7;
-    opacity: .16; }
-  .project-card i {
-    font-size: 65px;
-    margin: 0 24px 0 -30px;
-    position: relative;
-    opacity: .07;
-    -webkit-transition: all .3s ease-in-out;
-    transition: all .3s ease-in-out; }
-  .project-card .project-content {
-    width: 100%; }
-    .project-card .project-content ul {
-      list-style: none;
-      margin: 0;
-      padding: 0; }
-      .project-card .project-content ul strong {
-        color: #97a3b9;
-        font-size: 12px;
-        font-weight: 400; }
-      .project-card .project-content ul li {
-        line-height: 20px; }
-      .project-card .project-content ul span {
-        color: #323232;
-        float: right;
-        font-weight: 600;
-        text-align: right;
-        margin-left: auto; }
-  .project-card .primary {
-    fill: #fff;
-    background: linear-gradient(45deg, #3858f9, #8e79fd);
-    padding: 11px;
-    border-radius: 5px;
-    box-shadow: 0 7px 30px rgba(128, 116, 252, 0.5); }
-  .project-card .success {
-    fill: #fff;
-    background: linear-gradient(to top, #0ba360 0%, #3cba92 100%);
-    padding: 11px;
-    border-radius: 5px;
-    box-shadow: 0 7px 30px rgba(11, 163, 96, 0.3); }
-  .project-card .danger {
-    fill: #fff;
-    background: linear-gradient(45deg, #f53c5b, #fb768c);
-    padding: 11px;
-    border-radius: 5px;
-    box-shadow: 0 7px 30px rgba(250, 106, 130, 0.5); }
-  .project-card .warning {
-    fill: #fff;
-    background-image: linear-gradient(45deg, #ff5858 0%, #f09819 100%);
-    padding: 11px;
-    border-radius: 5px;
-    box-shadow: 0 7px 30px rgba(241, 159, 93, 0.5); }
-
 .area.chart-legend {
   top: 125px; }
 

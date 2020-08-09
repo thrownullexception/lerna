@@ -1,0 +1,35 @@
+.list-student-skills {
+    &__skill-logo {
+        display: inline-block;
+        position: relative;
+        width: 36px;
+        height: 36px;
+        border-radius: 5px;
+        text-align: center;
+    }
+
+    &__skill-heart{
+        color: red;
+    }
+
+    &__skill-title{
+        margin-bottom: 2px;
+    }
+
+    &__skill-title-wrapper{
+        margin-left: 10px;
+        margin-bottom: -4px;
+    }
+    &__breadcrumb{
+        background-color: #fff;
+        padding: 0px;
+        font-size: 12px;
+    }
+
+    &__breadcrumb-item{
+        color: #031b42;
+        &::before{
+            color: #031b42 !important;
+        }
+    }
+}

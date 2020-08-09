@@ -9,7 +9,7 @@ export const SignInForm: React.SFC<FormProps<ISignInForm>> = ({ onSubmit, isMaki
   return (
     <Form
       onSubmit={onSubmit}
-      render={({ handleSubmit, submitting }) => {
+      render={({ handleSubmit }) => {
         return (
           <React.Fragment>
             <Field name="email" validate={required} validateFields={[]}>
@@ -28,12 +28,7 @@ export const SignInForm: React.SFC<FormProps<ISignInForm>> = ({ onSubmit, isMaki
                 />
               )}
             </Field>
-            <SubmitButton
-              disabled={submitting}
-              onClick={handleSubmit}
-              isMakingRequest={isMakingRequest}
-              text="Sign In"
-            />
+            <SubmitButton onClick={handleSubmit} isMakingRequest={isMakingRequest} text="Sign In" />
           </React.Fragment>
         );
       }}
