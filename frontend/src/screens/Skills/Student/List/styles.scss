@@ -12,10 +12,10 @@
         color: red;
     }
 
-    &__breadcrumb{
-        font-size: 12px;
-        color: #999;
-    }
+    // &__breadcrumb{
+    //     font-size: 12px;
+    //     color: #999;
+    // }
 
     &__skill-title{
         margin-bottom: 2px;
@@ -24,5 +24,17 @@
     &__skill-title-wrapper{
         margin-left: 10px;
         margin-bottom: -4px;
+    }
+    &__breadcrumb{
+        background-color: #fff;
+        padding: 0px;
+        font-size: 12px;
+    }
+
+    &__breadcrumb-item{
+        color: #031b42;
+        &::before{
+            color: #031b42 !important;
+        }
     }
 }

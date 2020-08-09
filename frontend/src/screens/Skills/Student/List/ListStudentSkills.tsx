@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { TabContent, TabPane, Nav, NavLink } from 'reactstrap';
+import { TabContent, TabPane, Nav, NavLink, BreadcrumbItem, Breadcrumb } from 'reactstrap';
 import { IProps } from './ListStudentSkills.types';
 import { Spinner } from '../../../../components/Spinner';
 import { SkillResourceResponse } from '../../../../app/student-skills/responses/skill-resource.response';
@@ -145,11 +145,22 @@ export class ListStudentSkills extends React.Component<IProps> {
             {currentStudentSkill.name}
           </h5>
           <p>
-            {skillsBreadCrumbs.map(skillBreadCrumb => (
-              <a href="#" key={skillBreadCrumb.id} className="list-student-skills__breadcrumb">
-                {skillBreadCrumb.name}
-              </a>
-            ))}
+            <nav aria-label="breadcrumb">
+              <div className="breadcrumb list-student-skills__breadcrumb">
+                <a href="#" className="breadcrumb-item list-student-skills__breadcrumb-item">
+                  Home
+                </a>
+                {skillsBreadCrumbs.map(skillBreadCrumb => (
+                  <a
+                    href="#"
+                    key={skillBreadCrumb.id}
+                    className="breadcrumb-item list-student-skills__breadcrumb-item"
+                  >
+                    {skillBreadCrumb.name}
+                  </a>
+                ))}
+              </div>
+            </nav>
           </p>
         </div>
         <button

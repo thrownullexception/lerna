@@ -52,14 +52,14 @@ export const studentSkillsSlice = createSlice({
       state.currentSkillDetails = payload;
     },
     toggleSkillFavouritism: (state, { payload: skilId }: PayloadAction<string>) => {
-      const skillFavouriteId = state.favouriteSkillIds.findIndex(
+      const skillFavouriteIndex = state.favouriteSkillIds.findIndex(
         favouriteSkillId => favouriteSkillId === skilId,
       );
-      if (skillFavouriteId === -1) {
+      if (skillFavouriteIndex === -1) {
         state.favouriteSkillIds.push(skilId);
         return;
       }
-      state.favouriteSkillIds.splice(skillFavouriteId, 1);
+      state.favouriteSkillIds.splice(skillFavouriteIndex, 1);
     },
     setFavouriteSkillsAndCompletedRoadMaps: (
       state,

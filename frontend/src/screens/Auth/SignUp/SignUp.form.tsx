@@ -16,7 +16,7 @@ export const SignUpForm: React.SFC<FormProps<ISignUpForm>> = ({ onSubmit, isMaki
   return (
     <Form
       onSubmit={onSubmit}
-      render={({ handleSubmit, submitting, pristine }) => {
+      render={({ handleSubmit }) => {
         return (
           <React.Fragment>
             <Field
@@ -61,12 +61,7 @@ export const SignUpForm: React.SFC<FormProps<ISignUpForm>> = ({ onSubmit, isMaki
                 />
               )}
             </Field>
-            <SubmitButton
-              disabled={submitting || pristine}
-              onClick={handleSubmit}
-              isMakingRequest={isMakingRequest}
-              text="Sign Up"
-            />
+            <SubmitButton onClick={handleSubmit} isMakingRequest={isMakingRequest} text="Sign Up" />
           </React.Fragment>
         );
       }}

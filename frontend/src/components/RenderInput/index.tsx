@@ -1,8 +1,8 @@
 import React from 'react';
-import { FormFeedback, FormGroup, Input, Label } from 'reactstrap';
+import { FormFeedback, FormGroup, Input, Label, Button } from 'reactstrap';
 import { FieldInputProps, FieldMetaState } from 'react-final-form';
 
-interface ISelectData {
+export interface ISelectData {
   value: string;
   label: string;
 }
@@ -55,26 +55,21 @@ export const RenderInput: React.SFC<IRenderInput> = ({
 };
 
 interface ISubmitButton {
-  disabled: boolean;
   text: string;
   isMakingRequest: boolean;
   onClick: () => void;
 }
 
-export const SubmitButton: React.SFC<ISubmitButton> = ({
-  disabled,
-  text,
-  isMakingRequest,
-  onClick,
-}) => {
+export const SubmitButton: React.SFC<ISubmitButton> = ({ text, isMakingRequest, onClick }) => {
   return (
-    <button
-      disabled={disabled || isMakingRequest}
+    <Button
+      disabled={isMakingRequest}
+      color="primary"
       onClick={onClick}
       type="submit"
-      className="btn ripple btn-main-primary btn-block"
+      className="pull-right"
     >
       {isMakingRequest ? <i className="fa fa-spinner fa-spin" /> : text}
-    </button>
+    </Button>
   );
 };

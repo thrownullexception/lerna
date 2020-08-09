@@ -12,7 +12,7 @@ export const CreateSessionForm: React.SFC<FormProps<ICreateSessionForm>> = ({
   return (
     <Form
       onSubmit={onSubmit}
-      render={({ handleSubmit, submitting, pristine }) => {
+      render={({ handleSubmit }) => {
         return (
           <React.Fragment>
             <Field name="title" validate={required} validateFields={[]}>
@@ -40,7 +40,6 @@ export const CreateSessionForm: React.SFC<FormProps<ICreateSessionForm>> = ({
               </div>
             </div>
             <SubmitButton
-              disabled={submitting || pristine}
               onClick={handleSubmit}
               isMakingRequest={isMakingRequest}
               text="Create Session"

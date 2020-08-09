@@ -10,6 +10,7 @@ import {
   Post,
   Body,
   Patch,
+  UseInterceptors,
 } from '@nestjs/common';
 import { APP_CONSTANTS } from '../shared/constants';
 import { AuthGuard } from '@nestjs/passport';
@@ -17,15 +18,16 @@ import { TutorSkillTransformer } from './transfomers';
 import { TutorSkillsService } from './tutor-skills.service';
 import { AuthenticatedUser } from '../shared/decorators';
 import { CreateTutorSkillDTO, UpdateTutorSkillDTO } from './dtos';
+import { ReduceAuthenticatedUserIdToBodyInterceptor } from '../shared/interceptors';
 
-@Controller(APP_CONSTANTS.API_ROUTES_PREFIX('tutor-skills'))
 @UseGuards(AuthGuard('jwt'))
+@Controller(APP_CONSTANTS.API_ROUTES_PREFIX('tutor-skills'))
 export class TutorSkillsApiController {
   constructor(private readonly tutorSkillsService: TutorSkillsService) {}
 
   @Get()
   async show(
-    @AuthenticatedUser('id', new ParseUUIDPipe()) userId: string,
+    @AuthenticatedUser('id', ParseUUIDPipe) userId: string,
   ): Promise<TutorSkillTransformer[]> {
     const { tutorSkills, tutorSkillLevels } = await this.tutorSkillsService.getUserTutorSkills(
       userId,
@@ -35,15 +37,14 @@ export class TutorSkillsApiController {
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
-  async create(
-    @AuthenticatedUser('id', new ParseUUIDPipe()) userId: string,
-    @Body() createTutorSkillDTO: CreateTutorSkillDTO, // TODO a pipe to reduce the userId into body
-  ): Promise<void> {
-    await this.tutorSkillsService.createTutorSkill(createTutorSkillDTO, userId);
+  @UseInterceptors(ReduceAuthenticatedUserIdToBodyInterceptor)
+  async create(@Body() createTutorSkillDTO: CreateTutorSkillDTO): Promise<void> {
+    await this.tutorSkillsService.createTutorSkill(createTutorSkillDTO);
   }
 
   @Patch(':tutorSkillId')
   @HttpCode(HttpStatus.NO_CONTENT)
+  @UseInterceptors(ReduceAuthenticatedUserIdToBodyInterceptor)
   async update(
     @Param('tutorSkillId', new ParseUUIDPipe()) tutorSkillId: string,
     @Body() updateTutorSkillDTO: UpdateTutorSkillDTO,
