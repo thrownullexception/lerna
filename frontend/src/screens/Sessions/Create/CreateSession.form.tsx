@@ -20,13 +20,7 @@ export const CreateSessionForm: React.SFC<FormProps<ICreateSessionForm>> = ({
             </Field>
             <Field name="description" validate={required} validateFields={[]}>
               {({ input, meta }) => (
-                <RenderInput
-                  type="textarea"
-                  label="Password"
-                  icon="lock"
-                  meta={meta}
-                  input={input}
-                />
+                <RenderInput type="textarea" label="Description" meta={meta} input={input} />
               )}
             </Field>
             <div className="row">

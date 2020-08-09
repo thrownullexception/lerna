@@ -3,32 +3,38 @@ import { IStore } from '../../../../store/rootReducers';
 import { DispatchProps, StateProps } from './ListStudentSkills.types';
 import { IThunkDispatch } from '../../../../shared/types';
 import { ListStudentSkills } from './ListStudentSkills';
-import { SkillsSelectors } from '../../../../app/skills/skills.selectors';
-import { SkillActions } from '../../../../app/skills/skills.actions';
+import { StudentSkillsSelectors } from '../../../../app/student-skills/student-skills.selectors';
+import { SkillsActions } from '../../../../app/skills/skills.actions';
+import { StudentSkillsActions } from '../../../../app/student-skills/student-skills.actions';
+import { SkillsPresentationMode } from '../../../../app/student-skills/student-skills.types';
 
 const mapStateToProps = (state: IStore): StateProps => {
   return {
-    skills: SkillsSelectors.selectSkillsInHierarchy(state),
-    skillInHierarchy: SkillsSelectors.selectSkillInHierarchy(state),
-    skill: SkillsSelectors.selectCurrentStudentSkill(state),
-    skillsDepth: SkillsSelectors.selectSkillsDepth(state),
+    skillsListToPresent: StudentSkillsSelectors.selectSkillsListToPresent(state),
+    skillInHierarchy: StudentSkillsSelectors.selectSkillInHierarchy(state),
+    currentStudentSkill: StudentSkillsSelectors.selectCurrentStudentSkill(state),
+    skillsBreadCrumbs: StudentSkillsSelectors.getSkillsBreadCrumbs(state),
+    favouriteSkillIds: StudentSkillsSelectors.selectFavouriteSkillIds(state),
+    completedRoadMapIds: StudentSkillsSelectors.selectCompletedRoadMapIds(state),
+    skillPresentationMode: StudentSkillsSelectors.selectSkillPresentationMode(state),
   };
 };
 
 const mapDispatchToProps = (dispatch: IThunkDispatch): DispatchProps => {
   return {
-    getSkillsWithHeirarchies: () => {
-      dispatch(SkillActions.getSkillsWithHeirarchies());
-    },
-    getStudentSkill: (skillId: string) => {
-      dispatch(SkillActions.getStudentSkill(skillId));
-    },
-    goBackInSkillsDepth: () => {
-      dispatch(SkillActions.goBackInSkillsDepth());
-    },
-    setCurrentSkillId: (skillId: string) => {
-      dispatch(SkillActions.setCurrentSkillId(skillId));
-    },
+    getSkillsWithHeirarchies: () => dispatch(StudentSkillsActions.getSkillHeirarchies()),
+    getSkillsList: () => dispatch(SkillsActions.getSkillsList()),
+    getMyFavouriteSkillsAndCompletedRoadMaps: () =>
+      dispatch(StudentSkillsActions.getMyFavouriteSkillsAndCompletedRoadMaps()),
+    toggleSkillFavouritism: (skillId: string, isFavourite: boolean) =>
+      dispatch(StudentSkillsActions.toggleSkillFavouritism(skillId, isFavourite)),
+    getStudentSkill: (skillId: string) =>
+      dispatch(StudentSkillsActions.getStudentSkillDetails(skillId)),
+    changeSkillPresentationMode: (skillPresentationMode: SkillsPresentationMode) =>
+      dispatch(StudentSkillsActions.changeSkillPresentationMode(skillPresentationMode)),
+    goBackInSkillsDepth: () => dispatch(StudentSkillsActions.goBackInSkillsDepth()),
+    setCurrentSkillId: (skillId: string) =>
+      dispatch(StudentSkillsActions.setCurrentSkillId(skillId)),
   };
 };
 

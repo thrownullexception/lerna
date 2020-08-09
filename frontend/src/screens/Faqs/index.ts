@@ -6,21 +6,6 @@ import { AccountModeType } from '../../app/auth/auth.types';
 export const FaqsPath = 'faqs';
 
 export const FaqRoutes: IMenuItems[] = [
-  // {
-  //   path: NavigationService.indexPath(FaqsPath),
-  //   exact: true,
-  //   title: 'Faqs',
-  //   // component: permissionGaurd(FaqsList, CAN_MANAGE_FAQS),
-  //   component: FaqsList,
-  //   // permission: CAN_MANAGE_FAQS,
-  //   showOnNavigation: true,
-  //   actions: [
-  //     {
-  //       title: 'New Faq',
-  //       path: NavigationService.createPath(FaqsPath),
-  //     },
-  //   ],
-  // },
   {
     path: NavigationService.tutorPath(FaqsPath),
     exact: true,

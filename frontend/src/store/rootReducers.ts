@@ -7,6 +7,8 @@ import { requestStatusSlice } from '../app/request-status/request-status.ducks';
 import { sessionsSlice } from '../app/sessions/sessions.ducks';
 import { authSlice } from '../app/auth/auth.ducks';
 import { skillsSlice } from '../app/skills/skills.ducks';
+import { studentSkillsSlice } from '../app/student-skills/student-skills.ducks';
+import { tutorSkillsSlice } from '../app/tutor-skills/tutor-skills.ducks';
 
 export const rootReducers = combineReducers({
   router: connectRouter(history),
@@ -15,6 +17,8 @@ export const rootReducers = combineReducers({
   sessions: sessionsSlice.reducer,
   auth: authSlice.reducer,
   skills: skillsSlice.reducer,
+  studentSkills: studentSkillsSlice.reducer,
+  tutorSkills: tutorSkillsSlice.reducer,
 });
 
 export type IStore = ReturnType<typeof rootReducers>;

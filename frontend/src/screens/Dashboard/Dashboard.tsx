@@ -368,21 +368,12 @@ export class Dashboard extends React.PureComponent {
                         </td>
                         <td>
                           <div className="image-grouped">
-                            <img
-                              className="profile-img brround"
-                              alt="profile image"
-                              src="../assets/img/faces/11.jpg"
-                            />
+                            <img className="profile-img brround" src="../assets/img/faces/11.jpg" />
                             <img
                               className="profile-img brround "
-                              alt="profile image"
                               src="../assets/img/faces/12.jpg"
                             />
-                            <img
-                              className="profile-img brround"
-                              alt="profile image"
-                              src="../assets/img/faces/2.jpg"
-                            />
+                            <img className="profile-img brround" src="../assets/img/faces/2.jpg" />
                           </div>
                         </td>
                         <td>Web Design</td>
@@ -400,21 +391,9 @@ export class Dashboard extends React.PureComponent {
                         </td>
                         <td>
                           <div className="image-grouped">
-                            <img
-                              className="profile-img brround"
-                              alt="profile image"
-                              src="../assets/img/faces/16.jpg"
-                            />
-                            <img
-                              className="profile-img brround "
-                              alt="profile image"
-                              src="../assets/img/faces/8.jpg"
-                            />
-                            <img
-                              className="profile-img brround"
-                              alt="profile image"
-                              src="../assets/img/faces/7.jpg"
-                            />
+                            <img className="profile-img brround" src="../assets/img/faces/16.jpg" />
+                            <img className="profile-img brround " src="../assets/img/faces/8.jpg" />
+                            <img className="profile-img brround" src="../assets/img/faces/7.jpg" />
                           </div>
                         </td>
                         <td>Web Development</td>
@@ -432,21 +411,12 @@ export class Dashboard extends React.PureComponent {
                         </td>
                         <td>
                           <div className="image-grouped">
-                            <img
-                              className="profile-img brround"
-                              alt="profile image"
-                              src="../assets/img/faces/3.jpg"
-                            />
+                            <img className="profile-img brround" src="../assets/img/faces/3.jpg" />
                             <img
                               className="profile-img brround "
-                              alt="profile image"
                               src="../assets/img/faces/12.jpg"
                             />
-                            <img
-                              className="profile-img brround"
-                              alt="profile image"
-                              src="../assets/img/faces/15.jpg"
-                            />
+                            <img className="profile-img brround" src="../assets/img/faces/15.jpg" />
                           </div>
                         </td>
                         <td>Web Development</td>
@@ -464,21 +434,9 @@ export class Dashboard extends React.PureComponent {
                         </td>
                         <td>
                           <div className="image-grouped">
-                            <img
-                              className="profile-img brround"
-                              alt="profile image"
-                              src="../assets/img/faces/7.jpg"
-                            />
-                            <img
-                              className="profile-img brround "
-                              alt="profile image"
-                              src="../assets/img/faces/6.jpg"
-                            />
-                            <img
-                              className="profile-img brround"
-                              alt="profile image"
-                              src="../assets/img/faces/16.jpg"
-                            />
+                            <img className="profile-img brround" src="../assets/img/faces/7.jpg" />
+                            <img className="profile-img brround " src="../assets/img/faces/6.jpg" />
+                            <img className="profile-img brround" src="../assets/img/faces/16.jpg" />
                           </div>
                         </td>
                         <td>Android</td>
@@ -496,21 +454,12 @@ export class Dashboard extends React.PureComponent {
                         </td>
                         <td>
                           <div className="image-grouped">
-                            <img
-                              className="profile-img brround"
-                              alt="profile image"
-                              src="../assets/img/faces/8.jpg"
-                            />
+                            <img className="profile-img brround" src="../assets/img/faces/8.jpg" />
                             <img
                               className="profile-img brround "
-                              alt="profile image"
                               src="../assets/img/faces/11.jpg"
                             />
-                            <img
-                              className="profile-img brround"
-                              alt="profile image"
-                              src="../assets/img/faces/15.jpg"
-                            />
+                            <img className="profile-img brround" src="../assets/img/faces/15.jpg" />
                           </div>
                         </td>
                         <td>Android</td>
@@ -624,7 +573,7 @@ export class Dashboard extends React.PureComponent {
                 <div className="activity Activity-scroll ps ps--active-y">
                   <div className="activity-list">
                     {' '}
-                    <img src="../assets/img/faces/6.jpg" alt="" className="img-activity" />
+                    <img src="../assets/img/faces/6.jpg" className="img-activity" />
                     <div className="time-activity ">
                       <div className="item-activity">
                         <p className="mb-0">
@@ -635,7 +584,7 @@ export class Dashboard extends React.PureComponent {
                         <small className="text-muted ">30 mins ago</small>
                       </div>
                     </div>{' '}
-                    <img src="../assets/img/faces/9.jpg" alt="" className="img-activity" />
+                    <img src="../assets/img/faces/9.jpg" className="img-activity" />
                     <div className="time-activity">
                       <div className="item-activity">
                         <p className="mb-0">
@@ -648,7 +597,7 @@ export class Dashboard extends React.PureComponent {
                         <small className="text-muted ">1 days ago</small>
                       </div>
                     </div>{' '}
-                    <img src="../assets/img/faces/3.jpg" alt="" className="img-activity" />
+                    <img src="../assets/img/faces/3.jpg" className="img-activity" />
                     <div className="time-activity">
                       <div className="item-activity">
                         <p className="mb-0">
@@ -661,7 +610,7 @@ export class Dashboard extends React.PureComponent {
                         <small className="text-muted ">3 days ago</small>
                       </div>
                     </div>{' '}
-                    <img src="../assets/img/faces/4.jpg" alt="" className="img-activity" />
+                    <img src="../assets/img/faces/4.jpg" className="img-activity" />
                     <div className="time-activity">
                       <div className="item-activity ">
                         <p className="mb-0">
@@ -674,7 +623,7 @@ export class Dashboard extends React.PureComponent {
                         <small className="text-muted ">5 days ago</small>
                       </div>
                     </div>{' '}
-                    <img src="../assets/img/faces/5.jpg" alt="" className="img-activity" />
+                    <img src="../assets/img/faces/5.jpg" className="img-activity" />
                     <div className="time-activity">
                       <div className="item-activity">
                         <p className="mb-0">
@@ -688,7 +637,7 @@ export class Dashboard extends React.PureComponent {
                         <small className="text-muted ">30 mins ago</small>
                       </div>
                     </div>{' '}
-                    <img src="../assets/img/faces/6.jpg" alt="" className="img-activity" />
+                    <img src="../assets/img/faces/6.jpg" className="img-activity" />
                     <div className="time-activity">
                       <div className="item-activity">
                         <p className="mb-0">
@@ -701,7 +650,7 @@ export class Dashboard extends React.PureComponent {
                         <small className="text-muted ">1 days ago</small>
                       </div>
                     </div>{' '}
-                    <img src="../assets/img/faces/16.jpg" alt="" className="img-activity" />
+                    <img src="../assets/img/faces/16.jpg" className="img-activity" />
                     <div className="time-activity">
                       <div className="item-activity">
                         <p className="mb-0">
@@ -714,7 +663,7 @@ export class Dashboard extends React.PureComponent {
                         <small className="text-muted ">3 days ago</small>
                       </div>
                     </div>{' '}
-                    <img src="../assets/img/faces/10.jpg" alt="" className="img-activity" />
+                    <img src="../assets/img/faces/10.jpg" className="img-activity" />
                     <div className="time-activity mb-0">
                       <div className="item-activity mb-0">
                         <p className="mb-0">

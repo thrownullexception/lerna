@@ -18,7 +18,4 @@ export class BaseSkillDTO {
     message: 'Skill Description is required',
   })
   description: string;
-
-  @IsOptional()
-  isPath: boolean;
 }

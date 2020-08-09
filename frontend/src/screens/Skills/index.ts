@@ -1,10 +1,9 @@
 import { NavigationService } from '../../services';
-import { studentGuard } from '../../guards';
 import { IMenuItems } from '../../routes/types';
 import { ListStudentSkills } from './Student/List';
 import { AccountModeType } from '../../app/auth/auth.types';
+import { ListTutorSkills } from './Tutor/List';
 
-// const CAN_MANAGE_FAQS = 'CAN_MANAGE_FAQS';
 export const SkillsPath = 'skills';
 
 export const SkillsRoutes: IMenuItems[] = [
@@ -14,7 +13,14 @@ export const SkillsRoutes: IMenuItems[] = [
     title: 'Skills',
     showOnNavigation: true,
     accountModes: [AccountModeType.Student],
-    // component: studentGuard(ListStudentSkills),
     component: ListStudentSkills,
+  },
+  {
+    path: NavigationService.tutorPath(SkillsPath),
+    exact: true,
+    title: 'Skills',
+    showOnNavigation: true,
+    accountModes: [AccountModeType.Tutor],
+    component: ListTutorSkills,
   },
 ];

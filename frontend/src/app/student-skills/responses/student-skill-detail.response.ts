@@ -1,26 +1,22 @@
 import get from 'lodash-es/get';
-import { SkillHierarchyResponse } from './skill-hierarchy.response';
 import { SkillRoadMapResponse } from './skill-road-map.response';
 import { SkillResourceResponse } from './skill-resource.response';
+import { SkillListResponse } from '../../skills/responses';
 
-export class SkillResponse {
+export class StudentSkillDetailResponse {
   id: string;
-  isPath: boolean;
   name: string;
   description: string;
-  hasChildren: boolean;
-  hasParent: boolean;
-  relatedSkills: SkillResponse[];
+  relatedSkills: SkillListResponse[];
   roadMaps: SkillRoadMapResponse[];
   resources: SkillResourceResponse[];
 
-  constructor(jsonObject: object, skillsHierarchies: SkillHierarchyResponse[] = []) {
+  constructor(jsonObject: object) {
     this.id = get(jsonObject, 'id', '');
-    this.isPath = get(jsonObject, 'isPath', '');
     this.name = get(jsonObject, 'name', '');
     this.description = get(jsonObject, 'description', '');
     this.relatedSkills = get(jsonObject, 'relatedSkills', []).map(
-      (skill: object) => new SkillResponse(skill),
+      (skill: object) => new SkillListResponse(skill),
     );
     this.roadMaps = get(jsonObject, 'roadMaps', []).map(
       (roadMap: object) => new SkillRoadMapResponse(roadMap),
@@ -28,7 +24,5 @@ export class SkillResponse {
     this.resources = get(jsonObject, 'resources', []).map(
       (resource: object) => new SkillResourceResponse(resource),
     );
-    this.hasChildren = skillsHierarchies.some(({ parentId }) => parentId === this.id);
-    this.hasParent = skillsHierarchies.some(({ childId }) => childId === this.id);
   }
 }
