@@ -32,6 +32,13 @@ export class SkillsApiController {
     return skills.map(skill => new SkillListTransformer(skill));
   }
 
+  @Get('/with-no-children')
+  async listtSkillsWithNoChildren(): Promise<SkillListTransformer[]> {
+    return (await this.skillsService.listSkillsWithNoChildren()).map(
+      skillHierarchy => new SkillListTransformer(skillHierarchy),
+    );
+  }
+
   @Get(':skillId')
   async show(
     @Param('skillId', new ParseUUIDPipe()) skillId: string,

@@ -2,7 +2,7 @@ import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, OneToMan
 import { User } from '../users/users.entity';
 import { SessionStatus } from '../session-statuses/session-statuses.entity';
 import { SessionStatusTypes } from '../session-statuses/session-statuses.types';
-import { SessionSkill } from 'src/session-skills/session-skills.entity';
+import { SessionSkill } from '../session-skills/session-skills.entity';
 
 @Entity('sessions')
 export class Session {

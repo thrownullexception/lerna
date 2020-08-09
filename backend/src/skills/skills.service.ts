@@ -29,6 +29,13 @@ export class SkillsService {
     });
   }
 
+  async listSkillsWithNoChildren(): Promise<Skill[]> {
+    const skills = await this.listSkills();
+    const skillHierarchies = await this.getSkillHierarchies();
+    const skillsAsParentIds = skillHierarchies.map(({ parentId }) => parentId);
+    return skills.filter(({ id }) => !skillsAsParentIds.includes(id));
+  }
+
   async getMyFavouriteSkillsAndCompletedRoadMaps(userId: string): Promise<IMySkillActions> {
     const [favouriteSkills, completedRoadMaps] = await Promise.all([
       await this.userFavouriteSkillsService.getUserFavouriteSkills(userId),

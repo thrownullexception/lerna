@@ -11,7 +11,6 @@
             <input name="id" value="{{skill.id}}" type="hidden" />
             {{ forms.textInput('name', 'Name', skill.name) }}
             {{ forms.textArea('description', 'Description', skill.description) }}
-            {{ forms.checkBox('isPath', 'Is Path', skill.isPath) }}
         </div>
         <div class="box-footer">
             <a href="{{ route('skills') }}" class="btn btn-default"> &laquo; Back To Skills</a>

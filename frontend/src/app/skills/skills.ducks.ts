@@ -5,10 +5,12 @@ const DOMAIN = 'skills';
 
 export interface IState {
   skillsList: SkillListResponse[];
+  skillsWithNoChildrenList: SkillListResponse[];
 }
 
 const initial: IState = {
   skillsList: [],
+  skillsWithNoChildrenList: [],
 };
 
 export const skillsSlice = createSlice({
@@ -17,6 +19,9 @@ export const skillsSlice = createSlice({
   reducers: {
     setSkillsList: (state, { payload }: PayloadAction<SkillListResponse[]>) => {
       state.skillsList = payload;
+    },
+    setSkillsWithNoChildrenList: (state, { payload }: PayloadAction<SkillListResponse[]>) => {
+      state.skillsWithNoChildrenList = payload;
     },
   },
 });

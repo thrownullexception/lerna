@@ -6,6 +6,7 @@ import { tutorSkillsSlice } from './tutor-skills.ducks';
 import { requestStatusSlice } from '../request-status/request-status.ducks';
 import { ITutorSkillForm } from '../../screens/Skills/Tutor/List/ListTutorSkills.types';
 import { mutateAUUIDIdOnMe } from '../utils';
+import { IStore } from '../../store/rootReducers';
 
 const BASE_REQUEST_PATH = 'tutor-skills';
 
@@ -15,7 +16,11 @@ export class TutorSkillsActions {
       dispatch(requestStatusSlice.actions.dataRequestStarted());
       try {
         const { data } = await RequestService.get(BASE_REQUEST_PATH);
-        dispatch(tutorSkillsSlice.actions.setTutorSkills(data.map((datum: object) => datum)));
+        dispatch(
+          tutorSkillsSlice.actions.setTutorSkills(
+            data.map((datum: object) => new TutorSkillResponse(datum)),
+          ),
+        );
       } catch (e) {
         ToastService.error(e);
       }
@@ -37,11 +42,15 @@ export class TutorSkillsActions {
   }
 
   static createTutorSkill(tutorSkillForm: ITutorSkillForm): ThunkInterface<void> {
-    return async (dispatch: Dispatch) => {
+    return async (dispatch: Dispatch, getState: () => IStore) => {
       dispatch(requestStatusSlice.actions.formRequestStarted());
       try {
         await RequestService.post(BASE_REQUEST_PATH, mutateAUUIDIdOnMe(tutorSkillForm));
-        // dispatch(tutorSkillsSlice.actions.addTutorSkill(new TutorSkillResponse(tutorSkillForm)));
+        dispatch(
+          tutorSkillsSlice.actions.addTutorSkill(
+            new TutorSkillResponse(tutorSkillForm, getState()),
+          ),
+        );
       } catch (e) {
         ToastService.error(e);
       }

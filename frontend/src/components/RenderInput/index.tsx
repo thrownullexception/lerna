@@ -69,7 +69,7 @@ export const SubmitButton: React.SFC<ISubmitButton> = ({ text, isMakingRequest, 
       type="submit"
       className="pull-right"
     >
-      {isMakingRequest ? <i className="fa fa-spinner fa-spin" /> : text}
+      {isMakingRequest ? <i className="fa fa-spinner fa-spin" /> : null} {text}
     </Button>
   );
 };

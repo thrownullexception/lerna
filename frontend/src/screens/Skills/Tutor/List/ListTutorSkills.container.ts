@@ -14,14 +14,14 @@ const mapStateToProps = (state: IStore): StateProps => {
     tutorSkills: TutorSkillsSelectors.selectTutorSkills(state),
     isMakingFormRequest: RequestStatusSelectors.selectIsMakingFormRequest(state),
     tutorSkillLevels: TutorSkillsSelectors.selectTutorSkillLevels(state),
-    skillsList: SkillsSelectors.selectSkillsList(state),
+    skillsWithNoChildren: SkillsSelectors.selectSkillsWithNoChildrenList(state),
   };
 };
 
 const mapDispatchToProps = (dispatch: IThunkDispatch): DispatchProps => {
   return {
     getTutorSkills: () => dispatch(TutorSkillsActions.getTutorSkills()),
-    getSkillsList: () => dispatch(SkillsActions.getSkillsList()),
+    getSkillsWithNoChildrenList: () => dispatch(SkillsActions.getSkillsWithNoChildrenList()),
     getTutorSkillLevels: () => dispatch(TutorSkillsActions.getTutorSkillLevels()),
     createTutorSkill: (tutorSkill: ITutorSkillForm) =>
       dispatch(TutorSkillsActions.createTutorSkill(tutorSkill)),

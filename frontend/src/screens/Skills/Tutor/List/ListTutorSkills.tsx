@@ -12,7 +12,7 @@ export class ListTutorSkills extends React.Component<IProps> {
 
   componentDidMount() {
     this.props.getTutorSkills();
-    this.props.getSkillsList();
+    this.props.getSkillsWithNoChildrenList();
     this.props.getTutorSkillLevels();
   }
 
@@ -82,7 +82,7 @@ export class ListTutorSkills extends React.Component<IProps> {
 
   renderCreateModal = () => {
     const { isModalOpen } = this.state;
-    const { isMakingFormRequest, skillsList, tutorSkillLevels } = this.props;
+    const { isMakingFormRequest, skillsWithNoChildren, tutorSkillLevels } = this.props;
     return (
       <Modal isOpen={isModalOpen} toggle={() => this.toggleModal()} className={'some new class'}>
         <ModalHeader toggle={() => this.toggleModal()}>Add A Skill You Can Teach</ModalHeader>
@@ -90,7 +90,7 @@ export class ListTutorSkills extends React.Component<IProps> {
           <TutorSkillForm
             onSubmit={this.onCreateTutorSkillSubmit}
             isMakingRequest={isMakingFormRequest}
-            skills={skillsList}
+            skills={skillsWithNoChildren}
             tutorSkillLevels={tutorSkillLevels}
           />
         </ModalBody>
