@@ -21,6 +21,8 @@ const mapStateToProps = (state: IStore): StateProps => {
 const mapDispatchToProps = (dispatch: IThunkDispatch): DispatchProps => {
   return {
     getTutorSkills: () => dispatch(TutorSkillsActions.getTutorSkills()),
+    deleteTutorSkill: (tutorSkillId: string) =>
+      dispatch(TutorSkillsActions.deleteTutorSkill(tutorSkillId)),
     getSkillsWithNoChildrenList: () => dispatch(SkillsActions.getSkillsWithNoChildrenList()),
     getTutorSkillLevels: () => dispatch(TutorSkillsActions.getTutorSkillLevels()),
     createTutorSkill: (tutorSkill: ITutorSkillForm) =>

@@ -25,7 +25,7 @@ export class TutorSkillsService {
   }
 
   async createTutorSkill(createTutorSkillDTO: CreateTutorSkillDTO): Promise<void> {
-    return await this.tutorSkillsRepository.createTutorSkill({ ...createTutorSkillDTO });
+    return await this.tutorSkillsRepository.createTutorSkill(createTutorSkillDTO);
   }
 
   async updateTutorSkill(skillId: string, updateTutorSkillDTO: UpdateTutorSkillDTO): Promise<void> {

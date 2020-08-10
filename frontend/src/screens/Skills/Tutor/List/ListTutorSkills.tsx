@@ -91,6 +91,11 @@ export class ListTutorSkills extends React.Component<IProps> {
     this.props.updateTutorSkill(values);
   };
 
+  onDeleteTutorSkill = () => {
+    this.props.deleteTutorSkill(this.state.currentTutorSkillId);
+    this.toggleModal();
+  };
+
   renderCreateModal = () => {
     const { isModalOpen, currentTutorSkillId } = this.state;
     const { isMakingFormRequest, skillsWithNoChildren, tutorSkillLevels } = this.props;
@@ -122,6 +127,7 @@ export class ListTutorSkills extends React.Component<IProps> {
         <ModalBody>
           <TutorSkillForm
             onSubmit={this.onUpdateTutorSkillSubmit}
+            onDelete={this.onDeleteTutorSkill}
             isMakingRequest={isMakingFormRequest}
             skills={skillsWithNoChildren}
             initialValues={tutorSkill}

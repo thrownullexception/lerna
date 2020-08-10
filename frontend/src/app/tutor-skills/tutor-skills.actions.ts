@@ -32,8 +32,9 @@ export class TutorSkillsActions {
     return async (dispatch: Dispatch) => {
       ProgressService.start();
       try {
-        await RequestService.delete(`${BASE_REQUEST_PATH}/${tutorSkillId}`);
         dispatch(tutorSkillsSlice.actions.deleteTutorSkill(tutorSkillId));
+        await RequestService.delete(`${BASE_REQUEST_PATH}/${tutorSkillId}`);
+        ToastService.success('Skill Deleted Successfully');
       } catch (e) {
         ToastService.error(e);
       }

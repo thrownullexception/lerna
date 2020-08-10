@@ -10,6 +10,7 @@ export interface IProps {
   getTutorSkillLevels: () => void;
   createTutorSkill: (tutorSkill: ITutorSkillForm) => void;
   updateTutorSkill: (tutorSkill: ITutorSkillForm) => void;
+  deleteTutorSkill: (tutorSkillId: string) => void;
   tutorSkills: TutorSkillResponse[];
   isMakingFormRequest: boolean;
   tutorSkillLevels: TutorSkillLevelResponse[];
@@ -21,6 +22,7 @@ export type DispatchProps = Pick<
   | 'getTutorSkills'
   | 'getSkillsWithNoChildrenList'
   | 'getTutorSkillLevels'
+  | 'deleteTutorSkill'
   | 'createTutorSkill'
   | 'updateTutorSkill'
 >;
