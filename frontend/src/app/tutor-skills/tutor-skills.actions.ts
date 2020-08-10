@@ -51,6 +51,25 @@ export class TutorSkillsActions {
             new TutorSkillResponse(tutorSkillForm, getState()),
           ),
         );
+        ToastService.success('Skill Added Successfully');
+      } catch (e) {
+        ToastService.error(e);
+      }
+      dispatch(requestStatusSlice.actions.formRequestEnded());
+    };
+  }
+
+  static updateTutorSkill(tutorSkillForm: ITutorSkillForm): ThunkInterface<void> {
+    return async (dispatch: Dispatch, getState: () => IStore) => {
+      dispatch(requestStatusSlice.actions.formRequestStarted());
+      try {
+        await RequestService.patch(`${BASE_REQUEST_PATH}/${tutorSkillForm.id}`, tutorSkillForm);
+        dispatch(
+          tutorSkillsSlice.actions.updateTutorSkill(
+            new TutorSkillResponse(tutorSkillForm, getState()),
+          ),
+        );
+        ToastService.success('Skill Edited Successfully');
       } catch (e) {
         ToastService.error(e);
       }

@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsEnum, IsUUID, IsOptional, IsNumberString } from 'class-validator';
+import { IsNotEmpty, IsEnum, IsUUID, IsOptional, IsNumber } from 'class-validator';
 import { TutorSkillLevels } from '../../tutor-skill-levels/tutor-skill-levels.types';
 import { Unique } from '../../shared/constraints';
 import { TutorSkill } from '../tutor-skills.entity';
@@ -35,13 +35,13 @@ export class BaseTutorSkillDTO {
   })
   level: TutorSkillLevels;
 
-  @IsNumberString()
+  @IsNumber()
   @IsNotEmpty({
     message: 'Rate is required',
   })
   rate: number;
 
-  @IsNumberString()
+  @IsNumber()
   @IsNotEmpty({
     message: 'Years of Experience is required',
   })

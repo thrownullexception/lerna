@@ -9,6 +9,7 @@ export interface IProps {
   getSkillsWithNoChildrenList: () => void;
   getTutorSkillLevels: () => void;
   createTutorSkill: (tutorSkill: ITutorSkillForm) => void;
+  updateTutorSkill: (tutorSkill: ITutorSkillForm) => void;
   tutorSkills: TutorSkillResponse[];
   isMakingFormRequest: boolean;
   tutorSkillLevels: TutorSkillLevelResponse[];
@@ -17,7 +18,11 @@ export interface IProps {
 
 export type DispatchProps = Pick<
   IProps,
-  'getTutorSkills' | 'getSkillsWithNoChildrenList' | 'getTutorSkillLevels' | 'createTutorSkill'
+  | 'getTutorSkills'
+  | 'getSkillsWithNoChildrenList'
+  | 'getTutorSkillLevels'
+  | 'createTutorSkill'
+  | 'updateTutorSkill'
 >;
 
 export type StateProps = Pick<
@@ -26,8 +31,9 @@ export type StateProps = Pick<
 >;
 
 export interface ITutorSkillForm {
-  skillId: string;
-  level: string;
-  rate: number;
-  years: number;
+  id?: string;
+  skillId?: string;
+  level?: string;
+  rate?: number;
+  years?: number;
 }

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { IProps, ITutorSkillForm } from './ListTutorSkills.types';
 import './styles.scss';
 import { TutorSkillForm } from './forms';
@@ -8,6 +8,7 @@ import { StringFilters } from '../../../../shared/filters';
 export class ListTutorSkills extends React.Component<IProps> {
   state = {
     isModalOpen: false,
+    currentTutorSkillId: '',
   };
 
   componentDidMount() {
@@ -16,12 +17,18 @@ export class ListTutorSkills extends React.Component<IProps> {
     this.props.getTutorSkillLevels();
   }
 
+  getSnapshotBeforeUpdate(prevProp: IProps) {
+    if (prevProp.isMakingFormRequest && !this.props.isMakingFormRequest) {
+      this.toggleModal();
+    }
+  }
+
   renderSkillCard = () => {
-    return this.props.tutorSkills.map(({ skillName, skillId, years, rate, levelName }) => {
+    return this.props.tutorSkills.map(({ skillName, skillId, years, rate, levelName, id }) => {
       return (
         <div className="col-xl-3 col-lg-6 col-md-6 col-sm-12" key={skillId}>
           <div className="card overflow-hidden">
-            <div className="card-body">
+            <div className="card-body" onClick={() => this.toggleModal(id)}>
               <div className="d-flex list-tutor-skills__container">
                 <div className="my-auto">
                   <img
@@ -72,19 +79,23 @@ export class ListTutorSkills extends React.Component<IProps> {
     );
   };
 
-  toggleModal = () => {
-    this.setState({ isModalOpen: !this.state.isModalOpen });
+  toggleModal = (currentTutorSkillId = '') => {
+    this.setState({ isModalOpen: !this.state.isModalOpen, currentTutorSkillId });
   };
 
   onCreateTutorSkillSubmit = (values: ITutorSkillForm) => {
     this.props.createTutorSkill(values);
   };
 
+  onUpdateTutorSkillSubmit = (values: ITutorSkillForm) => {
+    this.props.updateTutorSkill(values);
+  };
+
   renderCreateModal = () => {
-    const { isModalOpen } = this.state;
+    const { isModalOpen, currentTutorSkillId } = this.state;
     const { isMakingFormRequest, skillsWithNoChildren, tutorSkillLevels } = this.props;
     return (
-      <Modal isOpen={isModalOpen} toggle={() => this.toggleModal()} className={'some new class'}>
+      <Modal isOpen={isModalOpen && !currentTutorSkillId} toggle={() => this.toggleModal()}>
         <ModalHeader toggle={() => this.toggleModal()}>Add A Skill You Can Teach</ModalHeader>
         <ModalBody>
           <TutorSkillForm
@@ -98,9 +109,33 @@ export class ListTutorSkills extends React.Component<IProps> {
     );
   };
 
+  renderUpdateModal = () => {
+    const { isModalOpen, currentTutorSkillId } = this.state;
+    const { isMakingFormRequest, skillsWithNoChildren, tutorSkillLevels, tutorSkills } = this.props;
+    const tutorSkill = tutorSkills.find(({ id }) => id === currentTutorSkillId);
+    if (!tutorSkill) {
+      return null;
+    }
+    return (
+      <Modal isOpen={isModalOpen && !!currentTutorSkillId} toggle={() => this.toggleModal()}>
+        <ModalHeader toggle={() => this.toggleModal()}>Update Skill</ModalHeader>
+        <ModalBody>
+          <TutorSkillForm
+            onSubmit={this.onUpdateTutorSkillSubmit}
+            isMakingRequest={isMakingFormRequest}
+            skills={skillsWithNoChildren}
+            initialValues={tutorSkill}
+            tutorSkillLevels={tutorSkillLevels}
+          />
+        </ModalBody>
+      </Modal>
+    );
+  };
+
   render() {
     return (
       <div className="row row-sm">
+        {this.renderUpdateModal()}
         {this.renderCreateModal()}
         {this.renderAddSkillButton()}
         {this.renderSkillCard()}

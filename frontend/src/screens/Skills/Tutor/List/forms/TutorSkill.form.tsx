@@ -10,21 +10,30 @@ import {
   transformSystemValuesToSelectData,
   transformDataToSelectData,
 } from '../../../../../shared/transformers';
+import pick from 'lodash-es/pick';
 
 interface IProps extends FormProps<ITutorSkillForm> {
   skills: SkillListResponse[];
   tutorSkillLevels: TutorSkillLevelResponse[];
 }
 
+const addOrUpdateText = (determinate: boolean): string => (determinate ? 'Update' : 'Create');
+
 export const TutorSkillForm: React.SFC<IProps> = ({
   onSubmit,
   isMakingRequest,
   skills,
+  initialValues,
   tutorSkillLevels,
 }) => {
   return (
     <Form
-      onSubmit={onSubmit}
+      onSubmit={(values: ITutorSkillForm) => {
+        values.rate = Number(values.rate);
+        values.years = Number(values.years);
+        onSubmit(values);
+      }}
+      initialValues={pick(initialValues, ['skillId', 'level', 'years', 'rate', 'id'])}
       render={({ handleSubmit }) => {
         return (
           <React.Fragment>
@@ -61,7 +70,7 @@ export const TutorSkillForm: React.SFC<IProps> = ({
             <SubmitButton
               onClick={handleSubmit}
               isMakingRequest={isMakingRequest}
-              text="Add New Skill"
+              text={`${addOrUpdateText(!!initialValues)} Skill`}
             />
           </React.Fragment>
         );

@@ -26,6 +26,12 @@ export const tutorSkillsSlice = createSlice({
     setTutorSkillLevels: (state, { payload }: PayloadAction<TutorSkillLevelResponse[]>) => {
       state.tutorSkillLevels = payload;
     },
+    updateTutorSkill: (state, { payload }: PayloadAction<TutorSkillResponse>) => {
+      const tutorSkillIndex = state.tutorSkills.findIndex(({ id }) => payload.id === id);
+      if (tutorSkillIndex > -1) {
+        state.tutorSkills[tutorSkillIndex] = payload;
+      }
+    },
     deleteTutorSkill: (state, { payload: tutorSkillId }: PayloadAction<string>) => {
       const tutorSkillIndex = state.tutorSkills.findIndex(({ id }) => id === tutorSkillId);
       state.tutorSkills.splice(tutorSkillIndex, 1);

@@ -25,6 +25,8 @@ const mapDispatchToProps = (dispatch: IThunkDispatch): DispatchProps => {
     getTutorSkillLevels: () => dispatch(TutorSkillsActions.getTutorSkillLevels()),
     createTutorSkill: (tutorSkill: ITutorSkillForm) =>
       dispatch(TutorSkillsActions.createTutorSkill(tutorSkill)),
+    updateTutorSkill: (tutorSkill: ITutorSkillForm) =>
+      dispatch(TutorSkillsActions.updateTutorSkill(tutorSkill)),
   };
 };
 
