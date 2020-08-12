@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsUUID } from 'class-validator';
 
-export class AnswerQuizDTO {
+export class AnswerQuestionDTO {
   @IsUUID(4)
   @IsNotEmpty({
     message: 'Session ID is required',
@@ -9,15 +9,15 @@ export class AnswerQuizDTO {
 
   @IsUUID(4)
   @IsNotEmpty({
-    message: 'Session Quiz ID is required',
+    message: 'Session Question ID is required',
   })
-  sessionQuizId: string;
+  sessionQuestionId: string;
 
   @IsUUID(4)
   @IsNotEmpty({
-    message: 'Session Quiz Response ID is required',
+    message: 'Session Question Response ID is required',
   })
-  sessionQuizResponseId: string;
+  sessionQuestionResponseId: string;
 
   @IsNotEmpty({
     message: 'Answer is required',

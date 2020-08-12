@@ -1,9 +1,9 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
 import { BaseMigration, ReferenceAction } from './base/base-migration';
 
-export class CreateSessionQuizzesTable1594807293301 extends BaseMigration
+export class CreateSessionQuestionsTable1594807293301 extends BaseMigration
   implements MigrationInterface {
-  protected table = 'session_quizzes';
+  protected table = 'session_questions';
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await this.createTable(queryRunner, [

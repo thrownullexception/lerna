@@ -28,7 +28,7 @@ export class SessionCandidate {
   respondedAt: string;
 
   @Column()
-  quizedAt: string;
+  questionedAt: string;
 
   @ManyToOne(
     () => Session,

@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity('session_quiz_responses')
-export class SessionQuizResponse {
+@Entity('session_question_responses')
+export class SessionQuestionResponse {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -9,7 +9,7 @@ export class SessionQuizResponse {
   sessionId: string;
 
   @Column()
-  sessionQuizId: string;
+  sessionQuestionId: string;
 
   @Column()
   userId: string;

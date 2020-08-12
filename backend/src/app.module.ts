@@ -20,8 +20,8 @@ import { TutorSkillLevelsModule } from './tutor-skill-levels/tutor-skill-levels.
 import { TutorSkillsModule } from './tutor-skills/tutor-skills.module';
 import { SessionsModule } from './sessions/sessions.module';
 import { SessionSkillsModule } from './session-skills/session-skills.module';
-import { SessionQuizzesModule } from './session-quizzes/session-quizzes.module';
-import { SessionQuizResponsesModule } from './session-quiz-responses/session-quiz-responses.module';
+import { SessionQuestionsModule } from './session-questions/session-questions.module';
+import { SessionQuestionResponsesModule } from './session-question-responses/session-question-responses.module';
 import { MailModule } from './shared/services/mail/mail-module';
 import { SessionCandidatesModule } from './session-candidates/session-candidates.module';
 import { SkillRelationsModule } from './skill-relations/skill-relations.module';
@@ -64,8 +64,8 @@ import { UserCompletedSkillRoadMapsModule } from './user-completed-skill-road-ma
     TutorSkillsModule,
     SessionsModule,
     SessionSkillsModule,
-    SessionQuizzesModule,
-    SessionQuizResponsesModule,
+    SessionQuestionsModule,
+    SessionQuestionResponsesModule,
     SessionCandidatesModule,
     SkillRelationsModule,
     SkillRoadMapsModule,

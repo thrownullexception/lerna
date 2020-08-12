@@ -1,8 +1,8 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { Session } from '../sessions/sessions.entity';
 
-@Entity('session_quizzes')
-export class SessionQuiz {
+@Entity('session_questions')
+export class SessionQuestion {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 

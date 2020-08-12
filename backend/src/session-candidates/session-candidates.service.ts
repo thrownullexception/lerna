@@ -26,7 +26,7 @@ export class SessionCandidatesService {
       ...shortListCandidate,
       statusSystemName: SessionCandidateStatusTypes.Sent,
     });
-    // Also tell them to take the quiz as soon as possible
+    // Also tell them to take the question as soon as possible
     this.mailService.sendShortListCandidateMail({
       to: 'user@email.com',
       context: { name: 'TODO' },
@@ -70,13 +70,13 @@ export class SessionCandidatesService {
     const updatePayload: Partial<SessionCandidate> = {
       statusSystemName: candidateStatus,
     };
-    // TODO If the status of the session is selected_tutor then dont allow status to change to `passed_quiz`, `no_response`
+    // TODO If the status of the session is selected_tutor then dont allow status to change to `passed_question`, `no_response`
     const currentDateTime = new Date().toString();
 
     switch (candidateStatus) {
       case SessionCandidateStatusTypes.NoResponse:
         // if the session status is not in StopMailingStudentAboutNoResponse then Mail the tutor that a candidate status has been moved to `NoResponse` hence they have one more spot
-        // Mail the student that since they got didn't take the quiz or not interested that their spot has been lifted and will be filled to someone else based on the student choice
+        // Mail the student that since they got didn't take the question or not interested that their spot has been lifted and will be filled to someone else based on the student choice
         break;
 
       case SessionCandidateStatusTypes.Opened:
@@ -95,13 +95,13 @@ export class SessionCandidatesService {
         // Mail the student about the news that they can shortlist someone else and provide the reason
         break;
 
-      case SessionCandidateStatusTypes.PassedQuiz:
-        updatePayload.quizedAt = currentDateTime;
+      case SessionCandidateStatusTypes.PassedQuestions:
+        updatePayload.questionedAt = currentDateTime;
         // Student that some
         break;
 
-      case SessionCandidateStatusTypes.FailedQuiz:
-        updatePayload.quizedAt = currentDateTime;
+      case SessionCandidateStatusTypes.FailedQuestions:
+        updatePayload.questionedAt = currentDateTime;
         break;
 
       case SessionCandidateStatusTypes.Selected:

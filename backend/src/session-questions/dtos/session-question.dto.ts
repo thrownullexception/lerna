@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsUUID, IsOptional, Length } from 'class-validator';
 
-export class SessionQuizDTO {
+export class SessionQuestionDTO {
   @IsUUID(4)
   id: string;
 

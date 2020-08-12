@@ -1,14 +1,14 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
 import { BaseMigration, ReferenceAction } from './base/base-migration';
 
-export class CreateSessionQuizResponsesTable1594900631548 extends BaseMigration
+export class CreateSessionQuestionResponsesTable1594900631548 extends BaseMigration
   implements MigrationInterface {
-  protected table = 'session_quiz_responses';
+  protected table = 'session_question_responses';
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await this.createTable(queryRunner, [
       {
-        name: 'session_quiz_id',
+        name: 'session_question_id',
         type: 'uuid',
       },
       {
@@ -32,8 +32,8 @@ export class CreateSessionQuizResponsesTable1594900631548 extends BaseMigration
     ]);
 
     await this.reference(queryRunner, {
-      table: 'session_quizzes',
-      referencedColumnHere: 'session_quiz_id',
+      table: 'session_questions',
+      referencedColumnHere: 'session_question_id',
       referenceAction: ReferenceAction.Restrict,
     });
 
