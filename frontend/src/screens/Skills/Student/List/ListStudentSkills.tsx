@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { TabContent, TabPane, Nav, NavLink, BreadcrumbItem, Breadcrumb } from 'reactstrap';
+import { TabContent, TabPane, Nav, NavLink } from 'reactstrap';
 import { IProps } from './ListStudentSkills.types';
 import { Spinner } from '../../../../components/Spinner';
 import { SkillResourceResponse } from '../../../../app/student-skills/responses/skill-resource.response';
@@ -21,7 +21,7 @@ export class ListStudentSkills extends React.Component<IProps> {
   }
 
   renderSkillResource = ({ id, title, link, mediaType }: SkillResourceResponse) => (
-    <a className="list-group-item" href={link} target="_blank" key={id}>
+    <a className="list-group-item" href={link} target="_blank" rel="noopener noreferrer" key={id}>
       <i className="fe fe-airplay mr-2" aria-hidden="true" />
       {title}
     </a>
@@ -138,6 +138,7 @@ export class ListStudentSkills extends React.Component<IProps> {
         <img
           className="list-student-skills__skill-logo"
           src="https://avatars0.githubusercontent.com/u/8915890?s=460&u=0d64410a743190d194ebd2cf1ba42d8584fdf3ce&v=4"
+          alt={currentStudentSkill.name}
         />
         <div className="media-body list-student-skills__skill-title-wrapper">
           <h5 className="card-title list-student-skills__skill-title">
@@ -147,17 +148,16 @@ export class ListStudentSkills extends React.Component<IProps> {
           <p>
             <nav aria-label="breadcrumb">
               <div className="breadcrumb list-student-skills__breadcrumb">
-                <a href="#" className="breadcrumb-item list-student-skills__breadcrumb-item">
+                <button className="breadcrumb-item list-student-skills__breadcrumb-item link-like">
                   Home
-                </a>
+                </button>
                 {skillsBreadCrumbs.map(skillBreadCrumb => (
-                  <a
-                    href="#"
+                  <button
                     key={skillBreadCrumb.id}
-                    className="breadcrumb-item list-student-skills__breadcrumb-item"
+                    className="breadcrumb-item list-student-skills__breadcrumb-item link-like"
                   >
                     {skillBreadCrumb.name}
-                  </a>
+                  </button>
                 ))}
               </div>
             </nav>

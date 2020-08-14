@@ -22,7 +22,7 @@ export class TutorSkillResponse {
     this.skillName = get(jsonObject, 'skillName');
 
     if (state) {
-      const levels = TutorSkillsSelectors.selectTutorSkillLevels(state);
+      const levels = TutorSkillsSelectors.selectSkillLevels(state);
       this.levelName = '' + levels.find(({ systemName }) => systemName === this.level)?.displayName;
 
       const skills = SkillsSelectors.selectSkillsWithNoChildrenList(state);

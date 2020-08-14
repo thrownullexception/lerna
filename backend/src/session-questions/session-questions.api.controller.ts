@@ -14,7 +14,7 @@ import {
 } from '@nestjs/common';
 import { APP_CONSTANTS } from '../shared/constants';
 import { AuthGuard } from '@nestjs/passport';
-import { ManageSessionQuizTransformer, NextSessionQuizTransformer } from './transformers';
+import { ManagesessionQuestionTransformer, NextSessionQuestionTransformer } from './transformers';
 import { SessionQuestionDTO, AnswerQuestionDTO } from './dtos';
 import { SessionQuestionsService } from './session-questions.service';
 import { AuthenticatedUser } from '../shared/decorators';
@@ -28,17 +28,17 @@ export class SessionQuisApiController {
   @Get(':sessionId')
   async listForManagement(
     @Param('sessionId', new ParseUUIDPipe()) sessionId: string,
-  ): Promise<ManageSessionQuizTransformer[]> {
+  ): Promise<ManagesessionQuestionTransformer[]> {
     const sessionQuizzes = await this.sessionQuestionsService.listSessionQuestions(sessionId);
-    return sessionQuizzes.map(sessionQuiz => new ManageSessionQuizTransformer(sessionQuiz));
+    return sessionQuizzes.map(sessionQuiz => new ManagesessionQuestionTransformer(sessionQuiz));
   }
 
   @Get(':sessionId/nextquiz')
   async show(
     @Param('sessionId', new ParseUUIDPipe()) sessionId: string,
     @AuthenticatedUser('id') userId: string,
-  ): Promise<NextSessionQuizTransformer> {
-    return new NextSessionQuizTransformer(
+  ): Promise<NextSessionQuestionTransformer> {
+    return new NextSessionQuestionTransformer(
       await this.sessionQuestionsService.getNextSessionQuestion(sessionId, userId),
     );
   }

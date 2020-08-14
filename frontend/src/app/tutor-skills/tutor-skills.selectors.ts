@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 import { IStore } from '../../store/rootReducers';
-import { TutorSkillResponse, TutorSkillLevelResponse } from './responses';
+import { TutorSkillResponse, SkillLevelResponse } from './responses';
 
 export class TutorSkillsSelectors {
   static base(state: IStore) {
@@ -13,9 +13,9 @@ export class TutorSkillsSelectors {
     })(state);
   }
 
-  static selectTutorSkillLevels(state: IStore): TutorSkillLevelResponse[] {
-    return createSelector(TutorSkillsSelectors.base, ({ tutorSkillLevels }) => {
-      return tutorSkillLevels;
+  static selectSkillLevels(state: IStore): SkillLevelResponse[] {
+    return createSelector(TutorSkillsSelectors.base, ({ skillLevels }) => {
+      return skillLevels;
     })(state);
   }
 }

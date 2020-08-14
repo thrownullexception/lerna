@@ -1,19 +1,16 @@
-import {
-  TutorSkillResponse,
-  TutorSkillLevelResponse,
-} from '../../../../app/tutor-skills/responses';
+import { TutorSkillResponse, SkillLevelResponse } from '../../../../app/tutor-skills/responses';
 import { SkillWithNoChildrenResponse } from '../../../../app/skills/responses';
 
 export interface IProps {
   getTutorSkills: () => void;
   getSkillsWithNoChildrenList: () => void;
-  getTutorSkillLevels: () => void;
+  getSkillLevels: () => void;
   createTutorSkill: (tutorSkill: ITutorSkillForm) => void;
   updateTutorSkill: (tutorSkill: ITutorSkillForm) => void;
   deleteTutorSkill: (tutorSkillId: string) => void;
   tutorSkills: TutorSkillResponse[];
   isMakingFormRequest: boolean;
-  tutorSkillLevels: TutorSkillLevelResponse[];
+  skillLevels: SkillLevelResponse[];
   skillsWithNoChildren: SkillWithNoChildrenResponse[];
 }
 
@@ -21,7 +18,7 @@ export type DispatchProps = Pick<
   IProps,
   | 'getTutorSkills'
   | 'getSkillsWithNoChildrenList'
-  | 'getTutorSkillLevels'
+  | 'getSkillLevels'
   | 'deleteTutorSkill'
   | 'createTutorSkill'
   | 'updateTutorSkill'
@@ -29,7 +26,7 @@ export type DispatchProps = Pick<
 
 export type StateProps = Pick<
   IProps,
-  'tutorSkills' | 'isMakingFormRequest' | 'tutorSkillLevels' | 'skillsWithNoChildren'
+  'tutorSkills' | 'isMakingFormRequest' | 'skillLevels' | 'skillsWithNoChildren'
 >;
 
 export interface ITutorSkillForm {

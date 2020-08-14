@@ -1,6 +1,6 @@
-import { connect } from 'react-redux';
-import { IThunkDispatch } from '../../shared/types';
-import { IStore } from '../../store/rootReducers';
+// import { connect } from 'react-redux';
+// import { IThunkDispatch } from '../../shared/types';
+// import { IStore } from '../../store/rootReducers';
 import { Dashboard } from './Dashboard';
 // import { DispatchProps, StateProps } from './Dashboard.types';
 

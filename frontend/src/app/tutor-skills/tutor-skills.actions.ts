@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux';
 import { ThunkInterface } from '../../shared/types';
 import { RequestService, ToastService, ProgressService } from '../../services';
-import { TutorSkillResponse, TutorSkillLevelResponse } from './responses';
+import { TutorSkillResponse, SkillLevelResponse } from './responses';
 import { tutorSkillsSlice } from './tutor-skills.ducks';
 import { requestStatusSlice } from '../request-status/request-status.ducks';
 import { ITutorSkillForm } from '../../screens/Skills/Tutor/List/ListTutorSkills.types';
@@ -78,13 +78,13 @@ export class TutorSkillsActions {
     };
   }
 
-  static getTutorSkillLevels(): ThunkInterface<void> {
+  static getSkillLevels(): ThunkInterface<void> {
     return async (dispatch: Dispatch) => {
       try {
         const { data } = await RequestService.get('tutor-skill-levels');
         dispatch(
-          tutorSkillsSlice.actions.setTutorSkillLevels(
-            data.map((datum: object) => new TutorSkillLevelResponse(datum)),
+          tutorSkillsSlice.actions.setSkillLevels(
+            data.map((datum: object) => new SkillLevelResponse(datum)),
           ),
         );
       } catch (e) {

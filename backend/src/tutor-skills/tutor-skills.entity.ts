@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
-import { TutorSkillLevels } from '../tutor-skill-levels/tutor-skill-levels.types';
+import { SkillLevels } from '../skill-levels/skill-levels.types';
 import { Skill } from '../skills/skills.entity';
 
 @Entity('tutor_skills')
@@ -14,7 +14,7 @@ export class TutorSkill {
   skillId: string;
 
   @Column()
-  level: TutorSkillLevels;
+  level: SkillLevels;
 
   @Column()
   rate: number;

@@ -1,0 +1,316 @@
+.wizard {
+    border: 1px solid #dedcfb;
+    background-color: #fff;
+}
+
+.wizard>.steps {
+    padding: 20px;
+}
+
+.wizard>.steps>ul {
+    padding: 0;
+    margin-bottom: 0;
+    display: flex;
+}
+
+.wizard>.steps>ul li {
+    float: none;
+    display: block;
+    width: auto;
+}
+
+.wizard>.steps>ul li .current-info {
+    display: none;
+}
+
+.wizard>.steps>ul li .title {
+    margin-left: 5px;
+    white-space: nowrap;
+    transition: all 0.2s ease-in-out;
+}
+
+.wizard>.steps>ul li+li {
+    margin-left: 5px;
+}
+
+.wizard>.steps button {
+    color: #5e597d;
+    font-weight: 500;
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wizard>.steps button:hover,
+.wizard>.steps button:active {
+    color: #5e597d;
+    font-weight: 500;
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wizard>.steps button .number,
+.wizard>.steps button:hover .number,
+.wizard>.steps button:active .number {
+    flex-shrink: 0;
+    font-weight: 700;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    color: #fff;
+    display: block;
+    text-align: center;
+    line-height: 2;
+    width: 30px;
+    height: 30px;
+    background-color: #aba7d0;
+    border-radius: 100%;
+    transition: all 0.2s ease-in-out;
+}
+
+.wizard>.steps .disabled {
+    display: none;
+}
+
+.wizard>.steps .disabled button {
+    color: #9c96c1;
+}
+
+.wizard>.steps .disabled button:hover,
+.wizard>.steps .disabled button:active {
+    color: #9c96c1;
+}
+
+.wizard>.steps .current button {
+    color: #3858f9;
+}
+
+.wizard>.steps .current button:hover,
+.wizard>.steps .current button:active {
+    color: #3858f9;
+}
+
+.wizard>.steps .current button .title,
+.wizard>.steps .current button:hover .title,
+.wizard>.steps .current button:active .title {
+    display: inline-block;
+}
+
+.wizard>.steps .current button .number,
+.wizard>.steps .current button:hover .number,
+.wizard>.steps .current button:active .number {
+    background-color: #3858f9;
+}
+
+.wizard>.steps .done button {
+    color: #00cccc;
+}
+
+.wizard>.steps .done button:hover,
+.wizard>.steps .done button:active {
+    color: #00cccc;
+}
+
+.wizard>.steps .done a .title,
+.wizard>.steps .done button:hover .title,
+.wizard>.steps .done button:active .title {
+    display: none;
+}
+
+.wizard>.steps .done button .number,
+.wizard>.steps .done button:hover .number,
+.wizard>.steps .done button:active .number {
+    background-color: #00cccc;
+}
+
+.wizard>.content {
+    border-top: 1px solid #dedcfb;
+    border-bottom: 1px solid #dedcfb;
+    min-height: 150px;
+    padding: 20px;
+}
+
+.wizard>.content>.title {
+    font-size: 18px;
+    color: #5e597d;
+    font-weight: 700;
+    margin-bottom: 5px;
+    display: none;
+}
+
+.wizard>.content>.title.current {
+    display: block;
+}
+
+.wizard>.content>.body {
+    float: none;
+    position: static;
+    width: auto;
+    height: auto;
+}
+
+.wizard>.content>.body input.parsley-error {
+    border-color: #f53c5b;
+}
+
+.wizard>.content>.body input.parsley-error+ul {
+    list-style: none !important;
+}
+
+.wizard>.actions {
+    padding: 20px;
+}
+
+.wizard>.actions>ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+.wizard>.actions>ul>li:last-child button {
+    background-color: #00cccc;
+}
+
+.wizard>.actions button {
+    display: block;
+    background-color: #3858f9;
+    padding: 9px 25px;
+    line-height: 1.573;
+    color: #fff;
+}
+
+.wizard>.actions button:hover,
+.wizard>.actions button:active {
+    display: block;
+    background-color: #3858f9;
+    padding: 9px 25px;
+    line-height: 1.573;
+    color: #fff;
+}
+
+.wizard>.actions .disabled button {
+    background-color: #9c96c1;
+}
+
+.wizard>.actions .disabled button:hover,
+.wizard>.actions .disabled button:active {
+    background-color: #9c96c1;
+}
+
+@media (min-width: 768px) {
+    .wizard>.steps {
+        padding: 25px;
+    }
+}
+
+@media (min-width: 992px) {
+    .wizard>.steps {
+        padding: 30px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .wizard>.steps>ul li .title {
+        transition: none;
+    }
+}
+
+@media (min-width: 576px) {
+    .wizard>.steps>ul li .title {
+        display: none;
+        margin-left: 10px;
+    }
+}
+
+@media (min-width: 768px) {
+    .wizard>.steps>ul li .title {
+        display: inline-block;
+    }
+}
+
+@media (min-width: 576px) {
+    .wizard>.steps>ul li+li {
+        margin-left: 20px;
+    }
+}
+
+@media (min-width: 992px) {
+    .wizard>.steps>ul li+li {
+        margin-left: 30px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .wizard>.steps button {
+        justify-content: flex-start;
+    }
+
+    .wizard>.steps button:hover,
+    .wizard>.steps button:active {
+        justify-content: flex-start;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .wizard>.steps button .number,
+    .wizard>.steps button:hover .number,
+    .wizard>.steps button:active .number {
+        transition: none;
+    }
+}
+
+@media (min-width: 576px) {
+
+    .wizard>.steps button .number,
+    .wizard>.steps button:hover .number,
+    .wizard>.steps button:active .number {
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 2.1;
+        width: 40px;
+        height: 40px;
+    }
+}
+
+@media (min-width: 576px) {
+    .wizard>.steps .disabled {
+        display: block;
+    }
+}
+
+@media (min-width: 768px) {
+
+    .wizard>.steps .done button .title,
+    .wizard>.steps .done button:hover .title,
+    .wizard>.steps .done button:active .title {
+        display: inline-block;
+    }
+}
+
+@media (min-width: 768px) {
+    .wizard>.content {
+        padding: 25px;
+    }
+}
+
+@media (min-width: 992px) {
+    .wizard>.content {
+        padding: 30px;
+    }
+}
+
+@media (min-width: 768px) {
+    .wizard>.actions {
+        padding: 25px;
+    }
+}
+
+@media (min-width: 992px) {
+    .wizard>.actions {
+        padding: 30px;
+    }
+}

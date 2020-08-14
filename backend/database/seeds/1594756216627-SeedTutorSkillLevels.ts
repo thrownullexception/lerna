@@ -1,8 +1,8 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
 import { BaseSeed } from './base/base-seed';
 
-export class SeedTutorSkillLevels1594756216627 extends BaseSeed implements MigrationInterface {
-  table = 'tutor_skills_levels';
+export class SeedSkillLevels1594756216627 extends BaseSeed implements MigrationInterface {
+  table = 'skill_levels';
   systemEnumerationFields = [
     {
       systemName: 'level_1',

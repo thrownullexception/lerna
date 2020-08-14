@@ -1,2 +1,2 @@
 export { TutorSkillResponse } from './tutor-skill.response';
-export { TutorSkillLevelResponse } from './tutor-skill-level.response';
+export { SkillLevelResponse } from './skill-level.response';

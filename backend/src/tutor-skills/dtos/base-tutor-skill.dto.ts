@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsEnum, IsUUID, IsOptional, IsNumber } from 'class-validator';
-import { TutorSkillLevels } from '../../tutor-skill-levels/tutor-skill-levels.types';
+import { SkillLevels } from '../../skill-levels/skill-levels.types';
 import { Unique } from '../../shared/constraints';
 import { TutorSkill } from '../tutor-skills.entity';
 
@@ -29,11 +29,11 @@ export class BaseTutorSkillDTO {
   })
   userId: string;
 
-  @IsEnum(TutorSkillLevels)
+  @IsEnum(SkillLevels)
   @IsNotEmpty({
     message: 'Answer is required',
   })
-  level: TutorSkillLevels;
+  level: SkillLevels;
 
   @IsNumber()
   @IsNotEmpty({

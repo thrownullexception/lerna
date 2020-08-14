@@ -1,16 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { TutorSkillResponse, TutorSkillLevelResponse } from './responses';
+import { TutorSkillResponse, SkillLevelResponse } from './responses';
 
 const DOMAIN = 'tutor-skills';
 
 export interface IState {
   tutorSkills: TutorSkillResponse[];
-  tutorSkillLevels: TutorSkillLevelResponse[];
+  skillLevels: SkillLevelResponse[]; // Move to its own domain
 }
 
 const initial: IState = {
   tutorSkills: [],
-  tutorSkillLevels: [],
+  skillLevels: [],
 };
 
 export const tutorSkillsSlice = createSlice({
@@ -23,8 +23,8 @@ export const tutorSkillsSlice = createSlice({
     addTutorSkill: (state, { payload }: PayloadAction<TutorSkillResponse>) => {
       state.tutorSkills.push(payload);
     },
-    setTutorSkillLevels: (state, { payload }: PayloadAction<TutorSkillLevelResponse[]>) => {
-      state.tutorSkillLevels = payload;
+    setSkillLevels: (state, { payload }: PayloadAction<SkillLevelResponse[]>) => {
+      state.skillLevels = payload;
     },
     updateTutorSkill: (state, { payload }: PayloadAction<TutorSkillResponse>) => {
       const tutorSkillIndex = state.tutorSkills.findIndex(({ id }) => payload.id === id);

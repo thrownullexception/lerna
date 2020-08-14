@@ -14,7 +14,7 @@ export const AuthLayout: React.SFC<{}> = (): JSX.Element => {
               <div className="my-auto authentication-pages">
                 <div>
                   {' '}
-                  <img src="/static/images/logo-white.png" className=" m-0 mb-4" />
+                  <img src="/static/images/logo-white.png" className=" m-0 mb-4" alt="logo" />
                   <h5 className="mb-4">Responsive Modern Dashboard &amp; Admin Template</h5>
                   <p className="mb-5">
                     Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem

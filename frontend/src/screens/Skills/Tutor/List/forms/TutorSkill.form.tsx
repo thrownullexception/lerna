@@ -6,7 +6,7 @@ import { FormProps } from '../../../../../shared/types';
 import { required } from '../../../../../shared/validations';
 import { SubmitButton, RenderInput } from '../../../../../components/RenderInput';
 import { SkillListResponse } from '../../../../../app/skills/responses';
-import { TutorSkillLevelResponse } from '../../../../../app/tutor-skills/responses';
+import { SkillLevelResponse } from '../../../../../app/tutor-skills/responses';
 import {
   transformSystemValuesToSelectData,
   transformDataToSelectData,
@@ -15,7 +15,7 @@ import pick from 'lodash-es/pick';
 
 interface IProps extends FormProps<ITutorSkillForm> {
   skills: SkillListResponse[];
-  tutorSkillLevels: TutorSkillLevelResponse[];
+  skillLevels: SkillLevelResponse[];
   onDelete?: () => void;
 }
 
@@ -27,7 +27,7 @@ export const TutorSkillForm: React.SFC<IProps> = ({
   skills,
   onDelete,
   initialValues,
-  tutorSkillLevels,
+  skillLevels,
 }) => {
   return (
     <Form
@@ -53,7 +53,7 @@ export const TutorSkillForm: React.SFC<IProps> = ({
             <Field name="level" validate={required} validateFields={[]}>
               {({ input, meta }) => (
                 <RenderInput
-                  selectData={transformSystemValuesToSelectData(tutorSkillLevels)}
+                  selectData={transformSystemValuesToSelectData(skillLevels)}
                   label="Level"
                   meta={meta}
                   input={input}

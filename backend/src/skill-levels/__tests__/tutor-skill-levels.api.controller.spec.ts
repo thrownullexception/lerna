@@ -4,14 +4,14 @@ import * as request from 'supertest';
 import { APP_CONSTANTS } from '../../shared/constants';
 import { TestingModule } from '../../shared/tests';
 
-import { TutorSkillLevelsModule } from '../tutor-skill-levels.module';
+import { SkillLevelsModule } from '../skill-levels.module';
 
 describe('TutorSkillLevels API Controller', () => {
   let app: INestApplication;
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
-      imports: [TestingModule, TutorSkillLevelsModule],
+      imports: [TestingModule, SkillLevelsModule],
     }).compile();
 
     app = moduleRef.createNestApplication();
@@ -20,7 +20,7 @@ describe('TutorSkillLevels API Controller', () => {
 
   it('API /GET tutor-skill-levels', async () => {
     return request(app.getHttpServer())
-      .get(APP_CONSTANTS.API_ROUTES_PREFIX('tutor-skill-levels', '/'))
+      .get(APP_CONSTANTS.API_ROUTES_PREFIX('skill-levels', '/'))
       .set('Accept', 'application/json')
       .expect(200)
       .expect(({ body }) => {

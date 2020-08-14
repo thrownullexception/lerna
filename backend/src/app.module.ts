@@ -16,7 +16,7 @@ import { HealthCheckModule } from './healthcheck/healthcheck.module';
 import { GuestModule } from './guest/guest.module';
 import { SkillHierarchiesModule } from './skill-hierarchies/skill-hierarchies.module';
 import { SkillsModule } from './skills/skills.module';
-import { TutorSkillLevelsModule } from './tutor-skill-levels/tutor-skill-levels.module';
+import { SkillLevelsModule } from './skill-levels/skill-levels.module';
 import { TutorSkillsModule } from './tutor-skills/tutor-skills.module';
 import { SessionsModule } from './sessions/sessions.module';
 import { SessionSkillsModule } from './session-skills/session-skills.module';
@@ -60,7 +60,7 @@ import { UserCompletedSkillRoadMapsModule } from './user-completed-skill-road-ma
     GuestModule,
     SkillHierarchiesModule,
     SkillsModule,
-    TutorSkillLevelsModule,
+    SkillLevelsModule,
     TutorSkillsModule,
     SessionsModule,
     SessionSkillsModule,

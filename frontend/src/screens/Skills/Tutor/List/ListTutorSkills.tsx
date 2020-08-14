@@ -14,7 +14,7 @@ export class ListTutorSkills extends React.Component<IProps> {
   componentDidMount() {
     this.props.getTutorSkills();
     this.props.getSkillsWithNoChildrenList();
-    this.props.getTutorSkillLevels();
+    this.props.getSkillLevels();
   }
 
   getSnapshotBeforeUpdate(prevProp: IProps) {
@@ -34,6 +34,7 @@ export class ListTutorSkills extends React.Component<IProps> {
                   <img
                     src="/assets/images/skills/javascript.png"
                     className="list-tutor-skills__skill-logo"
+                    alt={skillName}
                   />
                 </div>
                 <div className="list-tutor-skills__content">
@@ -98,7 +99,7 @@ export class ListTutorSkills extends React.Component<IProps> {
 
   renderCreateModal = () => {
     const { isModalOpen, currentTutorSkillId } = this.state;
-    const { isMakingFormRequest, skillsWithNoChildren, tutorSkillLevels } = this.props;
+    const { isMakingFormRequest, skillsWithNoChildren, skillLevels } = this.props;
     return (
       <Modal isOpen={isModalOpen && !currentTutorSkillId} toggle={() => this.toggleModal()}>
         <ModalHeader toggle={() => this.toggleModal()}>Add A Skill You Can Teach</ModalHeader>
@@ -107,7 +108,7 @@ export class ListTutorSkills extends React.Component<IProps> {
             onSubmit={this.onCreateTutorSkillSubmit}
             isMakingRequest={isMakingFormRequest}
             skills={skillsWithNoChildren}
-            tutorSkillLevels={tutorSkillLevels}
+            skillLevels={skillLevels}
           />
         </ModalBody>
       </Modal>
@@ -116,7 +117,7 @@ export class ListTutorSkills extends React.Component<IProps> {
 
   renderUpdateModal = () => {
     const { isModalOpen, currentTutorSkillId } = this.state;
-    const { isMakingFormRequest, skillsWithNoChildren, tutorSkillLevels, tutorSkills } = this.props;
+    const { isMakingFormRequest, skillsWithNoChildren, skillLevels, tutorSkills } = this.props;
     const tutorSkill = tutorSkills.find(({ id }) => id === currentTutorSkillId);
     if (!tutorSkill) {
       return null;
@@ -131,7 +132,7 @@ export class ListTutorSkills extends React.Component<IProps> {
             isMakingRequest={isMakingFormRequest}
             skills={skillsWithNoChildren}
             initialValues={tutorSkill}
-            tutorSkillLevels={tutorSkillLevels}
+            skillLevels={skillLevels}
           />
         </ModalBody>
       </Modal>
