@@ -1,17 +1,17 @@
 import * as React from 'react';
 import { Form, Field } from 'react-final-form';
 import { Button } from 'reactstrap';
+import pick from 'lodash-es/pick';
 import { ITutorSkillForm } from '../ListTutorSkills.types';
 import { FormProps } from '../../../../../shared/types';
 import { required } from '../../../../../shared/validations';
 import { SubmitButton, RenderInput } from '../../../../../components/RenderInput';
 import { SkillListResponse } from '../../../../../app/skills/responses';
-import { SkillLevelResponse } from '../../../../../app/tutor-skills/responses';
 import {
   transformSystemValuesToSelectData,
   transformDataToSelectData,
 } from '../../../../../shared/transformers';
-import pick from 'lodash-es/pick';
+import { SkillLevelResponse } from '../../../../../app/skill-levels/responses';
 
 interface IProps extends FormProps<ITutorSkillForm> {
   skills: SkillListResponse[];

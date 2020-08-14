@@ -1,6 +1,7 @@
 import React from 'react';
 import { FormFeedback, FormGroup, Input, Label, Button } from 'reactstrap';
 import { FieldInputProps, FieldMetaState } from 'react-final-form';
+import Select from 'react-select';
 
 export interface ISelectData {
   value: string;
@@ -28,27 +29,35 @@ export const RenderInput: React.SFC<IRenderInput> = ({
   disabled,
 }): JSX.Element => {
   const hasError = meta.invalid && meta.touched;
+
+  let inputData = null;
+
   if (selectData) {
-    type = 'select';
-  }
-  return (
-    <FormGroup>
-      {!hideLabel && <Label for={input.name}>{label}</Label>}
+    inputData = (
+      <Select
+        {...input}
+        value={selectData.find(({ value }) => value === input.value)}
+        onChange={({ value }: any) => input.onChange(value)}
+        options={selectData}
+      />
+    );
+  } else {
+    inputData = (
       <Input
         {...input}
         placeholder={label}
         type={type}
         invalid={!!(meta.touched && meta.error)}
-        id={input.name}
         disabled={disabled}
-      >
-        {selectData &&
-          selectData.map((each: ISelectData) => (
-            <option value={each.value} key={each.value}>
-              {each.label}
-            </option>
-          ))}
-      </Input>
+        style={{ borderRadius: 5, borderColor: 'hsl(0,0%,80%)' }}
+      />
+    );
+  }
+
+  return (
+    <FormGroup>
+      {!hideLabel && <Label for={input.name}>{label}</Label>}
+      {inputData}
       {hasError && <FormFeedback>{meta.error}</FormFeedback>}
     </FormGroup>
   );

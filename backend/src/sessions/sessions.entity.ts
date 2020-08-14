@@ -3,7 +3,7 @@ import { User } from '../users/users.entity';
 import { SessionStatus } from '../session-statuses/session-statuses.entity';
 import { SessionStatusTypes } from '../session-statuses/session-statuses.types';
 import { SessionSkill } from '../session-skills/session-skills.entity';
-import { SessionQuestion } from 'src/session-questions/session-questions.entity';
+import { SessionQuestion } from '../session-questions/session-questions.entity';
 
 @Entity('sessions')
 export class Session {

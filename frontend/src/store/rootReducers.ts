@@ -9,6 +9,7 @@ import { authSlice } from '../app/auth/auth.ducks';
 import { skillsSlice } from '../app/skills/skills.ducks';
 import { studentSkillsSlice } from '../app/student-skills/student-skills.ducks';
 import { tutorSkillsSlice } from '../app/tutor-skills/tutor-skills.ducks';
+import { skillLevelsSlice } from '../app/skill-levels/skill-levels.ducks';
 
 export const rootReducers = combineReducers({
   router: connectRouter(history),
@@ -19,6 +20,7 @@ export const rootReducers = combineReducers({
   skills: skillsSlice.reducer,
   studentSkills: studentSkillsSlice.reducer,
   tutorSkills: tutorSkillsSlice.reducer,
+  skillLevels: skillLevelsSlice.reducer,
 });
 
 export type IStore = ReturnType<typeof rootReducers>;

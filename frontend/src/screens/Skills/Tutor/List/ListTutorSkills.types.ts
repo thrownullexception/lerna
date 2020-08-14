@@ -1,5 +1,6 @@
-import { TutorSkillResponse, SkillLevelResponse } from '../../../../app/tutor-skills/responses';
+import { TutorSkillResponse } from '../../../../app/tutor-skills/responses';
 import { SkillWithNoChildrenResponse } from '../../../../app/skills/responses';
+import { SkillLevelResponse } from '../../../../app/skill-levels/responses';
 
 export interface IProps {
   getTutorSkills: () => void;
