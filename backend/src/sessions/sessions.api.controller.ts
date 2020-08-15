@@ -20,7 +20,7 @@ import {
 } from './transformers';
 import { AuthenticatedUser } from '../shared/decorators';
 import { SessionsService } from './sessions.service';
-import { CreateSessionDTO, UpdateSessionMetadataDTO, UpdateSessionDTO } from './dtos';
+import { CreateSessionDTO, UpdateSessionMetadataDTO } from './dtos';
 import { AccountModeType } from '../account-modes/account-modes.types';
 import { CursorQueryParametersPipe } from '../shared/pipes';
 import { ICursorParametersDTO } from '../shared/types';
@@ -73,15 +73,6 @@ export class SessionsApiController {
     @Body() createSessionDTO: CreateSessionDTO,
   ): Promise<void> {
     await this.sessionsService.createSession(createSessionDTO, userId);
-  }
-
-  @Patch(':sessionId/base')
-  @HttpCode(HttpStatus.NO_CONTENT)
-  async updateBase(
-    @Param('sessionId', new ParseUUIDPipe()) tutorSkillId: string,
-    @Body() updateSessionDTO: UpdateSessionDTO,
-  ): Promise<void> {
-    await this.sessionsService.updateSession(tutorSkillId, updateSessionDTO);
   }
 
   @Patch(':sessionId/meta')

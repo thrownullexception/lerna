@@ -190,15 +190,3 @@ export class CreateSession extends React.PureComponent<IProps> {
     // console.log(createSessionForm);
   };
 }
-
-interface IFieldError {
-  name: string;
-}
-
-const Error = ({ name }: IFieldError) => (
-  <Field
-    name={name}
-    subscribe={{ touched: true, error: true }}
-    render={({ meta: { touched, error } }) => (touched && error ? <span>{error}</span> : null)}
-  />
-);

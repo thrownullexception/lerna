@@ -45,7 +45,7 @@ export class SessionsRepository extends Repository<Session> {
   }
 
   async createSession(session: Partial<Session>): Promise<void> {
-    await this.insert(session);
+    await this.save(session);
   }
 
   async updateSession(sessionId: string, session: Partial<Session>): Promise<void> {

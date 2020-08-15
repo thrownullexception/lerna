@@ -1,1 +1,1 @@
-export { CreateSessionSkillDTO } from './create-session-skills.dto';
+export { CreateSessionSkillDTO } from './create-session-skill.dto';

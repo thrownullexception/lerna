@@ -30,6 +30,7 @@ export class CreateSkillHierarchiesTable1593354544636 extends BaseMigration
       referencedColumnHere: 'child_id',
       referenceAction: ReferenceAction.Cascade,
     });
+    await this.uniqueIndex(queryRunner, ['parent_id', 'child_id']);
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {

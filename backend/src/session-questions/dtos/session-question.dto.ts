@@ -1,6 +1,7 @@
-import { IsNotEmpty, IsUUID, IsOptional, Length } from 'class-validator';
+import { IsNotEmpty, IsUUID } from 'class-validator';
+import { BaseSessionQuestionDTO } from './base-session-question.dto';
 
-export class SessionQuestionDTO {
+export class SessionQuestionDTO extends BaseSessionQuestionDTO {
   @IsUUID(4)
   id: string;
 
@@ -9,34 +10,4 @@ export class SessionQuestionDTO {
     message: 'SessionID is required',
   })
   sessionId: string;
-
-  @Length(10, 140)
-  @IsNotEmpty({
-    message: 'Question is required',
-  })
-  question: string;
-
-  @Length(1, 50)
-  @IsNotEmpty({
-    message: 'Option A is required',
-  })
-  optionA: string;
-
-  @Length(1, 50)
-  @IsNotEmpty({
-    message: 'Option B is required',
-  })
-  optionB: string;
-
-  @Length(1, 50)
-  @IsOptional()
-  optionC: string;
-
-  @Length(1, 50)
-  @IsOptional()
-  optionD: string;
-
-  @Length(1, 50)
-  @IsOptional()
-  optionE: string;
 }

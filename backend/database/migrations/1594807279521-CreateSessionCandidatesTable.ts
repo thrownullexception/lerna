@@ -56,6 +56,7 @@ export class CreateSessionCandidatesTable1594807279521 extends BaseMigration
       referencedColumnThere: 'system_name',
       referenceAction: ReferenceAction.Restrict,
     });
+    await this.uniqueIndex(queryRunner, ['session_id', 'candidate_id']);
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {

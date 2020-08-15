@@ -45,6 +45,7 @@ export class CreateTutorSkillsTable1594754633405 extends BaseMigration
       referencedColumnThere: 'system_name',
       referenceAction: ReferenceAction.Restrict,
     });
+    await this.uniqueIndex(queryRunner, ['skill_id', 'user_id']);
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {

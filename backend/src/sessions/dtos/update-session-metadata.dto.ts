@@ -1,21 +1,4 @@
 import { IsNumber, IsNotEmpty } from 'class-validator';
+import { BaseSessionDTO } from './base-session.dto';
 
-export class UpdateSessionMetadataDTO {
-  @IsNumber()
-  @IsNotEmpty({
-    message: 'Title is required',
-  })
-  passPercentage: number;
-
-  @IsNumber()
-  @IsNotEmpty({
-    message: 'Title is required',
-  })
-  questionsDuration: number;
-
-  @IsNumber()
-  @IsNotEmpty({
-    message: 'Title is required',
-  })
-  noResponseDuration: number;
-}
+export class UpdateSessionMetadataDTO extends BaseSessionDTO {}
