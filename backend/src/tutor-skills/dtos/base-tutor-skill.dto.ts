@@ -31,9 +31,9 @@ export class BaseTutorSkillDTO {
 
   @IsEnum(SkillLevels)
   @IsNotEmpty({
-    message: 'Answer is required',
+    message: 'Level is required',
   })
-  level: SkillLevels;
+  levelId: SkillLevels;
 
   @IsNumber()
   @IsNotEmpty({

@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsOptional } from 'class-validator';
+import { IsNotEmpty } from 'class-validator';
 import { Unique } from '../../shared/constraints';
 import { Skill } from '../skills.entity';
 

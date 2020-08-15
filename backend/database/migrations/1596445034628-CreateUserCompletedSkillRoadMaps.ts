@@ -26,6 +26,7 @@ export class CreateUserCompletedSkillRoadMaps1596445034628 extends BaseMigration
       referencedColumnHere: 'skill_road_map_id',
       referenceAction: ReferenceAction.Cascade,
     });
+    await this.uniqueIndex(queryRunner, ['skill_road_map_id', 'user_id']);
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {

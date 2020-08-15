@@ -26,6 +26,7 @@ export class CreateSkillRelationsTable1593331031697 extends BaseMigration
       referencedColumnHere: 'skill_b_id',
       referenceAction: ReferenceAction.Cascade,
     });
+    await this.uniqueIndex(queryRunner, ['skill_a_id', 'skill_b_id']);
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {

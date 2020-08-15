@@ -15,6 +15,10 @@ export class CreateSessionSkillsTable1594805610510 extends BaseMigration
         name: 'skill_id',
         type: 'uuid',
       },
+      {
+        name: 'level',
+        type: 'varchar',
+      },
     ]);
     await this.reference(queryRunner, {
       table: 'sessions',
@@ -22,10 +26,20 @@ export class CreateSessionSkillsTable1594805610510 extends BaseMigration
       referenceAction: ReferenceAction.Cascade,
     });
     await this.reference(queryRunner, {
+      table: 'skill_levels',
+      referencedColumnHere: 'level',
+      referencedColumnThere: 'system_name',
+      referenceAction: ReferenceAction.Restrict,
+    });
+    await this.reference(queryRunner, {
       table: 'skills',
       referencedColumnHere: 'skill_id',
       referenceAction: ReferenceAction.Cascade,
     });
+    await this.uniqueIndex(
+      queryRunner,
+      ['skill_id', 'session_id'], // :eyes
+    );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {

@@ -26,6 +26,7 @@ export class CreateSkillsTable1593292900403 extends BaseMigration implements Mig
       referencedColumnHere: 'last_touched_by_id',
       referenceAction: ReferenceAction.SetNull,
     });
+    await this.uniqueIndex(queryRunner, ['name']);
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {

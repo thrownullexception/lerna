@@ -1,9 +1,11 @@
-import { IsNotEmpty, IsUUID } from 'class-validator';
+import { IsNotEmpty, IsUUID, IsOptional } from 'class-validator';
 import { SessionSkill } from '../session-skills.entity';
 import { Unique } from '../../shared/constraints';
+import { BaseCreateSessionSkillDTO } from './base-create-session-skill.dto';
 
-export class CreateSessionSkillDTO {
+export class CreateSessionSkillDTO extends BaseCreateSessionSkillDTO {
   @IsUUID(4)
+  @IsOptional()
   id: string;
 
   @Unique<CreateSessionSkillDTO>(
@@ -15,10 +17,6 @@ export class CreateSessionSkillDTO {
       message: 'Skill was already added',
     },
   )
-  @IsUUID(4)
-  @IsNotEmpty({
-    message: 'SkillID is required',
-  })
   skillId: string;
 
   @IsUUID(4)

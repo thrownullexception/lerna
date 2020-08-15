@@ -258,7 +258,7 @@ export class ConfigService implements CacheOptionsFactory {
       password: this.getDBPassword(),
       database: this.getDBName(),
       entities: [ENTITIES_DIR + '/**/**.entity{.ts,.js}'],
-      logging: false, // !['production', 'test', 'testing'].includes(this.getEnvironment()),
+      logging: true,
       namingStrategy: new SnakeNamingStrategy(),
       retryAttempts: 5,
       cache: this.getEnvironment() === EnvironmentTypes.Production ? cache : false,

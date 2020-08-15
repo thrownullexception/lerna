@@ -55,14 +55,20 @@ export class Session {
   @OneToMany(
     () => SessionSkill,
     ({ session }) => session,
+    {
+      cascade: ['insert'],
+    },
   )
-  skills: SessionSkill[];
+  skills: Array<Partial<SessionSkill>>; // :eyes
 
   @OneToMany(
     () => SessionQuestion,
     ({ session }) => session,
+    {
+      cascade: ['insert'],
+    },
   )
-  questions: SessionQuestion[];
+  questions: Array<Partial<SessionQuestion>>;
 
   @ManyToOne(
     () => SessionStatus,
@@ -72,7 +78,7 @@ export class Session {
     name: 'status_system_name',
     referencedColumnName: 'systemName',
   })
-  accountMode: SessionStatus;
+  status: SessionStatus;
 
   @Column()
   createdAt: string;

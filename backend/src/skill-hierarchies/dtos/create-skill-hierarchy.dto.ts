@@ -1,7 +1,7 @@
 import { BaseSkillHierarchyDTO } from './base-skill-hierarchy.dto';
 import { IsNotEmpty, IsIn, IsUUID } from 'class-validator';
-// import { SkillHierarchy } from '../skill-hierarchies.entity';
-// import { Unique } from '../../shared/constraints';
+import { SkillHierarchy } from '../skill-hierarchies.entity';
+import { Unique } from '../../shared/constraints';
 
 export class CreateSkillHierarchyDTO extends BaseSkillHierarchyDTO {
   @IsIn(['child', 'parent'])
@@ -13,9 +13,9 @@ export class CreateSkillHierarchyDTO extends BaseSkillHierarchyDTO {
   // @Unique<CreateSkillHierarchyDTO>({
   //   repositoryModel: SkillHierarchy,
   //   otherColumn: 'skillBId',
-  //   biDirectional: true
+  //   // biDirectional: true TODO
   // }, {
-  //   message: 'Relation Ship exists',
+  //   message: 'Relationship already exists',
   // })
   @IsUUID(4)
   @IsNotEmpty({

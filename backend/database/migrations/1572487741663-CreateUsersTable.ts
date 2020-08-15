@@ -51,8 +51,8 @@ export class CreateUsersTable1572487741663 extends BaseMigration implements Migr
       referencedColumnThere: 'system_name',
       referenceAction: ReferenceAction.Restrict,
     });
-    await this.index(queryRunner, 'email');
-    await this.index(queryRunner, 'username');
+    await this.uniqueIndex(queryRunner, ['email']);
+    await this.uniqueIndex(queryRunner, ['username']);
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {

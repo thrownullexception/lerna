@@ -26,6 +26,7 @@ export class CreateUserFavouriteSkills1596445006780 extends BaseMigration
       referencedColumnHere: 'skill_id',
       referenceAction: ReferenceAction.Cascade,
     });
+    await this.uniqueIndex(queryRunner, ['skill_id', 'user_id']);
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {

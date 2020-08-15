@@ -45,18 +45,19 @@ export class BaseMigration {
     await queryRunner.createIndex(
       this.table,
       new TableIndex({
-        name: `INDEX_${this.table}_${column}`.toUpperCase(),
+        name: `INDEX_${this.table}-${column}`.toUpperCase(),
         columnNames: [column],
       }),
     );
   }
 
-  protected async uniqueIndex(queryRunner: QueryRunner, column: string): Promise<void> {
+  protected async uniqueIndex(queryRunner: QueryRunner, columns: string[]): Promise<void> {
+    const columnsLabel = columns.join('-');
     await queryRunner.createUniqueConstraint(
       this.table,
       new TableUnique({
-        name: `UNIQUE_${this.table}_${column}`.toUpperCase(),
-        columnNames: [column],
+        name: `UNIQUE_${this.table}_${columnsLabel}`.toUpperCase(),
+        columnNames: columns,
       }),
     );
   }
@@ -130,7 +131,7 @@ export class BaseMigration {
         type: 'varchar',
       },
     ]);
-    this.uniqueIndex(queryRunner, 'system_name');
+    this.uniqueIndex(queryRunner, ['system_name']);
     this.table = currentTableName;
   }
 }
