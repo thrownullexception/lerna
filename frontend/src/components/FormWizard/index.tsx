@@ -42,9 +42,8 @@ export class FormWizard extends React.PureComponent<IProps, IState> {
     const isLastPage = page === React.Children.count(children) - 1;
     if (isLastPage) {
       return onSubmit(values);
-    } else {
-      this.next(values);
     }
+    this.next(values);
   };
 
   render() {
@@ -59,13 +58,13 @@ export class FormWizard extends React.PureComponent<IProps, IState> {
 
     return (
       <Form initialValues={values} onSubmit={this.handleSubmit}>
-        {({ handleSubmit, submitting, values: values$1 }) => (
+        {({ handleSubmit, submitting }) => (
           <form onSubmit={handleSubmit}>
             <div role="application" className="wizard clearfix">
               <div className="steps clearfix">
                 <ul role="tablist">
                   {wizardTitles.map((wizardTitle, index) => {
-                    const kiss = index;
+                    const index$1 = index;
                     return (
                       <li
                         role="tab"
@@ -78,8 +77,8 @@ export class FormWizard extends React.PureComponent<IProps, IState> {
                           current: index === page,
                         })}
                       >
-                        <button className="link-like">
-                          <span className="number">{kiss + 1}</span>
+                        <button type="button" className="link-like">
+                          <span className="number">{index$1 + 1}</span>
                           <span className="title">{wizardTitle}</span>
                         </button>
                       </li>

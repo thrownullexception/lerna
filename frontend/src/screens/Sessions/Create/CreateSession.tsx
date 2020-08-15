@@ -68,6 +68,19 @@ export class CreateSession extends React.PureComponent<IProps> {
                     </div>
                   </section>
                 </FormWizard.Page>
+                <FormWizard.Page title="Skills">
+                  <div>
+                    <label>Employed?</label>
+                    <Field name="employed" component="input" type="checkbox" />
+                  </div>
+                  <div>
+                    <label>Toppings</label>
+                    <Field name="toppings" component="select" type="select" multiple={true}>
+                      <option value="ham">Ham</option>
+                    </Field>
+                    <Error name="toppings" />
+                  </div>
+                </FormWizard.Page>
                 <FormWizard.Page title="Vetting">
                   <section role="tabpanel" className="body">
                     <h3 tabIndex={-1} className="title">
@@ -104,23 +117,6 @@ export class CreateSession extends React.PureComponent<IProps> {
                       )}
                     </Field>
                   </section>
-                </FormWizard.Page>
-                <FormWizard.Page title="Skills">
-                  <div>
-                    <label>Employed?</label>
-                    <Field name="employed" component="input" type="checkbox" />
-                  </div>
-                  <div>
-                    <label>Toppings</label>
-                    <Field name="toppings" component="select" type="select" multiple={true}>
-                      <option value="ham">🐷 Ham</option>
-                      <option value="mushrooms">🍄 Mushrooms</option>
-                      <option value="cheese">🧀 Cheese</option>
-                      <option value="chicken">🐓 Chicken</option>
-                      <option value="pineapple">🍍 Pinapple</option>
-                    </Field>
-                    <Error name="toppings" />
-                  </div>
                 </FormWizard.Page>
               </FormWizard>
             </div>
