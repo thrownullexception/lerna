@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TutorSkillsRepository } from './tutor-skills.repository';
-import { TutorSkillLevelsModule } from '../tutor-skill-levels/tutor-skill-levels.module';
+import { SkillLevelsModule } from '../skill-levels/skill-levels.module';
 import { TutorSkillsApiController } from './tutor-skills.api.controller';
 import { TutorSkillsService } from './tutor-skills.service';
 
 @Module({
-  imports: [TutorSkillLevelsModule, TypeOrmModule.forFeature([TutorSkillsRepository])],
+  imports: [SkillLevelsModule, TypeOrmModule.forFeature([TutorSkillsRepository])],
   controllers: [TutorSkillsApiController],
   providers: [TutorSkillsService],
 })

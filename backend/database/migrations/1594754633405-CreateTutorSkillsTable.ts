@@ -6,7 +6,7 @@ export class CreateTutorSkillsTable1594754633405 extends BaseMigration
   protected table = 'tutor_skills';
 
   public async up(queryRunner: QueryRunner): Promise<void> {
-    await this.createSystemTable(queryRunner, 'tutor_skills_levels');
+    await this.createSystemTable(queryRunner, 'skill_levels');
     await this.createTable(queryRunner, [
       {
         name: 'user_id',
@@ -40,7 +40,7 @@ export class CreateTutorSkillsTable1594754633405 extends BaseMigration
       referenceAction: ReferenceAction.Cascade,
     });
     await this.reference(queryRunner, {
-      table: 'tutor_skills_levels',
+      table: 'skill_levels',
       referencedColumnHere: 'level',
       referencedColumnThere: 'system_name',
       referenceAction: ReferenceAction.Restrict,
@@ -49,6 +49,6 @@ export class CreateTutorSkillsTable1594754633405 extends BaseMigration
 
   public async down(queryRunner: QueryRunner): Promise<void> {
     await this.drop(queryRunner, 'tutor_skills');
-    await this.drop(queryRunner, 'tutor_skills_levels');
+    await this.drop(queryRunner, 'skill_levels');
   }
 }

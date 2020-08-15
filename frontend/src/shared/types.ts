@@ -7,7 +7,7 @@ export type IThunkDispatch = ThunkDispatch<IStore, void, Action>;
 
 export interface FormProps<T> {
   onSubmit: (arg0: T) => void;
-  initialValues?: T;
+  initialValues?: Partial<T>;
   isMakingRequest: boolean;
 }
 

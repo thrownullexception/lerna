@@ -1,7 +1,7 @@
 import get from 'lodash-es/get';
 import { IStore } from '../../../store/rootReducers';
-import { TutorSkillsSelectors } from '../tutor-skills.selectors';
 import { SkillsSelectors } from '../../skills/skills.selectors';
+import { SkillsLevelsSelectors } from '../../skill-levels/skill-levels.selectors';
 
 export class TutorSkillResponse {
   id: string;
@@ -22,7 +22,7 @@ export class TutorSkillResponse {
     this.skillName = get(jsonObject, 'skillName');
 
     if (state) {
-      const levels = TutorSkillsSelectors.selectTutorSkillLevels(state);
+      const levels = SkillsLevelsSelectors.selectSkillLevels(state);
       this.levelName = '' + levels.find(({ systemName }) => systemName === this.level)?.displayName;
 
       const skills = SkillsSelectors.selectSkillsWithNoChildrenList(state);

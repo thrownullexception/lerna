@@ -35,7 +35,7 @@ export class CreateSessionCandidatesTable1594807279521 extends BaseMigration
         isNullable: true,
       },
       {
-        name: 'quized_at',
+        name: 'questioned_at',
         type: 'timestamp',
         isNullable: true,
       },

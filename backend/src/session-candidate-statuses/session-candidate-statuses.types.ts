@@ -4,14 +4,14 @@ export enum SessionCandidateStatusTypes {
   NoResponse = 'no_response',
   Rejected = 'rejected',
   Interested = 'interested',
-  PassedQuiz = 'passed_quiz',
-  FailedQuiz = 'failed_quiz',
+  PassedQuestions = 'passed_questions',
+  FailedQuestions = 'failed_questions',
   Selected = 'selected',
   AlreadyFilled = 'already_filled',
 }
 
 export const StatusesToReduceToAlreadyFilled = [
-  SessionCandidateStatusTypes.PassedQuiz,
+  SessionCandidateStatusTypes.PassedQuestions,
   SessionCandidateStatusTypes.Sent,
   SessionCandidateStatusTypes.Opened,
   SessionCandidateStatusTypes.Interested,
@@ -28,9 +28,9 @@ export const StatusesToReduceToNoResponse = [
 // Accpeted or Reject
 // Once they accept then you ask them to take the questions
 // Telling them the question duration, pass percenage and number of questions
-// If they start the quiz
+// If they start the questions
 // Grade them
 // If they fail/pass nofity srudent
 // if fail/rejected/no_response then allow the student to add more candidate
-// if pass quiz
+// if pass questions
 // unlock their messaging && and the student should book a meeting

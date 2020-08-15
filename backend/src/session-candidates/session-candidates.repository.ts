@@ -12,8 +12,8 @@ import { PagingQuery, PagingResult, buildPaginator } from 'typeorm-cursor-pagina
 @Injectable()
 @EntityRepository(SessionCandidate)
 export class SessionCandidatesRepository extends Repository<SessionCandidate> {
-  async createSessionCandidate(sessionQuizResponse: Partial<SessionCandidate>): Promise<void> {
-    await this.insert(sessionQuizResponse);
+  async createSessionCandidate(sessionQuestionResponse: Partial<SessionCandidate>): Promise<void> {
+    await this.insert(sessionQuestionResponse);
   }
 
   async listSessionCandidates(

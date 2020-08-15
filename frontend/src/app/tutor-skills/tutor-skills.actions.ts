@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux';
 import { ThunkInterface } from '../../shared/types';
 import { RequestService, ToastService, ProgressService } from '../../services';
-import { TutorSkillResponse, TutorSkillLevelResponse } from './responses';
+import { TutorSkillResponse } from './responses';
 import { tutorSkillsSlice } from './tutor-skills.ducks';
 import { requestStatusSlice } from '../request-status/request-status.ducks';
 import { ITutorSkillForm } from '../../screens/Skills/Tutor/List/ListTutorSkills.types';
@@ -32,8 +32,9 @@ export class TutorSkillsActions {
     return async (dispatch: Dispatch) => {
       ProgressService.start();
       try {
-        await RequestService.delete(`${BASE_REQUEST_PATH}/${tutorSkillId}`);
         dispatch(tutorSkillsSlice.actions.deleteTutorSkill(tutorSkillId));
+        await RequestService.delete(`${BASE_REQUEST_PATH}/${tutorSkillId}`);
+        ToastService.success('Skill Deleted Successfully');
       } catch (e) {
         ToastService.error(e);
       }
@@ -51,6 +52,7 @@ export class TutorSkillsActions {
             new TutorSkillResponse(tutorSkillForm, getState()),
           ),
         );
+        ToastService.success('Skill Added Successfully');
       } catch (e) {
         ToastService.error(e);
       }
@@ -58,18 +60,21 @@ export class TutorSkillsActions {
     };
   }
 
-  static getTutorSkillLevels(): ThunkInterface<void> {
-    return async (dispatch: Dispatch) => {
+  static updateTutorSkill(tutorSkillForm: ITutorSkillForm): ThunkInterface<void> {
+    return async (dispatch: Dispatch, getState: () => IStore) => {
+      dispatch(requestStatusSlice.actions.formRequestStarted());
       try {
-        const { data } = await RequestService.get('tutor-skill-levels');
+        await RequestService.patch(`${BASE_REQUEST_PATH}/${tutorSkillForm.id}`, tutorSkillForm);
         dispatch(
-          tutorSkillsSlice.actions.setTutorSkillLevels(
-            data.map((datum: object) => new TutorSkillLevelResponse(datum)),
+          tutorSkillsSlice.actions.updateTutorSkill(
+            new TutorSkillResponse(tutorSkillForm, getState()),
           ),
         );
+        ToastService.success('Skill Edited Successfully');
       } catch (e) {
         ToastService.error(e);
       }
+      dispatch(requestStatusSlice.actions.formRequestEnded());
     };
   }
 }

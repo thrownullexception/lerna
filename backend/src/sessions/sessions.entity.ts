@@ -3,6 +3,7 @@ import { User } from '../users/users.entity';
 import { SessionStatus } from '../session-statuses/session-statuses.entity';
 import { SessionStatusTypes } from '../session-statuses/session-statuses.types';
 import { SessionSkill } from '../session-skills/session-skills.entity';
+import { SessionQuestion } from '../session-questions/session-questions.entity';
 
 @Entity('sessions')
 export class Session {
@@ -28,7 +29,7 @@ export class Session {
   budgetTo: number;
 
   @Column()
-  quizDuration: number;
+  questionsDuration: number;
 
   @Column()
   passPercentage: number;
@@ -56,6 +57,12 @@ export class Session {
     ({ session }) => session,
   )
   skills: SessionSkill[];
+
+  @OneToMany(
+    () => SessionQuestion,
+    ({ session }) => session,
+  )
+  questions: SessionQuestion[];
 
   @ManyToOne(
     () => SessionStatus,

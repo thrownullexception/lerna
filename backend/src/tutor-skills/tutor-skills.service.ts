@@ -1,31 +1,31 @@
 import { Injectable } from '@nestjs/common';
 import { TutorSkillsRepository } from './tutor-skills.repository';
 import { TutorSkill } from './tutor-skills.entity';
-import { TutorSkillLevel } from '../tutor-skill-levels/tutor-skill-levels.entity';
-import { TutorSkillLevelsService } from '../tutor-skill-levels/tutor-skill-levels.service';
+import { SkillLevel } from '../skill-levels/skill-levels.entity';
+import { SkillLevelsService } from '../skill-levels/skill-levels.service';
 import { CreateTutorSkillDTO, UpdateTutorSkillDTO } from './dtos';
 
 @Injectable()
 export class TutorSkillsService {
   constructor(
     private readonly tutorSkillsRepository: TutorSkillsRepository,
-    private readonly tutorSkillLevelsService: TutorSkillLevelsService,
+    private readonly skillLevelsService: SkillLevelsService,
   ) {}
 
   async getUserTutorSkills(
     userId: string,
-  ): Promise<{ tutorSkills: TutorSkill[]; tutorSkillLevels: TutorSkillLevel[] }> {
+  ): Promise<{ tutorSkills: TutorSkill[]; skillLevels: SkillLevel[] }> {
     const tutorSkills = await this.tutorSkillsRepository.listTutorSkills({
       where: { userId },
       relations: ['skill'],
     });
-    const tutorSkillLevels = await this.tutorSkillLevelsService.getTutorSkillLevels();
+    const skillLevels = await this.skillLevelsService.getSkillLevels();
 
-    return { tutorSkills, tutorSkillLevels };
+    return { tutorSkills, skillLevels };
   }
 
   async createTutorSkill(createTutorSkillDTO: CreateTutorSkillDTO): Promise<void> {
-    return await this.tutorSkillsRepository.createTutorSkill({ ...createTutorSkillDTO });
+    return await this.tutorSkillsRepository.createTutorSkill(createTutorSkillDTO);
   }
 
   async updateTutorSkill(skillId: string, updateTutorSkillDTO: UpdateTutorSkillDTO): Promise<void> {

@@ -8,7 +8,7 @@ import { APP_CONSTANTS } from '../../shared/constants';
 import { getRepository } from 'typeorm';
 import { TutorSkillsModule } from '../tutor-skills.module';
 import { TutorSkill } from '../tutor-skills.entity';
-import { TutorSkillLevels } from '../../tutor-skill-levels/tutor-skill-levels.types';
+import { SkillLevels } from '../../skill-levels/skill-levels.types';
 
 describe('TutorSkills API Controller', () => {
   let app: INestApplication;
@@ -36,7 +36,7 @@ describe('TutorSkills API Controller', () => {
         id: TUTOR_SKILL_ID,
         userId: FIXTURE_IDS.USERS[0],
         skillId: FIXTURE_IDS.SKILLS[0],
-        level: TutorSkillLevels.Level1,
+        level: SkillLevels.Level1,
         rate: 50,
         years: 4,
       })
@@ -64,7 +64,7 @@ describe('TutorSkills API Controller', () => {
       .send({
         userId: FIXTURE_IDS.USERS[0],
         skillId: FIXTURE_IDS.SKILLS[1],
-        level: TutorSkillLevels.Level2,
+        level: SkillLevels.Level2,
         rate: 15,
         years: 34,
       })

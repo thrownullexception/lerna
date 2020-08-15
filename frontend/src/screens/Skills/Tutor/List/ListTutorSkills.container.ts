@@ -7,13 +7,15 @@ import { TutorSkillsActions } from '../../../../app/tutor-skills/tutor-skills.ac
 import { TutorSkillsSelectors } from '../../../../app/tutor-skills/tutor-skills.selectors';
 import { RequestStatusSelectors } from '../../../../app/request-status/request-status.selectors';
 import { SkillsActions } from '../../../../app/skills/skills.actions';
+import { SkillLevelsActions } from '../../../../app/skill-levels/skill-levels.actions';
 import { SkillsSelectors } from '../../../../app/skills/skills.selectors';
+import { SkillsLevelsSelectors } from '../../../../app/skill-levels/skill-levels.selectors';
 
 const mapStateToProps = (state: IStore): StateProps => {
   return {
     tutorSkills: TutorSkillsSelectors.selectTutorSkills(state),
     isMakingFormRequest: RequestStatusSelectors.selectIsMakingFormRequest(state),
-    tutorSkillLevels: TutorSkillsSelectors.selectTutorSkillLevels(state),
+    skillLevels: SkillsLevelsSelectors.selectSkillLevels(state),
     skillsWithNoChildren: SkillsSelectors.selectSkillsWithNoChildrenList(state),
   };
 };
@@ -21,10 +23,14 @@ const mapStateToProps = (state: IStore): StateProps => {
 const mapDispatchToProps = (dispatch: IThunkDispatch): DispatchProps => {
   return {
     getTutorSkills: () => dispatch(TutorSkillsActions.getTutorSkills()),
+    deleteTutorSkill: (tutorSkillId: string) =>
+      dispatch(TutorSkillsActions.deleteTutorSkill(tutorSkillId)),
     getSkillsWithNoChildrenList: () => dispatch(SkillsActions.getSkillsWithNoChildrenList()),
-    getTutorSkillLevels: () => dispatch(TutorSkillsActions.getTutorSkillLevels()),
+    getSkillLevels: () => dispatch(SkillLevelsActions.getSkillLevels()),
     createTutorSkill: (tutorSkill: ITutorSkillForm) =>
       dispatch(TutorSkillsActions.createTutorSkill(tutorSkill)),
+    updateTutorSkill: (tutorSkill: ITutorSkillForm) =>
+      dispatch(TutorSkillsActions.updateTutorSkill(tutorSkill)),
   };
 };
 

@@ -28,7 +28,7 @@ export class CreateSessionsTable1594805323121 extends BaseMigration implements M
         type: 'int',
       },
       {
-        name: 'quiz_duration',
+        name: 'questions_duration',
         type: 'int', // mins
         isNullable: true,
       },

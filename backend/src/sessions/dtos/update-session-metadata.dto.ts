@@ -11,7 +11,7 @@ export class UpdateSessionMetadataDTO {
   @IsNotEmpty({
     message: 'Title is required',
   })
-  quizDuration: number;
+  questionsDuration: number;
 
   @IsNumber()
   @IsNotEmpty({

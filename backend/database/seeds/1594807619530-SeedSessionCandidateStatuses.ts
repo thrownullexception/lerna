@@ -26,12 +26,12 @@ export class SeedSessionCandidateStatuses1594807619530 extends BaseSeed
       displayName: 'Accepted Invitation',
     },
     {
-      systemName: 'passed_quiz',
-      displayName: 'Passed Quiz',
+      systemName: 'passed_questions',
+      displayName: 'Passed Questions',
     },
     {
-      systemName: 'failed_quiz',
-      displayName: 'Failed Quiz',
+      systemName: 'failed_questions',
+      displayName: 'Failed Questions',
     },
     {
       systemName: 'selected',

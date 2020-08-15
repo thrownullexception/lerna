@@ -1,6 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { Skill } from '../skills/skills.entity';
 import { Session } from '../sessions/sessions.entity';
+import { SkillLevels } from '../skill-levels/skill-levels.types';
 
 @Entity('session_skills')
 export class SessionSkill {
@@ -13,7 +14,8 @@ export class SessionSkill {
   @Column()
   skillId: string;
 
-  // TODO level
+  @Column()
+  level: SkillLevels;
 
   @ManyToOne(
     () => Session,
