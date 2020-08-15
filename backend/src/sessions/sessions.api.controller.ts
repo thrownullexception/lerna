@@ -28,7 +28,7 @@ import { PagingResult } from 'typeorm-cursor-pagination';
 import { SessionCandidatesService } from '../session-candidates/session-candidates.service';
 
 @Controller(APP_CONSTANTS.API_ROUTES_PREFIX('sessions')) // TODO test
-// @UseGuards(AuthGuard('jwt'))
+@UseGuards(AuthGuard('jwt'))
 export class SessionsApiController {
   constructor(
     private readonly sessionsService: SessionsService,
