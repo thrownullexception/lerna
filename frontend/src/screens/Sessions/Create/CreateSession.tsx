@@ -5,10 +5,21 @@ import { FormWizard } from '../../../components/FormWizard';
 import { Field } from 'react-final-form';
 import { required } from '../../../shared/validations';
 import { RenderInput } from '../../../components/RenderInput';
+import { FieldArray } from 'react-final-form-arrays';
+import {
+  transformDataToSelectData,
+  transformSystemValuesToSelectData,
+} from '../../../shared/transformers';
+import './styles.scss';
 
 export class CreateSession extends React.PureComponent<IProps> {
+  componentDidMount() {
+    this.props.getSkillsWithNoChildrenList();
+    this.props.getSkillLevels();
+  }
+
   render() {
-    const { isMakingRequest } = this.props;
+    const { isMakingFormRequest, skillsWithNoChildren, skillLevels } = this.props;
     return (
       <div className="row">
         <div className="col-md-12">
@@ -19,9 +30,69 @@ export class CreateSession extends React.PureComponent<IProps> {
                 Please be specific as must as possible to get best search results
               </p>
               <FormWizard
-                initialValues={{ employed: true, stooge: 'larry' }}
+                initialValues={{
+                  employed: true,
+                  stooge: 'larry',
+                  skills: [{ skillId: '', levelId: '' }],
+                }}
                 onSubmit={this.createSession}
               >
+                <FormWizard.Page title="Skills">
+                  <FieldArray name="skills">
+                    {({ fields }) => {
+                      return (
+                        <>
+                          {fields.map((name, index) => (
+                            <div className="row" key={name}>
+                              <div className="col-5">
+                                <Field name={`${name}.skillId`} validate={required}>
+                                  {({ input, meta }) => (
+                                    <RenderInput
+                                      selectData={transformDataToSelectData(skillsWithNoChildren)}
+                                      label="Skill"
+                                      meta={meta}
+                                      input={input}
+                                    />
+                                  )}
+                                </Field>
+                              </div>
+                              <div className="col-5">
+                                <Field name={`${name}.levelId`} validate={required}>
+                                  {({ input, meta }) => (
+                                    <RenderInput
+                                      selectData={transformSystemValuesToSelectData(skillLevels)}
+                                      label="Level"
+                                      meta={meta}
+                                      input={input}
+                                    />
+                                  )}
+                                </Field>
+                              </div>
+
+                              <div className="col-2 text-center">
+                                <button
+                                  disabled={!(fields && fields.length && fields.length > 1)}
+                                  type="button"
+                                  className="btn btn-danger create-session__delete-skill-button"
+                                  onClick={() => fields.remove(index)}
+                                >
+                                  <i className="fa fa-trash" />
+                                </button>
+                              </div>
+                            </div>
+                          ))}
+                          <button
+                            type="button"
+                            className="btn btn-primary pull-right"
+                            onClick={() => fields.push({ skillId: '', levelId: '' })}
+                          >
+                            Add
+                          </button>
+                        </>
+                      );
+                    }}
+                  </FieldArray>
+                </FormWizard.Page>
                 <FormWizard.Page title="Lesson Details">
                   <section role="tabpanel" className="body">
                     <h3 tabIndex={-1} className="title">
@@ -67,19 +138,6 @@ export class CreateSession extends React.PureComponent<IProps> {
                       </div>
                     </div>
                   </section>
-                </FormWizard.Page>
-                <FormWizard.Page title="Skills">
-                  <div>
-                    <label>Employed?</label>
-                    <Field name="employed" component="input" type="checkbox" />
-                  </div>
-                  <div>
-                    <label>Toppings</label>
-                    <Field name="toppings" component="select" type="select" multiple={true}>
-                      <option value="ham">Ham</option>
-                    </Field>
-                    <Error name="toppings" />
-                  </div>
                 </FormWizard.Page>
                 <FormWizard.Page title="Vetting">
                   <section role="tabpanel" className="body">

@@ -14,7 +14,7 @@ import {
 import { SkillLevelResponse } from '../../../../../app/skill-levels/responses';
 
 interface IProps extends FormProps<ITutorSkillForm> {
-  skills: SkillListResponse[];
+  skillsWithNoChildren: SkillListResponse[];
   skillLevels: SkillLevelResponse[];
   onDelete?: () => void;
 }
@@ -24,7 +24,7 @@ const addOrUpdateText = (determinate: boolean): string => (determinate ? 'Update
 export const TutorSkillForm: React.SFC<IProps> = ({
   onSubmit,
   isMakingRequest,
-  skills,
+  skillsWithNoChildren,
   onDelete,
   initialValues,
   skillLevels,
@@ -43,7 +43,7 @@ export const TutorSkillForm: React.SFC<IProps> = ({
             <Field name="skillId" validate={required} validateFields={[]}>
               {({ input, meta }) => (
                 <RenderInput
-                  selectData={transformDataToSelectData(skills)}
+                  selectData={transformDataToSelectData(skillsWithNoChildren)}
                   label="Skill"
                   meta={meta}
                   input={input}

@@ -107,7 +107,7 @@ export class ListTutorSkills extends React.Component<IProps> {
           <TutorSkillForm
             onSubmit={this.onCreateTutorSkillSubmit}
             isMakingRequest={isMakingFormRequest}
-            skills={skillsWithNoChildren}
+            skillsWithNoChildren={skillsWithNoChildren}
             skillLevels={skillLevels}
           />
         </ModalBody>
@@ -130,7 +130,7 @@ export class ListTutorSkills extends React.Component<IProps> {
             onSubmit={this.onUpdateTutorSkillSubmit}
             onDelete={this.onDeleteTutorSkill}
             isMakingRequest={isMakingFormRequest}
-            skills={skillsWithNoChildren}
+            skillsWithNoChildren={skillsWithNoChildren}
             initialValues={tutorSkill}
             skillLevels={skillLevels}
           />

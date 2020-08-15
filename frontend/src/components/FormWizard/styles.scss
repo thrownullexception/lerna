@@ -1,6 +1,7 @@
 .wizard {
     border: 1px solid #dedcfb;
     background-color: #fff;
+    border-radius: 5px;
 }
 
 .wizard>.steps {
@@ -180,6 +181,7 @@
     padding: 9px 25px;
     line-height: 1.573;
     color: #fff;
+    border-radius: 5px;
 }
 
 .wizard>.actions button:hover,

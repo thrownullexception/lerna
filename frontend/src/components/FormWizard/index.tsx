@@ -1,6 +1,7 @@
 import React from 'react';
 import { Form } from 'react-final-form';
 import classnames from 'classnames';
+import arrayMutators from 'final-form-arrays';
 import './styles.scss';
 
 interface IProps {
@@ -57,7 +58,13 @@ export class FormWizard extends React.PureComponent<IProps, IState> {
     const wizardTitles: string[] = wizardPages.map(({ props }: any) => props.title);
 
     return (
-      <Form initialValues={values} onSubmit={this.handleSubmit}>
+      <Form
+        mutators={{
+          ...arrayMutators,
+        }}
+        initialValues={values}
+        onSubmit={this.handleSubmit}
+      >
         {({ handleSubmit, submitting }) => (
           <form onSubmit={handleSubmit}>
             <div role="application" className="wizard clearfix">
