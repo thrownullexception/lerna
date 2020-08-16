@@ -1,4 +1,4 @@
-import get from 'lodash-es/get';
+import get from 'lodash/get';
 import { IStore } from '../../../store/rootReducers';
 import { SkillsSelectors } from '../../skills/skills.selectors';
 import { SkillsLevelsSelectors } from '../../skill-levels/skill-levels.selectors';

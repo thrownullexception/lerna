@@ -1,7 +1,7 @@
 import { BaseSkillHierarchyDTO } from './base-skill-hierarchy.dto';
 import { IsNotEmpty, IsIn, IsUUID } from 'class-validator';
-import { SkillHierarchy } from '../skill-hierarchies.entity';
-import { Unique } from '../../shared/constraints';
+// import { SkillHierarchy } from '../skill-hierarchies.entity';
+// import { Unique } from '../../shared/constraints';
 
 export class CreateSkillHierarchyDTO extends BaseSkillHierarchyDTO {
   @IsIn(['child', 'parent'])
