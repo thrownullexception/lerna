@@ -9,6 +9,7 @@ export class CreateSessionDTO extends BaseSessionDTO {
   @IsNotEmpty()
   @Type(() => BaseCreateSessionSkillDTO)
   skills: BaseCreateSessionSkillDTO[];
+  // Note the skillId is not unique from here
 
   @ValidateNested({ each: true })
   @IsNotEmpty()
