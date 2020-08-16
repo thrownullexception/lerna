@@ -1,6 +1,6 @@
 import { v4 } from 'uuid';
 import { CursorData, Cursor } from './types';
-import set from 'lodash-es/set';
+import set from 'lodash/set';
 
 export const addUUIDToForm = (form: object): object => ({ ...form, id: v4() });
 
