@@ -74,11 +74,11 @@ describe('TutorSkillSlice', () => {
       years: 2,
       skillName: 2,
     });
-    const initialState$1 = {
+    const currentState = {
       tutorSkills: [baseTutorSkillResponse],
     };
     const nextState = rootDomainStateWrap(
-      tutorSkillsSlice.reducer(initialState$1, tutorSkillsSlice.actions.updateTutorSkill(payload)),
+      tutorSkillsSlice.reducer(currentState, tutorSkillsSlice.actions.updateTutorSkill(payload)),
     );
 
     expect(TutorSkillsSelectors.selectTutorSkills(nextState)).toMatchInlineSnapshot(`
@@ -97,11 +97,11 @@ describe('TutorSkillSlice', () => {
   });
 
   it('should delete tutorSkill', () => {
-    const initialState$1 = {
+    const currentState = {
       tutorSkills: [baseTutorSkillResponse],
     };
     const nextState = rootDomainStateWrap(
-      tutorSkillsSlice.reducer(initialState$1, tutorSkillsSlice.actions.deleteTutorSkill(baseId)),
+      tutorSkillsSlice.reducer(currentState, tutorSkillsSlice.actions.deleteTutorSkill(baseId)),
     );
 
     expect(TutorSkillsSelectors.selectTutorSkills(nextState)).toMatchInlineSnapshot(`Array []`);

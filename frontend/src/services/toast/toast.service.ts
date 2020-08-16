@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify';
 import { confirmAlert } from 'react-confirm-alert';
-import get from 'lodash-es/get';
+import get from 'lodash/get';
 
 export const DEFAULT_TOAST_ERROR_MESSAGE =
   'Oops! Something Went Wrong. Please Check Your Network And Try Again';
