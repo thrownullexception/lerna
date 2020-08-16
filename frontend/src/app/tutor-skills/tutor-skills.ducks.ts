@@ -1,19 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TutorSkillResponse } from './responses';
 
-const DOMAIN = 'tutor-skills';
+export const DOMAIN = 'tutorSkills';
 
 export interface IState {
   tutorSkills: TutorSkillResponse[];
 }
 
-const initial: IState = {
+export const initialState: IState = {
   tutorSkills: [],
 };
 
 export const tutorSkillsSlice = createSlice({
   name: DOMAIN,
-  initialState: initial,
+  initialState,
   reducers: {
     setTutorSkills: (state, { payload }: PayloadAction<TutorSkillResponse[]>) => {
       state.tutorSkills = payload;

@@ -33,7 +33,7 @@ export class BaseTutorSkillDTO {
   @IsNotEmpty({
     message: 'Level is required',
   })
-  levelId: SkillLevels;
+  level: SkillLevels;
 
   @IsNumber()
   @IsNotEmpty({

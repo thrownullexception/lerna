@@ -36,7 +36,7 @@ describe('TutorSkills API Controller', () => {
         id: TUTOR_SKILL_ID,
         userId: FIXTURE_IDS.USERS[0],
         skillId: FIXTURE_IDS.SKILLS[0],
-        level: SkillLevels.Level1,
+        level: SkillLevels.Level2,
         rate: 50,
         years: 4,
       })
@@ -47,7 +47,7 @@ describe('TutorSkills API Controller', () => {
           Array [
             TutorSkill {
               "id": "7211b9c5-8017-4d64-a2bd-76a2105b0a4f",
-              "level": "level_1",
+              "level": "level_2",
               "rate": 50,
               "skillId": "49eca663-4727-424f-9f9d-b7838c8f7dff",
               "userId": "c351ee24-9a21-44ac-ae92-766769f80233",

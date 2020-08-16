@@ -8,7 +8,10 @@ import { sessionsSlice } from '../app/sessions/sessions.ducks';
 import { authSlice } from '../app/auth/auth.ducks';
 import { skillsSlice } from '../app/skills/skills.ducks';
 import { studentSkillsSlice } from '../app/student-skills/student-skills.ducks';
-import { tutorSkillsSlice } from '../app/tutor-skills/tutor-skills.ducks';
+import {
+  tutorSkillsSlice,
+  DOMAIN as tutorSkillsDomain,
+} from '../app/tutor-skills/tutor-skills.ducks';
 import { skillLevelsSlice } from '../app/skill-levels/skill-levels.ducks';
 
 export const rootReducers = combineReducers({
@@ -19,7 +22,7 @@ export const rootReducers = combineReducers({
   auth: authSlice.reducer,
   skills: skillsSlice.reducer,
   studentSkills: studentSkillsSlice.reducer,
-  tutorSkills: tutorSkillsSlice.reducer,
+  [tutorSkillsDomain]: tutorSkillsSlice.reducer,
   skillLevels: skillLevelsSlice.reducer,
 });
 
