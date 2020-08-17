@@ -4,29 +4,31 @@ import { CreateSession } from './Create';
 import { StudentSessions } from './Student';
 import { TutorSessions } from './Tutor';
 import { AccountModeType } from '../../app/auth/auth.types';
-import { CreateSessionPath } from './Create/CreateSession.types';
-import { StudentSessionsPath } from './Student/StudentSessions.types';
-import { TutorSessionsPath } from './Tutor/TutorSessions.types';
+import { CreateSessionPrefix } from './Create/CreateSession.types';
+import { StudentSessionsPrefix } from './Student/StudentSessions.types';
+import { TutorSessionsPrefix } from './Tutor/TutorSessions.types';
+import { TutorSessionDetails } from './Tutor/Details';
+import { StudentSessionDetails } from './Student/Details';
 
 export const SessionsPath = 'session';
 
 const prefixRoute = (path: string) => `${SessionsPath}/${path}`;
 
-export const CreateSessionPath$1 = prefixRoute(CreateSessionPath);
-export const StudentSessionsPath$1 = prefixRoute(StudentSessionsPath);
-export const TutorSessionsPath$1 = prefixRoute(TutorSessionsPath);
+export const CREATE_A_SESSION_PATH = NavigationService.studentPath(
+  prefixRoute(CreateSessionPrefix),
+);
 
 export const SessionsRoutes: IMenuItems[] = [
   {
-    path: NavigationService.studentPath(CreateSessionPath$1),
+    path: CREATE_A_SESSION_PATH,
     exact: true,
     title: 'Create Session',
-    showOnNavigation: true,
+    showOnNavigation: false,
     accountModes: [AccountModeType.Student],
     component: CreateSession,
   },
   {
-    path: NavigationService.studentPath(StudentSessionsPath$1),
+    path: NavigationService.studentPath(prefixRoute(StudentSessionsPrefix)),
     exact: true,
     title: 'Sessions',
     showOnNavigation: true,
@@ -34,11 +36,27 @@ export const SessionsRoutes: IMenuItems[] = [
     component: StudentSessions,
   },
   {
-    path: NavigationService.tutorPath(TutorSessionsPath$1),
+    path: NavigationService.tutorPath(prefixRoute(TutorSessionsPrefix)),
     exact: true,
     title: 'Sessions',
     showOnNavigation: true,
     accountModes: [AccountModeType.Tutor],
     component: TutorSessions,
+  },
+  {
+    path: NavigationService.tutorPath(prefixRoute(':sessionId')),
+    exact: true,
+    title: 'Session Details',
+    showOnNavigation: false,
+    accountModes: [AccountModeType.Tutor],
+    component: TutorSessionDetails,
+  },
+  {
+    path: NavigationService.studentPath(prefixRoute(':sessionId')),
+    exact: true,
+    title: 'Session Details',
+    showOnNavigation: false,
+    accountModes: [AccountModeType.Student],
+    component: StudentSessionDetails,
   },
 ];

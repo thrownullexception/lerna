@@ -4,28 +4,29 @@ import classnames from 'classnames';
 import arrayMutators from 'final-form-arrays';
 import './styles.scss';
 
-interface IProps {
-  onSubmit: (values: Record<string, unknown>) => void;
-  initialValues: Record<string, unknown>;
+interface IProps<T> {
+  onSubmit: (values: T) => void;
+  initialValues: T;
+  isMakingFormRequest: boolean;
 }
 
-interface IState {
+interface IState<T> {
   page: number;
-  values: Record<string, unknown>;
+  values: T;
 }
 
-export class FormWizard extends React.PureComponent<IProps, IState> {
+export class FormWizard<T> extends React.PureComponent<IProps<T>, IState<T>> {
   static Page = ({ children }: any) => children;
 
-  constructor(props: IProps) {
+  constructor(props: IProps<T>) {
     super(props);
     this.state = {
       page: 0,
-      values: props.initialValues || {},
+      values: props.initialValues,
     };
   }
 
-  next = (values: Record<string, unknown>) => {
+  next = (values: T) => {
     this.setState(state => ({
       page: Math.min(state.page + 1, React.Children.count(this.props.children) - 1),
       values,
@@ -37,7 +38,7 @@ export class FormWizard extends React.PureComponent<IProps, IState> {
       page: Math.max(state.page - 1, 0),
     }));
 
-  handleSubmit = (values: Record<string, unknown>) => {
+  handleSubmit = (values: T) => {
     const { children, onSubmit } = this.props;
     const { page } = this.state;
     const isLastPage = page === React.Children.count(children) - 1;
@@ -48,7 +49,7 @@ export class FormWizard extends React.PureComponent<IProps, IState> {
   };
 
   render() {
-    const { children } = this.props;
+    const { children, isMakingFormRequest } = this.props;
     const { page, values } = this.state;
     const wizardPages = React.Children.toArray(children);
     const activePage = wizardPages[page];
@@ -65,7 +66,7 @@ export class FormWizard extends React.PureComponent<IProps, IState> {
         initialValues={values}
         onSubmit={this.handleSubmit}
       >
-        {({ handleSubmit, submitting }) => (
+        {({ handleSubmit }) => (
           <form onSubmit={handleSubmit}>
             <div role="application" className="wizard clearfix">
               <div className="steps clearfix">
@@ -114,7 +115,7 @@ export class FormWizard extends React.PureComponent<IProps, IState> {
                     </li>
                   ) : (
                     <li aria-hidden="true">
-                      <button type="submit" className="link-like" disabled={submitting}>
+                      <button type="submit" className="link-like" disabled={isMakingFormRequest}>
                         Finish
                       </button>
                     </li>
@@ -122,7 +123,6 @@ export class FormWizard extends React.PureComponent<IProps, IState> {
                 </ul>
               </div>
             </div>
-            {/* <pre>{JSON.stringify(values$1, null, 2)}</pre> */}
           </form>
         )}
       </Form>

@@ -10,4 +10,4 @@ export interface IProps {
 export type StateProps = Pick<IProps, 'tutorSessionsCursor' | 'tutorSessionsData'>;
 export type DispatchProps = Pick<IProps, 'fetchTutorSessions'>;
 
-export const TutorSessionsPath = '';
+export const TutorSessionsPrefix = '';
