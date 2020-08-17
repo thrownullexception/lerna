@@ -10,6 +10,8 @@ import { IProps } from './App.types';
 import { NavigationMenu } from './components/NavigationMenu';
 import './style.scss';
 import { AccountModeType, AccountModeLabel } from '../../app/auth/auth.types';
+import { CREATE_A_SESSION_PATH } from '../../screens/Sessions';
+import { NavigationService } from '../../services';
 
 const togglePreviousState = (prev: boolean) => !prev;
 
@@ -121,9 +123,12 @@ export const AppLayout: React.SFC<IProps> = ({
                 </span>
               </div>
               {accountMode === AccountModeType.Student ? (
-                <button className="btn btn-primary btn-block call-to-action">
+                <a
+                  className="btn btn-primary btn-block call-to-action"
+                  href={NavigationService.hashPath(CREATE_A_SESSION_PATH)}
+                >
                   Start A Session
-                </button>
+                </a>
               ) : null}
             </div>
           </div>

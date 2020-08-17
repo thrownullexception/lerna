@@ -1,12 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CursorData } from '../types';
-import { StudentSessionResponse, TutorSessionResponse } from './responses';
+import {
+  StudentSessionResponse,
+  TutorSessionResponse,
+  TutorSessionDetailsResponse,
+  StudentSessionDetailsResponse,
+} from './responses';
 
 const DOMAIN = 'sessions';
 
 interface IState {
   studentSessions: CursorData<StudentSessionResponse>;
   tutorSessions: CursorData<TutorSessionResponse>;
+  tutorSessionDetails: TutorSessionDetailsResponse;
+  studentSessionDetails: StudentSessionDetailsResponse;
 }
 
 const initial: IState = {
@@ -18,6 +25,8 @@ const initial: IState = {
     cursor: {},
     data: [],
   },
+  tutorSessionDetails: new TutorSessionDetailsResponse({}),
+  studentSessionDetails: new StudentSessionDetailsResponse({}),
 };
 
 export const sessionsSlice = createSlice({
@@ -29,6 +38,15 @@ export const sessionsSlice = createSlice({
     },
     setTutorSessions: (state, { payload }: PayloadAction<CursorData<TutorSessionResponse>>) => {
       state.tutorSessions = payload;
+    },
+    setTutorSessionDetails: (state, { payload }: PayloadAction<TutorSessionDetailsResponse>) => {
+      state.tutorSessionDetails = payload;
+    },
+    setStudentSessionDetails: (
+      state,
+      { payload }: PayloadAction<StudentSessionDetailsResponse>,
+    ) => {
+      state.studentSessionDetails = payload;
     },
   },
 });

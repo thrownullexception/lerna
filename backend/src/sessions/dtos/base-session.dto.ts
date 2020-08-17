@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsUUID, IsNumber, IsOptional } from 'class-validator';
+import { IsNotEmpty, IsUUID, IsOptional, IsNumberString } from 'class-validator';
 
 export class BaseSessionDTO {
   @IsUUID(4)
@@ -15,33 +15,33 @@ export class BaseSessionDTO {
   })
   description: string;
 
-  @IsNumber()
+  @IsNumberString() // TODO Reduce this numbers
   @IsNotEmpty({
-    message: 'Title is required',
+    message: 'Budget From is required',
   })
-  budgetFrom: number;
+  budgetFrom: string;
 
-  @IsNumber()
+  @IsNumberString()
   @IsNotEmpty({
-    message: 'Title is required',
+    message: 'Budget To is required',
   }) // TODO is greater than budget from
-  budgetTo: number;
+  budgetTo: string;
 
-  @IsNumber()
+  @IsNumberString()
   @IsNotEmpty({
-    message: 'Title is required',
+    message: 'Pass Percentage is required',
   }) // TODO between 10 and 100
-  passPercentage: number;
+  passPercentage: string;
 
-  @IsNumber()
+  @IsNumberString()
   @IsNotEmpty({
-    message: 'Title is required',
+    message: 'Questions Duration is required',
   })
-  questionsDuration: number;
+  questionsDuration: string;
 
-  @IsNumber()
+  @IsNumberString()
   @IsNotEmpty({
-    message: 'Title is required',
+    message: 'No Response Duration is required',
   })
-  noResponseDuration: number;
+  noResponseDuration: string;
 }

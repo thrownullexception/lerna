@@ -19,15 +19,12 @@ export class BaseSessionQuestionDTO {
   })
   optionB: string;
 
-  @Length(1, 50)
   @IsOptional()
   optionC: string;
 
-  @Length(1, 50)
   @IsOptional()
   optionD: string;
 
-  @Length(1, 50)
   @IsOptional()
   optionE: string;
 }

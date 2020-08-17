@@ -24,6 +24,18 @@ export interface ICreateSessionForm {
   description: string;
   budgetFrom: string;
   budgetTo: string;
+  questionsDuration: string;
+  passPercentage: string;
+  noResponseDuration: string;
+  skills: Array<{ skillId: string; level: string }>;
+  questions: Array<{
+    question: string;
+    optionA: string;
+    optionB: string;
+    optionC?: string;
+    optionD?: string;
+    optionE?: string;
+  }>;
 }
 
-export const CreateSessionPath = 'create';
+export const CreateSessionPrefix = 'create';

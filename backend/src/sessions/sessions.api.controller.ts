@@ -59,6 +59,24 @@ export class SessionsApiController {
     return { data: data.map(session => new StudentSessionTransformer(session)), cursor };
   }
 
+  @Get(`:sessionId/${AccountModeType.Student}`)
+  async showSessionDetaillsForStudent(
+    @Param('sessionId', new ParseUUIDPipe()) sessionId: string,
+  ): Promise<SessionDetailTransformer> {
+    // TODO Check if I am the creator
+    //  if not and I am candidate then ban the candiadtae
+    // else return bad excepction
+    return new SessionDetailTransformer(await this.sessionsService.showSession(sessionId));
+  }
+
+  @Get(`:sessionId/${AccountModeType.Tutor}`)
+  async showSessionDetaillsForTutor(
+    @Param('sessionId', new ParseUUIDPipe()) sessionId: string,
+    // @AuthenticatedUser('id', new ParseUUIDPipe()) userId: string,
+  ): Promise<SessionDetailTransformer> {
+    return new SessionDetailTransformer(await this.sessionsService.showSession(sessionId));
+  }
+
   @Get(':sessionId')
   async show(
     @Param('sessionId', new ParseUUIDPipe()) sessionId: string,

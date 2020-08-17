@@ -1,6 +1,11 @@
 import { createSelector } from 'reselect';
 import { IStore } from '../../store/rootReducers';
-import { StudentSessionResponse, TutorSessionResponse } from './responses';
+import {
+  StudentSessionResponse,
+  TutorSessionResponse,
+  TutorSessionDetailsResponse,
+  StudentSessionDetailsResponse,
+} from './responses';
 import { Cursor, CursorData } from '../types';
 
 export class SessionsSelectors {
@@ -8,27 +13,53 @@ export class SessionsSelectors {
     return state.sessions;
   }
 
-  static selectTutorSessions$1(state: IStore): CursorData<TutorSessionResponse> {
+  static selectTutorSessionsCursorData(state: IStore): CursorData<TutorSessionResponse> {
     return createSelector(SessionsSelectors.base, ({ tutorSessions }) => tutorSessions)(state);
   }
 
-  static selectStudentSessions$1(state: IStore): CursorData<StudentSessionResponse> {
+  static selectStudentSessionsCursorData(state: IStore): CursorData<StudentSessionResponse> {
     return createSelector(SessionsSelectors.base, ({ studentSessions }) => studentSessions)(state);
   }
 
   static selectStudentSessionsData(state: IStore): StudentSessionResponse[] {
-    return createSelector(SessionsSelectors.selectStudentSessions$1, ({ data }) => data)(state);
+    return createSelector(
+      SessionsSelectors.selectStudentSessionsCursorData,
+      ({ data }) => data,
+    )(state);
   }
 
   static selectStudentSessionCursor(state: IStore): Cursor {
-    return createSelector(SessionsSelectors.selectStudentSessions$1, ({ cursor }) => cursor)(state);
+    return createSelector(
+      SessionsSelectors.selectStudentSessionsCursorData,
+      ({ cursor }) => cursor,
+    )(state);
+  }
+
+  static selectStudentSessionDetails(state: IStore): StudentSessionDetailsResponse {
+    return createSelector(
+      SessionsSelectors.base,
+      ({ studentSessionDetails }) => studentSessionDetails,
+    )(state);
   }
 
   static selectTutorSessionsData(state: IStore): TutorSessionResponse[] {
-    return createSelector(SessionsSelectors.selectTutorSessions$1, ({ data }) => data)(state);
+    return createSelector(
+      SessionsSelectors.selectTutorSessionsCursorData,
+      ({ data }) => data,
+    )(state);
   }
 
   static selectTutorSessionCursor(state: IStore): Cursor {
-    return createSelector(SessionsSelectors.selectTutorSessions$1, ({ cursor }) => cursor)(state);
+    return createSelector(
+      SessionsSelectors.selectTutorSessionsCursorData,
+      ({ cursor }) => cursor,
+    )(state);
+  }
+
+  static selectTutorSessionDetails(state: IStore): TutorSessionDetailsResponse {
+    return createSelector(
+      SessionsSelectors.base,
+      ({ tutorSessionDetails }) => tutorSessionDetails,
+    )(state);
   }
 }

@@ -2,9 +2,7 @@ import { v4 } from 'uuid';
 import { CursorData, Cursor } from './types';
 import set from 'lodash/set';
 
-export const addUUIDToForm = (form: object): object => ({ ...form, id: v4() });
-
-export const mutateAUUIDIdOnMe = (form: object) => {
+export const mutateAUUIDIdOnMe = (form: object): object => {
   return set(form, ['id'], v4());
 };
 
