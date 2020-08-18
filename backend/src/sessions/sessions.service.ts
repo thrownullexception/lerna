@@ -37,6 +37,11 @@ export class SessionsService {
     return null;
   }
 
+  async suggestSessionCandiates(sessionId: string): Promise<any> {
+    // Get the session details
+    // Look for users in that requirements
+  }
+
   async createSession(createSessionDTO: CreateSessionDTO, studentId: string): Promise<void> {
     return await this.sessionsRepository.createSession({
       ...createSessionDTO,

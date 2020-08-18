@@ -19,29 +19,29 @@ export class BaseSessionDTO {
   @IsNotEmpty({
     message: 'Budget From is required',
   })
-  budgetFrom: string;
+  budgetFrom: number;
 
   @IsNumberString()
   @IsNotEmpty({
     message: 'Budget To is required',
   }) // TODO is greater than budget from
-  budgetTo: string;
+  budgetTo: number;
 
   @IsNumberString()
   @IsNotEmpty({
     message: 'Pass Percentage is required',
   }) // TODO between 10 and 100
-  passPercentage: string;
+  passPercentage: number;
 
   @IsNumberString()
   @IsNotEmpty({
     message: 'Questions Duration is required',
   })
-  questionsDuration: string;
+  questionsDuration: number;
 
   @IsNumberString()
   @IsNotEmpty({
     message: 'No Response Duration is required',
   })
-  noResponseDuration: string;
+  noResponseDuration: number;
 }

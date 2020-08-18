@@ -1,6 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { SkillLevels } from '../skill-levels/skill-levels.types';
 import { Skill } from '../skills/skills.entity';
+import { User } from 'src/users/users.entity';
 
 @Entity('tutor_skills')
 export class TutorSkill {
@@ -27,4 +28,10 @@ export class TutorSkill {
     ({ id }) => id,
   )
   skill: Skill;
+
+  @ManyToOne(
+    () => User,
+    ({ id }) => id,
+  )
+  user: User;
 }

@@ -40,7 +40,7 @@ export class SessionsApiController {
     @Query(new CursorQueryParametersPipe()) cursorParametersDTO: ICursorParametersDTO,
     @AuthenticatedUser('id', new ParseUUIDPipe()) userId: string,
   ): Promise<PagingResult<TutorSessionTransformer>> {
-    const { data, cursor } = await this.sessionsService.listStudentsSessions(
+    const { data, cursor } = await this.sessionCandidatesService.listTutorSessions(
       userId,
       cursorParametersDTO,
     );
@@ -52,7 +52,7 @@ export class SessionsApiController {
     @Query(new CursorQueryParametersPipe()) cursorParametersDTO: ICursorParametersDTO,
     @AuthenticatedUser('id', new ParseUUIDPipe()) userId: string,
   ): Promise<PagingResult<StudentSessionTransformer>> {
-    const { data, cursor } = await this.sessionCandidatesService.listTutorSessions(
+    const { data, cursor } = await this.sessionsService.listStudentsSessions(
       userId,
       cursorParametersDTO,
     );
@@ -84,6 +84,13 @@ export class SessionsApiController {
     return new SessionDetailTransformer(await this.sessionsService.showSession(sessionId));
   }
 
+  @Get(':sessionId/candidates')
+  async suggestSessionCandiates(
+    @Param('sessionId', new ParseUUIDPipe()) sessionId: string,
+  ): Promise<void> {
+    await this.sessionsService.suggestSessionCandiates(sessionId);
+  }
+
   @Post()
   @HttpCode(HttpStatus.CREATED)
   async create(
@@ -95,10 +102,9 @@ export class SessionsApiController {
 
   @Patch(':sessionId/meta')
   @HttpCode(HttpStatus.NO_CONTENT)
-  async updateMeta(
-    @Param('sessionId', new ParseUUIDPipe()) tutorSkillId: string,
-    @Body() updateSessionMetadataDTO: UpdateSessionMetadataDTO,
-  ): Promise<void> {
-    await this.sessionsService.updateSession(tutorSkillId, updateSessionMetadataDTO);
+  async updateMeta(): // @Param('sessionId', new ParseUUIDPipe()) tutorSkillId: string,
+  // @Body() updateSessionMetadataDTO: UpdateSessionMetadataDTO,
+  Promise<void> {
+    // await this.sessionsService.updateSession(tutorSkillId, updateSessionMetadataDTO);
   }
 }
