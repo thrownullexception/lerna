@@ -1,5 +1,5 @@
 import { Entity } from 'typeorm';
 import { SystemValueEntity } from '../shared/entities';
 
-@Entity('skill_media_types')
+@Entity('skillMediaTypes')
 export class SkillMediaType extends SystemValueEntity {}

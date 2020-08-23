@@ -1301,11 +1301,6 @@ acorn@^7.1.1, acorn@^7.2.0:
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-7.3.1.tgz#85010754db53c3fbaf3b9ea3e083aa5c5d147ffd"
   integrity sha512-tLc0wSnatxAQHVHUapaHdz72pi9KUyHjq5KyHjGg9Y8Ifdc79pTh2XvI6I1/chZbnM7QtNKzh66ooDogPZSleA==
 
-add@^2.0.6:
-  version "2.0.6"
-  resolved "https://registry.yarnpkg.com/add/-/add-2.0.6.tgz#248f0a9f6e5a528ef2295dbeec30532130ae2235"
-  integrity sha1-JI8Kn25aUo7yKV2+7DBTITCuIjU=
-
 agent-base@4, agent-base@^4.2.0, agent-base@^4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/agent-base/-/agent-base-4.3.0.tgz#8165f01c436009bccad0b1d122f05ed770efc6ee"
@@ -2717,6 +2712,11 @@ data-urls@^2.0.0:
     abab "^2.0.3"
     whatwg-mimetype "^2.3.0"
     whatwg-url "^8.0.0"
+
+dateformat@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/dateformat/-/dateformat-3.0.3.tgz#a6e37499a4d9a9cf85ef5872044d62901c9889ae"
+  integrity sha512-jyCETtSl3VMZMWeRo7iY1FL19ges1t55hMo5yaam4Jrsm5EPL89UQkoQRyiI+Yf4k8r2ZpdngkV8hr1lIdjb3Q==
 
 debug@2, debug@2.6.9, debug@^2.2.0, debug@^2.3.3, debug@^2.6.9:
   version "2.6.9"
@@ -8800,11 +8800,6 @@ typeorm-cursor-pagination@^0.4.1:
   resolved "https://registry.yarnpkg.com/typeorm-cursor-pagination/-/typeorm-cursor-pagination-0.4.1.tgz#2bc1cb258f45a065c87d21f9f4ab3eab1efdbcd8"
   integrity sha512-E/ySil8sjt6tkKWQrCDO+JNQXQ+XM1rjZDv/bfD0U3o5XIIVR276b3f8hFR7IWVT1K92DLQvsxyurWMNqDDfhg==
 
-typeorm-naming-strategies@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/typeorm-naming-strategies/-/typeorm-naming-strategies-1.1.0.tgz#29ce8ce1804bc0e4a56302d54e6a746561a94088"
-  integrity sha512-Nu1E4M8lclapX3rdQhQcJKkBjTtmTV4HLWg3M2wouS1ucvnjLPQE1XapOipfmX90LJEVeBwIVh1iPvtf4C5htA==
-
 typeorm@^0.2.25:
   version "0.2.25"
   resolved "https://registry.yarnpkg.com/typeorm/-/typeorm-0.2.25.tgz#1a33513b375b78cc7740d2405202208b918d7dde"
@@ -9417,11 +9412,6 @@ yargs@~3.10.0:
     cliui "^2.1.0"
     decamelize "^1.0.0"
     window-size "0.1.0"
-
-yarn@^1.22.4:
-  version "1.22.4"
-  resolved "https://registry.yarnpkg.com/yarn/-/yarn-1.22.4.tgz#01c1197ca5b27f21edc8bc472cd4c8ce0e5a470e"
-  integrity sha512-oYM7hi/lIWm9bCoDMEWgffW8aiNZXCWeZ1/tGy0DWrN6vmzjCXIKu2Y21o8DYVBUtiktwKcNoxyGl/2iKLUNGA==
 
 yn@3.1.1:
   version "3.1.1"

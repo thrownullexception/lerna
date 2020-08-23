@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CacheOptionsFactory, CacheModuleOptions } from '@nestjs/common';
 import { HandlebarsAdapter, MailerOptions } from '@nest-modules/mailer';
-import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import * as dotenv from 'dotenv';
 import * as winston from 'winston';
 import * as appRoot from 'app-root-path';
@@ -258,8 +257,7 @@ export class ConfigService implements CacheOptionsFactory {
       password: this.getDBPassword(),
       database: this.getDBName(),
       entities: [ENTITIES_DIR + '/**/**.entity{.ts,.js}'],
-      logging: false,
-      namingStrategy: new SnakeNamingStrategy(),
+      logging: true,
       retryAttempts: 5,
       cache: this.getEnvironment() === EnvironmentTypes.Production ? cache : false,
     };

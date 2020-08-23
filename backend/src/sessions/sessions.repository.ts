@@ -6,10 +6,8 @@ import {
   SelectQueryBuilder,
 } from 'typeorm';
 import { Injectable } from '@nestjs/common';
-import { buildPaginator, PagingQuery } from 'typeorm-cursor-pagination';
-
+import { buildPaginator, PagingQuery, PagingResult } from 'typeorm-cursor-pagination';
 import { Session } from './sessions.entity';
-import { PagingResult } from 'typeorm-cursor-pagination/lib/Paginator';
 
 @Injectable()
 @EntityRepository(Session)
@@ -39,7 +37,7 @@ export class SessionsRepository extends Repository<Session> {
     const paginator = buildPaginator({
       entity: Session,
       query: pagingQuery,
-      paginationKeys: ['createdAt'], // TODO check what happens with `id`
+      paginationKeys: ['createdAt'],
     });
     return await paginator.paginate(queryBuilder);
   }

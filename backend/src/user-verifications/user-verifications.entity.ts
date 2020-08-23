@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity('user_verifications')
+@Entity('userVerifications')
 export class UserVerification {
   @PrimaryGeneratedColumn()
   id: string;

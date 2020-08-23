@@ -17,7 +17,11 @@ export class SessionsService {
     return this.sessionsRepository.cursorPaginateSessions(
       this.sessionsRepository
         .createQueryBuilder('session')
-        .where(`session.studentId=:studentId`, { studentId }),
+        .where(`session.studentId=:studentId`, { studentId })
+        .select(['session.id', 'session.title', 'session.statusSystemName', 'session.createdAt'])
+        .leftJoinAndSelect('session.skills', 'sessionSkills') // I believe I should be able to query this without selecting it
+        .leftJoinAndSelect('session.status', 'status')
+        .leftJoinAndSelect('sessionSkills.skill', 'skill'),
       cursorParametersDTO,
     );
   }
@@ -37,7 +41,7 @@ export class SessionsService {
     return null;
   }
 
-  async suggestSessionCandiates(sessionId: string): Promise<any> {
+  async suggestSessionCandidates(sessionId: string): Promise<any> {
     // Get the session details
     // Look for users in that requirements
   }

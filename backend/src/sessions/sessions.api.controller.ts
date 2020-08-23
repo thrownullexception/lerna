@@ -85,10 +85,10 @@ export class SessionsApiController {
   }
 
   @Get(':sessionId/candidates')
-  async suggestSessionCandiates(
+  async suggestSessionCandidates(
     @Param('sessionId', new ParseUUIDPipe()) sessionId: string,
   ): Promise<void> {
-    await this.sessionsService.suggestSessionCandiates(sessionId);
+    await this.sessionsService.suggestSessionCandidates(sessionId);
   }
 
   @Post()

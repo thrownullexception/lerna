@@ -1,5 +1,5 @@
 import { Entity } from 'typeorm';
 import { SystemValueEntity } from '../shared/entities';
 
-@Entity('session_statuses')
+@Entity('sessionStatuses')
 export class SessionStatus extends SystemValueEntity {}

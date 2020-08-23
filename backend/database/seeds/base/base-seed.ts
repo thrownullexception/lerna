@@ -1,4 +1,5 @@
 import { QueryRunner } from 'typeorm';
+import { camelCase } from 'lodash';
 
 interface ISytemEnumerationFields {
   systemName: string;
@@ -13,7 +14,9 @@ export class BaseSeed {
     await Promise.all(
       this.systemEnumerationFields.map(({ systemName, displayName }) => {
         return queryRunner.query(
-          `INSERT INTO ${this.table} (system_name, display_name) VALUES ('${systemName}','${displayName}');`,
+          `INSERT INTO "${camelCase(
+            this.table,
+          )}" ("systemName", "displayName") VALUES ('${systemName}','${displayName}');`,
         );
       }),
     );

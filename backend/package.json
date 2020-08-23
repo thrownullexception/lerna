@@ -50,6 +50,7 @@
     "class-transformer": "^0.2.3",
     "class-validator": "^0.12.2",
     "cookie-parser": "^1.4.5",
+    "dateformat": "^3.0.3",
     "dotenv": "^8.2.0",
     "final-form": "^4.20.1",
     "final-form-arrays": "^3.0.2",
@@ -79,7 +80,6 @@
     "rxjs": "^6.5.4",
     "typeorm": "^0.2.25",
     "typeorm-cursor-pagination": "^0.4.1",
-    "typeorm-naming-strategies": "^1.1.0",
     "uuid": "^8.2.0",
     "winston": "^3.3.3"
   },

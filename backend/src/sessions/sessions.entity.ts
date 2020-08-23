@@ -40,6 +40,9 @@ export class Session {
   @Column()
   statusSystemName: SessionStatusTypes;
 
+  @Column()
+  createdAt: string;
+
   @ManyToOne(
     () => User,
     ({ id }) => id,
@@ -75,11 +78,8 @@ export class Session {
     ({ systemName }) => systemName,
   )
   @JoinColumn({
-    name: 'status_system_name',
+    name: 'statusSystemName',
     referencedColumnName: 'systemName',
   })
   status: SessionStatus;
-
-  @Column()
-  createdAt: string;
 }

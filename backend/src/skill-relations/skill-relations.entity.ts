@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { Skill } from '../skills/skills.entity';
 
-@Entity('skill_relations')
+@Entity('skillRelations')
 export class SkillRelation {
   @PrimaryGeneratedColumn('uuid')
   id: string;

@@ -28,8 +28,5 @@ export function queryStringifyCursor(cursor: Cursor, filters: Record<string, str
     .map(([key, value]) => `${key}=${value}`)
     .join('&');
 
-  if (querystring === '') {
-    return '';
-  }
-  return `?${querystring}`;
+  return querystring === '' ? '' : `?${querystring}`;
 }

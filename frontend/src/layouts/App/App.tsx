@@ -568,12 +568,9 @@ export const AppLayout: React.SFC<IProps> = ({
               </div>
             </div>
           </div>
-          {renderRoutes(appRoutes)}
+          <React.Suspense fallback={'Loading...'}>{renderRoutes(appRoutes)}</React.Suspense>
         </div>
       </div>
-      <a href="#top" id="back-to-top" style={{ display: 'none' }}>
-        <i className="las la-angle-double-up" />
-      </a>
     </div>
   );
 };

@@ -50,7 +50,7 @@ export const TutorSkillForm: React.SFC<IProps> = ({
                 />
               )}
             </Field>
-            <Field name="level" validate={required} validateFields={[]}>
+            <Field name="levelSystemName" validate={required} validateFields={[]}>
               {({ input, meta }) => (
                 <RenderInput
                   selectData={transformSystemValuesToSelectData(skillLevels)}

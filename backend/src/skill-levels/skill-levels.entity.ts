@@ -1,5 +1,5 @@
 import { Entity } from 'typeorm';
 import { SystemValueEntity } from '../shared/entities';
 
-@Entity('skill_levels')
+@Entity('skillLevels')
 export class SkillLevel extends SystemValueEntity {}

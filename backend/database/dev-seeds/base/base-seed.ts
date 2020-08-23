@@ -1,4 +1,5 @@
 import { QueryRunner } from 'typeorm';
+import { camelCase } from 'lodash';
 
 export class BaseSeed {
   protected table: string;
@@ -9,12 +10,14 @@ export class BaseSeed {
     await Promise.all(
       this.data.map(dataToSeed => {
         const fields = Object.keys(dataToSeed)
-          .map(value => '"' + value + '"')
+          .map(value => '"' + camelCase(value) + '"')
           .join(',');
         const values = Object.values(dataToSeed)
           .map(value => `'${value}'`)
           .join(',');
-        return queryRunner.query(`INSERT INTO ${table} (${fields}) VALUES (${values});`);
+        return queryRunner.query(
+          `INSERT INTO "${camelCase(table)}" (${fields}) VALUES (${values});`,
+        );
       }),
     );
   }

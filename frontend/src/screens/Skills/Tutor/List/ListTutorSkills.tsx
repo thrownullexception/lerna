@@ -24,41 +24,43 @@ export class ListTutorSkills extends React.Component<IProps> {
   }
 
   renderSkillCard = () => {
-    return this.props.tutorSkills.map(({ skillName, skillId, years, rate, levelName, id }) => {
-      return (
-        <div className="col-xl-3 col-lg-6 col-md-6 col-sm-12" key={skillId}>
-          <div className="card overflow-hidden">
-            <div className="card-body" onClick={() => this.toggleModal(id)}>
-              <div className="d-flex list-tutor-skills__container">
-                <div className="my-auto">
-                  <img
-                    src="/assets/images/skills/javascript.png"
-                    className="list-tutor-skills__skill-logo"
-                    alt={skillName}
-                  />
-                </div>
-                <div className="list-tutor-skills__content">
-                  <h6>
-                    {skillName}
-                    <span className="pull-right">{StringFilters.formatMoney(rate)}/hr</span>
-                  </h6>
-                  <ul className="list-tutor-skills__list">
-                    <li className="list-tutor-skills__list-item">
-                      <strong className="list-tutor-skills__list-label">Level</strong>
-                      <span className="list-tutor-skills__list-value">{levelName}</span>
-                    </li>
-                    <li>
-                      <strong className="list-tutor-skills__list-label">Years</strong>
-                      <span className="list-tutor-skills__list-value">{years}</span>
-                    </li>
-                  </ul>
+    return this.props.tutorSkills.map(
+      ({ skillName, skillId, years, rate, levelDisplayName, id }) => {
+        return (
+          <div className="col-xl-3 col-lg-6 col-md-6 col-sm-12" key={skillId}>
+            <div className="card overflow-hidden">
+              <div className="card-body" onClick={() => this.toggleModal(id)}>
+                <div className="d-flex list-tutor-skills__container">
+                  <div className="my-auto">
+                    <img
+                      src="/assets/images/skills/javascript.png"
+                      className="list-tutor-skills__skill-logo"
+                      alt={skillName}
+                    />
+                  </div>
+                  <div className="list-tutor-skills__content">
+                    <h6>
+                      {skillName}
+                      <span className="pull-right">{StringFilters.formatMoney(rate)}/hr</span>
+                    </h6>
+                    <ul className="list-tutor-skills__list">
+                      <li className="list-tutor-skills__list-item">
+                        <strong className="list-tutor-skills__list-label">Level</strong>
+                        <span className="list-tutor-skills__list-value">{levelDisplayName}</span>
+                      </li>
+                      <li>
+                        <strong className="list-tutor-skills__list-label">Years</strong>
+                        <span className="list-tutor-skills__list-value">{years}</span>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      );
-    });
+        );
+      },
+    );
   };
 
   renderAddSkillButton = () => {
