@@ -2,7 +2,7 @@ import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { UserSettingTypes } from './user-settings.types';
 import { User } from '../users/users.entity';
 
-@Entity('user_settings')
+@Entity('userSettings')
 export class UserSetting {
   @PrimaryGeneratedColumn()
   id: string;

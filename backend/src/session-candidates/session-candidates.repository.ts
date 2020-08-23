@@ -35,7 +35,7 @@ export class SessionCandidatesRepository extends Repository<SessionCandidate> {
     const paginator = buildPaginator({
       entity: SessionCandidate,
       query: pagingQuery,
-      paginationKeys: ['createdAt'], // TODO check what happens with `id`
+      paginationKeys: ['createdAt'],
     });
     return await paginator.paginate(queryBuilder);
   }

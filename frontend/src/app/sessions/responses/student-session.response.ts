@@ -1,15 +1,17 @@
 import get from 'lodash-es/get';
 
 export class StudentSessionResponse {
-  question: string;
-  answer: string;
-  xxxxx: string;
+  statusName: string;
+  createdAt: string;
+  title: string;
   id: string;
+  skills: string[];
 
   constructor(jsonObject: object) {
     this.id = get(jsonObject, 'id');
-    this.question = get(jsonObject, 'question');
-    this.answer = get(jsonObject, 'answer');
-    this.xxxxx = get(jsonObject, 'xxxxx');
+    this.title = get(jsonObject, 'title');
+    this.statusName = get(jsonObject, 'statusName');
+    this.createdAt = get(jsonObject, 'createdAt');
+    this.skills = get(jsonObject, 'skills');
   }
 }

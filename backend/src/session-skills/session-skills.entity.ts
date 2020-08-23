@@ -3,7 +3,7 @@ import { Skill } from '../skills/skills.entity';
 import { Session } from '../sessions/sessions.entity';
 import { SkillLevels } from '../skill-levels/skill-levels.types';
 
-@Entity('session_skills')
+@Entity('sessionSkills')
 export class SessionSkill {
   @PrimaryGeneratedColumn('uuid')
   id: string;

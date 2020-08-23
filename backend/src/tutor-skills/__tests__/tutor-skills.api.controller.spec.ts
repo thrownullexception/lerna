@@ -36,7 +36,7 @@ describe('TutorSkills API Controller', () => {
         id: TUTOR_SKILL_ID,
         userId: FIXTURE_IDS.USERS[0],
         skillId: FIXTURE_IDS.SKILLS[0],
-        level: SkillLevels.Level2,
+        levelSystemName: SkillLevels.Level2,
         rate: 50,
         years: 4,
       })
@@ -47,7 +47,7 @@ describe('TutorSkills API Controller', () => {
           Array [
             TutorSkill {
               "id": "7211b9c5-8017-4d64-a2bd-76a2105b0a4f",
-              "level": "level_2",
+              "levelSystemName": "level_2",
               "rate": 50,
               "skillId": "49eca663-4727-424f-9f9d-b7838c8f7dff",
               "userId": "c351ee24-9a21-44ac-ae92-766769f80233",
@@ -64,7 +64,7 @@ describe('TutorSkills API Controller', () => {
       .send({
         userId: FIXTURE_IDS.USERS[0],
         skillId: FIXTURE_IDS.SKILLS[1],
-        level: SkillLevels.Level2,
+        levelSystemName: SkillLevels.Level2,
         rate: 15,
         years: 34,
       })
@@ -75,7 +75,7 @@ describe('TutorSkills API Controller', () => {
           Array [
             TutorSkill {
               "id": "7211b9c5-8017-4d64-a2bd-76a2105b0a4f",
-              "level": "level_2",
+              "levelSystemName": "level_2",
               "rate": 15,
               "skillId": "507378a4-53ac-4f70-acda-ff15111c989b",
               "userId": "c351ee24-9a21-44ac-ae92-766769f80233",
@@ -96,8 +96,8 @@ describe('TutorSkills API Controller', () => {
           Array [
             Object {
               "id": "7211b9c5-8017-4d64-a2bd-76a2105b0a4f",
-              "level": "level_2",
-              "levelName": "Intermediate",
+              "levelDisplayName": "Intermediate",
+              "levelSystemName": "level_2",
               "rate": 15,
               "skillId": "507378a4-53ac-4f70-acda-ff15111c989b",
               "skillName": "Skill B",

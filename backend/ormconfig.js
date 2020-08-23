@@ -1,6 +1,5 @@
 require('dotenv').config();
 const path = require('path');
-const { SnakeNamingStrategy } = require('typeorm-naming-strategies');
 const { NODE_ENV } = process.env;
 const MIGRATIONS_DIR = path.join('.', 'database');
 const relativeMigrationsDir = path.join.bind(path, MIGRATIONS_DIR);

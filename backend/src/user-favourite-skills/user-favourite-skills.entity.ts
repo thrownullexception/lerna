@@ -2,7 +2,7 @@ import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { Skill } from '../skills/skills.entity';
 import { User } from '../users/users.entity';
 
-@Entity('user_favourite_skills')
+@Entity('userFavouriteSkills')
 export class UserFavouriteSkill {
   @PrimaryGeneratedColumn('uuid')
   id: string;

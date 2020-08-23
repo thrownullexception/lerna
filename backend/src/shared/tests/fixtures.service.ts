@@ -38,7 +38,7 @@ export class FixturesService {
       // ALTER TABLE b DISABLE TRIGGER ALL;
       // ALTER TABLE b ENABLE TRIGGER ALL;
       // await repository.query(`SET FOREIGN_KEY_CHECKS=0;`);
-      await repository.query(`DELETE FROM ${repository.metadata.tableName};`);
+      await repository.query(`DELETE FROM "${repository.metadata.tableName}";`);
       // await repository.query(`SET FOREIGN_KEY_CHECKS=1;`);
     } catch (error) {
       throw new Error(
@@ -98,7 +98,7 @@ export class FixturesService {
           .map(value => `'${value}'`)
           .join(',');
         return repository.query(
-          `INSERT INTO ${repository.metadata.tableName} (${fields}) VALUES (${values});`,
+          `INSERT INTO "${repository.metadata.tableName}" (${fields}) VALUES (${values});`,
         );
       }),
     );

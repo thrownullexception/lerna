@@ -17,8 +17,8 @@ describe('TutorSkillsActions', () => {
           {
             id: 'some id',
             skillId: 'some skill id',
-            level: 'some level',
-            levelName: 'some level name',
+            levelDisplayName: 'some level name',
+            levelSystemName: 'some level',
             rate: 1,
             years: 1,
             skillName: 1,
@@ -41,8 +41,8 @@ describe('TutorSkillsActions', () => {
           "payload": Array [
             TutorSkillResponse {
               "id": "some id",
-              "level": "some level",
-              "levelName": "some level name",
+              "levelDisplayName": "some level name",
+              "levelSystemName": "some level",
               "rate": 1,
               "skillId": "some skill id",
               "skillName": 1,

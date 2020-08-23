@@ -1,5 +1,5 @@
 import { Entity } from 'typeorm';
 import { SystemValueEntity } from '../shared/entities';
 
-@Entity('account_modes')
+@Entity('accountModes')
 export class AccountMode extends SystemValueEntity {}

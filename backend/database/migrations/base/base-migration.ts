@@ -1,5 +1,6 @@
 import { TableColumnOptions } from 'typeorm/schema-builder/options/TableColumnOptions';
 import { QueryRunner, TableForeignKey, TableIndex, Table, TableUnique } from 'typeorm';
+import { camelCase } from 'lodash';
 
 export enum ReferenceAction {
   Cascade = 'CASCADE',
@@ -28,25 +29,25 @@ export class BaseMigration {
     }: IReferenceParameters,
   ): Promise<void> {
     await queryRunner.createForeignKey(
-      this.table,
+      camelCase(this.table),
       new TableForeignKey({
         name: `FK_${this.table}__${table}_${referencedColumnHere}`.toUpperCase(),
-        columnNames: [referencedColumnHere],
-        referencedColumnNames: [referencedColumnThere],
-        referencedTableName: table,
+        columnNames: [camelCase(referencedColumnHere)],
+        referencedColumnNames: [camelCase(referencedColumnThere)],
+        referencedTableName: camelCase(table),
         onDelete: referenceAction,
         onUpdate: referenceAction,
       }),
     );
-    await this.index(queryRunner, referencedColumnHere);
+    await this.index(queryRunner, camelCase(referencedColumnHere));
   }
 
   protected async index(queryRunner: QueryRunner, column: string): Promise<void> {
     await queryRunner.createIndex(
-      this.table,
+      camelCase(this.table),
       new TableIndex({
         name: `INDEX_${this.table}-${column}`.toUpperCase(),
-        columnNames: [column],
+        columnNames: [camelCase(column)],
       }),
     );
   }
@@ -54,10 +55,10 @@ export class BaseMigration {
   protected async uniqueIndex(queryRunner: QueryRunner, columns: string[]): Promise<void> {
     const columnsLabel = columns.join('-');
     await queryRunner.createUniqueConstraint(
-      this.table,
+      camelCase(this.table),
       new TableUnique({
         name: `UNIQUE_${this.table}_${columnsLabel}`.toUpperCase(),
-        columnNames: columns,
+        columnNames: columns.map(camelCase),
       }),
     );
   }
@@ -68,7 +69,7 @@ export class BaseMigration {
   ): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: this.table,
+        name: camelCase(this.table),
         columns: this.standardize(this.setSensibleDefault(newFields)),
       }),
     );
@@ -78,7 +79,7 @@ export class BaseMigration {
     if (!table) {
       table = this.table;
     }
-    await queryRunner.dropTable(table);
+    await queryRunner.dropTable(camelCase(table));
   }
 
   private setSensibleDefault(options: TableColumnOptions[]): TableColumnOptions[] {
@@ -103,17 +104,19 @@ export class BaseMigration {
 
     const timestamps: TableColumnOptions[] = [
       {
-        name: 'created_at',
+        name: camelCase('created_at'),
         type: 'timestamp',
         default: 'CURRENT_TIMESTAMP',
       },
       {
-        name: 'updated_at',
+        name: camelCase('updated_at'),
         type: 'timestamp',
         default: 'CURRENT_TIMESTAMP',
         onUpdate: 'CURRENT_TIMESTAMP',
       },
     ];
+
+    newFields = newFields.map(field => ({ ...field, name: camelCase(field.name) }));
 
     return [...idField, ...newFields, ...timestamps];
   }
@@ -123,15 +126,15 @@ export class BaseMigration {
     this.table = tableName;
     await this.createTable(queryRunner, [
       {
-        name: 'system_name',
+        name: camelCase('system_name'),
         type: 'varchar',
       },
       {
-        name: 'display_name',
+        name: camelCase('display_name'),
         type: 'varchar',
       },
     ]);
-    this.uniqueIndex(queryRunner, ['system_name']);
-    this.table = currentTableName;
+    this.uniqueIndex(queryRunner, [camelCase('system_name')]);
+    this.table = camelCase(currentTableName);
   }
 }

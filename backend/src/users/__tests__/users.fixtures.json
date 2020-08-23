@@ -4,7 +4,7 @@
         "username": "user1",
         "email": "user1@email.com",
         "password": "$2b$10$nH31Ut9nh6KlvWQRMcyfD.Ox5vMab5QvrzigeZRLkG6uAyevEKM/e",
-        "account_mode": "student",
+        "accountMode": "student",
         "verified": true
     }
 ]

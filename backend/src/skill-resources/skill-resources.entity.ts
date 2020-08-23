@@ -3,7 +3,7 @@ import { Skill } from '../skills/skills.entity';
 import { SkillMediaType } from '../skill-media-types/skill-media-types.entity';
 import { SkillMediaTypes } from '../skill-media-types/skill-media-types.types';
 
-@Entity('skill_resources')
+@Entity('skillResources')
 export class SkillResource {
   @PrimaryGeneratedColumn('uuid')
   id: string;

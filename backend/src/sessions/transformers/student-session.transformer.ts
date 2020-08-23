@@ -1,18 +1,17 @@
-import { SessionCandidate } from '../../session-candidates/session-candidates.entity';
+import { Session } from '../sessions.entity';
 
 export class StudentSessionTransformer {
   id: string;
-  studentName: string;
-  studentId: string;
-  tutorName: string;
-  tutorId: string;
   title: string;
-  description: string;
-  levelName: string;
-  rate: number;
-  years: number;
-  skillName: string;
-  constructor(session: SessionCandidate) {
-    this.title = session.session.title;
+  statusName: string;
+  skills: string[];
+  createdAt: string;
+
+  constructor(session: Session) {
+    this.id = session.id;
+    this.title = session.title;
+    this.statusName = session.status.displayName;
+    this.createdAt = session.createdAt;
+    this.skills = session.skills.map(({ skill: { name } }) => name);
   }
 }

@@ -1,8 +1,19 @@
+import * as React from 'react';
 import { NavigationService } from '../../services';
 import { IMenuItems } from '../../routes/types';
-import { ListStudentSkills } from './Student/List';
 import { AccountModeType } from '../../app/auth/auth.types';
-import { ListTutorSkills } from './Tutor/List';
+
+const ListTutorSkillsComponent = React.lazy(() =>
+  import(/* webpackPrefetch: true */ './Tutor/List').then(({ ListTutorSkills }) => ({
+    default: ListTutorSkills,
+  })),
+);
+
+const ListStudentSkillsComponent = React.lazy(() =>
+  import(/* webpackPrefetch: true */ './Student/List').then(({ ListStudentSkills }) => ({
+    default: ListStudentSkills,
+  })),
+);
 
 export const SkillsPath = 'skills';
 
@@ -13,7 +24,7 @@ export const SkillsRoutes: IMenuItems[] = [
     title: 'Skills',
     showOnNavigation: true,
     accountModes: [AccountModeType.Student],
-    component: ListStudentSkills,
+    component: ListStudentSkillsComponent,
   },
   {
     path: NavigationService.tutorPath(SkillsPath),
@@ -21,6 +32,6 @@ export const SkillsRoutes: IMenuItems[] = [
     title: 'Skills',
     showOnNavigation: true,
     accountModes: [AccountModeType.Tutor],
-    component: ListTutorSkills,
+    component: ListTutorSkillsComponent,
   },
 ];

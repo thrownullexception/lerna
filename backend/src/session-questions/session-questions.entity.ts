@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { Session } from '../sessions/sessions.entity';
 
-@Entity('session_questions')
+@Entity('sessionQuestions')
 export class SessionQuestion {
   @PrimaryGeneratedColumn('uuid')
   id: string;

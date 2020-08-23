@@ -29,8 +29,8 @@ export class TutorSkillsApiController {
   async show(
     @AuthenticatedUser('id', ParseUUIDPipe) userId: string,
   ): Promise<TutorSkillTransformer[]> {
-    const { tutorSkills, skillLevels } = await this.tutorSkillsService.getUserTutorSkills(userId);
-    return tutorSkills.map(tutorSkill => new TutorSkillTransformer(tutorSkill, skillLevels));
+    const tutorSkills = await this.tutorSkillsService.getUserTutorSkills(userId);
+    return tutorSkills.map(tutorSkill => new TutorSkillTransformer(tutorSkill));
   }
 
   @Post()

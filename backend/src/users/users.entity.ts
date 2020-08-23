@@ -13,6 +13,7 @@ import { BankDetail } from '../bank-details/bank-details.entity';
 import { UserSetting } from '../user-settings/user-settings.entity';
 import { Role } from '../roles/roles.entity';
 import { AccountMode } from '../account-modes/account-modes.entity';
+import { TutorSkill } from '../tutor-skills/tutor-skills.entity';
 // import { Support } from '../supports/supports.entity';
 
 @Entity('users')
@@ -56,9 +57,15 @@ export class User {
 
   @OneToMany(
     () => UserSetting,
-    userSetting => userSetting.user,
+    ({ user }) => user,
   )
   settings: UserSetting[];
+
+  @OneToMany(
+    () => TutorSkill,
+    ({ user }) => user,
+  )
+  tutorSkills: TutorSkill[];
 
   // TODO Check if this works
   @ManyToOne(
@@ -76,15 +83,6 @@ export class User {
     role => role.users,
   )
   role: Role;
-
-  // @OneToMany(
-  //   () => UserNotification,
-  //   userNotification => userNotification.user,
-  // )
-  // notifications: UserNotification[];
-
-  // @OneToMany(() => Support, support => support.user)
-  // supports: Support[];
 
   @OneToOne(
     () => BankDetail,

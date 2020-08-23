@@ -11,8 +11,8 @@ describe('TutorSkillSlice', () => {
   const baseTutorSkillResponse = new TutorSkillResponse({
     id: baseId,
     skillId: 'some skill id',
-    level: 'some level',
-    levelName: 'some level name',
+    levelSystemName: 'some level',
+    levelDisplayName: 'some level name',
     rate: 1,
     years: 1,
     skillName: 1,
@@ -32,8 +32,8 @@ describe('TutorSkillSlice', () => {
       Array [
         TutorSkillResponse {
           "id": "some unique id",
-          "level": "some level",
-          "levelName": "some level name",
+          "levelDisplayName": "some level name",
+          "levelSystemName": "some level",
           "rate": 1,
           "skillId": "some skill id",
           "skillName": 1,
@@ -53,8 +53,8 @@ describe('TutorSkillSlice', () => {
       Array [
         TutorSkillResponse {
           "id": "some unique id",
-          "level": "some level",
-          "levelName": "some level name",
+          "levelDisplayName": "some level name",
+          "levelSystemName": "some level",
           "rate": 1,
           "skillId": "some skill id",
           "skillName": 1,
@@ -68,8 +68,8 @@ describe('TutorSkillSlice', () => {
     const payload = new TutorSkillResponse({
       id: baseId,
       skillId: 'updated skill id',
-      level: 'updated level id',
-      levelName: 'updates level name',
+      levelSystemName: 'updated level id',
+      levelDisplayName: 'updates level name',
       rate: 2,
       years: 2,
       skillName: 2,
@@ -85,8 +85,8 @@ describe('TutorSkillSlice', () => {
       Array [
         TutorSkillResponse {
           "id": "some unique id",
-          "level": "updated level id",
-          "levelName": "updates level name",
+          "levelDisplayName": "updates level name",
+          "levelSystemName": "updated level id",
           "rate": 2,
           "skillId": "updated skill id",
           "skillName": 2,

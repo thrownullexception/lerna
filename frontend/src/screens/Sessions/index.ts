@@ -1,14 +1,40 @@
+import * as React from 'react';
 import { NavigationService } from '../../services';
 import { IMenuItems } from '../../routes/types';
-import { CreateSession } from './Create';
-import { StudentSessions } from './Student';
-import { TutorSessions } from './Tutor';
 import { AccountModeType } from '../../app/auth/auth.types';
 import { CreateSessionPrefix } from './Create/CreateSession.types';
 import { StudentSessionsPrefix } from './Student/StudentSessions.types';
 import { TutorSessionsPrefix } from './Tutor/TutorSessions.types';
-import { TutorSessionDetails } from './Tutor/Details';
-import { StudentSessionDetails } from './Student/Details';
+
+const StudentSessionsComponent = React.lazy(() =>
+  import(/* webpackPrefetch: true */ './Student').then(({ StudentSessions }) => ({
+    default: StudentSessions,
+  })),
+);
+
+const CreateSessionComponent = React.lazy(() =>
+  import(/* webpackPrefetch: true */ './Create').then(({ CreateSession }) => ({
+    default: CreateSession,
+  })),
+);
+
+const StudentSessionDetailsComponent = React.lazy(() =>
+  import(/* webpackPrefetch: true */ './Student/Details').then(({ StudentSessionDetails }) => ({
+    default: StudentSessionDetails,
+  })),
+);
+
+const TutorSessionDetailsComponent = React.lazy(() =>
+  import(/* webpackPrefetch: true */ './Tutor/Details').then(({ TutorSessionDetails }) => ({
+    default: TutorSessionDetails,
+  })),
+);
+
+const TutorSessionsComponent = React.lazy(() =>
+  import(/* webpackPrefetch: true */ './Tutor').then(({ TutorSessions }) => ({
+    default: TutorSessions,
+  })),
+);
 
 export const SessionsPath = 'session';
 
@@ -25,7 +51,7 @@ export const SessionsRoutes: IMenuItems[] = [
     title: 'Create Session',
     showOnNavigation: false,
     accountModes: [AccountModeType.Student],
-    component: CreateSession,
+    component: CreateSessionComponent,
   },
   {
     path: NavigationService.studentPath(prefixRoute(StudentSessionsPrefix)),
@@ -33,7 +59,7 @@ export const SessionsRoutes: IMenuItems[] = [
     title: 'Sessions',
     showOnNavigation: true,
     accountModes: [AccountModeType.Student],
-    component: StudentSessions,
+    component: StudentSessionsComponent,
   },
   {
     path: NavigationService.tutorPath(prefixRoute(TutorSessionsPrefix)),
@@ -41,7 +67,7 @@ export const SessionsRoutes: IMenuItems[] = [
     title: 'Sessions',
     showOnNavigation: true,
     accountModes: [AccountModeType.Tutor],
-    component: TutorSessions,
+    component: TutorSessionsComponent,
   },
   {
     path: NavigationService.tutorPath(prefixRoute(':sessionId')),
@@ -49,7 +75,7 @@ export const SessionsRoutes: IMenuItems[] = [
     title: 'Session Details',
     showOnNavigation: false,
     accountModes: [AccountModeType.Tutor],
-    component: TutorSessionDetails,
+    component: TutorSessionDetailsComponent,
   },
   {
     path: NavigationService.studentPath(prefixRoute(':sessionId')),
@@ -57,6 +83,6 @@ export const SessionsRoutes: IMenuItems[] = [
     title: 'Session Details',
     showOnNavigation: false,
     accountModes: [AccountModeType.Student],
-    component: StudentSessionDetails,
+    component: StudentSessionDetailsComponent,
   },
 ];

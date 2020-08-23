@@ -1,8 +1,8 @@
-import { StudentSessionResponse } from '../../../../app/sessions/responses';
+import { StudentSessionDetailsResponse } from '../../../../app/sessions/responses';
 
 export interface IProps {
   fetchStudentSessionDetails: (sessionId: string) => void;
-  studentSessionDetails: StudentSessionResponse;
+  studentSessionDetails: StudentSessionDetailsResponse;
 }
 
 export type StateProps = Pick<IProps, 'studentSessionDetails'>;

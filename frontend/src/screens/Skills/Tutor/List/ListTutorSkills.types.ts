@@ -33,7 +33,7 @@ export type StateProps = Pick<
 export interface ITutorSkillForm {
   id?: string;
   skillId?: string;
-  level?: string;
+  levelSystemName?: string;
   rate?: number;
   years?: number;
 }

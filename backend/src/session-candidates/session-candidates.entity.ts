@@ -4,7 +4,7 @@ import { User } from '../users/users.entity';
 import { SessionCandidateStatus } from '../session-candidate-statuses/session-candidate-statuses.entity';
 import { SessionCandidateStatusTypes } from '../session-candidate-statuses/session-candidate-statuses.types';
 
-@Entity('session_candidates')
+@Entity('sessionCandidates')
 export class SessionCandidate {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -47,10 +47,12 @@ export class SessionCandidate {
     ({ systemName }) => systemName,
   )
   @JoinColumn({
-    name: 'status_system_name',
+    name: 'statusSystemName',
     referencedColumnName: 'systemName',
   })
   status: SessionCandidateStatus;
 
   createdAt: string;
+
+  created_at: string;
 }

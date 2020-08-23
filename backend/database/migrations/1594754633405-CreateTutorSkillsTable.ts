@@ -17,7 +17,7 @@ export class CreateTutorSkillsTable1594754633405 extends BaseMigration
         type: 'uuid',
       },
       {
-        name: 'level',
+        name: 'level_system_name',
         type: 'varchar',
       },
       {
@@ -41,7 +41,7 @@ export class CreateTutorSkillsTable1594754633405 extends BaseMigration
     });
     await this.reference(queryRunner, {
       table: 'skill_levels',
-      referencedColumnHere: 'level',
+      referencedColumnHere: 'level_system_name',
       referencedColumnThere: 'system_name',
       referenceAction: ReferenceAction.Restrict,
     });
