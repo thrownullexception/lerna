@@ -14,11 +14,11 @@ export class CursorQueryParametersPipe implements PipeTransform {
     return {
       ...value,
       afterCursor: this.toDatabaseTimeFormat(value.afterCursor),
-      beforeCursor: this.toDatabaseTimeFormat(value.beforeCursor),
+      beforeCursor: this.toDatabaseTimeFormat(value.beforeCursor, true),
     };
   }
 
-  private toDatabaseTimeFormat(cursor: string): string {
+  private toDatabaseTimeFormat(cursor: string, reduceTheTime?: boolean): string {
     if (!cursor) {
       return cursor;
     }
@@ -27,10 +27,14 @@ export class CursorQueryParametersPipe implements PipeTransform {
 
     const [column, ...rest] = decodedTime.split(':');
 
+    let timeStamp = new Date(rest.join(':'));
+
+    if (reduceTheTime) {
+      timeStamp = new Date(timeStamp.getTime() + 1000);
+    }
+
     return Buffer.from(
-      column +
-        ':' +
-        encodeURIComponent(dateFormat(new Date(rest.join(':')), 'yyyy-mm-dd HH:MM:ss')),
+      column + ':' + encodeURIComponent(dateFormat(timeStamp, 'yyyy-mm-dd HH:MM:ss')),
     ).toString('base64');
   }
 }

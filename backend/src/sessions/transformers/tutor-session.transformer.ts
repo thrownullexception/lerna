@@ -1,4 +1,4 @@
-import { SessionCandidate } from '../session-candidates/session-candidates.entity';
+import { SessionCandidate } from '../../session-candidates/session-candidates.entity';
 
 export class TutorSessionTransformer {
   id: string;
