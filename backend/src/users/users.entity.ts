@@ -13,7 +13,7 @@ import { BankDetail } from '../bank-details/bank-details.entity';
 import { UserSetting } from '../user-settings/user-settings.entity';
 import { Role } from '../roles/roles.entity';
 import { AccountMode } from '../account-modes/account-modes.entity';
-import { TutorSkill } from 'src/tutor-skills/tutor-skills.entity';
+import { TutorSkill } from '../tutor-skills/tutor-skills.entity';
 // import { Support } from '../supports/supports.entity';
 
 @Entity('users')

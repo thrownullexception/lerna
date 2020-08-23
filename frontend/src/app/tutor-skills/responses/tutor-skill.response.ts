@@ -6,7 +6,7 @@ import { SkillsLevelsSelectors } from '../../skill-levels/skill-levels.selectors
 export class TutorSkillResponse {
   id: string;
   skillId: string;
-  level: string;
+  levelSystemName: string;
   levelDisplayName: string;
   rate: number;
   years: number;
@@ -15,7 +15,7 @@ export class TutorSkillResponse {
   constructor(jsonObject: object, state?: IStore) {
     this.id = get(jsonObject, 'id');
     this.skillId = get(jsonObject, 'skillId');
-    this.level = get(jsonObject, 'level');
+    this.levelSystemName = get(jsonObject, 'levelSystemName');
     this.levelDisplayName = get(jsonObject, 'levelDisplayName');
     this.rate = get(jsonObject, 'rate');
     this.years = get(jsonObject, 'years');
@@ -24,7 +24,7 @@ export class TutorSkillResponse {
     if (state) {
       const levels = SkillsLevelsSelectors.selectSkillLevels(state);
       this.levelDisplayName =
-        '' + levels.find(({ systemName }) => systemName === this.level)?.displayName;
+        '' + levels.find(({ systemName }) => systemName === this.levelSystemName)?.displayName;
 
       const skills = SkillsSelectors.selectSkillsWithNoChildrenList(state);
       this.skillName = '' + skills.find(({ id }) => id === this.skillId)?.name;

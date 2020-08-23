@@ -3,12 +3,12 @@
         "id": "c351ee24-9a21-44ac-ae92-766769f80233",
         "question": "Question For Tutor 1",
         "answer": "Answer 1",
-        "account_mode_system_name": "tutor"
+        "accountModeSystemName": "tutor"
     },
     {
         "id": "b80bc459-8879-4a3d-822e-2c255c9832f3",
         "question": "Question For Student 2",
         "answer": "Answer 2",
-        "account_mode_system_name": "student"
+        "accountModeSystemName": "student"
     }
 ]

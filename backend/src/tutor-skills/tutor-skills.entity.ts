@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { SkillLevels } from '../skill-levels/skill-levels.types';
 import { Skill } from '../skills/skills.entity';
-import { User } from 'src/users/users.entity';
+import { User } from '../users/users.entity';
 import { SkillLevel } from '../skill-levels/skill-levels.entity';
 
 @Entity('tutorSkills')

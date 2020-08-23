@@ -31,7 +31,7 @@ export class Faq {
     ({ systemName }) => systemName,
   )
   @JoinColumn({
-    name: 'account_mode_system_name',
+    name: 'accountModeSystemName',
     referencedColumnName: 'systemName',
   })
   accountMode: AccountMode;
