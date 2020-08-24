@@ -1,21 +1,21 @@
 import dateformat from 'dateformat';
-import moment from 'moment';
+import formatDistance from 'date-fns/formatDistance';
 
 export class TimeFilters {
-  static formatTime(time: string, type?: string): string {
+  static formatTime(time: string, type?: 'Expressive' | 'DateAndTime'): string {
     if (!time) {
       return 'N/A';
     }
-    if (type === 'L') {
+    if (type === 'Expressive') {
       return dateformat(time, 'dddd, mmmm dS, yyyy, h:MM:ss TT');
     }
-    if (type === 'G') {
-      return dateformat(time, 'dS mmm, hh:MM');
+    if (type === 'DateAndTime') {
+      return dateformat(time, 'dS mmm yyyy - hh:MM');
     }
     return dateformat(time, 'mmmm dS, yyyy');
   }
 
   static timeAgo(time: string): string {
-    return moment(time).fromNow();
+    return formatDistance(new Date(time), new Date(), { addSuffix: true });
   }
 }
