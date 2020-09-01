@@ -32,9 +32,7 @@ export function studentGuard(
     }
   }
 
-  const mapStateToProps = (state: IStore) => ({
+  return connect((state: IStore) => ({
     accountMode: AuthSelectors.selectAccountMode(state),
-  });
-
-  return connect(mapStateToProps)(GuardedComponent) as React.ComponentType;
+  }))(GuardedComponent) as React.ComponentType;
 }

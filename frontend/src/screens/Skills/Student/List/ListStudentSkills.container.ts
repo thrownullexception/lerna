@@ -8,8 +8,8 @@ import { SkillsActions } from '../../../../app/skills/skills.actions';
 import { StudentSkillsActions } from '../../../../app/student-skills/student-skills.actions';
 import { SkillsPresentationMode } from '../../../../app/student-skills/student-skills.types';
 
-const mapStateToProps = (state: IStore): StateProps => {
-  return {
+export const ListStudentSkillsContainer = connect(
+  (state: IStore): StateProps => ({
     skillsListToPresent: StudentSkillsSelectors.selectSkillsListToPresent(state),
     skillInHierarchy: StudentSkillsSelectors.selectSkillInHierarchy(state),
     currentStudentSkill: StudentSkillsSelectors.selectCurrentStudentSkill(state),
@@ -17,11 +17,8 @@ const mapStateToProps = (state: IStore): StateProps => {
     favouriteSkillIds: StudentSkillsSelectors.selectFavouriteSkillIds(state),
     completedRoadMapIds: StudentSkillsSelectors.selectCompletedRoadMapIds(state),
     skillPresentationMode: StudentSkillsSelectors.selectSkillPresentationMode(state),
-  };
-};
-
-const mapDispatchToProps = (dispatch: IThunkDispatch): DispatchProps => {
-  return {
+  }),
+  (dispatch: IThunkDispatch): DispatchProps => ({
     getSkillsWithHeirarchies: () => dispatch(StudentSkillsActions.getSkillHeirarchies()),
     getSkillsList: () => dispatch(SkillsActions.getSkillsList()),
     getMyFavouriteSkillsAndCompletedRoadMaps: () =>
@@ -35,12 +32,5 @@ const mapDispatchToProps = (dispatch: IThunkDispatch): DispatchProps => {
     goBackInSkillsDepth: () => dispatch(StudentSkillsActions.goBackInSkillsDepth()),
     setCurrentSkillId: (skillId: string) =>
       dispatch(StudentSkillsActions.setCurrentSkillId(skillId)),
-  };
-};
-
-const connected = connect(
-  mapStateToProps,
-  mapDispatchToProps,
+  }),
 )(ListStudentSkills) as React.ComponentType;
-
-export { connected as ListStudentSkillsContainer };

@@ -35,11 +35,9 @@ export function permissionGaurd(
     }
   }
 
-  const mapStateToProps = (state: IStore) => ({
+  return connect((state: IStore) => ({
     isAuthenticated: AuthSelectors.selectIsAuthenticated(state),
     permissions: [],
     role: state.auth.role,
-  });
-
-  return connect(mapStateToProps)(PermissionComponent) as React.ComponentType;
+  }))(PermissionComponent) as React.ComponentType;
 }

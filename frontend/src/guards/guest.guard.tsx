@@ -27,9 +27,7 @@ export function guestGuard(
     }
   }
 
-  const mapStateToProps = (state: IStore) => ({
+  return connect((state: IStore) => ({
     isAuthenticated: AuthSelectors.selectIsAuthenticated(state),
-  });
-
-  return connect(mapStateToProps)(AuthenticatedComponent) as React.ComponentType;
+  }))(AuthenticatedComponent) as React.ComponentType;
 }

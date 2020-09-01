@@ -11,17 +11,14 @@ import { SkillLevelsActions } from '../../../../app/skill-levels/skill-levels.ac
 import { SkillsSelectors } from '../../../../app/skills/skills.selectors';
 import { SkillsLevelsSelectors } from '../../../../app/skill-levels/skill-levels.selectors';
 
-const mapStateToProps = (state: IStore): StateProps => {
-  return {
+export const ListTutorSkillsContainer = connect(
+  (state: IStore): StateProps => ({
     tutorSkills: TutorSkillsSelectors.selectTutorSkills(state),
     isMakingFormRequest: RequestStatusSelectors.selectIsMakingFormRequest(state),
     skillLevels: SkillsLevelsSelectors.selectSkillLevels(state),
     skillsWithNoChildren: SkillsSelectors.selectSkillsWithNoChildrenList(state),
-  };
-};
-
-const mapDispatchToProps = (dispatch: IThunkDispatch): DispatchProps => {
-  return {
+  }),
+  (dispatch: IThunkDispatch): DispatchProps => ({
     getTutorSkills: () => dispatch(TutorSkillsActions.getTutorSkills()),
     deleteTutorSkill: (tutorSkillId: string) =>
       dispatch(TutorSkillsActions.deleteTutorSkill(tutorSkillId)),
@@ -31,12 +28,5 @@ const mapDispatchToProps = (dispatch: IThunkDispatch): DispatchProps => {
       dispatch(TutorSkillsActions.createTutorSkill(tutorSkill)),
     updateTutorSkill: (tutorSkill: ITutorSkillForm) =>
       dispatch(TutorSkillsActions.updateTutorSkill(tutorSkill)),
-  };
-};
-
-const connected = connect(
-  mapStateToProps,
-  mapDispatchToProps,
+  }),
 )(ListTutorSkills) as React.ComponentType;
-
-export { connected as ListTutorSkillsContainer };
