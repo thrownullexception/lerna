@@ -43,50 +43,50 @@ export class ListStudentSkills extends React.Component<IProps> {
     const isFetching = false;
     return (
       <div className="list-group">
-        <Spinner isFetching={isFetching}>
-          {skillsListToPresent.map(({ id, name, hasChildren }) => {
-            const hasDepth =
-              hasChildren && skillPresentationMode === SkillsPresentationMode.AllSkills;
-            return (
-              <button
-                className="list-group-item link-like"
-                onClick={() => {
-                  getStudentSkill(id);
-                  if (hasDepth) {
-                    setCurrentSkillId(id);
-                  }
-                }}
-                key={id}
-              >
-                <div className="event-indicator bg-info" />
-                <h6 className="mg-t-5">
-                  {name}
-                  {hasDepth ? (
-                    <span className="ml-auto">
-                      <i
-                        className="fe fe-arrow-right text-primary mr-2"
-                        data-toggle="tooltip"
-                        title=""
-                        data-placement="top"
-                      />
-                    </span>
-                  ) : null}
-                </h6>
-              </button>
-            );
-          })}
-          {skillPresentationMode === SkillsPresentationMode.Favourites &&
-          skillsListToPresent.length === 0 ? (
+        {/* <Spinner isFetching={isFetching}> */}
+        {skillsListToPresent.map(({ id, name, hasChildren }) => {
+          const hasDepth =
+            hasChildren && skillPresentationMode === SkillsPresentationMode.AllSkills;
+          return (
             <button
               className="list-group-item link-like"
               onClick={() => {
-                noop();
+                getStudentSkill(id);
+                if (hasDepth) {
+                  setCurrentSkillId(id);
+                }
               }}
+              key={id}
             >
-              <h6 className="mg-t-5">You haven't favourited any skill yet</h6>
+              <div className="event-indicator bg-info" />
+              <h6 className="mg-t-5">
+                {name}
+                {hasDepth ? (
+                  <span className="ml-auto">
+                    <i
+                      className="fe fe-arrow-right text-primary mr-2"
+                      data-toggle="tooltip"
+                      title=""
+                      data-placement="top"
+                    />
+                  </span>
+                ) : null}
+              </h6>
             </button>
-          ) : null}
-        </Spinner>
+          );
+        })}
+        {skillPresentationMode === SkillsPresentationMode.Favourites &&
+        skillsListToPresent.length === 0 ? (
+          <button
+            className="list-group-item link-like"
+            onClick={() => {
+              noop();
+            }}
+          >
+            <h6 className="mg-t-5">You haven't favourited any skill yet</h6>
+          </button>
+        ) : null}
+        {/* </Spinner> */}
       </div>
     );
   };
@@ -296,20 +296,20 @@ export class ListStudentSkills extends React.Component<IProps> {
         <div className="col-xl-9 col-md-12">
           <div className="card mg-b-20">
             <div className="card-body">
-              <Spinner isFetching={isFetching}>
-                {this.renderSkillHeader()}
-                <div className="panel panel-primary tabs-style-3">
-                  {this.renderSkillTabPills()}
-                  <div className="panel-body tabs-menu-body">
-                    <TabContent activeTab={currentTab}>
-                      <TabPane tabId={1}>{this.renderSkillOverviewTabContent()}</TabPane>
-                      <TabPane tabId={2}>Community Tab</TabPane>
-                      <TabPane tabId={3}>Road Map Tab</TabPane>
-                      <TabPane tabId={4}>Resources</TabPane>
-                    </TabContent>
-                  </div>
+              {/* <Spinner isFetching={isFetching}> */}
+              {this.renderSkillHeader()}
+              <div className="panel panel-primary tabs-style-3">
+                {this.renderSkillTabPills()}
+                <div className="panel-body tabs-menu-body">
+                  <TabContent activeTab={currentTab}>
+                    <TabPane tabId={1}>{this.renderSkillOverviewTabContent()}</TabPane>
+                    <TabPane tabId={2}>Community Tab</TabPane>
+                    <TabPane tabId={3}>Road Map Tab</TabPane>
+                    <TabPane tabId={4}>Resources</TabPane>
+                  </TabContent>
                 </div>
-              </Spinner>
+              </div>
+              {/* </Spinner> */}
             </div>
           </div>
         </div>

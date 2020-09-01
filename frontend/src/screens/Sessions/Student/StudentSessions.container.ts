@@ -6,24 +6,17 @@ import { DispatchProps, StateProps } from './StudentSessions.types';
 import { SessionsActions } from '../../../app/sessions/sessions.actions';
 import { SessionsSelectors } from '../../../app/sessions/sessions.selectors';
 import { Cursor } from '../../../app/types';
+import { RequestStatusSelectors } from '../../../app/request-status/request-status.selectors';
 
-const mapStateToProps = (state: IStore): StateProps => {
-  return {
+export const StudentSessionsContainer = connect(
+  (state: IStore): StateProps => ({
     studentSessionsCursor: SessionsSelectors.selectStudentSessionCursor(state),
     studentSessionsData: SessionsSelectors.selectStudentSessionsData(state),
-  };
-};
-
-const mapDispatchToProps = (dispatch: IThunkDispatch): DispatchProps => {
-  return {
+    isMakingDataRequest: RequestStatusSelectors.selectIsMakingDataRequest(state),
+  }),
+  (dispatch: IThunkDispatch): DispatchProps => ({
     fetchStudentSessions: (cursor: Cursor) => {
       dispatch(SessionsActions.fetchStudentSessions(cursor));
     },
-  };
-};
-const connected = connect(
-  mapStateToProps,
-  mapDispatchToProps,
+  }),
 )(StudentSessions) as React.ComponentType;
-
-export { connected as StudentSessionsContainer };

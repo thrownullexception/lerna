@@ -10,20 +10,20 @@ export class FaqsList extends React.PureComponent<IProps> {
   render() {
     const { faqs, isFetching } = this.props;
     return (
-      <Spinner isFetching={isFetching}>
-        <div className="row">
-          <div className="col-md-12">
-            <div className="card">
-              {faqs.map(({ question, answer, id }) => (
-                <div className="card-body" key={id}>
-                  <h4 className="faqs-list__question">{question}</h4>
-                  <p className="faqs-list__answer">{answer}</p>
-                </div>
-              ))}
-            </div>
+      // <Spinner isFetching={isFetching}>
+      <div className="row">
+        <div className="col-md-12">
+          <div className="card">
+            {faqs.map(({ question, answer, id }) => (
+              <div className="card-body" key={id}>
+                <h4 className="faqs-list__question">{question}</h4>
+                <p className="faqs-list__answer">{answer}</p>
+              </div>
+            ))}
           </div>
         </div>
-      </Spinner>
+      </div>
+      // </Spinner>
     );
   }
 }

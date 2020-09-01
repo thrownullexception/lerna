@@ -1,7 +1,6 @@
-import { Dispatch } from 'redux';
-import { ThunkInterface } from '../../shared/types';
+import { ThunkInterface, IThunkDispatch } from '../../shared/types';
 import { AccountModeType } from '../auth/auth.types';
-import { RequestService, ToastService, ProgressService, NavigationService } from '../../services';
+import { RequestService, ToastService, NavigationService } from '../../services';
 import { transformCursorData, queryStringifyCursor, mutateAUUIDIdOnMe } from '../utils';
 import { ICreateSessionForm } from '../../screens/Sessions/Create/CreateSession.types';
 import {
@@ -14,12 +13,15 @@ import { Cursor } from '../types';
 import { sessionsSlice } from './sessions.ducks';
 import { requestStatusSlice } from '../request-status/request-status.ducks';
 import { SessionsPath } from '../../screens/Sessions';
+import { RequestStatusActions } from '../request-status/request-status.actions';
+import { SessionsSelectors } from './sessions.selectors';
+import { IStore } from '../../store/rootReducers';
 
 const BASE_PATH = 'sessions';
 
 export class SessionsActions {
   static createSession(createSessionForm: ICreateSessionForm): ThunkInterface<void> {
-    return async (dispatch: Dispatch) => {
+    return async (dispatch: IThunkDispatch) => {
       dispatch(requestStatusSlice.actions.formRequestStarted());
       try {
         await RequestService.post(BASE_PATH, mutateAUUIDIdOnMe(createSessionForm));
@@ -37,8 +39,12 @@ export class SessionsActions {
   }
 
   static fetchStudentSessions(cursor: Cursor): ThunkInterface<void> {
-    return async (dispatch: Dispatch) => {
-      ProgressService.start();
+    return async (dispatch: IThunkDispatch, getState: () => IStore) => {
+      dispatch(
+        RequestStatusActions.startRequestIndicator(
+          SessionsSelectors.selectStudentSessionsData(getState()),
+        ),
+      );
       try {
         const { data } = await RequestService.get(
           `${BASE_PATH}/${AccountModeType.Student}${queryStringifyCursor(cursor)}`,
@@ -51,12 +57,12 @@ export class SessionsActions {
       } catch (e) {
         ToastService.error(e);
       }
-      ProgressService.end();
+      dispatch(RequestStatusActions.endRequestIndicator());
     };
   }
 
   static fetchStudentSessionDetails(sessionId: string): ThunkInterface<void> {
-    return async (dispatch: Dispatch) => {
+    return async (dispatch: IThunkDispatch) => {
       dispatch(requestStatusSlice.actions.dataRequestStarted());
       try {
         const { data } = await RequestService.get(
@@ -68,13 +74,13 @@ export class SessionsActions {
       } catch (e) {
         ToastService.error(e);
       }
-      dispatch(requestStatusSlice.actions.dataRequestStarted());
+      dispatch(requestStatusSlice.actions.dataRequestEnded());
     };
   }
 
   static fetchTutorSessions(cursor: Cursor): ThunkInterface<void> {
-    return async (dispatch: Dispatch) => {
-      ProgressService.start();
+    return async (dispatch: IThunkDispatch) => {
+      dispatch(requestStatusSlice.actions.dataRequestStarted());
       try {
         const { data } = await RequestService.get(
           `${BASE_PATH}/${AccountModeType.Tutor}${queryStringifyCursor(cursor)}`,
@@ -87,12 +93,12 @@ export class SessionsActions {
       } catch (e) {
         ToastService.error(e);
       }
-      ProgressService.end();
+      dispatch(requestStatusSlice.actions.dataRequestEnded());
     };
   }
 
   static fetchTutorSessionDetails(sessionId: string): ThunkInterface<void> {
-    return async (dispatch: Dispatch) => {
+    return async (dispatch: IThunkDispatch) => {
       dispatch(requestStatusSlice.actions.dataRequestStarted());
       try {
         const { data } = await RequestService.get(
@@ -104,7 +110,7 @@ export class SessionsActions {
       } catch (e) {
         ToastService.error(e);
       }
-      dispatch(requestStatusSlice.actions.dataRequestStarted());
+      dispatch(requestStatusSlice.actions.dataRequestEnded());
     };
   }
 }

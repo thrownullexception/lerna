@@ -3,7 +3,7 @@ import { BaseMigration, ReferenceAction } from './base/base-migration';
 
 export class CreateRolePermissionMatchingTable1593940676418 extends BaseMigration
   implements MigrationInterface {
-  table = 'role_permissions_matching';
+  table = 'rolePermissionsMatching';
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await this.createTable(queryRunner, [

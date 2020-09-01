@@ -7,7 +7,7 @@ export class CursorQueryParametersPipe implements PipeTransform {
   // TODO Test me
   transform(value: ICursorParametersDTO): ICursorParametersDTO {
     if (!value.limit) {
-      value.limit = 10;
+      value.limit = 2;
     }
 
     value.limit = +value.limit;

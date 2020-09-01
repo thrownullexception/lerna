@@ -1,5 +1,4 @@
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import logger from 'redux-logger';
 import { routerMiddleware } from 'connected-react-router';
 import { persistReducer, persistStore, PERSIST } from 'redux-persist';
 import autoMergeLevel2 from 'redux-persist/es/stateReconciler/autoMergeLevel2';
@@ -23,7 +22,6 @@ export default () => {
         ignoredActions: [PERSIST],
       },
     }),
-    logger,
     routerMiddleware(history),
   ];
 
