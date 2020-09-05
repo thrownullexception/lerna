@@ -2,6 +2,10 @@ import axios from 'axios';
 import { ENV } from '../../env';
 import { JWT_TOKEN_STORAGE_KEY } from '../../app/auth/auth.types';
 import { StorageService } from '../storage/storage.service';
+import { NavigationService } from '../navigation/navigation.service';
+import { AuthSignInPath } from '../../screens/Auth/Auth.types';
+
+const UNAUTHORIZED_STATUS_CODE = 401;
 
 const RequestService = axios.create();
 
@@ -18,7 +22,14 @@ RequestService.interceptors.request.use(
 
 RequestService.interceptors.response.use(
   response => response,
-  error => Promise.reject(error),
+  error => {
+    if (error.response.status === UNAUTHORIZED_STATUS_CODE) {
+      StorageService.removeString(JWT_TOKEN_STORAGE_KEY);
+      NavigationService.goTo(AuthSignInPath);
+      return Promise.resolve(null);
+    }
+    return Promise.reject(error);
+  },
 );
 
 export { RequestService };

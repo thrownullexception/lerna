@@ -6,20 +6,12 @@ import { DispatchProps, StateProps } from './TutorSessionDetails.types';
 import { SessionsActions } from '../../../../app/sessions/sessions.actions';
 import { SessionsSelectors } from '../../../../app/sessions/sessions.selectors';
 
-const mapStateToProps = (state: IStore): StateProps => {
-  return {
+export const TutorSessionDetailsContainer = connect(
+  (state: IStore): StateProps => ({
     tutorSessionDetails: SessionsSelectors.selectTutorSessionDetails(state),
-  };
-};
-
-const mapDispatchToProps = (dispatch: IThunkDispatch): DispatchProps => ({
-  fetchTutorSessionDetails: (sessionId: string) =>
-    dispatch(SessionsActions.fetchTutorSessionDetails(sessionId)),
-});
-
-const connected = connect(
-  mapStateToProps,
-  mapDispatchToProps,
+  }),
+  (dispatch: IThunkDispatch): DispatchProps => ({
+    fetchTutorSessionDetails: (sessionId: string) =>
+      dispatch(SessionsActions.fetchTutorSessionDetails(sessionId)),
+  }),
 )(TutorSessionDetails) as React.ComponentType;
-
-export { connected as TutorSessionDetailsContainer };

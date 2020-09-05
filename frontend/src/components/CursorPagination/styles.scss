@@ -1,0 +1,9 @@
+.cursor-pagination {
+    &__disabled{
+        color: #aaa;
+        cursor: not-allowed;
+        &:hover{
+            color: #aaa;
+        }
+    }
+}

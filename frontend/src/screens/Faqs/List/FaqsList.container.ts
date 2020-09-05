@@ -7,20 +7,14 @@ import { FaqsActions } from '../../../app/faqs/faqs.actions';
 import { RequestStatusSelectors } from '../../../app/request-status/request-status.selectors';
 import { FaqsSelectors } from '../../../app/faqs/faqs.selectors';
 
-const mapStateToProps = (state: IStore): StateProps => {
-  return {
+export const FaqsListContainer = connect(
+  (state: IStore): StateProps => ({
     faqs: FaqsSelectors.selectFaqs(state),
-    isFetching: RequestStatusSelectors.selectIsMakingDataRequest(state),
-  };
-};
-
-const mapDispatchToProps = (dispatch: IThunkDispatch): DispatchProps => {
-  return {
+    selectIsMakingDataRequest: RequestStatusSelectors.selectIsMakingDataRequest(state),
+  }),
+  (dispatch: IThunkDispatch): DispatchProps => ({
     getFaqs: () => {
       dispatch(FaqsActions.getFaqs());
     },
-  };
-};
-const connected = connect(mapStateToProps, mapDispatchToProps)(FaqsList) as React.ComponentType;
-
-export { connected as FaqsListContainer };
+  }),
+)(FaqsList) as React.ComponentType;

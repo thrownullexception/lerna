@@ -6,20 +6,13 @@ import { DispatchProps, StateProps, ISignUpForm } from './SignUp.types';
 import { AuthActions } from '../../../app/auth/auth.actions';
 import { RequestStatusSelectors } from '../../../app/request-status/request-status.selectors';
 
-const mapStateToProps = (state: IStore): StateProps => {
-  return {
+export const SignUpContainer = connect(
+  (state: IStore): StateProps => ({
     isMakingRequest: RequestStatusSelectors.selectIsMakingFormRequest(state),
-  };
-};
-
-const mapDispatchToProps = (dispatch: IThunkDispatch): DispatchProps => {
-  return {
+  }),
+  (dispatch: IThunkDispatch): DispatchProps => ({
     doSignUp: (signUpForm: ISignUpForm) => {
       dispatch(AuthActions.doSignUp(signUpForm));
     },
-  };
-};
-
-const connected = connect(mapStateToProps, mapDispatchToProps)(SignUp);
-
-export { connected as SignUpContainer };
+  }),
+)(SignUp);

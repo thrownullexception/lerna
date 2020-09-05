@@ -10,25 +10,16 @@ import { SkillsSelectors } from '../../../app/skills/skills.selectors';
 import { SkillsActions } from '../../../app/skills/skills.actions';
 import { SkillLevelsActions } from '../../../app/skill-levels/skill-levels.actions';
 
-const mapStateToProps = (state: IStore): StateProps => {
-  return {
+export const CreateSessionContainer = connect(
+  (state: IStore): StateProps => ({
     isMakingFormRequest: RequestStatusSelectors.selectIsMakingFormRequest(state),
     skillsWithNoChildren: SkillsSelectors.selectSkillsWithNoChildrenList(state),
     skillLevels: SkillsLevelsSelectors.selectSkillLevels(state),
-  };
-};
-
-const mapDispatchToProps = (dispatch: IThunkDispatch): DispatchProps => {
-  return {
+  }),
+  (dispatch: IThunkDispatch): DispatchProps => ({
     createSession: (createSessionForm: ICreateSessionForm) =>
       dispatch(SessionsActions.createSession(createSessionForm)),
     getSkillLevels: () => dispatch(SkillLevelsActions.getSkillLevels()),
     getSkillsWithNoChildrenList: () => dispatch(SkillsActions.getSkillsWithNoChildrenList()),
-  };
-};
-const connected = connect(
-  mapStateToProps,
-  mapDispatchToProps,
+  }),
 )(CreateSession) as React.ComponentType;
-
-export { connected as CreateSessionContainer };
