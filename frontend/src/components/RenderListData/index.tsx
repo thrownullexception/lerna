@@ -7,7 +7,7 @@ import { Spinner } from '../Spinner';
 
 interface IProps {
   isMakingDataRequest: boolean;
-  dataFetchingAction: (cursor: Cursor) => void;
+  dataFetchingAction?: (cursor: Cursor) => void;
   cursor: Cursor;
   emptyText: string;
 }
@@ -30,12 +30,14 @@ export const RenderListData: React.SFC<IProps> = ({
   return (
     <>
       {showSpinner}
-      {children}
-      <CursorPagination
-        cursor={cursor}
-        fetchData={dataFetchingAction}
-        isMakingDataRequest={isMakingDataRequest}
-      />
+      {children ? <div className="card ">{children}</div> : null}
+      {dataFetchingAction ? (
+        <CursorPagination
+          cursor={cursor}
+          fetchData={dataFetchingAction}
+          isMakingDataRequest={isMakingDataRequest}
+        />
+      ) : null}
     </>
   );
 };

@@ -3,8 +3,8 @@ import { FaqResponse } from '../../../app/faqs/responses';
 export interface IProps {
   getFaqs: () => void;
   faqs: FaqResponse[];
-  isFetching: boolean;
+  selectIsMakingDataRequest: boolean;
 }
 
-export type StateProps = Pick<IProps, 'faqs' | 'isFetching'>;
+export type StateProps = Pick<IProps, 'faqs' | 'selectIsMakingDataRequest'>;
 export type DispatchProps = Pick<IProps, 'getFaqs'>;

@@ -5,7 +5,12 @@ export class CreateSessionsTable1594805323121 extends BaseMigration implements M
   protected table = 'sessions';
 
   public async up(queryRunner: QueryRunner): Promise<void> {
-    await this.createSystemTable(queryRunner, 'session_statuses');
+    await this.createSystemTable(queryRunner, 'session_statuses', [
+      {
+        name: 'theme',
+        type: 'varchar',
+      },
+    ]);
     await this.createTable(queryRunner, [
       {
         name: 'student_id',

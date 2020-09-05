@@ -2,7 +2,7 @@ import * as React from 'react';
 import { IProps } from './StudentSessions.types';
 import { SessionsPath } from '..';
 import { NavigationService } from '../../../services';
-import { RenderListData } from '../../../components';
+import { RenderListData, RenderStatus } from '../../../components';
 import { TimeFilters } from '../../../shared/filters';
 
 export class StudentSessions extends React.PureComponent<IProps> {
@@ -25,33 +25,33 @@ export class StudentSessions extends React.PureComponent<IProps> {
         emptyText="No Sessions Created"
       >
         {studentSessionsData.map(
-          ({ id, title, statusDisplayName, statusSystemName, createdAt, skills }) => (
-            <div className="card card-aside custom-card" key={id}>
-              <div className="card-body d-flex flex-column">
-                <h4>
-                  <a
-                    href={NavigationService.hashPath(
-                      NavigationService.studentPath(NavigationService.showPath(SessionsPath, id)),
-                    )}
-                    className="card-title"
-                  >
-                    {title}
-                  </a>
-                </h4>
-                <p>
-                  Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                  mollit anim id est laborum.
-                </p>
-                <div className="d-flex align-items-center pt-3 mt-auto">
-                  {skills.map(skill => (
-                    <span className="btn ripple btn-outline-secondary btn-sm mr-1" key={skill}>
-                      {skill}
-                    </span>
-                  ))}
-                  <small className="d-block text-muted text-right">
-                    {TimeFilters.formatTime(createdAt, 'DateAndTime')}
-                  </small>
+          ({ id, title, statusDisplayName, statusTheme, description, createdAt, skills }) => (
+            <div className="card-body d-flex flex-column" key={id}>
+              <a
+                href={NavigationService.hashPath(
+                  NavigationService.studentPath(NavigationService.showPath(SessionsPath, id)),
+                )}
+                className="text-black"
+              >
+                <div className="row">
+                  <div className="col-6">
+                    <RenderStatus theme={statusTheme} text={statusDisplayName} />
+                  </div>
+                  <div className="col-6 text-right">
+                    <small className="text-muted text-right" style={{ alignSelf: 'self-end' }}>
+                      {TimeFilters.formatTime(createdAt, 'DateAndTime')}
+                    </small>
+                  </div>
                 </div>
+                <p className="card-title mt-1 mb-0"> {title}</p>
+                <p className="mt-1 mb-0">{description}</p>
+              </a>
+              <div className="d-flex align-items-center pt-1 mt-auto">
+                {skills.map(skill => (
+                  <span className="tag tag-rounded mr-1" key={skill}>
+                    {skill}
+                  </span>
+                ))}
               </div>
             </div>
           ),
@@ -60,11 +60,9 @@ export class StudentSessions extends React.PureComponent<IProps> {
     );
   };
 
+  // card-aside custom-card
+
   render() {
-    return (
-      <div className="row">
-        <div className="col-md-12">{this.renderStudentSessions()}</div>
-      </div>
-    );
+    return this.renderStudentSessions();
   }
 }

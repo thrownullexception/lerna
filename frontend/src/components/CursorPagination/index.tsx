@@ -45,7 +45,7 @@ export const CursorPagination: React.SFC<IProps> = ({
             fetchData(cursor);
           }}
         >
-          {isLoading ? 'Loading...' : paginationButton}
+          {isLoading ? <i className="fa fa-spinner fa-spin" /> : null} {paginationButton}
         </button>
       </li>
     );

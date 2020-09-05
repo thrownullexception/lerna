@@ -11,4 +11,11 @@ export class StringHelpers {
       charset: 'numeric',
     });
   }
+
+  static plainAndEllipsize(text: string, length = 120): string {
+    if (text.length > length) {
+      return text.substr(0, length) + '...';
+    }
+    return text;
+  }
 }

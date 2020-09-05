@@ -544,16 +544,6 @@ export const AppLayout: React.SFC<IProps> = ({
           <div className="breadcrumb-header justify-content-between">
             <div>
               <TitleAndActions />
-              <nav aria-label="breadcrumb">
-                <ol className="breadcrumb">
-                  <li className="breadcrumb-item">
-                    <a href="/">Home</a>
-                  </li>
-                  <li className="breadcrumb-item active" aria-current="page">
-                    Faqs
-                  </li>
-                </ol>
-              </nav>
             </div>
             <div className="d-flex my-auto">
               <div className=" d-flex right-page">

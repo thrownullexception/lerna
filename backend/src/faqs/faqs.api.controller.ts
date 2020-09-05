@@ -9,6 +9,7 @@ export class FaqsController {
   constructor(private readonly faqsService: FaqsService) {}
 
   @Get()
+  // TODO make sure it is valid account mode
   async index(@Query('account_mode') accountMode: AccountModeType): Promise<FaqTransformer[]> {
     const faqs = await this.faqsService.listFaqs(accountMode);
     return faqs.map(faq => new FaqTransformer(faq));

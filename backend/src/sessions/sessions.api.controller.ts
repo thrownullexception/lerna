@@ -27,10 +27,6 @@ import { ICursorParametersDTO } from '../shared/types';
 import { PagingResult } from 'typeorm-cursor-pagination';
 import { SessionCandidatesService } from '../session-candidates/session-candidates.service';
 
-function wait(milliseconds: number) {
-  return new Promise(resolve => setTimeout(resolve, milliseconds));
-}
-
 @Controller(APP_CONSTANTS.API_ROUTES_PREFIX('sessions')) // TODO test
 @UseGuards(AuthGuard('jwt'))
 export class SessionsApiController {
@@ -56,7 +52,6 @@ export class SessionsApiController {
     @Query(new CursorQueryParametersPipe()) cursorParametersDTO: ICursorParametersDTO,
     @AuthenticatedUser('id', new ParseUUIDPipe()) userId: string,
   ): Promise<PagingResult<StudentSessionTransformer>> {
-    // await wait(2000);
     const { data, cursor } = await this.sessionsService.listStudentsSessions(
       userId,
       cursorParametersDTO,

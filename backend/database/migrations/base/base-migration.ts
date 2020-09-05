@@ -121,7 +121,11 @@ export class BaseMigration {
     return [...idField, ...newFields, ...timestamps];
   }
 
-  protected async createSystemTable(queryRunner: QueryRunner, tableName: string): Promise<void> {
+  protected async createSystemTable(
+    queryRunner: QueryRunner,
+    tableName: string,
+    otherFields: TableColumnOptions[] = [],
+  ): Promise<void> {
     const currentTableName = this.table;
     this.table = tableName;
     await this.createTable(queryRunner, [
@@ -133,6 +137,7 @@ export class BaseMigration {
         name: camelCase('display_name'),
         type: 'varchar',
       },
+      ...otherFields,
     ]);
     this.uniqueIndex(queryRunner, [camelCase('system_name')]);
     this.table = camelCase(currentTableName);

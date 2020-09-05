@@ -10,7 +10,7 @@ import { FaqsSelectors } from '../../../app/faqs/faqs.selectors';
 export const FaqsListContainer = connect(
   (state: IStore): StateProps => ({
     faqs: FaqsSelectors.selectFaqs(state),
-    isFetching: RequestStatusSelectors.selectIsMakingDataRequest(state),
+    selectIsMakingDataRequest: RequestStatusSelectors.selectIsMakingDataRequest(state),
   }),
   (dispatch: IThunkDispatch): DispatchProps => ({
     getFaqs: () => {
